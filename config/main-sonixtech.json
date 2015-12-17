@@ -1,5 +1,4 @@
 //you should take attention to the line comment with '*', more '*'' means more important
-
 {
     "env": "product",                //**** options are: "dev", "product"
     "base": "/product/",             //****
