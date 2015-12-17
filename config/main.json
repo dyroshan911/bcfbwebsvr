@@ -1,0 +1,99 @@
+//you should take attention to the line comment with '*', more '*'' means more important
+
+{
+    "env": "dev",                //**** options are: "dev", "product"
+    "base": "/web/",             //****
+    "domain": "sn9k.sonix.cn",   //****
+    "title": "松翰云服务",       //****
+
+    "devices": {
+        "key": "9SAC2TY1ME7"     //**
+    },
+    "servers": {
+        //this is a example to define a server that for web server to communicate with.
+        // "serverName1": {                 //arbitrary server name, not duplicate in "servers" section
+        //     "host": "hostname1",         //IP or Domain name, not with "http://"
+        //     "port": 443,                 //port number, Number type
+        //     "auth":"name:password"       //basic-digest authentication. If not use, do not write this line.
+        // },
+        "websvr": { //web server itself to configure for start
+            "host": "localhost",          //***
+            "port": 3000,                 //***
+            "aes-key": "o0bFdxCML1tdAt2T" //***
+        }
+    },
+    //this is redis configuration, include 2 main type: "cluster" and "standalone",
+    // other section types are functional types which will use 1 of the 2 main types
+    "cache": {
+        //cluster section
+        "cluster": [
+            { "host": "127.0.0.1", "port": 30001 },
+            { "host": "127.0.0.1", "port": 30002 },
+            { "host": "127.0.0.1", "port": 30003 }
+        ],
+        //standalone section
+        "standalone": {
+            "sessions": {
+                "host": "127.0.0.1",
+                "port": 6379,
+                "dbNum": 1
+            },
+            "devices": {
+                "host": "127.0.0.1",
+                "port": 6379,
+                "dbNum": 2
+            }
+        },
+        //sessions section
+        "sessions": {
+            "prefix": "websvr.session.", //this will be add to the redis key as prefix, to distinguish from different applications
+            "use": "cluster",            //*** 2 choices，cluster or standalone
+            "name": "sessions",          //curesponding to standalone-->sessions
+            "options": {                 // if you have some other redis option, add here
+            }
+        },
+        //sessions section
+        "devices": {
+            "prefix": "websvr.devices.", //this will be add to the redis key as prefix, to distinguish from different applications
+            "use": "cluster",            //*** 2 choices，cluster or standalone
+            "name": "sessions",          //curesponding to standalone-->sessions
+            "options": {                 // if you have some other redis option, add here
+            }
+        }
+    },
+    //this is mongodb configuation
+    "db": {
+        "url": "mongodb://localhost/SN9KWechat", //*** full mongodb url without user:pwd
+        "options": { //this is mongodb option, some other options reference to official doc
+            //"user": "userName",
+            //"pass": "password",
+            //"auth": {
+            //    "authdb": "admin"
+            //}
+        }
+    },
+    "wechat": {
+        "token": "oUEHE57borrHgL98ROZ7LQKraWU6T",                        //****
+        "appId": "wx398aaaf6902ecf50",                                   //****
+        "appSecret": "d5afc597d6ee4ff7a41c7420286bbd1f",                 //****
+        "encodingAESKey": "YyP7udS8TWvlpcLY1CeBSbJ4RILgcD5Hp5ZPzldiPeG", //****
+        "url": "http://sn9kwt.sonix.cn/web/",                            //****
+        "stateCode": "200",
+        "pushMsgs":{
+            "alarm": {
+                "id": "szZJ6bMYQUaACR9Z1I-I2hmdtIe5AGhRTQAIzD2j_98"      //****
+            }
+        },
+        "deviceType": "gh_d0ef7f4b0633",                                 //****
+        "alarmText": {
+            "G":["设备检测到震动"],
+            "B":["设备电量过低"],
+            "P":["压力", "value"],
+            "L":["亮度","value"],
+            "U":["UV","value"],
+            "T":["温度","value"],
+            "H":["湿度","value"]
+        },
+        "productId": "2930"
+    }
+}
