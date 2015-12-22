@@ -6,7 +6,7 @@ var uuid = require('uuid');
 
 var userObj = exports = module.exports = {};
 
-var UserModel = model.UserModel;
+var UserModel = model.AccountModel;
 
 userObj.init = function (ap) {
     userObj.app = ap;
