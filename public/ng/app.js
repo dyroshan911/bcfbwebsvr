@@ -8,9 +8,8 @@ var sessionStorage = window.sessionStorage;
 var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngMessages', 'ngAnimate', 'ngTouch', 'cgBusy']);
 myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
     function ($routeProvider, $locationProvider, $resourceProvider) {
-        $routeProvider.when('/', { template: '', controller: '' });
+        $routeProvider.when('/', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
         $routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
-        $routeProvider.when('/backDoor', { controller: 'LoginCtrl' });
         $routeProvider.otherwise({ redirectTo: '/404' });
         $locationProvider.html5Mode(true);
         
@@ -19,12 +18,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 ]);
 
 myApp.run(['$location', 'SessionsService', function ($location, SessionsService) {
-        var path = $location.path();
-        if (path !== '/') {
-            $location.path('/');
-        } else {
-            path = '/home';
-        }
+        return;
         SessionsService.initSession(function (data) {
             $location.path(path);
         }, function (err) {
