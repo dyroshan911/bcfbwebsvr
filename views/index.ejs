@@ -24,9 +24,9 @@
             <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body layout="column" ng-controller="IndexCtrl">
+    <body ng-controller="IndexCtrl">
         <% include header%>
-        <div ng-view layout="row" flex>
+        <div ng-view>
         </div>
         <% include footer%>
         <% var component = (env === 'dev')?'component':'component-min' %>
