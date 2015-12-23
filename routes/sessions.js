@@ -20,12 +20,9 @@ router.head('/', function(req, res){
 /*user login*/
 router.post('/user', function(req, res){
 	
-	var token = req.query.token;
-	var obj = {};
-	obj.userName = req.body.data.user_name;
-	obj.password = req.body.data.password;
-	obj.securityCode = req.body.data.security_code;
-    sessions.createUser(token, obj, function (statusCode, result) {
+	var userName = req.body.data.user_name;
+	var password = req.body.data.password;
+    sessions.createUser(userName, password, function (statusCode, result) {
 		res.status(statusCode).json(result);
 	});	
 });

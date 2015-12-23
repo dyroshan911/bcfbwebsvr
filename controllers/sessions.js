@@ -40,15 +40,15 @@ exports.verifyToken = function(token, cb) {
     });
 };
 
-exports.createUser = function(token, obj, cb) {
-	users.verifyUser(obj.userName, obj.password, function(err, doc){
+exports.createUser = function(userName, password, cb) {
+	users.verifyUser(userName, password, function(err, doc){
 		var result = {};
         var statusCode = 200;
 		if (!err) {
             var userData = {
                 user_id: doc.id,
                 user_name: doc.user_name,
-                nick_name: doc.nick_name
+                role: doc.role
             };
             sessions.updateSession(token, userData, function(err, data) {
                 if (!err) {
