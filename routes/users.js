@@ -19,19 +19,18 @@ router.get('/', function (req, res) {
 /* create user, user sign up. */
 //FIXME: 创建用户不只是tenant，以后还会有其他角色，所以api需要改！
 router.post('/', function (req, res) {
-    var token = req.body.params.token;
-    var obj = {
+    //var token = req.body.params.token;
+    var accountObj = {
         userName: req.body.data.user_name,
         password: req.body.data.password,
-        nickName: req.body.data.nick_name,
-        role: req.body.data.role,
-        tenantId : req.body.data.tenant_id,
-        products : req.body.data.products,
+        email: req.body.data.email,
+        phone: req.body.data.phone,
+        true_name : req.body.data.true_name,
+        superior: req.body.data.superior
     };
-	//todo: check token
 	//todo: verify checkcode
 	//...
-    users.creatAccount(token, obj, function (statusCode, result) {
+    users.creatAccount(accountObj, function (statusCode, result) {
         res.status(statusCode).json(result);
     }); 
 });

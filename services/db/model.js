@@ -14,13 +14,12 @@ var modelObj = exports = module.exports = {
 
 
 var AccountSchema = new Schema({
-    id:       {type: String, unique: true, required: true},
     user_name: {type: String, unique: true, required: true},    //登录名
     password: {type: String, required: true},                   //密码
     email:    {type: String},                                   //fixme:validator
     phone:    {type: String, required: true},                                   //fixme:validator
-    true_name: {type: String},                                  //真实姓名
-    role:{type:String, enum:['admin','web-admin','channel-mgr','channel','member'],required:true},
+    true_name: {type: String, required: true},                                  //真实姓名
+    role:{type:String, enum:['admin','web-admin','channel-mgr','channel','member'],default:'member',required:true},
     superior:{type:String},                                         //所属上级ID
     wechat_id:{type:String},                                    //微信ID
     job_number:{type:String, unique: true} ,                                         //工号
@@ -60,3 +59,4 @@ var CustomerSchema = new Schema({
 
 
 modelObj.AccountModel = mongoose.model('websvr.accounts', AccountSchema);
+modelObj.CustomerModel = mongoose.model('websvr.customers', CustomerSchema);
