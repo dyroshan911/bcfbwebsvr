@@ -2,6 +2,17 @@ var express = require('express');
 var router = express.Router();
 var users = require('../controllers/users.js');
 
+/** a common fcuntion to package response */
+
+function httpResp(res, code, result) {
+    res.status(code).json(result);
+    if (code >= 400) {
+        console.error(JSON.stringify(result));
+    }
+}
+
+
+
 /* get all user accounts info  */
 router.get('/', function (req, res) {
     var token = req.query.token;
@@ -12,12 +23,11 @@ router.get('/', function (req, res) {
     };
     //todo:
     users.getAccounts(token, obj, function (statusCode, result) {
-        res.status(statusCode).json(result);
+        httpResp(res, statusCode, result);
     }); 
 });
 
 /* create user, user sign up. */
-//FIXME: 创建用户不只是tenant，以后还会有其他角色，所以api需要改！
 router.post('/', function (req, res) {
     //var token = req.body.params.token;
     var accountObj = {
@@ -31,7 +41,7 @@ router.post('/', function (req, res) {
 	//todo: verify checkcode
 	//...
     users.creatAccount(accountObj, function (statusCode, result) {
-        res.status(statusCode).json(result);
+        httpResp(res, statusCode, result);
     }); 
 });
 
@@ -40,7 +50,7 @@ router.get('/:accountId', function (req, res) {
     var token = req.query.token;
     var accountId = req.url.substring(1, req.url.indexOf('?'));
     users.getAccountInfo(token, accountId, function (statusCode, result) {
-        res.status(statusCode).json(result);
+        httpResp(res, statusCode, result);
     });
 });
 
@@ -60,7 +70,7 @@ router.put('/:accountId', function (req, res) {
         accountObj.enable = req.body.data.enable;
     }
     users.updateAccount(token, accountId, accountObj, function (statusCode, result) {
-        res.status(statusCode).json(result);
+        httpResp(res, statusCode, result);
     }); 
 });
 
@@ -72,7 +82,7 @@ router.post('/:accountId/roles', function (req, res) {
     
 
     users.getAccounts(obj, function (statusCode, result) {
-        res.status(statusCode).json(result);
+        httpResp(res, statusCode, result);
     });*/
 });
 
@@ -83,7 +93,7 @@ router.put('/:accountId/roles', function (req, res) {
 
     //todo:
     users.getAccounts(obj, function (statusCode, result) {
-        res.status(statusCode).json(result);
+        httpResp(res, statusCode, result);
     }); */
 });
 module.exports = router;

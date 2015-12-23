@@ -34,8 +34,8 @@ exports.getUsers = function (token, obj, cb) {
 
 
 
-exports.createUser = function(token, userObj, cb) {
-    users.createUser(userObj.userName, userObj.password, userObj, function (err, doc) {
+exports.creatAccount = function(accountObj, cb) {
+    users.createUser(accountObj, function (err, doc) {
         var result = {};
         var statusCode = 201;
         if (!err) {

@@ -46,16 +46,16 @@ userObj.queryUser = function(userName, cb) {
     });
 };
 
-userObj.createUser = function (userName, password, userObj, cb) {
+userObj.createUser = function (userObj, cb) {
     var userInfo = {
         id: uuid.v4(),
-        user_name: userName,
-        password: password,
-        nick_name: userName
+        userName:userObj.userName,
+        password:userObj.password,
+        email:userObj.email,
+        phone:userObj.phone,
+        true_name:userObj.true_name ,
+        superior:userObj.superior
     };
-    if (userObj.nick_name) {
-        userInfo.nick_name = userObj.nick_name;
-    }
     var newUser = new UserModel(userInfo);
     newUser.save ( function ( err, user ){
         if (err) {

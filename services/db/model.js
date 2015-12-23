@@ -14,6 +14,7 @@ var modelObj = exports = module.exports = {
 
 
 var AccountSchema = new Schema({
+    id: {type: String, unique: true, required: true},    //id
     user_name: {type: String, unique: true, required: true},    //登录名
     password: {type: String, required: true},                   //密码
     email:    {type: String},                                   //fixme:validator
