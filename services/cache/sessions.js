@@ -1,7 +1,7 @@
 'use strict';
 var uuid = require('uuid');
 var Redis = require('ioredis');
-var config = require('../config').data.cache;
+var config = require('../config').data.main.cache;
 
 var sessions = null;
 var keyPrefix = '';

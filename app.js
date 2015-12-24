@@ -6,26 +6,26 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var config = require('./services/config');
 
 //config init
-var config = require('./services/config').load('./config.json', function(err) {
+var mainConfig = config.load('main', './config/main.json', function (err) {
     if (err) {
         console.error(err);
         process.exit(1);
     }
-}).data;
+}).data.main;
 
 //database init
 var db = require("./services/db")
-.error(function(err){
+.error(function (err) {
     console.error(err);
-}).config(config.db.url, config.db.options)       //"mongodb://localhost/AdminService"  "mongodb://localhost/adminWebDb"
+}).config(mainConfig.db.url, mainConfig.db.options)//"mongodb://localhost/AdminService"  "mongodb://localhost/adminWebDb"
 .start();
 
 //cache init
 var cache = require("./services/cache");
-cache.init(function(err){
+cache.init(function (err) {
     console.error(err);
     process.exit(1);
 });
@@ -89,7 +89,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-var server = app.listen(process.env.PORT || config.servers.websvr.port, function() {
+var server = app.listen(process.env.PORT || mainConfig.servers.websvr.port, function() {
     console.log('listening on port %d', server.address().port);
 });
 
