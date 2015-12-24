@@ -1,15 +1,8 @@
 'use strict';
 
-angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootScope', 'UsersService', 'SessionsService', 
-	function ($scope, $location, $rootScope, UsersService, SessionsService) {
+angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootScope', 'UserService', 'SessionService', 
+	function ($scope, $location, $rootScope, UserService, SessionService) {
 		$scope.logout = function () {
-			SessionsService.deleteSessionUser($rootScope.session.token, function (data) {
-				$location.path('/login');
-			}, function (err) {
-				$location.path('/login');
-			});
-		};
-		$scope.login = function () {
-			$location.path('/login');
+			
 		};
 	}]);
