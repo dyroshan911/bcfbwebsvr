@@ -8,6 +8,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./services/config');
 
+var wechat = require('wechat');
+var wechat_api = require('wechat-api');
+var wechatOAuth = require('wechat-oauth');
+
+
+
 //config init
 var mainConfig = config.load('main', './config/main.json', function (err) {
     if (err) {
@@ -15,6 +21,23 @@ var mainConfig = config.load('main', './config/main.json', function (err) {
         process.exit(1);
     }
 }).data.main;
+
+
+//init wechat menu config
+var menuConfig = config.load('wechatMenu','./config/wechatMenu.json', function (err) {
+    if (err) {
+        console.error(err);
+        process.exit(1);
+    }
+}).data.wechatMenu;
+
+var api = new wechat_api(mainConfig.wechat.appId, mainConfig.wechat.appSecret);
+wechat_api.myApi = api;
+var auth = new wechatOAuth(mainConfig.wechat.appId, mainConfig.wechat.appSecret);
+wechatOAuth.myAuth = auth;
+
+
+
 
 //database init
 var db = require("./services/db")
@@ -34,6 +57,7 @@ var routes = require('./routes/index');
 var apiAccounts = require('./routes/users');
 var apiSessions = require('./routes/sessions');
 var apiBackDoor = require('./routes/backDoor');
+var wechatMsg = require('./controllers/wechatMsg.js');
 var app = express();
 
 // view engine setup
@@ -51,6 +75,30 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+var config_weixin = {
+    token: mainConfig.wechat.token,
+    appid: mainConfig.wechat.appId,
+    encodingAESKey: mainConfig.wechat.encodingAESKey
+};
+
+app.use('/wechat', wechat(config_weixin)
+    .text(wechatMsg.text)
+    .image(wechatMsg.image)
+    .voice(wechatMsg.voice)
+    .video(wechatMsg.video)
+    .location(wechatMsg.location)
+    .link(wechatMsg.link)
+    .event(wechatMsg.event)
+    .device_text(wechatMsg.device_text)
+    .device_event(wechatMsg.device_event)
+    .middlewarify());
+
+
+
+
 
 app.use('/', routes);
 app.use(apiSessions.verify()); //@tip by Kai: Token should be verified every api request except create session

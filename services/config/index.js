@@ -17,18 +17,5 @@ var configuration = exports = module.exports = {
             cb(err);
         }        
         return configuration;
-    },
-    loadWechatMenu: function(cfgFile, cb) {
-        var data = fs.readFileSync(cfgFile, {encoding: 'utf8'});
-        if (!data) {
-            cb(new Error('Failed to load config file' + cfgFile));
-        }
-        try {
-            var jData = stripJson(data);
-            configuration.menuData = JSON.parse(jData);
-        } catch (err) {
-            cb(err);
-        }        
-        return configuration;
     }
 };
