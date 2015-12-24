@@ -12,7 +12,7 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 			superior: ''
 		};
 		
-		$scope.onLogin = function () {
+		$scope.onSignup = function () {
 			UserService.signup($rootScope.session.token, $scope.signupData, function (res) {
 				res;
 			}, function (res) {

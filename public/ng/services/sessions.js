@@ -4,12 +4,12 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 		var cfgData = {};
 		
 		cfgData.createSession = function (successcb, failcb) {
-			ApiService.post('api/sessions', {}, function (data) {
-				$rootScope.session.token = data.token;
+			ApiService.post('api/sessions', {}, function (res) {
+				$rootScope.session.token = res.token;
 				if (typeof (Storage) !== 'undefined') {
-					sessionStorage.token = data.token;
+					sessionStorage.token = res.token;
 				}
-				successcb(data);
+				successcb(res);
 			}, failcb);
 		};
 		
@@ -26,17 +26,16 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					//Yes!
 					$rootScope.session.token = sessionStorage.token;
 					//is token valid?
-					cfgData.verifyToken($rootScope.session.token, function (data) {
+					cfgData.verifyToken($rootScope.session.token, function (res) {
 						//yes! 
 						//And is user has logged?
-						cfgData.getSessionUser($rootScope.session.token, function (data) {
+						cfgData.getSessionUser($rootScope.session.token, function (res) {
 							//yes! so reserve user basic info in $rootScope
 							$rootScope.session.logged = true;
-							$rootScope.session.userName = data.user_name;
-							$rootScope.session.nickName = data.nick_name; //for display
-							$rootScope.session.userId = data.user_id;
-							
-							successcb(data);
+							$rootScope.session.userId = res.user_id;
+							$rootScope.session.userName = res.user_name;
+							$rootScope.session.role = res.role;
+							successcb(res);
 						}, function (err) {
 							//No
 							//that's OK, user need login
@@ -46,14 +45,14 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 						//No
 						//token should be generated again
 						sessionStorage.token = $rootScope.session.token = '';
-						cfgData.createSession(function (data) {
+						cfgData.createSession(function (res) {
 							//successfully generated, but need login
 							failcb(MsgService.getMsg('m11001'));
 						}, failcb);
 					});
 				} else {
 					// token not found in sessionStorage, create one
-					cfgData.createSession(function (data) {
+					cfgData.createSession(function (res) {
 						//successfully generated, but need login
 						failcb(MsgService.getMsg('m11001'));
 					}, failcb);
@@ -61,7 +60,7 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			} else {
 				// Sorry! No web storage support..
 				// token only save in $rootScope, create one
-				cfgData.createSession(function (data) {
+				cfgData.createSession(function (res) {
 					//successfully generated, but need login
 					failcb(MsgService.getMsg('m11001'));
 				}, failcb);
@@ -79,12 +78,12 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					security_code: securityCode
 				}
 			};
-			ApiService.post('/api/sessions/user', obj, function (data) {
+			ApiService.post('api/sessions/user', obj, function (res) {
 				$rootScope.session.logged = true;
-				$rootScope.session.userId = data.user_id;
-				$rootScope.session.userName = data.user_name;
-				$rootScope.session.role = role;
-				successcb(data);
+				$rootScope.session.userId = res.user_id;
+				$rootScope.session.userName = res.user_name;
+				$rootScope.session.role = res.role;
+				successcb(res);
 			}, failcb);
 		};
 		
@@ -95,12 +94,12 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 				}
 			};
 			//whatever successful or not, clear session's user info
-			ApiService.delete('/api/sessions/user', obj, function (data) {
+			ApiService.delete('api/sessions/user', obj, function (res) {
 				delete $rootScope.session.userId;
 				delete $rootScope.session.userName;
 				delete $rootScope.session.role;
 				$rootScope.session.logged = false;
-				successcb(data);
+				successcb(res);
 			}, function (err) {
 				delete $rootScope.session.userId;
 				delete $rootScope.session.userName;
@@ -116,7 +115,7 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					token: token
 				}
 			};
-			ApiService.get('/api/sessions/user', obj, successcb, failcb);
+			ApiService.get('api/sessions/user', obj, successcb, failcb);
 		};
 		
 		cfgData.verifyToken = function (token, successcb, failcb) {
@@ -125,7 +124,7 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					token: token
 				}
 			};
-			ApiService.head('/api/sessions', obj, successcb, failcb);
+			ApiService.head('api/sessions', obj, successcb, failcb);
 		};
 		
 		return cfgData;
