@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var env = require('../services/config').data.env;
+var env = require('../services/config').data.main.env;
 
 /* GET home page. */
 router.get('/', function(req, res) {
