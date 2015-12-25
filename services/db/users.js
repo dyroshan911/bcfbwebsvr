@@ -49,7 +49,7 @@ userObj.queryUser = function(userName, cb) {
 userObj.createUser = function (userObj, cb) {
     var userInfo = {
         id: uuid.v4(),
-        userName:userObj.userName,
+        user_name:userObj.userName,
         password:userObj.password,
         email:userObj.email,
         phone:userObj.phone,
