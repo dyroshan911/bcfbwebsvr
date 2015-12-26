@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootScope', 'UserService', 'SessionService', 
-	function ($scope, $location, $rootScope, UserService, SessionService) {
+angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootScope', 'UserService', 
+	function ($scope, $location, $rootScope, UserService) {
 		$scope.signupData = {
 			userName: '',
 			password: '',
