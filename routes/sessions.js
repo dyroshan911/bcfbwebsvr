@@ -19,10 +19,10 @@ router.head('/', function(req, res){
 
 /*user login*/
 router.post('/user', function(req, res){
-	
+	var token = req.query.token;
 	var userName = req.body.data.user_name;
 	var password = req.body.data.password;
-    sessions.createUser(userName, password, function (statusCode, result) {
+    sessions.createUser(token, userName, password, function (statusCode, result) {
 		res.status(statusCode).json(result);
 	});	
 });

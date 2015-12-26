@@ -61,8 +61,8 @@
     },
     "wechat": {
         "token": "oUEHE57borrHgL98ROZ7LQKraWU6T",                  
-        "appId": "wx398aaaf6902ecf50",                                
-        "appSecret": "d5afc597d6ee4ff7a41c7420286bbd1f",            
+        "appId": "wx21698b391a99a42b",                                
+        "appSecret": "aa60a13f62ad8ffcb8a9b1af9184d2d3",            
         "encodingAESKey": "YyP7udS8TWvlpcLY1CeBSbJ4RILgcD5Hp5ZPzldiPeG", 
         "url": "http://sn9kwt.sonix.cn/web/",                    
         "stateCode": "200",

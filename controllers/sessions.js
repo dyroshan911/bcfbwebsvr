@@ -40,7 +40,7 @@ exports.verifyToken = function(token, cb) {
     });
 };
 
-exports.createUser = function(userName, password, cb) {
+exports.createUser = function(token, userName, password, cb) {
 	users.verifyUser(userName, password, function(err, doc){
 		var result = {};
         var statusCode = 200;
