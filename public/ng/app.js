@@ -22,9 +22,9 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 
 myApp.run(['$location', 'SessionService', function ($location, SessionService) {
 		SessionService.initSession(function (data) {
-			$location.path(path);
+
 		}, function (err) {
-			if (err.name == 'NeedSignIn') {
+			if (err.name == 'NeedLogin') {
 				$location.path('/login');
 			} else {
 				alert(err.message);

@@ -29,6 +29,8 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					cfgData.verifyToken($rootScope.session.token, function (res) {
 						//yes! 
 						//And is user has logged?
+						successcb();
+						return;
 						cfgData.getSessionUser($rootScope.session.token, function (res) {
 							//yes! so reserve user basic info in $rootScope
 							$rootScope.session.logged = true;
@@ -65,6 +67,15 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					failcb(MsgService.getMsg('m11001'));
 				}, failcb);
 			}
+		};
+		
+		cfgData.getSessionUser = function (token, successcb, failcb) {
+			var obj = {
+				params : {
+					token: token
+				}
+			};
+			ApiService.get('api/sessions/user', obj, successcb, failcb);
 		};
 		
 		cfgData.createSessionUser = function (token, userName, password, securityCode, successcb, failcb) {
@@ -107,15 +118,6 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 				$rootScope.session.logged = false;
 				failcb(err);
 			});
-		};
-		
-		cfgData.getSessionUser = function (token, successcb, failcb) {
-			var obj = {
-				params : {
-					token: token
-				}
-			};
-			ApiService.get('api/sessions/user', obj, successcb, failcb);
 		};
 		
 		cfgData.verifyToken = function (token, successcb, failcb) {

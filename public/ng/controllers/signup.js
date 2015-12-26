@@ -16,7 +16,7 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 			UserService.signup($rootScope.session.token, $scope.signupData, function (res) {
 				res;
 			}, function (res) {
-				res;
+				alert(res.message);
 			})
 		};
 	}]);

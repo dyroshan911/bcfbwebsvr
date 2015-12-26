@@ -9,9 +9,12 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 		
 		$scope.onLogin = function () {
 			UserService.login($rootScope.session.token, $scope.loginData, function (res) {
-				res;
+				$rootScope.session.logged = true;
+				$rootScope.session.userId = res.user_id;
+				$rootScope.session.userName = res.user_name;
+				$rootScope.session.role = res.role;
 			}, function (res) {
-				res;
+				alert(res.message);
 			})
 		};
 	}]);

@@ -36,8 +36,14 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li>
+				<li ng-if="!session.logged">
 					<a href="/login">用户登录</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="#">欢迎，{{session.userName}}</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="/login">登出</a>
 				</li>
 			</ul>
 		</div>
