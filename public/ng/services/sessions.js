@@ -8,6 +8,7 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 				$rootScope.session.token = res.token;
 				if (typeof (Storage) !== 'undefined') {
 					sessionStorage.token = res.token;
+					sessionStorage.logged = false;
 				}
 				successcb(res);
 			}, failcb);
@@ -28,43 +29,29 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					//is token valid?
 					cfgData.verifyToken($rootScope.session.token, function (res) {
 						//yes! 
-						//And is user has logged?
 						successcb();
-						return;
-						cfgData.getSessionUser($rootScope.session.token, function (res) {
-							//yes! so reserve user basic info in $rootScope
-							$rootScope.session.logged = true;
-							$rootScope.session.userId = res.user_id;
-							$rootScope.session.userName = res.user_name;
-							$rootScope.session.role = res.role;
-							successcb(res);
-						}, function (err) {
-							//No
-							//that's OK, user need login
-							failcb(MsgService.getMsg('m11001'));
-						});
 					}, function (err) {
 						//No
 						//token should be generated again
-						sessionStorage.token = $rootScope.session.token = '';
+						$rootScope.session.token = sessionStorage.token = '';
 						cfgData.createSession(function (res) {
-							//successfully generated, but need login
-							failcb(MsgService.getMsg('m11001'));
+							//successfully generated
+							successcb();
 						}, failcb);
 					});
 				} else {
 					// token not found in sessionStorage, create one
 					cfgData.createSession(function (res) {
-						//successfully generated, but need login
-						failcb(MsgService.getMsg('m11001'));
+						//successfully generated
+						successcb();
 					}, failcb);
 				}
 			} else {
 				// Sorry! No web storage support..
 				// token only save in $rootScope, create one
 				cfgData.createSession(function (res) {
-					//successfully generated, but need login
-					failcb(MsgService.getMsg('m11001'));
+					//successfully generated
+					successcb();
 				}, failcb);
 			}
 		};
@@ -106,16 +93,10 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			};
 			//whatever successful or not, clear session's user info
 			ApiService.delete('api/sessions/user', obj, function (res) {
-				delete $rootScope.session.userId;
-				delete $rootScope.session.userName;
-				delete $rootScope.session.role;
-				$rootScope.session.logged = false;
+				clearSession();
 				successcb(res);
 			}, function (err) {
-				delete $rootScope.session.userId;
-				delete $rootScope.session.userName;
-				delete $rootScope.session.role;
-				$rootScope.session.logged = false;
+				clearSession();
 				failcb(err);
 			});
 		};
@@ -128,6 +109,18 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			};
 			ApiService.head('api/sessions', obj, successcb, failcb);
 		};
+		
+		function clearSession() {
+			delete $rootScope.session.userId;
+			delete $rootScope.session.userName;
+			delete $rootScope.session.role;
+			$rootScope.session.logged = false;
+			
+			delete sessionStorage.userId;
+			delete sessionStorage.userName;
+			delete sessionStorage.role;
+			sessionStorage.logged = false;
+		}
 		
 		return cfgData;
 	}]);

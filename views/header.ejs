@@ -43,7 +43,7 @@
 					<a href="#">欢迎，{{session.userName}}</a>
 				</li>
 				<li ng-if="session.logged">
-					<a href="/login">登出</a>
+					<a href="#" ng-click="onLogout()">登出</a>
 				</li>
 			</ul>
 		</div>

@@ -12,6 +12,7 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 			superior: ''
 		};
 		
+		//functions
 		$scope.onSignup = function () {
 			UserService.signup($rootScope.session.token, $scope.signupData, function (res) {
 				res;

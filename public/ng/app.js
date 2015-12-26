@@ -12,6 +12,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/home', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl' });
+		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		$locationProvider.html5Mode(true);
@@ -24,10 +25,6 @@ myApp.run(['$location', 'SessionService', function ($location, SessionService) {
 		SessionService.initSession(function (data) {
 
 		}, function (err) {
-			if (err.name == 'NeedLogin') {
-				$location.path('/login');
-			} else {
-				alert(err.message);
-			}
+
 		});
 	}]);
