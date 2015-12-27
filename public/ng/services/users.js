@@ -8,14 +8,7 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 				params: {
 					token: token
 				},
-				data: {
-					user_name: dataObj.userName,
-					password: dataObj.passwordConfirm,
-					phone: dataObj.phone,
-					true_name : dataObj.name,
-					email : dataObj.email,
-					superior: dataObj.superior
-				}
+				data: dataObj
 			};
 			ApiService.post('api/accounts', obj, successcb, failcb);
 		};
@@ -25,10 +18,7 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 				params: {
 					token: token
 				},
-				data: {
-					user_name: dataObj.userName,
-					password: dataObj.password
-				}
+				data: dataObj
 			};
 			ApiService.post('api/sessions/user', obj, successcb, failcb);
 		};

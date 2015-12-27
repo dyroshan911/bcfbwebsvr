@@ -8,7 +8,7 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 				$rootScope.session.token = res.token;
 				if (typeof (Storage) !== 'undefined') {
 					sessionStorage.token = res.token;
-					sessionStorage.logged = false;
+					sessionStorage.logged = 'false';
 				}
 				successcb(res);
 			}, failcb);
@@ -119,7 +119,7 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			delete sessionStorage.userId;
 			delete sessionStorage.userName;
 			delete sessionStorage.role;
-			sessionStorage.logged = false;
+			sessionStorage.logged = 'false';
 		}
 		
 		return cfgData;

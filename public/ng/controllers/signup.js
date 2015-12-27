@@ -14,7 +14,15 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 		
 		//functions
 		$scope.onSignup = function () {
-			UserService.signup($rootScope.session.token, $scope.signupData, function (res) {
+			var dataOdj = {
+				user_name: $scope.signupData.userName,
+				password: $scope.signupData.passwordConfirm,
+				phone: $scope.signupData.phone,
+				true_name : $scope.signupData.name,
+				email : $scope.signupData.email,
+				superior: $scope.signupData.superior
+			};
+			UserService.signup($rootScope.session.token, dataOdj, function (res) {
 				res;
 			}, function (res) {
 				alert(res.message);

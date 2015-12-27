@@ -9,13 +9,17 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 		
 		//functions
 		$scope.onLogin = function () {
-			UserService.login($rootScope.session.token, $scope.loginData, function (res) {
+			var dataObj = {
+				user_name: $scope.loginData.userName,
+				password: $scope.loginData.password
+			};
+			UserService.login($rootScope.session.token, dataObj, function (res) {
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;
 				$rootScope.session.userName = res.user_name;
 				$rootScope.session.role = res.role;
 				saveSessionData();
-				$location.path('/business').search({ id: $rootScope.session.userId });
+				$location.path('/business');
 			}, function (res) {
 				alert(res.message);
 			})

@@ -23,7 +23,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService', function (
 					return String(arg);
 			}
 		};
-
+		
 		var makeUrl = function () {
 			var argLen = arguments.length;
 			if (argLen === 0) {
@@ -61,7 +61,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService', function (
 				}
 			});
 		};
-
+		
 		cfgData.post = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				url = makeUrl(url, obj.params);
@@ -80,7 +80,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService', function (
 				}
 			});
 		};
-
+		
 		cfgData.put = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				url = makeUrl(url, obj.params);
@@ -99,7 +99,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService', function (
 				}
 			});
 		};
-
+		
 		cfgData.delete = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				url = makeUrl(url, obj.params);
@@ -118,7 +118,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService', function (
 				}
 			});
 		};
-
+		
 		cfgData.head = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				url = makeUrl(url, obj.params);
@@ -133,6 +133,6 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService', function (
 				msg.debug();
 			});
 		};
-
+		
 		return cfgData;
 	}]);

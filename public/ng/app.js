@@ -13,6 +13,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl' });
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });
+		$routeProvider.when('/add-business', { templateUrl: ('partial/add-business'), controller: 'AddBusinessCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		$locationProvider.html5Mode(true);

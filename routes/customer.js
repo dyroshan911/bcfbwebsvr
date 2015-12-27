@@ -19,8 +19,8 @@ router.post('/', function (req, res) {
         name: req.body.data.name,
         phone: req.body.data.phone,
         superior: req.body.data.superior,
-        referrer_id: body.data.referrer_id,
-        apply_amount:body.data.apply_amount
+        referrer_id: req.body.data.referrer_id,
+        apply_amount: req.body.data.apply_amount
     };
 	//todo: verify checkcode
 	//...
