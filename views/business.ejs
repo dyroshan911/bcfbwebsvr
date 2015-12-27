@@ -1,3 +1,37 @@
-<div class="row">
+<div class="container">
+	<div class ="row" style="margin-top: 20px;">
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<a href="/add-business" class="btn btn-success btn-lg btn-block">新增客户</a>
+		</div>
+	</div>
+	<div style="margin-top: 30px;">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#" role="tab" data-toggle="tab">我的客户</a>
+			</li>
+		</ul>
 
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="myCustomer">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th width="10%">姓名</th>
+							<th width="15%">联系电话</th>
+							<th width="15%">贷款金额</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="user in customerList">
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
