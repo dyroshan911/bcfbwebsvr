@@ -18,16 +18,36 @@ router.post('/', function (req, res) {
     var customerObj = {
         name: req.body.data.name,
         phone: req.body.data.phone,
-        superior: req.body.data.superior,
         referrer_id: req.body.data.referrer_id,
         apply_amount: req.body.data.apply_amount
     };
-	//todo: verify checkcode
 	//...
     users.creatCustomer(customerObj, function (statusCode, result) {
         httpResp(res, statusCode, result);
     }); 
 });
 
+
+/* get customer list*/
+router.get('/', function (req, res) {
+    var token = req.query.token;
+	//todo get custromer list
+    httpResp(res, 200, {customerlist:'test get customer'});
+    /*users.creatCustomer(customerObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });*/ 
+});
+
+
+/* get customer list by id*/
+router.get('/:account_id', function (req, res) {
+    var token = req.query.token;
+    var accountId = req.params.account_id;
+	//todo get custromer list by id
+    httpResp(res, 200, {customerlist:'test get customer by id'});
+    /*users.creatCustomer(customerObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });*/ 
+});
 
 module.exports = router;
