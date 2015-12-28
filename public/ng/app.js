@@ -1,4 +1,4 @@
-/*
+﻿/*
  * angular.js file
  */
 var sessionStorage = window.sessionStorage;
@@ -22,7 +22,8 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	}
 ]);
 
-myApp.run(['$location', 'SessionService', function ($location, SessionService) {
+myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($route, $rootScope, $location, SessionService) {
+		$rootScope.session = {};
 		var firstStart = true;
 		$rootScope.$on('$routeChangeStart', function (event, next, current) {
 			if (firstStart) {
@@ -30,9 +31,10 @@ myApp.run(['$location', 'SessionService', function ($location, SessionService) {
 				SessionService.initSession(function (data) {
 					var args = $location.search();
 					if ((args.code && args.state) || args.openid) {
-						SessionService.auth($rootScope.session.token, args, function (res) {
+						SessionService.auth(args, function (res) {
 							firstStart = false;
 							alert(JSON.stringify(res));
+							alert('登录成功');
 							$location.path('/business');
 						}, function (res) {
 							alert(JSON.stringify(res));

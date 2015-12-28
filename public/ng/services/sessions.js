@@ -110,10 +110,10 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			ApiService.head('api/sessions', obj, successcb, failcb);
 		};
 		
-		cfgData.auth = function (token, dataObj, successcb, failcb) {
+		cfgData.auth = function (dataObj, successcb, failcb) {
 			var obj = {
 				params: {
-					token: token
+					token: $rootScope.session.token
 				},
 				data: dataObj
 			};

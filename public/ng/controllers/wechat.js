@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp').controller('WechatCtrl', ['$scope', '$location', '$rootScope', 'WechatService', 'UserService', 
-	function ($scope, $location, $rootScope, WechatService, UserService) {
+angular.module('myApp').controller('WechatCtrl', ['$scope', '$location', '$rootScope', 'UserService', 
+	function ($scope, $location, $rootScope, UserService) {
 		$scope.wechatSignupData = {
 			name: '',
 			phone: '', 
