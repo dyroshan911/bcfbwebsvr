@@ -10,6 +10,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/', { redirectTo: '/home' });
 		$routeProvider.when('/home', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
+		$routeProvider.when('/wechat-login', { templateUrl: ('partial/wechat-login'), controller: 'WechatCtrl' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl' });
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/add-business', { templateUrl: ('partial/add-business'), controller: 'AddBusinessCtrl' });

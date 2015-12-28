@@ -59,19 +59,19 @@
             //}
         }
     },
-    "wechat": {
-        "token": "oUEHE57borrHgL98ROZ7LQKraWU6T",                  
-        "appId": "wx21698b391a99a42b",                                
-        "appSecret": "aa60a13f62ad8ffcb8a9b1af9184d2d3",            
-        "encodingAESKey": "YyP7udS8TWvlpcLY1CeBSbJ4RILgcD5Hp5ZPzldiPeG", 
-        "url": "http://sn9kwt.sonix.cn/web/",                    
-        "stateCode": "200",
-        "pushMsgs":{
-            "alarm": {
-                "id": "szZJ6bMYQUaACR9Z1I-I2hmdtIe5AGhRTQAIzD2j_98"    
-            }
-        },
-        "deviceType": "gh_d0ef7f4b0633",                           
-        "productId": "2930"
-    }
+	"wechat": {
+		"token": "oUEHE57borrHgL98ROZ7LQKraWU6T",
+		"appId": "wx21698b391a99a42b",
+		"appSecret": "aa60a13f62ad8ffcb8a9b1af9184d2d3",
+		"encodingAESKey": "YyP7udS8TWvlpcLY1CeBSbJ4RILgcD5Hp5ZPzldiPeG",
+		"url": "http://120.25.122.178/",
+		"stateCode": "200",
+		"pushMsgs": {
+			"alarm": {
+				"id": "szZJ6bMYQUaACR9Z1I-I2hmdtIe5AGhRTQAIzD2j_98"
+			}
+		},
+		"deviceType": "gh_d0ef7f4b0633",
+		"productId": "2930"
+	}
 }
