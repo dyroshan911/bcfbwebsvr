@@ -11,6 +11,9 @@ angular.module('myApp').controller('AddBusinessCtrl', ['$scope', '$location', '$
 		
 		//functions
 		$scope.onAddBusiness = function () {
+			if ($scope.customerForm.$invalid) {
+				return;
+			}
 			var dataObj = {
 				name: $scope.customerData.name,
 				phone: $scope.customerData.phone,
