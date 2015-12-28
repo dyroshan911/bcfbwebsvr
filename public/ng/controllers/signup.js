@@ -9,11 +9,15 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 			phone: '',
 			name: '',
 			email: '',
-			superior: ''
+			superior: '',
+			checkPassword: true
 		};
 		
 		//functions
 		$scope.onSignup = function () {
+			if ($scope.signupForm.$invalid || !$scope.signupData.checkPassword) {
+				return;
+			}
 			var dataOdj = {
 				user_name: $scope.signupData.userName,
 				password: $scope.signupData.passwordConfirm,
@@ -27,5 +31,13 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 			}, function (res) {
 				alert(res.message);
 			})
+		};
+		
+		$scope.onCheckPassword = function () {
+			if ($scope.signupData.password !== $scope.signupData.passwordConfirm) {
+				$scope.signupData.checkPassword = false;
+			} else {
+				$scope.signupData.checkPassword = true;
+			}
 		};
 	}]);
