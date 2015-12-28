@@ -2,6 +2,7 @@
 'use strict';
 var sessions = require('../services/cache').Sessions;
 var users = require("../services/db").Users;
+var wecahtOAuth = require('wechat-oauth').myAuth;
 
 exports.createSession = function (cb) {
 	sessions.createSession(function (err, data) {
@@ -72,6 +73,45 @@ exports.createUser = function(token, userName, password, cb) {
             cb(statusCode, result);
         }
 	});
+};
+
+
+exports.createUserWechat = function(token, code, cb) {
+    var result = {};
+    var statusCode = 200;
+    wecahtOAuth.getAccessToken(code, function(err, doc){
+        if(!err) {
+                var userData = {
+                access_token: doc.data.access_token,
+                refresh_token: doc.data.refresh_token,
+                open_id: doc.data.openid,
+            };
+            users.verifyUserByOpenid(userData.open_id, function(err, data){
+               if(!err && data){
+                   userData.user_name = data.user_name;
+                   userData.true_name = data.true_name;
+                   userData.role = data.role;
+                   userData.user_id = doc.id;
+                   sessions.updateSession(token, userData, function(err, data) {
+                        if(!err) {
+                            delete userData.access_token;
+                            delete userData.refresh_token;
+                            delete userData.open_id;
+                            result = userData;
+                             cb(statusCode, result);
+                        }
+                    });
+               } else {
+                    statusCode = 500;
+                    result.code = 'e1109';
+                    result.message = err.message;
+                    result.description = err.message;
+                    result.source = '<<webui>>';
+                    cb(statusCode, result);
+               } 
+            });
+        }
+    });
 };
 
 exports.signOut = function (token, cb) {

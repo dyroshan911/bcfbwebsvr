@@ -34,7 +34,7 @@ router.post('/auth', function(req, res) {
         code: req.body.code,
         state: req.body.state,
     };
-    wecahtOAuth.getAccessToken(code, function(err, result) {
+    wecahtOAuth.getAccessToken(param.code, function(err, result) {
                 var data = {};
         if (err) {
             data.resultCode = 'F';

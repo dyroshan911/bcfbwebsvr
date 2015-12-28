@@ -27,6 +27,15 @@ router.post('/user', function(req, res){
 	});	
 });
 
+/*user login by wechat*/
+router.post('/wechatauth', function(req, res){
+	var token = req.query.token;
+	var code = req.body.data.code;
+    sessions.createUserWechat(token, code, function (statusCode, result) {
+		res.status(statusCode).json(result);
+	});	
+});
+
 /* user log out */
 router.delete('/user', function(req, res){
 	var token = req.query.token;

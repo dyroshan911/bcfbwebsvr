@@ -32,6 +32,20 @@ userObj.verifyUser = function (userName, password, cb) {
     });
 };
 
+userObj.verifyUserByOpenid = function (openId, cb) {
+	UserModel.findOne({
+        'wechat_id': openId, 
+    }).select('id user_name role').exec(function (err, user) {
+		if (err) {
+			cb(err, null);
+        } else if (!user) {
+			cb(new Error('Verify user failed'), null);
+		} else {
+            cb(null, user);
+		}
+    });
+};
+
 userObj.queryUser = function(userName, cb) {
     UserModel.findOne({
         'user_name': userName
