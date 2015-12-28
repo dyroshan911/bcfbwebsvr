@@ -10,7 +10,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/', { redirectTo: '/home' });
 		$routeProvider.when('/home', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
-		$routeProvider.when('/wechat-login', { templateUrl: ('partial/wechat-login'), controller: 'WechatCtrl' });
+		$routeProvider.when('/wechat_signup', { templateUrl: ('partial/wechat-signup'), controller: 'WechatCtrl' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl' });
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/add-business', { templateUrl: ('partial/add-business'), controller: 'AddBusinessCtrl' });
@@ -23,9 +23,29 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 ]);
 
 myApp.run(['$location', 'SessionService', function ($location, SessionService) {
-		SessionService.initSession(function (data) {
-
-		}, function (err) {
-
+		var firstStart = true;
+		$rootScope.$on('$routeChangeStart', function (event, next, current) {
+			if (firstStart) {
+				event.preventDefault();
+				SessionService.initSession(function (data) {
+					var args = $location.search();
+					if ((args.code && args.state) || args.openid) {
+						SessionService.auth($rootScope.session.token, args, function (res) {
+							firstStart = false;
+							alert(JSON.stringify(res));
+							$location.path('/business');
+						}, function (res) {
+							alert(JSON.stringify(res));
+							firstStart = false;
+							$route.reload();
+						});
+					} else {
+						firstStart = false;
+						$route.reload();
+					}
+				}, function (res) {
+					alert(res.message);
+				});
+			}
 		});
 	}]);

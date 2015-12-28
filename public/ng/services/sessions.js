@@ -29,21 +29,21 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					//is token valid?
 					cfgData.verifyToken($rootScope.session.token, function (res) {
 						//yes! 
-						successcb();
+						successcb(null);
 					}, function (err) {
 						//No
 						//token should be generated again
 						$rootScope.session.token = sessionStorage.token = '';
 						cfgData.createSession(function (res) {
 							//successfully generated
-							successcb();
+							successcb(null);
 						}, failcb);
 					});
 				} else {
 					// token not found in sessionStorage, create one
 					cfgData.createSession(function (res) {
 						//successfully generated
-						successcb();
+						successcb(null);
 					}, failcb);
 				}
 			} else {
@@ -51,7 +51,7 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 				// token only save in $rootScope, create one
 				cfgData.createSession(function (res) {
 					//successfully generated
-					successcb();
+					successcb(null);
 				}, failcb);
 			}
 		};
@@ -108,6 +108,16 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 				}
 			};
 			ApiService.head('api/sessions', obj, successcb, failcb);
+		};
+		
+		cfgData.auth = function (token, dataObj, successcb, failcb) {
+			var obj = {
+				params: {
+					token: token
+				},
+				data: dataObj
+			};
+			ApiService.post('api/sessions/wechatauth', obj, successcb, failcb);
 		};
 		
 		function clearSession() {
