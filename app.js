@@ -61,6 +61,7 @@ cache.init(function (err) {
 var routes = require('./routes/index');
 var apiAccounts = require('./routes/users');
 var apiCustomers = require('./routes/customer');
+var wechats = require('./routes/wechats');
 var apiSessions = require('./routes/sessions');
 var apiBackDoor = require('./routes/backDoor');
 var wechatMsg = require('./controllers/wechatMsg.js');
@@ -110,6 +111,7 @@ app.use('/', routes);
 app.use(apiSessions.verify()); //@tip by Kai: Token should be verified every api request except create session
 app.use('/api/sessions', apiSessions);
 app.use('/api/accounts', apiAccounts);
+app.use('/api/wechat', wechats);
 app.use('/api/customers', apiCustomers);
 app.use('/api/backDoor', apiBackDoor);
 
