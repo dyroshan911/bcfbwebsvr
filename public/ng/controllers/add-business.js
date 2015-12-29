@@ -5,8 +5,7 @@ angular.module('myApp').controller('AddBusinessCtrl', ['$scope', '$location', '$
 		$scope.customerData = {
 			name: '',
 			phone: '',
-			amount: '',
-			referrer: ''
+			amount: ''
 		};
 		
 		//functions
@@ -16,9 +15,8 @@ angular.module('myApp').controller('AddBusinessCtrl', ['$scope', '$location', '$
 			}
 			var dataObj = {
 				name: $scope.customerData.name,
-				phone: $scope.customerData.phone,
-				referrer_id: $scope.customerData.amount,
-				apply_amount: $scope.customerData.referrer
+				phone: $scope.customerData.phone,		
+				apply_amount: $scope.customerData.amount
 			};
 			BusinessService.addBusiness($rootScope.session.token, dataObj, function (res) {
 				$location.path('/business');

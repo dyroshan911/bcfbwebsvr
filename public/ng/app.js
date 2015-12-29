@@ -1,4 +1,4 @@
-﻿/*
+/*
  * angular.js file
  */
 var sessionStorage = window.sessionStorage;
