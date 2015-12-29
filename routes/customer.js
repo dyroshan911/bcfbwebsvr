@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var users = require('../controllers/users.js');
+var customers = require('../controllers/customer.js');
 
 /** a common fcuntion to package response */
 
@@ -14,15 +14,14 @@ function httpResp(res, code, result) {
 
 /* create customer, */
 router.post('/', function (req, res) {
-    //var token = req.body.params.token;
+    var token = req.query.token;
     var customerObj = {
         name: req.body.data.name,
         phone: req.body.data.phone,
-        referrer_id: req.body.data.referrer_id,
         apply_amount: req.body.data.apply_amount
     };
 	//...
-    users.creatCustomer(customerObj, function (statusCode, result) {
+    customers.creatCustomer(token, customerObj, function (statusCode, result) {
         httpResp(res, statusCode, result);
     }); 
 });

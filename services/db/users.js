@@ -94,7 +94,8 @@ userObj.createUser = function (userObj, cb) {
         phone:userObj.phone,
         true_name:userObj.true_name ,
         superior:userObj.superior,
-        wechat_id:userObj.openId
+        wechat_id:userObj.openId,
+        create_on: parseInt(Date.now()/1000) 
     };
     var newUser = new UserModel(userInfo);
     newUser.save ( function ( err, user ){

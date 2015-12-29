@@ -49,7 +49,8 @@ exports.createUser = function(token, userName, password, cb) {
             var userData = {
                 user_id: doc.id,
                 user_name: doc.user_name,
-                role: doc.role
+                role: doc.role,
+                superior: doc.superior
             };
             sessions.updateSession(token, userData, function(err, data) {
                 if (!err) {
@@ -92,6 +93,7 @@ exports.createUserWechat = function(token, code, cb) {
                    userData.true_name = data.true_name;
                    userData.role = data.role;
                    userData.user_id = doc.id;
+                   userData.superior = doc.superior;
                    sessions.updateSession(token, userData, function(err, data) {
                         if(!err) {
                             delete userData.access_token;
@@ -119,7 +121,7 @@ exports.bindWechatUsr = function(token, userName, password, cb) {
     sessions.getSessionAttrs(token, ['open_id'], function (err, data) {
         var result = {};
         var statusCode = 200;
-        if (!err) {
+        if (!err && data.open_id) {
             users.bindUsrByOpenid(data.open_id, userName, password, function(err, doc){
                 var result = {};
                 var statusCode = 200;
@@ -127,7 +129,8 @@ exports.bindWechatUsr = function(token, userName, password, cb) {
                     var userData = {
                         user_id: doc.id,
                         user_name: doc.user_name,
-                        role: doc.role
+                        role: doc.role,
+                        superior: doc.superior
                     };
                     sessions.updateSession(token, userData, function(err, data) {
                         if (!err) {
