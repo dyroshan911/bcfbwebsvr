@@ -30,11 +30,14 @@ router.post('/', function (req, res) {
 /* get customer list*/
 router.get('/', function (req, res) {
     var token = req.query.token;
-	//todo get custromer list
-    httpResp(res, 200, {customerlist:'test get customer'});
-    /*users.creatCustomer(customerObj, function (statusCode, result) {
+    var offset = req.query.offset;
+    var limit = req.query.limit;
+    var filter = req.query.filter;
+    customers.getCustomerList(token, offset, limit, filter, function(statusCode, result){
         httpResp(res, statusCode, result);
-    });*/ 
+    });
+    //httpResp(res, 200, {customerlist:'test get customer'});
+
 });
 
 
