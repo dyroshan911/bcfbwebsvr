@@ -102,8 +102,9 @@ exports.createUserWechat = function(token, code, cb) {
                         }
                     });
                } else {
+                    sessions.updateSession(token, userData, function(err, data) {});
                     statusCode = 500;
-                    result.code = 'e1109';
+                    result.code = 'e0004';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
@@ -113,6 +114,53 @@ exports.createUserWechat = function(token, code, cb) {
         }
     });
 };
+
+exports.bindWechatUsr = function(token, userName, password, cb) {
+    sessions.getSessionAttrs(token, ['open_id'], function (err, data) {
+        var result = {};
+        var statusCode = 200;
+        if (!err) {
+            users.bindUsrByOpenid(data.open_id, userName, password, function(err, doc){
+                var result = {};
+                var statusCode = 200;
+                if (!err) {
+                    var userData = {
+                        user_id: doc.id,
+                        user_name: doc.user_name,
+                        role: doc.role
+                    };
+                    sessions.updateSession(token, userData, function(err, data) {
+                        if (!err) {
+                            result = userData;
+                            cb(statusCode, result);
+                        } else {                    
+                            statusCode = 500;
+                            result.code = 'e1109';
+                            result.message = err.message;
+                            result.description = err.message;
+                            result.source = '<<webui>>';
+                            cb(statusCode, result);
+                        }
+                    });
+                } else {
+                    statusCode = 500;
+                    result.code = 'e1109';
+                    result.message = err.message;
+                    result.description = err.message;
+                    result.source = '<<webui>>';
+                    cb(statusCode, result);
+                }                
+            });
+        } else {
+            statusCode = 500;
+            result.code = 'e2001';
+            result.message = err.message;
+            result.description = 'bindWechatUsr';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
+        }
+    });
+}
 
 exports.signOut = function (token, cb) {
     sessions.clearSession(token, function(err, data) {

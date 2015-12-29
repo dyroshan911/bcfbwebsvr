@@ -36,6 +36,17 @@ router.post('/wechatauth', function(req, res){
 	});	
 });
 
+
+/*user login by wechat*/
+router.post('/binduser', function(req, res){
+	var token = req.query.token;
+	var userName = req.body.data.user_name;
+    var password = req.body.data.password;
+    sessions.bindWechatUsr(token, userName, password, function (statusCode, result) {
+		res.status(statusCode).json(result);
+	});	
+});
+
 /* user log out */
 router.delete('/user', function(req, res){
 	var token = req.query.token;

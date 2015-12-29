@@ -46,6 +46,31 @@ userObj.verifyUserByOpenid = function (openId, cb) {
     });
 };
 
+userObj.bindUsrByOpenid = function (openId, userName, password, cb) {    
+    UserModel.findOne({
+        'user_name': userName, 
+        'password': password
+    }, function (err, user) {
+        if (err) {
+            cb(err, null);
+        } else if (!user) {
+            cb(new Error("User not found"), null);
+        } else {
+            user.wechat_id = openId;
+            user.modify_on = parseInt(Date.now()/1000);
+            user.save(function (err, result) {
+                if (err) {
+                    cb(err, null);
+                } else {
+                    cb(null, user);
+                }
+            });
+        }
+    });
+};
+
+
+
 userObj.queryUser = function(userName, cb) {
     UserModel.findOne({
         'user_name': userName
