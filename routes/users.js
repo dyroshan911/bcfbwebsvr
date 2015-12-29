@@ -29,7 +29,7 @@ router.get('/', function (req, res) {
 
 /* create user, user sign up. */
 router.post('/', function (req, res) {
-    //var token = req.body.params.token;
+    var token = req.query.token;
     var accountObj = {
         userName: req.body.data.user_name,
         password: req.body.data.password,
@@ -40,7 +40,7 @@ router.post('/', function (req, res) {
     };
 	//todo: verify checkcode
 	//...
-    users.creatAccount(accountObj, function (statusCode, result) {
+    users.creatAccount(token, accountObj, function (statusCode, result) {
         httpResp(res, statusCode, result);
     }); 
 });

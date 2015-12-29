@@ -1,5 +1,6 @@
 'use strict';
 var users = require("../services/db").Users;
+var sessions = require('../services/cache').Sessions;
 
 exports.getUsers = function (token, obj, cb) {
     users.getUserList(obj.offset, obj.limit, function (err, docs) {
@@ -34,21 +35,27 @@ exports.getUsers = function (token, obj, cb) {
 
 
 
-exports.creatAccount = function(accountObj, cb) {
-    users.createUser(accountObj, function (err, doc) {
-        var result = {};
-        var statusCode = 201;
-        if (!err) {
-            result = {user_id: doc.id};
-        } else {
-            statusCode = 403;
-            result.code = 'e1109';
-            result.message = err.message;
-            result.description = err.message;
-            result.source = '<<webui>>';
+exports.creatAccount = function(token, accountObj, cb) {
+    sessions.getSessionAttrs(token, ['open_id'], function (err, data) {
+        if(!err && data && data.open_id) {
+            accountObj.openId= data.open_id;
         }
-        cb(statusCode, result);
-    });
+        users.createUser(accountObj, function (err, doc) {
+            var result = {};
+            var statusCode = 201;
+            if (!err) {
+                result = {user_id: doc.id};
+            } else {
+                statusCode = 403;
+                result.code = 'e1109';
+                result.message = err.message;
+                result.description = err.message;
+                result.source = '<<webui>>';
+            }
+            cb(statusCode, result);
+        });
+    })
+
 };
 
 exports.getUserInfo = function (token, userId, cb) {
