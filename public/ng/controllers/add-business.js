@@ -19,6 +19,7 @@ angular.module('myApp').controller('AddBusinessCtrl', ['$scope', '$location', '$
 				apply_amount: $scope.customerData.amount
 			};
 			BusinessService.addBusiness($rootScope.session.token, dataObj, function (res) {
+				alert(JSON.stringify(res));
 				$location.path('/business');
 			}, function (res) {
 				alert(res.message);

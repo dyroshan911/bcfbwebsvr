@@ -32,5 +32,42 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 			ApiService.get(url, obj, successcb, failcb);
 		};
 		
+		cfgData.getMember = function (token, paramObj, successcb, failcb) {
+			var obj = {
+				params: {
+					token: token,
+					Offset: paramObj.offset,
+ 					Limit: paramObj.limit,
+					filter: paramObj.filter
+				}
+			};
+			ApiService.get('api/accounts/member', obj, successcb, failcb);
+		};
+		
+		cfgData.getMemberById = function (token, paramObj, userId, successcb, failcb) {
+			var url = 'api/accounts/member' + userId;
+			var obj = {
+				params: {
+					token: token,
+					Offset: paramObj.offset,
+					Limit: paramObj.limit,
+					filter: paramObj.filter
+				}
+			};
+			ApiService.get(url, obj, successcb, failcb);
+		};
+		
+		cfgData.getChannel = function (token, paramObj, successcb, failcb) {
+			var obj = {
+				params: {
+					token: token,
+					Offset: paramObj.offset,
+					Limit: paramObj.limit,
+					filter: paramObj.filter
+				}
+			};
+			ApiService.get('api/accounts/channel', obj, successcb, failcb);
+		};
+		
 		return cfgData;
 	}]);

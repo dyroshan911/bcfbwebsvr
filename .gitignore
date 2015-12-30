@@ -2,4 +2,4 @@
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
 
-/node_modules/JSV/jsdoc-toolkit/templates/jsdoc/static/header.html
+/node_modules
