@@ -78,7 +78,7 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, cb
                     }
                     else {
                         var dataList = {};
-                        dataList.list = customers;
+                        dataList.customerList = customers;
                         dataList.total = count;
                         cb(null, dataList);
                     }

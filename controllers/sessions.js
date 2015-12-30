@@ -92,8 +92,8 @@ exports.createUserWechat = function(token, code, cb) {
                    userData.user_name = data.user_name;
                    userData.true_name = data.true_name;
                    userData.role = data.role;
-                   userData.user_id = doc.id;
-                   userData.superior = doc.superior;
+                   userData.user_id = data.id;
+                   userData.superior = data.superior;
                    sessions.updateSession(token, userData, function(err, data) {
                         if(!err) {
                             delete userData.access_token;

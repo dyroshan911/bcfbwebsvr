@@ -37,6 +37,7 @@ exports.getCustomerList = function (token, offset, limit, filter, cb) {
     sessions.getSessionAttrs(token, ['user_id', 'role'], function (err, data) {
         if(!err && data.user_id) {
             customers.getCustomerList(data.user_id, data.role, offset, limit, filter, function(err, doc){
+                result = doc;
                 cb(statusCode, result);
             });
         }
