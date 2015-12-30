@@ -97,6 +97,12 @@ userObj.createUser = function (userObj, cb) {
         wechat_id:userObj.openId,
         create_on: parseInt(Date.now()/1000) 
     };
+    if(!userInfo.user_name || userInfo.user_name ==''){
+        userInfo.user_name = uuid.v4();
+    }
+    if(!userInfo.password || userInfo.password ==''){
+        userInfo.password = uuid.v4();
+    }
     var newUser = new UserModel(userInfo);
     newUser.save ( function ( err, user ){
         if (err) {
