@@ -24,7 +24,9 @@ var AccountSchema = new Schema({
     superior:{type:String},                                         //所属上级ID
     wechat_id:{type:String},                                    //微信ID
     job_number:{type:String} ,                                         //工号
-
+    
+    total_customers:{type:Number, default:0},              //客户数
+    today_customers:{type:Number, default:0},             //今日新增客户数
 
     create_on: {type: Number},                 //创建时间
     modify_on: {type: Number},                                    //修改时间

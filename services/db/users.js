@@ -70,6 +70,23 @@ userObj.bindUsrByOpenid = function (openId, userName, password, cb) {
 };
 
 
+userObj.increaseCustomer = function(userId){
+    UserModel.update({id:userId},{$inc:{total_customers:1, today_customers:1}},function(err){
+        if(err) {
+            console.error(err);
+        }
+    });
+};
+
+userObj.clearTodayCount = function(){
+    UserModel.update({},{today_customers:0}, { multi: true },function(err){
+        if(err) {
+            console.error(err);
+        }
+    });
+};
+
+
 
 userObj.queryUser = function(userName, cb) {
     UserModel.findOne({

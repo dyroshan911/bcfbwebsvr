@@ -8,17 +8,17 @@ exports.getUsers = function (token, obj, cb) {
         var statusCode = 200;
         if (!err) {
             result = {
-              "total":  obj.limit,  //总数
-              "offset": obj.offset, //实际偏移量
-              "count":  docs.length,  //实际个数
-              "users":  []
+                "total": obj.limit,  //总数
+                "offset": obj.offset, //实际偏移量
+                "count": docs.length,  //实际个数
+                "users": []
             };
             for (var i = 0; i < doc.length; i++) {
                 var user = {
-                    id:        docs[i].id,
+                    id: docs[i].id,
                     user_name: docs[i].user_name,
                     nick_name: docs[i].nick_name,
-                    enable:    docs[i].enabled
+                    enable: docs[i].enabled
                 };
                 result.users.push(user);
             }
@@ -35,16 +35,16 @@ exports.getUsers = function (token, obj, cb) {
 
 
 
-exports.creatAccount = function(token, accountObj, cb) {
+exports.creatAccount = function (token, accountObj, cb) {
     sessions.getSessionAttrs(token, ['open_id'], function (err, data) {
-        if(!err && data && data.open_id) {
-            accountObj.openId= data.open_id;
+        if (!err && data && data.open_id) {
+            accountObj.openId = data.open_id;
         }
         users.createUser(accountObj, function (err, doc) {
             var result = {};
             var statusCode = 201;
             if (!err) {
-                result = {user_id: doc.id};
+                result = { user_id: doc.id };
             } else {
                 statusCode = 403;
                 result.code = 'e1109';
@@ -59,7 +59,7 @@ exports.creatAccount = function(token, accountObj, cb) {
 };
 
 exports.getUserInfo = function (token, userId, cb) {
-    users.getUserInfo (userId, function (err, doc) {
+    users.getUserInfo(userId, function (err, doc) {
         var result = {};
         var statusCode = 200;
         if (!err) {
@@ -67,7 +67,7 @@ exports.getUserInfo = function (token, userId, cb) {
                 id: doc.id,
                 user_name: doc.user_name,
                 nick_name: doc.nick_name,
-                enable:  doc.enabled
+                enable: doc.enabled
             };
         } else {
             statusCode = 500;
@@ -97,3 +97,8 @@ exports.updateUser = function (token, userId, userObj, cb) {
         cb(statusCode, result);
     });
 };
+
+exports.scheduleJob = function () {
+    console.log('begin schedule------->')
+    users.clearTodayCount();
+}

@@ -11,6 +11,8 @@ var config = require('./services/config');
 var wechat = require('wechat');
 var wechat_api = require('wechat-api');
 var wechatOAuth = require('wechat-oauth');
+var schedule = require("node-schedule");
+
 
 
 
@@ -65,6 +67,7 @@ var wechats = require('./routes/wechats');
 var apiSessions = require('./routes/sessions');
 var apiBackDoor = require('./routes/backDoor');
 var wechatMsg = require('./controllers/wechatMsg.js');
+var accounts = require('./controllers/users.js');
 var app = express();
 
 // view engine setup
@@ -145,6 +148,11 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+var rule = new schedule.RecurrenceRule();
+rule.hour = 0;
+rule.minute = 0;   
+var j = schedule.scheduleJob(rule, accounts.scheduleJob);
 
 var server = app.listen(process.env.PORT || mainConfig.servers.websvr.port, function() {
     console.log('listening on port %d', server.address().port);
