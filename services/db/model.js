@@ -28,6 +28,8 @@ var AccountSchema = new Schema({
 
     create_on: {type: Number},                 //创建时间
     modify_on: {type: Number},                                    //修改时间
+    
+    complete:{type:Boolean, default:true},
     enabled:  {type: Boolean, default: true}                    //账号禁用开关
 });
 
