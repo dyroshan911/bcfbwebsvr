@@ -18,37 +18,37 @@ userObj.init = function (ap) {
 */
 
 userObj.verifyUser = function (userName, password, cb) {
-	UserModel.findOne({
-        'user_name': userName, 
+    UserModel.findOne({
+        'user_name': userName,
         'password': password
     }).select('id user_name role').exec(function (err, user) {
-		if (err) {
-			cb(err, null);
+        if (err) {
+            cb(err, null);
         } else if (!user) {
-			cb(new Error('Verify user failed'), null);
-		} else {
+            cb(new Error('Verify user failed'), null);
+        } else {
             cb(null, user);
-		}
+        }
     });
 };
 
 userObj.verifyUserByOpenid = function (openId, cb) {
-	UserModel.findOne({
-        'wechat_id': openId, 
+    UserModel.findOne({
+        'wechat_id': openId,
     }).select('id user_name role').exec(function (err, user) {
-		if (err) {
-			cb(err, null);
+        if (err) {
+            cb(err, null);
         } else if (!user) {
-			cb(new Error('Verify user failed'), null);
-		} else {
+            cb(new Error('Verify user failed'), null);
+        } else {
             cb(null, user);
-		}
+        }
     });
 };
 
-userObj.bindUsrByOpenid = function (openId, userName, password, cb) {    
+userObj.bindUsrByOpenid = function (openId, userName, password, cb) {
     UserModel.findOne({
-        'user_name': userName, 
+        'user_name': userName,
         'password': password
     }, function (err, user) {
         if (err) {
@@ -57,7 +57,7 @@ userObj.bindUsrByOpenid = function (openId, userName, password, cb) {
             cb(new Error("User not found"), null);
         } else {
             user.wechat_id = openId;
-            user.modify_on = parseInt(Date.now()/1000);
+            user.modify_on = parseInt(Date.now() / 1000);
             user.save(function (err, result) {
                 if (err) {
                     cb(err, null);
@@ -70,17 +70,17 @@ userObj.bindUsrByOpenid = function (openId, userName, password, cb) {
 };
 
 
-userObj.increaseCustomer = function(userId){
-    UserModel.update({id:userId},{$inc:{total_customers:1, today_customers:1}},function(err){
-        if(err) {
+userObj.increaseCustomer = function (userId) {
+    UserModel.update({ id: userId }, { $inc: { total_customers: 1, today_customers: 1 } }, function (err) {
+        if (err) {
             console.error(err);
         }
     });
 };
 
-userObj.clearTodayCount = function(){
-    UserModel.update({},{today_customers:0}, { multi: true },function(err){
-        if(err) {
+userObj.clearTodayCount = function () {
+    UserModel.update({}, { today_customers: 0 }, { multi: true }, function (err) {
+        if (err) {
             console.error(err);
         }
     });
@@ -88,7 +88,7 @@ userObj.clearTodayCount = function(){
 
 
 
-userObj.queryUser = function(userName, cb) {
+userObj.queryUser = function (userName, cb) {
     UserModel.findOne({
         'user_name': userName
     }).select('id').exec(function (err, user) {
@@ -105,23 +105,23 @@ userObj.queryUser = function(userName, cb) {
 userObj.createUser = function (userObj, cb) {
     var userInfo = {
         id: uuid.v4(),
-        user_name:userObj.userName,
-        password:userObj.password,
-        email:userObj.email,
-        phone:userObj.phone,
-        true_name:userObj.true_name ,
-        superior:userObj.superior,
-        wechat_id:userObj.openId,
-        create_on: parseInt(Date.now()/1000) 
+        user_name: userObj.userName,
+        password: userObj.password,
+        email: userObj.email,
+        phone: userObj.phone,
+        true_name: userObj.true_name,
+        superior: userObj.superior,
+        wechat_id: userObj.openId,
+        create_on: parseInt(Date.now() / 1000)
     };
-    if(!userInfo.user_name || userInfo.user_name ==''){
+    if (!userInfo.user_name || userInfo.user_name == '') {
         userInfo.user_name = uuid.v4();
     }
-    if(!userInfo.password || userInfo.password ==''){
+    if (!userInfo.password || userInfo.password == '') {
         userInfo.password = uuid.v4();
     }
     var newUser = new UserModel(userInfo);
-    newUser.save ( function ( err, user ){
+    newUser.save(function (err, user) {
         if (err) {
             cb(err, null);
         } else {
@@ -133,67 +133,51 @@ userObj.createUser = function (userObj, cb) {
     });
 };
 
-userObj.updateUser = function (userId, userObj, cb) {
-    UserModel.findOne({
-        'id': userId
-    }, function (err, user) {
-        if (err) {
-            cb(err, null);
-        } else if (!user) {
-            cb(new Error("User not found"), null);
-        } else {
-            for (var key in userObj) {
-                if (key === 'password') {
-                    user.password = userObj.password;
-                }
-                if (key === 'nick_name') {
-                    user.nick_name = userObj.nick_name;
-                }
-                //todo: add other attrs here
-                //...
-                user.modify_on = Date.now();
+userObj.getMembersList = function (user_id, offset, limit, filter, cb) {
+    if (!offset) offset = 0;
+    if (!limit) limit = 30;
+    if (!filter) filter = '';
+    var textArr = filter.split(' ');
+    var count = textArr.length;
+    var queryObj = {};
+    if (count !== 0) {
+        console.log('filter----->', textArr);
+        queryObj['$and'] = [];
+        for (var i = 0; i < count; ++i) {
+            var queryElem = { '$or': [] };
+            queryElem['$or'].push({ user_name: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ phone: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ status: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ territory: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ comment: new RegExp(textArr[i], 'i') });
+            queryObj['$and'].push(queryElem);
+        }
+    }
+    queryObj['$and'].push({ superior: user_id });
+    queryObj['$and'].push({ role: 'member' });
+
+    UserModel.find(queryObj)
+        .skip(offset).
+        limit(limit).
+        exec(function (err, members) {
+            if (err) {
+                cb(err, null);
+            } else if (!members) {
+                cb(new Error("not found"), null);
+            } else {
+                UserModel.count(queryObj, function (errcount, count) {
+                    if (errcount) {
+                        cb(errcount, null);
+                    }
+                    else {
+                        var dataList = {};
+                        dataList.membersList = members;
+                        dataList.total = count;
+                        cb(null, dataList);
+                    }
+                });
             }
-            user.save(function (err, result) {
-                if (err) {
-                    cb(err, null);
-                } else {
-                    cb(null, user);
-                }
-            });
-        }
-    });
-};
-
-userObj.getUserInfo = function (userId, cb) {
-    var acId = userId;
-    UserModel.findOne({id: acId})
-    .select('id user_name nick_name create_on modify_on enabled')
-    .exec(function (err, user) {
-        if (err) {
-            cb(err, null)
-        } else if (!user) {
-            cb(new Error("Can not find user by user id " + acId), null);
-        } else {
-            cb(null, user);
-        }
-    });
-};
+        });
+}
 
 
-/**
-* get user list
-*   
-*/
-userObj.getUserList = function (offset, limit, cb) {
-    UserModel.find()
-    .skip(offset)
-    .limit(limit)
-    .select('id user_name nick_name create_on modify_on enabled')
-    .exec(function(err, users) {
-        if (err) {
-            cb(err, null)
-        } else {
-            cb(null, users);
-        }
-    });
-};

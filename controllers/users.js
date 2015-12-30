@@ -2,39 +2,6 @@
 var users = require("../services/db").Users;
 var sessions = require('../services/cache').Sessions;
 
-exports.getUsers = function (token, obj, cb) {
-    users.getUserList(obj.offset, obj.limit, function (err, docs) {
-        var result = {};
-        var statusCode = 200;
-        if (!err) {
-            result = {
-                "total": obj.limit,  //总数
-                "offset": obj.offset, //实际偏移量
-                "count": docs.length,  //实际个数
-                "users": []
-            };
-            for (var i = 0; i < doc.length; i++) {
-                var user = {
-                    id: docs[i].id,
-                    user_name: docs[i].user_name,
-                    nick_name: docs[i].nick_name,
-                    enable: docs[i].enabled
-                };
-                result.users.push(user);
-            }
-        } else {
-            statusCode = 500;
-            result.code = 'e2001';
-            result.message = err.message;
-            result.description = err.message;
-            result.source = '<<webui>>';
-        }
-        cb(statusCode, result);
-    });
-};
-
-
-
 exports.creatAccount = function (token, accountObj, cb) {
     sessions.getSessionAttrs(token, ['open_id'], function (err, data) {
         if (!err && data && data.open_id) {
@@ -58,45 +25,32 @@ exports.creatAccount = function (token, accountObj, cb) {
 
 };
 
-exports.getUserInfo = function (token, userId, cb) {
-    users.getUserInfo(userId, function (err, doc) {
+exports.getMembersList = function (token, offset, limit, filter, cb) {
+    sessions.getSessionAttrs(token, ['role', 'user_id'], function (err, data) {
         var result = {};
-        var statusCode = 200;
-        if (!err) {
-            result = {
-                id: doc.id,
-                user_name: doc.user_name,
-                nick_name: doc.nick_name,
-                enable: doc.enabled
-            };
+        var statusCode = 201;
+        if (!err && data.user_id && data.role != 'member') {
+            users.getMembersList(data.user_id, token, offset, limit, filter, function (err, doc) {
+                if (!err) {
+                    result = doc;
+                } else {
+                    statusCode = 403;
+                    result.code = 'e2001';
+                    result.message = err.message;
+                    result.description = err.message;
+                    result.source = '<<webui>>';
+                }
+                cb(statusCode, result);
+            });
         } else {
-            statusCode = 500;
+            statusCode = 403;
             result.code = 'e2001';
             result.message = err.message;
-            result.description = err.message;
+            result.description = 'Without permission';
             result.source = '<<webui>>';
         }
-        cb(statusCode, result);
     });
-};
-
-
-exports.updateUser = function (token, userId, userObj, cb) {
-    users.updateUser(userId, userObj, function (err, doc) {
-        var result = {};
-        var statusCode = 200;
-        if (!err) {
-            result = doc;
-        } else {
-            statusCode = 500;
-            result.code = 'e2001';
-            result.message = err.message;
-            result.description = err.message;
-            result.source = '<<webui>>';
-        }
-        cb(statusCode, result);
-    });
-};
+}
 
 exports.scheduleJob = function () {
     console.log('begin schedule------->')
