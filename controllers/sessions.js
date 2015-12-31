@@ -50,7 +50,8 @@ exports.createUser = function(token, userName, password, cb) {
                 user_id: doc.id,
                 user_name: doc.user_name,
                 role: doc.role,
-                superior: doc.superior
+                superior: doc.superior,
+                true_name: doc.true_name
             };
             sessions.updateSession(token, userData, function(err, data) {
                 if (!err) {
@@ -94,13 +95,14 @@ exports.createUserWechat = function(token, code, cb) {
                    userData.role = data.role;
                    userData.user_id = data.id;
                    userData.superior = data.superior;
+                   userData.complete = data.complete;
                    sessions.updateSession(token, userData, function(err, data) {
                         if(!err) {
                             delete userData.access_token;
                             delete userData.refresh_token;
                             delete userData.open_id;
                             result = userData;
-                             cb(statusCode, result);
+                            cb(statusCode, result);
                         }
                     });
                } else {

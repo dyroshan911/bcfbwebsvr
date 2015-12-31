@@ -21,7 +21,7 @@ userObj.verifyUser = function (userName, password, cb) {
     UserModel.findOne({
         'user_name': userName,
         'password': password
-    }).select('id user_name role').exec(function (err, user) {
+    }).select('id user_name true_name superior role').exec(function (err, user) {
         if (err) {
             cb(err, null);
         } else if (!user) {
@@ -35,7 +35,7 @@ userObj.verifyUser = function (userName, password, cb) {
 userObj.verifyUserByOpenid = function (openId, cb) {
     UserModel.findOne({
         'wechat_id': openId,
-    }).select('id user_name role').exec(function (err, user) {
+    }).select('id user_name true_name role superior complete').exec(function (err, user) {
         if (err) {
             cb(err, null);
         } else if (!user) {
@@ -116,9 +116,11 @@ userObj.createUser = function (userObj, cb) {
     };
     if (!userInfo.user_name || userInfo.user_name == '') {
         userInfo.user_name = uuid.v4();
+        userInfo.complete = false;
     }
     if (!userInfo.password || userInfo.password == '') {
         userInfo.password = uuid.v4();
+        userInfo.complete = false;
     }
     var newUser = new UserModel(userInfo);
     newUser.save(function (err, user) {
