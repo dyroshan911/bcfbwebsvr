@@ -48,6 +48,8 @@ router.post('/auth', function(req, res) {
     });
 });
 
+
+
 /** wechat api update wechat menu api*/
 router.post('/menu', function (req, res) {
     var result = {};
