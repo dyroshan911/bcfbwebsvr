@@ -1,14 +1,26 @@
 body {
 	font-family: Segoe UI;
-    font: 16px "Microsoft YaHei UI", Helvetica, Arial, sans-serif;
+	font: 16px "Microsoft YaHei UI", Helvetica, Arial, sans-serif;
 }
 
 a {
 	color: #00B7FF;
 }
 
+.control-label {
+	padding-top: 7px;
+	margin-bottom: 0;
+	text-align: right;
+}
+
 /*home page*/
 #home-header {
 	height: 200px;
 	background-color: lightgreen;
+}
+
+/*wechat*/
+.container-wechat {
+	padding-right: 5px;
+	padding-left: 5px;
 }

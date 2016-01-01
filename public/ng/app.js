@@ -13,6 +13,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/wechat_signup', { templateUrl: ('partial/wechat-signup'), controller: 'WechatCtrl' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl' });
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });
+		$routeProvider.when('/wechat-business', { templateUrl: ('partial/wechat-business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/add-business', { templateUrl: ('partial/add-business'), controller: 'AddBusinessCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
@@ -24,6 +25,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 
 myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($route, $rootScope, $location, SessionService) {
 		$rootScope.session = {};
+		//$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
 		var firstStart = true;
 		$rootScope.$on('$routeChangeStart', function (event, next, current) {
 			if (firstStart) {
@@ -31,11 +33,12 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 				SessionService.initSession(function (data) {
 					var args = $location.search();
 					if ((args.code && args.state) || args.openid) {
-						SessionService.auth(args, function (res) {
+						$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
+						SessionService.wechatAuth(args, function (res) {
 							firstStart = false;
 							alert(JSON.stringify(res));
 							alert('登录成功');
-							$location.path('/business');
+							$location.path('/wechat-business');
 						}, function (res) {
 							alert(JSON.stringify(res));
 							firstStart = false;
@@ -55,6 +58,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 			if (sessionStorage) {
 				$rootScope.session.token = sessionStorage.token;
 				$rootScope.session.logged = sessionStorage.logged === 'true' ? true : false;
+				$rootScope.session.wechatMode = sessionStorage.wechatMode === 'true' ? true : false;
 				$rootScope.session.userId = sessionStorage.userId;
 				$rootScope.session.userName = sessionStorage.userName;
 				$rootScope.session.role = sessionStorage.role;

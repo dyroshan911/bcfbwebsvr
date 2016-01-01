@@ -23,7 +23,11 @@ angular.module('myApp').controller('WechatCtrl', ['$scope', '$location', '$rootS
 			};
 			UserService.signup($rootScope.session.token, dataOdj, function (res) {
 				alert(JSON.stringify(res));
-				$location.path('/business');
+				if ($rootScope.session.wechatMode) {
+					$location.path('/wechat-business');
+				} else {
+					$location.path('/business');
+				}
 			}, function (res) {
 				alert(res.message);
 			})

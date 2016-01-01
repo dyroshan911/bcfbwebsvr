@@ -3,21 +3,11 @@
 angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', 'ApiService', function ($rootScope, MsgService, ApiService) {
 		var cfgData = {};
 		
-		cfgData.createSession = function (successcb, failcb) {
-			ApiService.post('api/sessions', {}, function (res) {
-				$rootScope.session.token = res.token;
-				if (typeof (Storage) !== 'undefined') {
-					sessionStorage.token = res.token;
-					sessionStorage.logged = 'false';
-				}
-				successcb(res);
-			}, failcb);
-		};
-		
 		cfgData.initSession = function (successcb, failcb) {
 			$rootScope.session = {
+				token: '',
 				logged: false,
-				token: ''
+				wechatMode: false
 			};
 			
 			if (typeof (Storage) !== 'undefined') {
@@ -54,6 +44,18 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 					successcb(null);
 				}, failcb);
 			}
+		};
+		
+		cfgData.createSession = function (successcb, failcb) {
+			ApiService.post('api/sessions', {}, function (res) {
+				$rootScope.session.token = res.token;
+				if (typeof (Storage) !== 'undefined') {
+					sessionStorage.token = res.token;
+					sessionStorage.logged = false;
+					sessionStorage.wechatMode = false;
+				}
+				successcb(res);
+			}, failcb);
 		};
 		
 		cfgData.getSessionUser = function (token, successcb, failcb) {
@@ -110,7 +112,7 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			ApiService.head('api/sessions', obj, successcb, failcb);
 		};
 		
-		cfgData.auth = function (dataObj, successcb, failcb) {
+		cfgData.wechatAuth = function (dataObj, successcb, failcb) {
 			var obj = {
 				params: {
 					token: $rootScope.session.token
@@ -125,11 +127,13 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			delete $rootScope.session.userName;
 			delete $rootScope.session.role;
 			$rootScope.session.logged = false;
+			$rootScope.session.wechatMode = false;
 			
 			delete sessionStorage.userId;
 			delete sessionStorage.userName;
 			delete sessionStorage.role;
-			sessionStorage.logged = 'false';
+			sessionStorage.logged = false;
+			sessionStorage.wechatMode = false;
 		}
 		
 		return cfgData;

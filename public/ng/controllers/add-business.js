@@ -20,7 +20,11 @@ angular.module('myApp').controller('AddBusinessCtrl', ['$scope', '$location', '$
 			};
 			BusinessService.addBusiness($rootScope.session.token, dataObj, function (res) {
 				alert(JSON.stringify(res));
-				$location.path('/business');
+				if ($rootScope.session.wechatMode) {
+					$location.path('/wechat-business');
+				} else {
+					$location.path('/business');
+				}
 			}, function (res) {
 				alert(res.message);
 			})
