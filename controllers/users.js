@@ -30,7 +30,7 @@ exports.getMembersList = function (token, offset, limit, filter, cb) {
         var result = {};
         var statusCode = 201;
         if (!err && data.user_id && data.role != 'member') {
-            users.getMembersList(data.user_id, token, offset, limit, filter, function (err, doc) {
+            users.getMembersList(data.user_id, offset, limit, filter, function (err, doc) {
                 if (!err) {
                     result = doc;
                 } else {

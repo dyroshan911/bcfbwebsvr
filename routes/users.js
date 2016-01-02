@@ -55,7 +55,7 @@ router.get('/member', function (req, res) {
         httpResp(res, statusCode, result);
     });
     //todo: get all account list
-    httpResp(res, 200, { customerlist: 'test get all my member account list' });
+    //httpResp(res, 200, { customerlist: 'test get all my member account list' });
     /*users.getAccounts(token, obj, function (statusCode, result) {
         httpResp(res, statusCode, result);
     });*/
