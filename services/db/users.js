@@ -122,17 +122,27 @@ userObj.createUser = function (userObj, cb) {
         userInfo.password = uuid.v4();
         userInfo.complete = false;
     }
-    var newUser = new UserModel(userInfo);
-    newUser.save(function (err, user) {
-        if (err) {
-            cb(err, null);
+
+    UserModel.findOne({
+        user_name: userInfo.user_name
+    }, function (err, user) {
+        if (!err && !user) {
+            var newUser = new UserModel(userInfo);
+            newUser.save(function (err, user) {
+                if (err) {
+                    cb(err, null);
+                } else {
+                    var result = {
+                        id: user.id
+                    };
+                    cb(null, result);
+                }
+            });
         } else {
-            var result = {
-                id: user.id
-            };
-            cb(null, result);
+            cb(new Error("not found"), null);
         }
     });
+
 };
 
 userObj.getMembersList = function (user_id, offset, limit, filter, cb) {

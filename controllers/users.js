@@ -14,7 +14,7 @@ exports.creatAccount = function (token, accountObj, cb) {
                 result = { user_id: doc.id };
             } else {
                 statusCode = 403;
-                result.code = 'e1109';
+                result.code = 'e1103';
                 result.message = err.message;
                 result.description = err.message;
                 result.source = '<<webui>>';
