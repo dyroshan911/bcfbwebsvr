@@ -5,9 +5,21 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.customerList = [];
 		$scope.channelList = [];
 		$scope.memberList = [];
+		$scope.statusOptions = [
+			{ value: 'init' },
+			{ value: 'successed' },
+			{ value: 'failed' },
+			{ value: 'cancelled' }
+		];
+		$scope.editCustomer = {
+			name: '',
+			newPhone: '',
+			apply_amount: '',
+			status: {}
+		};
 		
 		getCustomerList();
-		if ($rootScope.session.role == '') {
+		if ($rootScope.session.role == 'channel-mgr') {
 			getChannelList(0, 10, '');
 			getMemberList(0, 10, '');
 		} else if ($rootScope.session.role == 'channel') {
@@ -15,6 +27,17 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		}
 		
 		//functions
+		$scope.onEditCustomer = function (customer) {
+			$scope.editCustomer.name = customer.name;
+			$scope.editCustomer.amount = customer.apply_amount;
+			for (var i = 0; i < $scope.statusOptions.length; ++i) {
+				if ($scope.statusOptions[i].value == customer.status) {
+					$scope.editCustomer.status = $scope.statusOptions[i];
+				}
+			}
+			$('#editDialog').modal({ backdrop: false });
+		};
+
 		function getCustomerList() {
 			BusinessService.getBusiness($rootScope.session.token, function (res) {
 				$rootScope.session;

@@ -10,10 +10,10 @@
 			<li role="presentation"  class="active">
 				<a href="#myCustomers" role="tab" data-toggle="tab">我的客户</a>
 			</li>
-			<li role="presentation">
+			<li role="presentation" ng-show="session.role == 'channel-mgr'">
 				<a href="#myChannels" role="tab" data-toggle="tab">我的渠道</a>
 			</li>
-			<li role="presentation">
+			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
 				<a href="#myMembers" role="tab" data-toggle="tab">我的会员</a>
 			</li>
 		</ul>
@@ -29,6 +29,7 @@
 							<th width="10%">贷款金额</th>
 							<th width="15%">申请时间</th>
 							<th width="10%">状态</th>
+							<th width="10%"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -38,6 +39,9 @@
 							<td ng-bind="customer.apply_amount"></td>
 							<td ng-bind="customer.createDate"></td>
 							<td ng-bind="customer.status"></td>
+							<td align="center">
+								<a href="#" ng-click="onEditCustomer(customer)">编辑</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -83,6 +87,60 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">编辑客户</h4>
+				</div>
+				<div class="modal-body">
+					<form name='editForm' role="form" class="form-horizontal" ng-submit="onLogin()">
+						<div class="form-group">
+							<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+								<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="20" ng-model="editCustomer.name" />
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+								<input type="text" class="form-control" name="phone" placeholder="电话号码(新增)" title="请输入新电话号码" required="" maxlength="20" ng-model="editCustomer.newPhone"
+								ng-pattern="/^\d+$/" />
+								<div ng-show="editForm.phone.$dirty &amp;&amp; editForm.phone.$invalid">
+									<small class="alert-danger well-sm" ng-show="editForm.phone.$error.pattern">请使用数字</small>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+								<input type="text" class="form-control" name="amount" placeholder="贷款金额" title="请输入贷款金额" required="" maxlength="20" ng-model="editCustomer.amount"
+								ng-pattern="/^\d+$/" />
+								<div ng-show="editForm.amount.$dirty &amp;&amp; editForm.amount.$invalid">
+									<small class="alert-danger well-sm" ng-show="editForm.amount.$error.pattern">请使用数字</small>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-5 col-xs-offset-1 col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+								<select class="form-control" ng-options="status.value for status in statusOptions" ng-model="editCustomer.status"></select>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<button type="button" class="btn btn-success btn-lg btn-block" data-dismiss="modal">保存</button>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
