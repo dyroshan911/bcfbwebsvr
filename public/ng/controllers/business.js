@@ -3,11 +3,14 @@
 angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$rootScope', 'BusinessService',
 	function ($scope, $location, $rootScope, BusinessService) {
 		$scope.customerList = [];
-		$scope.MemberList = [];
-		$scope.ChannelList = [];
+		$scope.channelList = [];
+		$scope.memberList = [];
 		
 		getCustomerList();
 		if ($rootScope.session.role == '') {
+			getChannelList(0, 10, '');
+			getMemberList(0, 10, '');
+		} else if ($rootScope.session.role == 'channel') {
 			getMemberList(0, 10, '');
 		}
 		
@@ -24,20 +27,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				alert(res.message);
 			});
 		}
-
-		function getMemberList(Offset, Limit, filter) {
-			var paramObj = {
-				Offset: Offset,
-				Limit: Limit,
-				filter: filter
-			};
-			BusinessService.getMember($rootScope.session.token, paramObj, function (res) {
-				$scope.MemberList = res.memberList;
-			}, function (res) {
-				alert(res.message);
-			});
-		}
-
+		
 		function getChannelList(Offset, Limit, filter) {
 			var paramObj = {
 				Offset: Offset,
@@ -45,9 +35,38 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				filter: filter
 			};
 			BusinessService.getChannel($rootScope.session.token, paramObj, function (res) {
-				$scope.ChannelList = res.channelList;
+				$scope.channelList = res.channelList;
 			}, function (res) {
 				alert(res.message);
 			});
 		}
+		
+		function getMemberList(Offset, Limit, filter) {
+			var paramObj = {
+				Offset: Offset,
+				Limit: Limit,
+				filter: filter
+			};
+			BusinessService.getMember($rootScope.session.token, paramObj, function (res) {
+				$scope.memberList = res.memberList;
+			}, function (res) {
+				alert(res.message);
+			});
+		}
+		
+		//jQuery
+		$('#myTabs a[href="#myCustomers"]').click(function (e) {
+			e.preventDefault()
+			$(this).tab('show')
+		})
+		
+		$('#myTabs a[href="#myChannels"]').click(function (e) {
+			e.preventDefault()
+			$(this).tab('show')
+		})
+		
+		$('#myTabs a[href="#myMembers"]').click(function (e) {
+			e.preventDefault()
+			$(this).tab('show')
+		})
 	}]);

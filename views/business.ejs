@@ -6,16 +6,22 @@
 	</div>
 	<div style="margin-top: 30px;">
 		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active">
-				<a href="#" role="tab" data-toggle="tab">我的客户</a>
+		<ul class="nav nav-tabs" id="myTabs" role="tablist">
+			<li role="presentation"  class="active">
+				<a href="#myCustomers" role="tab" data-toggle="tab">我的客户</a>
+			</li>
+			<li role="presentation">
+				<a href="#myChannels" role="tab" data-toggle="tab">我的渠道</a>
+			</li>
+			<li role="presentation">
+				<a href="#myMembers" role="tab" data-toggle="tab">我的会员</a>
 			</li>
 		</ul>
 
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane fade in active" id="myCustomer">
-				<table class="table table-striped">
+			<div role="tabpanel" class="tab-pane fade in active" id="myCustomers">
+				<table class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
 							<th width="10%">姓名</th>
@@ -32,6 +38,48 @@
 							<td ng-bind="customer.apply_amount"></td>
 							<td ng-bind="customer.createDate"></td>
 							<td ng-bind="customer.status"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="myChannels">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="10%">姓名</th>
+							<th width="10%">联系电话</th>
+							<th width="10%">查看客户</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="channel in channelList">
+							<td ng-bind="channel.name"></td>
+							<td ng-bind="channel.phone"></td>
+							<td>
+								<a href="#">查看</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="myMembers">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="10%">会员姓名</th>
+							<th width="10%">联系电话</th>
+							<th width="10%">查看客户</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="member in memberList">
+							<td ng-bind="member.name"></td>
+							<td ng-bind="member.phone"></td>
+							<td>
+								<a href="#">查看</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
