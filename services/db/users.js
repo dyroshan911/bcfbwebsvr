@@ -127,19 +127,29 @@ userObj.createUser = function (userObj, cb) {
         user_name: userInfo.user_name
     }, function (err, user) {
         if (!err && !user) {
-            var newUser = new UserModel(userInfo);
-            newUser.save(function (err, user) {
-                if (err) {
-                    cb(err, null);
-                } else {
-                    var result = {
-                        id: user.id
-                    };
-                    cb(null, result);
+            UserModel.findOne({
+                job_number: userObj.superior
+            }, function (err, user) {
+                if (user.id) {
+                    userInfo.superior = user.id;
+                    var newUser = new UserModel(userInfo);
+                    newUser.save(function (err, user) {
+                        if (err) {
+                            cb(err, null);
+                        } else {
+                            var result = {
+                                id: user.id
+                            };
+                            cb(null, result);
+                        }
+                    });
+                }
+                else {
+                    cb(new Error("superior not found"), null);
                 }
             });
         } else {
-            cb(new Error("not found"), null);
+            cb(new Error("already existing"), null);
         }
     });
 
