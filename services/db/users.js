@@ -130,7 +130,7 @@ userObj.createUser = function (userObj, cb) {
             UserModel.findOne({
                 job_number: userObj.superior
             }, function (err, user) {
-                if (user.id) {
+                if (user) {
                     userInfo.superior = user.id;
                     var newUser = new UserModel(userInfo);
                     newUser.save(function (err, user) {
