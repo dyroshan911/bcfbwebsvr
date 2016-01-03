@@ -26,6 +26,22 @@ router.get('/', function (req, res) {
     });*/
 });
 
+/* bind user with wechat_id, user sign up. */
+router.put('/', function (req, res) {
+    var token = req.query.token;
+    var accountObj = {
+        userName: req.body.data.user_name,
+        password: req.body.data.password,
+    };
+    //todo: verify checkcode
+    //...
+    users.bindAccount(token, accountObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
+});
+
+
+
 /* create user, user sign up. */
 router.post('/', function (req, res) {
     var token = req.query.token;
