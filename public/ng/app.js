@@ -15,6 +15,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/wechat-business', { templateUrl: ('partial/wechat-business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/add-business', { templateUrl: ('partial/add-business'), controller: 'AddBusinessCtrl' });
+		$routeProvider.when('/members', { templateUrl: ('partial/members'), controller: 'MembersCtrl' });
+		$routeProvider.when('/wechat-members', { templateUrl: ('partial/wechat-members'), controller: 'MembersCtrl' });
+		$routeProvider.when('/customers', { templateUrl: ('partial/customers'), controller: 'CustomersCtrl' });
+		$routeProvider.when('/wechat-customers', { templateUrl: ('partial/wechat-customers'), controller: 'CustomersCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		$locationProvider.html5Mode(true);

@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="panel panel-default" ng-repeat="member in memberList">
+		<div class="panel-heading" ng-click="member.showDetails = !member.showDetails;">
+			<div class="row">
+				<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="member.name"></h3>
+				<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
+			</div>
+		</div>
+		<div class="panel-body" ng-show="customer.showDetails">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
+					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+						<div class="panel panel-success">
+							<div class="panel-heading" ng-bind="member.phone"></div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">查看客户</lable>
+					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+						<button class="btn btn-success btn-lg btn-block">查看</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -3,7 +3,7 @@
 angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiService) {
 		var cfgData = {};
 		
-		cfgData.addBusiness = function (token, dataObj, successcb, failcb) {
+		cfgData.addCustomer = function (token, dataObj, successcb, failcb) {
 			var obj = {
 				params: {
 					token: token
@@ -13,7 +13,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 			ApiService.post('api/customers', obj, successcb, failcb);
 		};
 		
-		cfgData.getBusiness = function (token, successcb, failcb) {
+		cfgData.getCustomers = function (token, successcb, failcb) {
 			var obj = {
 				params: {
 					token: token
@@ -22,7 +22,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 			ApiService.get('api/customers', obj, successcb, failcb);
 		};
 		
-		cfgData.getBusinessById = function (token, userId, successcb, failcb) {
+		cfgData.getCustomersById = function (token, userId, successcb, failcb) {
 			var url = 'api/customers/' + userId;
 			var obj = {
 				params: {
@@ -32,37 +32,37 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 			ApiService.get(url, obj, successcb, failcb);
 		};
 		
-		cfgData.getMember = function (token, paramObj, successcb, failcb) {
+		cfgData.getMembers = function (token, paramObj, successcb, failcb) {
 			var obj = {
 				params: {
 					token: token,
-					Offset: paramObj.offset,
- 					Limit: paramObj.limit,
+					offset: paramObj.offset,
+ 					limit: paramObj.limit,
 					filter: paramObj.filter
 				}
 			};
 			ApiService.get('api/accounts/member', obj, successcb, failcb);
 		};
 		
-		cfgData.getMemberById = function (token, paramObj, userId, successcb, failcb) {
-			var url = 'api/accounts/member' + userId;
+		cfgData.getMembersById = function (token, userId, paramObj, successcb, failcb) {
+			var url = 'api/accounts/member/' + userId;
 			var obj = {
 				params: {
 					token: token,
-					Offset: paramObj.offset,
-					Limit: paramObj.limit,
+					offset: paramObj.offset,
+					limit: paramObj.limit,
 					filter: paramObj.filter
 				}
 			};
 			ApiService.get(url, obj, successcb, failcb);
 		};
 		
-		cfgData.getChannel = function (token, paramObj, successcb, failcb) {
+		cfgData.getChannels = function (token, paramObj, successcb, failcb) {
 			var obj = {
 				params: {
 					token: token,
-					Offset: paramObj.offset,
-					Limit: paramObj.limit,
+					offset: paramObj.offset,
+					limit: paramObj.limit,
 					filter: paramObj.filter
 				}
 			};

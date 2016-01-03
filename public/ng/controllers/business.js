@@ -37,9 +37,9 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			}
 			$('#editDialog').modal({ backdrop: false });
 		};
-
+		
 		function getCustomerList() {
-			BusinessService.getBusiness($rootScope.session.token, function (res) {
+			BusinessService.getCustomers($rootScope.session.token, function (res) {
 				$rootScope.session;
 				$scope.customerList = res.customerList;
 				for (var i = 0; i < $scope.customerList.length; ++i) {
@@ -53,8 +53,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		
 		function getChannelList(Offset, Limit, filter) {
 			var paramObj = {
-				Offset: Offset,
-				Limit: Limit,
+				offset: offset,
+				oimit: limit,
 				filter: filter
 			};
 			BusinessService.getChannel($rootScope.session.token, paramObj, function (res) {
@@ -66,8 +66,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		
 		function getMemberList(Offset, Limit, filter) {
 			var paramObj = {
-				Offset: Offset,
-				Limit: Limit,
+				offset: offset,
+				limit: limit,
 				filter: filter
 			};
 			BusinessService.getMember($rootScope.session.token, paramObj, function (res) {
