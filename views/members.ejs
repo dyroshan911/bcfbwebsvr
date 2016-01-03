@@ -1,0 +1,24 @@
+<div class="container">
+	<table class="table table-bordered table-striped table-hover">
+		<thead>
+			<tr>
+				<th width="10%">姓名</th>
+				<th width="10%">联系电话</th>
+				<th width="10%">电子邮箱</th>
+				<th width="15%">注册时间</th>
+				<th width="10%"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="member in memberList">
+				<td ng-bind="member.name"></td>
+				<td ng-bind="member.phone"></td>
+				<td ng-bind="member.email"></td>
+				<td ng-bind="member.createDate"></td>
+				<td>
+					<a href="#">查看客户</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
