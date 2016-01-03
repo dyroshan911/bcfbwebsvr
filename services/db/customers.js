@@ -36,7 +36,7 @@ customerObj.createCustomer = function (dataObj, cb) {
     });
 };
 
-customerObj.getCustomerList = function (user_id, role, offset, limit, filter, cb) {
+customerObj.getCustomerList = function (user_id, role, offset, limit, filter, seeTel, cb) {
     if (!offset) offset = 0;
     if (!limit) limit = 30;
     if (!filter) filter = '';
@@ -63,9 +63,15 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, cb
     } else if (role == 'channel-mgr' || role == 'channel') {
         queryObj['$and'].push({ belong_channel: user_id });
     }
+    
+    var selectattr = 'id name  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on';
+    if (seeTel) {
+        var selectattr = 'id name phone  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on';
+    }
     CustomerModel.find(queryObj)
         .skip(offset).
         limit(limit).
+        select(selectattr).
         exec(function (err, customers) {
             if (err) {
                 cb(err, null);

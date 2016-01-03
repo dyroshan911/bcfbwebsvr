@@ -45,11 +45,14 @@ router.get('/', function (req, res) {
 router.get('/:account_id', function (req, res) {
     var token = req.query.token;
     var accountId = req.params.account_id;
+    var offset = req.query.offset;
+    var limit = req.query.limit;
+    var filter = req.query.filter;
 	//todo get custromer list by id
-    httpResp(res, 200, {customerlist:'test get customer by id'});
-    /*users.creatCustomer(customerObj, function (statusCode, result) {
+    //httpResp(res, 200, {customerlist:'test get customer by id'});
+    customers.getCustomerListById(token, accountId, offset, limit, filter, function(statusCode, result){
         httpResp(res, statusCode, result);
-    });*/ 
+    });
 });
 
 module.exports = router;

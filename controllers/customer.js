@@ -39,9 +39,26 @@ exports.getCustomerList = function (token, offset, limit, filter, cb) {
     var statusCode = 200;
     sessions.getSessionAttrs(token, ['user_id', 'role'], function (err, data) {
         if (!err && data.user_id) {
-            customers.getCustomerList(data.user_id, data.role, offset, limit, filter, function (err, doc) {
+            customers.getCustomerList(data.user_id, data.role, offset, limit, filter, true, function (err, doc) {
                 result = doc;
                 cb(statusCode, result);
+            });
+        }
+    });
+}
+
+exports.getCustomerListById = function (token, accountId, offset, limit, filter, cb) {
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['user_id', 'role'], function (err, data) {
+        if (!err && data.user_id) {
+            var seeTel = false;
+            if (data.role = 'admin') seeTel = true;
+            users.queryUser(accountId, function (err, user) {
+                customers.getCustomerListById(accountId, user.role, offset, limit, filter, seeTel, function (err, doc) {
+                    result = doc;
+                    cb(statusCode, result);
+                });
             });
         }
     });
