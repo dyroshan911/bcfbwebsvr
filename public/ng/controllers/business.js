@@ -57,7 +57,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				oimit: limit,
 				filter: filter
 			};
-			BusinessService.getChannel($rootScope.session.token, paramObj, function (res) {
+			BusinessService.getChannels($rootScope.session.token, paramObj, function (res) {
 				$scope.channelList = res.channelList;
 			}, function (res) {
 				alert(res.message);
@@ -70,7 +70,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				limit: limit,
 				filter: filter
 			};
-			BusinessService.getMember($rootScope.session.token, paramObj, function (res) {
+			BusinessService.getMembers($rootScope.session.token, paramObj, function (res) {
 				$scope.memberList = res.memberList;
 			}, function (res) {
 				alert(res.message);
