@@ -51,7 +51,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			});
 		}
 		
-		function getChannelList(Offset, Limit, filter) {
+		function getChannelList(offset, limit, filter) {
 			var paramObj = {
 				offset: offset,
 				oimit: limit,
@@ -64,7 +64,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			});
 		}
 		
-		function getMemberList(Offset, Limit, filter) {
+		function getMemberList(offset, limit, filter) {
 			var paramObj = {
 				offset: offset,
 				limit: limit,
