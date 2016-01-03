@@ -99,7 +99,7 @@ exports.getMembersList = function (token, offset, limit, filter, cb) {
         } else {
             statusCode = 403;
             result.code = 'e2001';
-            result.message = err.message;
+            result.message = 'err.message';
             result.description = 'Without permission';
             result.source = '<<webui>>';
         }
