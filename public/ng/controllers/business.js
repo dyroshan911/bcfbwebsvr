@@ -71,7 +71,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				filter: filter
 			};
 			BusinessService.getMembers($rootScope.session.token, paramObj, function (res) {
-				$scope.memberList = res.memberList;
+				$scope.memberList = res.membersList;
 			}, function (res) {
 				alert(res.message);
 			});
