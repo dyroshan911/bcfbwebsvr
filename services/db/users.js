@@ -259,3 +259,9 @@ userObj.getChannelsList = function (user_id, role, offset, limit, filter, cb) {
 }
 
 
+userObj.updateAccountInfo = function (userId, dataObj, cb) {
+    UserModel.update({ id: userId }, { $set: dataObj }, function (err, data) {
+        cb(err, data);
+    });
+};
+

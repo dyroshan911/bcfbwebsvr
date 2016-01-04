@@ -99,6 +99,37 @@ router.get('/channel', function (req, res) {
 });
 
 
+/* get  account info */
+router.get('/accountInfo', function (req, res) {
+    var token = req.query.token;
+
+    users.getAccountInfo(token, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
+});
+
+
+/* complete account info */
+router.put('/completeAcount', function (req, res) {
+    var token = req.query.token;
+    var userName = req.body.data.user_name;
+    var password = req.body.data.password;
+    users.completeAcount(token, userName, password, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
+});
+
+
+/* update account info */
+router.put('/accountInfo', function (req, res) {
+    var token = req.query.token;
+    var dataObj = req.body.data;
+    users.updateAccountInfo(token, dataObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
+});
+
+
 
 /* update account info */
 router.put('/:account_id', function (req, res) {
@@ -112,31 +143,5 @@ router.put('/:account_id', function (req, res) {
     /*users.getAccounts(token, obj, function (statusCode, result) {
         httpResp(res, statusCode, result);
     });*/
-});
-
-
-
-
-/* add role for account info by id*/
-router.post('/:accountId/roles', function (req, res) {
-
-    var accountId = req.url.substring(1, req.url.indexOf('/roles'));
-    /*var token = req.query.token;
-    
-
-    users.getAccounts(obj, function (statusCode, result) {
-        httpResp(res, statusCode, result);
-    });*/
-});
-
-/* update role for account info by id*/
-router.put('/:accountId/roles', function (req, res) {
-    var accountId = req.url.substring(1, req.url.indexOf('/roles'));
-    /*var token = req.query.token,
-
-    //todo:
-    users.getAccounts(obj, function (statusCode, result) {
-        httpResp(res, statusCode, result);
-    }); */
 });
 module.exports = router;

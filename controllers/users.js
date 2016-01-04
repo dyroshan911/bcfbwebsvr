@@ -24,7 +24,7 @@ exports.creatAccount = function (token, accountObj, cb) {
                 sessions.updateSession(token, userData, function (err, data) {
                     if (err) { console.error('update session error'); }
                 });
-                result = { user_id: doc.id };
+                result = userData;
             } else {
                 statusCode = 403;
                 result.code = 'e1103';
@@ -160,6 +160,80 @@ exports.getChannelsList = function (token, offset, limit, filter, cb) {
             result.source = '<<webui>>';
         }
     });
+}
+
+
+exports.getAccountInfo = function (token, cb) {
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['role', 'user_id', 'user_name', 'superior', 'true_name', 'complete'], function (err, data) {
+        if (!err && data) {
+            result = data;
+        } else {
+            statusCode = 403;
+            result.code = 'e1103';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+        }
+        cb(statusCode, result);
+    });
+};
+
+exports.updateAccountInfo = function (token, dataObj, cb) {
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['user_id', 'open_id'], function (err, data) {
+        if (!err && data) {
+            var updateData = {};
+            if (dataObj.true_name && dataObj.true_name != '') {
+                updateData.true_name = dataObj.true_name;
+            }
+            if (dataObj.password && dataObj.password != '') {
+                updateData.password = dataObj.password;
+            }
+            if (dataObj.phone && dataObj.phone != '') {
+                updateData.phone = dataObj.phone;
+            }
+            if (dataObj.email && dataObj.email != '') {
+                updateData.email = dataObj.email;
+            }
+            users.updateAccountInfo(data.user_id, updateData, function (err, doc) {
+                if (!err) {
+                    var userData = {
+                        user_id: doc.id,
+                        user_name: doc.user_name,
+                        role: doc.role,
+                        superior: doc.superior,
+                        true_name: doc.true_name,
+                        open_id: data.open_id,
+                        complete: doc.complete
+                    };
+                    sessions.updateSession(token, userData, function (err, data) {
+                        if (err) { console.error('update session error'); }
+                    });
+                    delete userData.open_id;
+                    result = userData;
+                    cb(statusCode, result);
+                } else {
+                    statusCode = 403;
+                    result.code = 'e1103';
+                    result.message = 'err.message';
+                    result.description = 'err.message';
+                    result.source = '<<webui>>';
+                    cb(statusCode, result);
+                }
+            });
+        } else {
+            statusCode = 403;
+            result.code = 'e1103';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
+        }
+    });
+
 }
 
 
