@@ -238,10 +238,10 @@ userObj.getChannelsList = function (user_id, role, offset, limit, filter, cb) {
     UserModel.find(queryObj)
         .skip(offset).
         limit(limit).
-        exec(function (err, members) {
+        exec(function (err, channels) {
             if (err) {
                 cb(err, null);
-            } else if (!members) {
+            } else if (!channels) {
                 cb(new Error("not found"), null);
             } else {
                 UserModel.count(queryObj, function (errcount, count) {
@@ -250,7 +250,7 @@ userObj.getChannelsList = function (user_id, role, offset, limit, filter, cb) {
                     }
                     else {
                         var dataList = {};
-                        dataList.membersList = members;
+                        dataList.channelsList = channels;
                         dataList.total = count;
                         cb(null, dataList);
                     }
