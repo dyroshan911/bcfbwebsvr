@@ -180,6 +180,49 @@ exports.getAccountInfo = function (token, cb) {
     });
 };
 
+
+exports.completeAcount = function (token, userName, password, cb) {
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['user_id', 'complete', 'open_id'], function (err, data) {
+        if (!err && data && data.complete == false) {
+            users.completeAcount(data.user_id, userName, password, function (err, doc) {
+                if (!err) {
+                    var userData = {
+                        user_id: doc.id,
+                        user_name: doc.user_name,
+                        role: doc.role,
+                        superior: doc.superior,
+                        true_name: doc.true_name,
+                        open_id: data.open_id,
+                        complete: doc.complete
+                    };
+                    sessions.updateSession(token, userData, function (err, data) {
+                        if (err) { console.error('update session error'); }
+                    });
+                    delete userData.open_id;
+                    result = userData;
+                    cb(statusCode, result);
+                } else {
+                    statusCode = 403;
+                    result.code = 'e1103';
+                    result.message = 'err.message';
+                    result.description = 'err.message';
+                    result.source = '<<webui>>';
+                    cb(statusCode, result);
+                }
+            });
+        } else {
+            statusCode = 403;
+            result.code = 'e1103';
+            result.message = 'no permision';
+            result.description = 'no permision';
+            result.source = '<<webui-completeAcount>>';
+        }
+        cb(statusCode, result);
+    });
+}
+
 exports.updateAccountInfo = function (token, dataObj, cb) {
     var result = {};
     var statusCode = 200;

@@ -258,6 +258,20 @@ userObj.getChannelsList = function (user_id, role, offset, limit, filter, cb) {
         });
 }
 
+userObj.completeAcount = function (userId, userName, password, cb) {
+    UserModel.findOne({
+        user_name: userName
+    }, function (err, user) {
+        if (!err && !user) {
+            UserModel.update({ id: userId }, { $set: { user_name: userName, password: password, complete: true } }, function (err, data) {
+                cb(err, data);
+            });
+        } else {
+            cb(new Error('user name has exisit'), null);
+        }
+    })
+}
+
 
 userObj.updateAccountInfo = function (userId, dataObj, cb) {
     UserModel.update({ id: userId }, { $set: dataObj }, function (err, data) {
