@@ -89,15 +89,13 @@ router.get('/member/:account_id', function (req, res) {
 /* get all my channel user accounts info  */
 router.get('/channel', function (req, res) {
     var token = req.query.token;
-    var obj = {
-        offset: req.query.offset,
-        limit: req.query.limit
-    };
+    var offset = req.query.offset;
+    var limit = req.query.limit;
+    var filter = req.query.filter;
     //todo: get all account list
-    httpResp(res, 200, { customerlist: 'test get all my channel account list' });
-    /*users.getAccounts(token, obj, function (statusCode, result) {
+    users.getChannelsList(token, offset, limit, filter, function (statusCode, result) {
         httpResp(res, statusCode, result);
-    });*/
+    });
 });
 
 
