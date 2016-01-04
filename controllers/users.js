@@ -106,6 +106,63 @@ exports.getMembersList = function (token, offset, limit, filter, cb) {
     });
 }
 
+
+exports.getMembersListById = function (token, accountId, offset, limit, filter, cb) {
+    sessions.getSessionAttrs(token, ['role', 'user_id'], function (err, data) {
+        var result = {};
+        var statusCode = 201;
+        if (!err && data.user_id && data.role == 'admin') {
+            users.getMembersList(accountId, offset, limit, filter, function (err, doc) {
+                if (!err) {
+                    result = doc;
+                } else {
+                    statusCode = 403;
+                    result.code = 'e2001';
+                    result.message = err.message;
+                    result.description = err.message;
+                    result.source = '<<webui>>';
+                }
+                cb(statusCode, result);
+            });
+        } else {
+            statusCode = 403;
+            result.code = 'e2001';
+            result.message = 'err.message';
+            result.description = 'Without permission';
+            result.source = '<<webui>>';
+        }
+    });
+}
+
+
+exports.getChannelsList = function (token, offset, limit, filter, cb) {
+    sessions.getSessionAttrs(token, ['role', 'user_id'], function (err, data) {
+        var result = {};
+        var statusCode = 201;
+        if (!err && data.user_id && (data.role == 'admin' || data.role == 'channel-mgr')) {
+            users.getChannelsList(data.user_id, data.role, offset, limit, filter, function (err, doc) {
+                if (!err) {
+                    result = doc;
+                } else {
+                    statusCode = 403;
+                    result.code = 'e2001';
+                    result.message = err.message;
+                    result.description = err.message;
+                    result.source = '<<webui>>';
+                }
+                cb(statusCode, result);
+            });
+        } else {
+            statusCode = 403;
+            result.code = 'e2001';
+            result.message = 'err.message';
+            result.description = 'Without permission';
+            result.source = '<<webui>>';
+        }
+    });
+}
+
+
 exports.scheduleJob = function () {
     console.log('begin schedule------->')
     users.clearTodayCount();

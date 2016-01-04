@@ -91,7 +91,7 @@ userObj.clearTodayCount = function () {
 userObj.queryUser = function (user_id, cb) {
     UserModel.findOne({
         'id': user_id
-    }).select('role').exec(function (err, user) {
+    }).select('role superior').exec(function (err, user) {
         if (err) {
             cb(err, null);
         } else if (!user) {
@@ -194,6 +194,63 @@ userObj.getMembersList = function (user_id, offset, limit, filter, cb) {
                     else {
                         var dataList = {};
                         dataList.membersList = members;
+                        dataList.total = count;
+                        cb(null, dataList);
+                    }
+                });
+            }
+        });
+}
+
+
+
+userObj.getChannelsList = function (user_id, role, offset, limit, filter, cb) {
+    if (!offset) offset = 0;
+    if (!limit) limit = 30;
+    if (!filter) filter = '';
+    var textArr = filter.split(' ');
+    var count = textArr.length;
+    var queryObj = {};
+    if (count !== 0) {
+        console.log('filter----->', textArr);
+        queryObj['$and'] = [];
+        for (var i = 0; i < count; ++i) {
+            var queryElem = { '$or': [] };
+            queryElem['$or'].push({ user_name: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ phone: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ status: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ territory: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ comment: new RegExp(textArr[i], 'i') });
+            queryObj['$and'].push(queryElem);
+        }
+    }
+    if (role == 'admin') {
+        var queryElem = { '$or': [] };
+        queryElem['$or'].push({ role: 'channel' });
+        queryElem['$or'].push({ role: 'channel-mgr' });
+        queryObj['$and'].push(queryElem);
+    } else {
+        queryObj['$and'].push({ superior: user_id });
+        queryObj['$and'].push({ role: 'channel' });
+    }
+
+
+    UserModel.find(queryObj)
+        .skip(offset).
+        limit(limit).
+        exec(function (err, channels) {
+            if (err) {
+                cb(err, null);
+            } else if (!channels) {
+                cb(new Error("not found"), null);
+            } else {
+                UserModel.count(queryObj, function (errcount, count) {
+                    if (errcount) {
+                        cb(errcount, null);
+                    }
+                    else {
+                        var dataList = {};
+                        dataList.channelsList = channels;
                         dataList.total = count;
                         cb(null, dataList);
                     }
