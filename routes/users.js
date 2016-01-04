@@ -70,26 +70,19 @@ router.get('/member', function (req, res) {
     users.getMembersList(token, offset, limit, filter, function (statusCode, result) {
         httpResp(res, statusCode, result);
     });
-    //todo: get all account list
-    //httpResp(res, 200, { customerlist: 'test get all my member account list' });
-    /*users.getAccounts(token, obj, function (statusCode, result) {
-        httpResp(res, statusCode, result);
-    });*/
 });
 
 /* get all member user accounts info  by chanel id*/
 router.get('/member/:account_id', function (req, res) {
     var token = req.query.token;
     var accountId = req.params.account_id;
-    var obj = {
-        offset: req.query.offset,
-        limit: req.query.limit
-    };
-    //todo: get all account list
-    httpResp(res, 200, { customerlist: 'test get all member account list by chanel id' });
-    /*users.getAccounts(token, obj, function (statusCode, result) {
+    var offset = req.query.offset;
+    var limit = req.query.limit;
+    var filter = req.query.filter;
+
+    users.getMembersListById(token, accountId, offset, limit, filter, function (statusCode, result) {
         httpResp(res, statusCode, result);
-    });*/
+    });
 });
 
 

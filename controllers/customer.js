@@ -55,6 +55,9 @@ exports.getCustomerListById = function (token, accountId, offset, limit, filter,
             var seeTel = false;
             if (data.role = 'admin') seeTel = true;
             users.queryUser(accountId, function (err, user) {
+                if(user.role == 'member' && user.superior == data.user_id) {
+                    seeTel = true;
+                }
                 customers.getCustomerListById(accountId, user.role, offset, limit, filter, seeTel, function (err, doc) {
                     result = doc;
                     cb(statusCode, result);
