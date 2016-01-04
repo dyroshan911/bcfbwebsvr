@@ -40,7 +40,6 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		
 		function getCustomerList() {
 			BusinessService.getCustomers($rootScope.session.token, function (res) {
-				$rootScope.session;
 				$scope.customerList = res.customerList;
 				for (var i = 0; i < $scope.customerList.length; ++i) {
 					$scope.customerList[i].createDate = (new Date($scope.customerList[i].create_on * 1000)).toLocaleString();
