@@ -62,6 +62,9 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, se
         queryObj['$and'].push({ belong_mem: user_id });
     } else if (role == 'channel-mgr' || role == 'channel') {
         queryObj['$and'].push({ belong_channel: user_id });
+    } else {
+        cb(new Error("not permision"), null);
+        return;
     }
     
     var selectattr = 'id name  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on';

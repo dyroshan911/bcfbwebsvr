@@ -137,10 +137,7 @@ userObj.createUser = function (userObj, cb) {
                         if (err) {
                             cb(err, null);
                         } else {
-                            var result = {
-                                id: user.id
-                            };
-                            cb(null, result);
+                            cb(null, user);
                         }
                     });
                 }
