@@ -26,6 +26,7 @@
 						<tr>
 							<th width="10%">姓名</th>
 							<th width="10%">联系电话</th>
+							<th width="15%">电子邮箱</th>
 							<th width="10%">贷款金额</th>
 							<th width="15%">申请时间</th>
 							<th width="10%">状态</th>
@@ -36,6 +37,7 @@
 						<tr ng-repeat="customer in customerList">
 							<td ng-bind="customer.name"></td>
 							<td ng-bind="customer.phone"></td>
+							<td ng-bind="customer.email"></td>
 							<td ng-bind="customer.apply_amount"></td>
 							<td ng-bind="customer.createDate"></td>
 							<td ng-bind="customer.status"></td>
@@ -53,15 +55,27 @@
 						<tr>
 							<th width="10%">姓名</th>
 							<th width="10%">联系电话</th>
-							<th width="10%">查看客户</th>
+							<th width="15%">电子邮箱</th>
+							<th width="15%">注册时间</th>
+							<th width="10%">今日业绩</th>
+							<th width="10%">历史业绩</th>
+							<th width="10%">会员</th>
+							<th width="10%">客户</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="channel in channelList">
-							<td ng-bind="channel.name"></td>
+							<td ng-bind="channel.true_name"></td>
 							<td ng-bind="channel.phone"></td>
-							<td>
-								<a href="#">查看</a>
+							<td ng-bind="channel.email"></td>
+							<td ng-bind="channel.createDate"></td>
+							<td ng-bind="channel.today_customers"></td>
+							<td ng-bind="channel.total_customers"></td>
+							<td align="center">
+								<a href="/members?id={{channel.id}}">查看会员</a>
+							</td>
+							<td align="center">
+								<a href="/customers?id={{channel.id}}">查看客户</a>
 							</td>
 						</tr>
 					</tbody>
@@ -74,6 +88,8 @@
 						<tr>
 							<th width="10%">会员姓名</th>
 							<th width="10%">联系电话</th>
+							<th width="15%">电子邮箱</th>
+							<th width="15%">注册时间</th>
 							<th width="10%">今日业绩</th>
 							<th width="10%">历史业绩</th>
 							<th width="10%"></th>
@@ -83,10 +99,12 @@
 						<tr ng-repeat="member in memberList">
 							<td ng-bind="member.true_name"></td>
 							<td ng-bind="member.phone"></td>
+							<td ng-bind="member.email"></td>
+							<td ng-bind="member.createDate"></td>
 							<td ng-bind="member.today_customers"></td>
 							<td ng-bind="member.total_customers"></td>
 							<td align="center">
-								<a href="#">查看客户</a>
+								<a href="/customers?id={{member.id}}">查看客户</a>
 							</td>
 						</tr>
 					</tbody>

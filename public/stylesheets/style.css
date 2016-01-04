@@ -20,5 +20,13 @@ a {
 }
 
 	.container-wechat .control-label {
-		padding-top: 10px;
+		padding-top: 6px;
+	}
+
+	.container-wechat .tab-content .form-control[readonly] {
+		background-color: #DDF9DA;
+	}
+
+	.container-wechat .panel .form-control[readonly] {
+		background-color: #DDF9DA;
 	}

@@ -57,7 +57,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				filter: filter
 			};
 			BusinessService.getChannels($rootScope.session.token, paramObj, function (res) {
-				$scope.channelList = res.channelList;
+				$scope.channelList = res.channelsList;
+				for (var i = 0; i < $scope.channelList.length; ++i) {
+					$scope.channelList[i].createDate = (new Date($scope.channelList[i].create_on * 1000)).toLocaleString();
+					$scope.channelList[i].showDetails = false;
+				}
 			}, function (res) {
 				alert(res.message);
 			});
@@ -71,6 +75,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			};
 			BusinessService.getMembers($rootScope.session.token, paramObj, function (res) {
 				$scope.memberList = res.membersList;
+				for (var i = 0; i < $scope.memberList.length; ++i) {
+					$scope.memberList[i].createDate = (new Date($scope.memberList[i].create_on * 1000)).toLocaleString();
+					$scope.memberList[i].showDetails = false;
+				}
 			}, function (res) {
 				alert(res.message);
 			});

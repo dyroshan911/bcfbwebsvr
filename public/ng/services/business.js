@@ -37,7 +37,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 				params: {
 					token: token,
 					offset: paramObj.offset,
- 					limit: paramObj.limit,
+					limit: paramObj.limit,
 					filter: paramObj.filter
 				}
 			};

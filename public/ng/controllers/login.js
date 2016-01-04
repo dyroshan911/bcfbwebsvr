@@ -16,7 +16,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 			UserService.login($rootScope.session.token, dataObj, function (res) {
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;
-				$rootScope.session.userName = res.user_name;
+				$rootScope.session.userName = res.true_name;
 				$rootScope.session.role = res.role;
 				saveSessionData();
 				$location.path('/business');

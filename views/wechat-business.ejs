@@ -33,33 +33,31 @@
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<div class="panel panel-success">
-										<div class="panel-heading" ng-bind="customer.phone"></div>
-									</div>
+									<input type="text" class="form-control" ng-model="customer.phone" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电子邮箱</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.email" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">贷款金额</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<div class="panel panel-success">
-										<div class="panel-heading" ng-bind="customer.apply_amount"></div>
-									</div>
+									<input type="text" class="form-control" ng-model="customer.apply_amount" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请时间</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<div class="panel panel-success">
-										<div class="panel-heading" ng-bind="customer.createDate"></div>
-									</div>
+									<input type="text" class="form-control" ng-model="customer.createDate" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">状态</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<div class="panel panel-success">
-										<div class="panel-heading" ng-bind="customer.status"></div>
-									</div>
+									<input type="text" class="form-control" ng-model="customer.status" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -76,24 +74,50 @@
 				<div class="panel panel-default" ng-repeat="channel in channelList">
 					<div class="panel-heading" ng-click="channel.showDetails = !channel.showDetails;">
 						<div class="row">
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="channel.name"></h3>
+							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="channel.true_name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
 						</div>
 					</div>
-					<div class="panel-body" ng-show="customer.showDetails">
+					<div class="panel-body" ng-show="channel.showDetails">
 						<form class="form-horizontal">
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<div class="panel panel-success">
-										<div class="panel-heading" ng-bind="customer.phone"></div>
-									</div>
+									<input type="text" class="form-control" ng-model="channel.phone" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">查看客户</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电子邮箱</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<button class="btn btn-success btn-lg btn-block">查看</button>
+									<input type="text" class="form-control" ng-model="channel.email" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">注册时间</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="channel.createDate" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">今日业绩</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="channel.today_customers" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">历史业绩</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="channel.total_customers" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+									<a class="btn btn-info btn-lg btn-block" href="/wechat-members?id={{channel.id}}">查看会员</a>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+									<a class="btn btn-info btn-lg btn-block" href="/wechat-customers?id={{channel.id}}">查看客户</a>
 								</div>
 							</div>
 						</form>
@@ -105,24 +129,45 @@
 				<div class="panel panel-default" ng-repeat="member in memberList">
 					<div class="panel-heading" ng-click="member.showDetails = !member.showDetails;">
 						<div class="row">
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="member.name"></h3>
+							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="member.true_name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
 						</div>
 					</div>
-					<div class="panel-body" ng-show="customer.showDetails">
+					<div class="panel-body" ng-show="member.showDetails">
 						<form class="form-horizontal">
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<div class="panel panel-success">
-										<div class="panel-heading" ng-bind="member.phone"></div>
-									</div>
+									<input type="text" class="form-control" ng-model="member.phone" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">查看客户</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电子邮箱</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<button class="btn btn-success btn-lg btn-block">查看</button>
+									<input type="text" class="form-control" ng-model="member.email" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">注册时间</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="member.createDate" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">今日业绩</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="member.today_customers" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">历史业绩</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="member.total_customers" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+									<a class="btn btn-info btn-lg btn-block" href="/wechat-customers?id={{member.id}}">查看客户</a>
 								</div>
 							</div>
 						</form>
