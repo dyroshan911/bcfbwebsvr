@@ -130,6 +130,7 @@ exports.getMembersListById = function (token, accountId, offset, limit, filter, 
             result.message = 'err.message';
             result.description = 'Without permission';
             result.source = '<<webui>>';
+            cb(statusCode, result);
         }
     });
 }
