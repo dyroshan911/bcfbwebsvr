@@ -5,7 +5,7 @@
             "sub_button":[{
                 "type":"view",
                 "name":"注册百城",
-                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/wechat_signup&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
+                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/wechat-signup&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
             },{
                 "type":"view",
                 "name":"我的百城主页",

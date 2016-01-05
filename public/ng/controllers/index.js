@@ -10,4 +10,11 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 				alert(res.message);
 			});
 		};
+
+		$scope.saveSessionData = function () {
+			sessionStorage.logged = $rootScope.session.logged;
+			sessionStorage.userId = $rootScope.session.userId;
+			sessionStorage.userName = $rootScope.session.userName;
+			sessionStorage.role = $rootScope.session.role;
+		};
 	}]);

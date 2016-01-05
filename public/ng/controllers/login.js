@@ -18,17 +18,10 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 				$rootScope.session.userId = res.user_id;
 				$rootScope.session.userName = res.true_name;
 				$rootScope.session.role = res.role;
-				saveSessionData();
+				$scope.saveSessionData();
 				$location.path('/business');
 			}, function (res) {
 				alert(res.message);
 			})
 		};
-		
-		function saveSessionData() {
-			sessionStorage.logged = $rootScope.session.logged;
-			sessionStorage.userId = $rootScope.session.userId;
-			sessionStorage.userName = $rootScope.session.userName;
-			sessionStorage.role = $rootScope.session.role;
-		}
 	}]);

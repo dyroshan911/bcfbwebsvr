@@ -27,7 +27,21 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 				superior: $scope.signupData.superior
 			};
 			UserService.signup($rootScope.session.token, dataOdj, function (res) {
-				res;
+				alert(JSON.stringify(res));
+				var dataObj = {
+					user_name: $scope.signupData.userName,
+					password: $scope.signupData.passwordConfirm,
+				};
+				UserService.login($rootScope.session.token, dataObj, function (res) {
+					$rootScope.session.logged = true;
+					$rootScope.session.userId = res.user_id;
+					$rootScope.session.userName = res.true_name;
+					$rootScope.session.role = res.role;
+					$scope.saveSessionData();
+					$location.path('/business');
+				}, function (res) {
+					alert(res.message);
+				})
 			}, function (res) {
 				alert(res.message);
 			})

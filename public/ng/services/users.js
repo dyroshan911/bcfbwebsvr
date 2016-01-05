@@ -23,5 +23,25 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 			ApiService.post('api/sessions/user', obj, successcb, failcb);
 		};
 		
+		cfgData.complete = function (token, dataObj, successcb, failcb) {
+			var obj = {
+				params: {
+					token: token
+				},
+				data: dataObj
+			};
+			ApiService.put('api/accounts/completeAcount', obj, successcb, failcb);
+		};
+		
+		cfgData.bind = function (token, dataObj, successcb, failcb) {
+			var obj = {
+				params: {
+					token: token
+				},
+				data: dataObj
+			};
+			ApiService.put('api/accounts/completeAcount', obj, successcb, failcb);
+		};
+		
 		return cfgData;
 	}]);
