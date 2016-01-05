@@ -19,11 +19,13 @@ exports.creatAccount = function (token, accountObj, cb) {
                     superior: doc.superior,
                     true_name: doc.true_name,
                     open_id: data.open_id,
-                    complete: doc.complete
+                    complete: doc.complete,
+                    phone:doc.phone
                 };
                 sessions.updateSession(token, userData, function (err, data) {
                     if (err) { console.error('update session error'); }
                 });
+                delete userData.open_id;
                 result = userData;
             } else {
                 statusCode = 403;
@@ -52,7 +54,8 @@ exports.bindAccount = function (token, accountObj, cb) {
                         superior: doc.superior,
                         true_name: doc.true_name,
                         open_id: data.open_id,
-                        complete: doc.complete
+                        complete: doc.complete,
+                        phone:doc.phone
                     };
                     sessions.updateSession(token, userData, function (err, data) {
                         if (err) { console.error('update session error'); }
@@ -196,7 +199,8 @@ exports.completeAcount = function (token, userName, password, cb) {
                         superior: doc.superior,
                         true_name: doc.true_name,
                         open_id: data.open_id,
-                        complete: doc.complete
+                        complete: doc.complete,
+                        phone:doc.phone
                     };
                     sessions.updateSession(token, userData, function (err, data) {
                         if (err) { console.error('update session error'); }

@@ -5,24 +5,24 @@ var users = require("../services/db").Users;
 var wecahtOAuth = require('wechat-oauth').myAuth;
 
 exports.createSession = function (cb) {
-	sessions.createSession(function (err, data) {
-		var result = {};
+    sessions.createSession(function (err, data) {
+        var result = {};
         var statusCode = 200;
-		if (!err) {
-			result.token = data;
-		} else {
+        if (!err) {
+            result.token = data;
+        } else {
             statusCode = 500;
             result.code = 'e1109';
             result.message = err.message;
             result.description = err.message;
             result.source = '<<webui>>';
-		}
-		cb(statusCode, result);
-	});
+        }
+        cb(statusCode, result);
+    });
 };
 
-exports.verifyToken = function(token, cb) {
-    sessions.verifyToken(token, function(err, valid){
+exports.verifyToken = function (token, cb) {
+    sessions.verifyToken(token, function (err, valid) {
         var result = {};
         var statusCode = 200;
         if (err) {
@@ -31,7 +31,7 @@ exports.verifyToken = function(token, cb) {
             result.message = err.message;
             result.description = err.message;
             result.source = '<<webui>>';
-        } else if (!valid) {            
+        } else if (!valid) {
             statusCode = 403;
             result.code = 'e1110';
             result.description = result.message = "verify failed";
@@ -41,24 +41,25 @@ exports.verifyToken = function(token, cb) {
     });
 };
 
-exports.createUser = function(token, userName, password, cb) {
-	users.verifyUser(userName, password, function(err, doc){
-		var result = {};
+exports.createUser = function (token, userName, password, cb) {
+    users.verifyUser(userName, password, function (err, doc) {
+        var result = {};
         var statusCode = 200;
-		if (!err) {
+        if (!err) {
             var userData = {
                 user_id: doc.id,
                 user_name: doc.user_name,
                 role: doc.role,
                 superior: doc.superior,
                 true_name: doc.true_name,
-                complete:doc.complete
+                complete: doc.complete,
+                phone: doc.phone
             };
-            sessions.updateSession(token, userData, function(err, data) {
+            sessions.updateSession(token, userData, function (err, data) {
                 if (!err) {
                     result = userData;
                     cb(statusCode, result);
-                } else {                    
+                } else {
                     statusCode = 500;
                     result.code = 'e1109';
                     result.message = err.message;
@@ -67,7 +68,7 @@ exports.createUser = function(token, userName, password, cb) {
                     cb(statusCode, result);
                 }
             });
-		} else {
+        } else {
             statusCode = 500;
             result.code = 'e1109';
             result.message = err.message;
@@ -75,30 +76,31 @@ exports.createUser = function(token, userName, password, cb) {
             result.source = '<<webui>>';
             cb(statusCode, result);
         }
-	});
+    });
 };
 
 
-exports.createUserWechat = function(token, code, cb) {
+exports.createUserWechat = function (token, code, cb) {
     var result = {};
     var statusCode = 200;
-    wecahtOAuth.getAccessToken(code, function(err, doc){
-        if(!err) {
-                var userData = {
+    wecahtOAuth.getAccessToken(code, function (err, doc) {
+        if (!err) {
+            var userData = {
                 access_token: doc.data.access_token,
                 refresh_token: doc.data.refresh_token,
                 open_id: doc.data.openid,
             };
-            users.verifyUserByOpenid(userData.open_id, function(err, data){
-               if(!err && data){
-                   userData.user_name = data.user_name;
-                   userData.true_name = data.true_name;
-                   userData.role = data.role;
-                   userData.user_id = data.id;
-                   userData.superior = data.superior;
-                   userData.complete = data.complete;
-                   sessions.updateSession(token, userData, function(err, data) {
-                        if(!err) {
+            users.verifyUserByOpenid(userData.open_id, function (err, data) {
+                if (!err && data) {
+                    userData.user_name = data.user_name;
+                    userData.true_name = data.true_name;
+                    userData.role = data.role;
+                    userData.user_id = data.id;
+                    userData.superior = data.superior;
+                    userData.complete = data.complete;
+                    userData.phone = data.phone;
+                    sessions.updateSession(token, userData, function (err, data) {
+                        if (!err) {
                             delete userData.access_token;
                             delete userData.refresh_token;
                             delete userData.open_id;
@@ -106,26 +108,26 @@ exports.createUserWechat = function(token, code, cb) {
                             cb(statusCode, result);
                         }
                     });
-               } else {
-                    sessions.updateSession(token, userData, function(err, data) {});
+                } else {
+                    sessions.updateSession(token, userData, function (err, data) { });
                     statusCode = 500;
                     result.code = 'e0004';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
                     cb(statusCode, result);
-               } 
+                }
             });
         }
     });
 };
 
-exports.bindWechatUsr = function(token, userName, password, cb) {
+exports.bindWechatUsr = function (token, userName, password, cb) {
     sessions.getSessionAttrs(token, ['open_id'], function (err, data) {
         var result = {};
         var statusCode = 200;
         if (!err && data.open_id) {
-            users.bindUsrByOpenid(data.open_id, userName, password, function(err, doc){
+            users.bindUsrByOpenid(data.open_id, userName, password, function (err, doc) {
                 var result = {};
                 var statusCode = 200;
                 if (!err) {
@@ -135,11 +137,11 @@ exports.bindWechatUsr = function(token, userName, password, cb) {
                         role: doc.role,
                         superior: doc.superior
                     };
-                    sessions.updateSession(token, userData, function(err, data) {
+                    sessions.updateSession(token, userData, function (err, data) {
                         if (!err) {
                             result = userData;
                             cb(statusCode, result);
-                        } else {                    
+                        } else {
                             statusCode = 500;
                             result.code = 'e1109';
                             result.message = err.message;
@@ -155,7 +157,7 @@ exports.bindWechatUsr = function(token, userName, password, cb) {
                     result.description = err.message;
                     result.source = '<<webui>>';
                     cb(statusCode, result);
-                }                
+                }
             });
         } else {
             statusCode = 500;
@@ -169,7 +171,7 @@ exports.bindWechatUsr = function(token, userName, password, cb) {
 }
 
 exports.signOut = function (token, cb) {
-    sessions.clearSession(token, function(err, data) {
+    sessions.clearSession(token, function (err, data) {
         var result = {};
         var statusCode = 200;
         if (!err) {
@@ -186,7 +188,7 @@ exports.signOut = function (token, cb) {
 };
 
 exports.getUser = function (token, cb) {
-    sessions.getSessionAttrs(token, ['user_id', 'user_name', 'nick_name'], function(err, data) {
+    sessions.getSessionAttrs(token, ['user_id', 'user_name', 'nick_name'], function (err, data) {
         var result = {};
         var statusCode = 200;
         if (!err) {

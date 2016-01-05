@@ -96,3 +96,27 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, se
             }
         });
 }
+
+
+customerObj.updateCustomer = function (dataObj, cb) {
+    var customerInfo = {
+        id: uuid.v4(),
+        name: dataObj.name,
+        phone: dataObj.phone,
+        belong_mem: dataObj.mem_id,
+        belong_channel: dataObj.channel_id,
+        apply_amount: dataObj.apply_amount,
+        create_on: parseInt(Date.now() / 1000)
+    };
+    var newCustomer = new CustomerModel(customerInfo);
+    newCustomer.save(function (err, customer) {
+        if (err) {
+            cb(err, null);
+        } else {
+            var result = {
+                id: customer.id
+            };
+            cb(null, result);
+        }
+    });
+};
