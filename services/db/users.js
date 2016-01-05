@@ -91,7 +91,7 @@ userObj.clearTodayCount = function () {
 userObj.queryUser = function (user_id, cb) {
     UserModel.findOne({
         'id': user_id
-    }).select('role superior').exec(function (err, user) {
+    }).select('role superior user_name superior true_name complete phone').exec(function (err, user) {
         if (err) {
             cb(err, null);
         } else if (!user) {

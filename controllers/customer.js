@@ -88,7 +88,7 @@ exports.updateCustomerInfo = function (token, customerId, dataObj, cb) {
             if (dataObj.phone && dataObj.phone != '') {
                 updateData.phone = dataObj.phone;
             }
-            customers.updateCustomer(data.user_id, customerId, updateData, function (err, doc) {
+            customers.updateCustomer(data.user_id, data.role, customerId, updateData, function (err, doc) {
                 result = doc;
                 cb(statusCode, result);
             });
