@@ -18,7 +18,7 @@ angular.module('myApp').controller('MembersCtrl', ['$scope', '$location', '$root
 			BusinessService.getMembersById($rootScope.session.token, userId, paramObj, function (res) {
 				$scope.memberList = res.memberList;
 				for (var i = 0; i < $scope.memberList.length; ++i) {
-					$scope.memberList[i].createDate = (new Date($scope.memberList[i].create_on * 1000)).toLocaleString();
+					$scope.memberList[i].createDate = $scope.getDateString($scope.memberList[i].create_on * 1000);
 					$scope.memberList[i].showDetails = false;
 				}
 			}, function (res) {

@@ -42,7 +42,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			BusinessService.getCustomers($rootScope.session.token, function (res) {
 				$scope.customerList = res.customerList;
 				for (var i = 0; i < $scope.customerList.length; ++i) {
-					$scope.customerList[i].createDate = (new Date($scope.customerList[i].create_on * 1000)).toLocaleString();
+					$scope.customerList[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
 					$scope.customerList[i].showDetails = false;
 				}
 			}, function (res) {
@@ -59,7 +59,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			BusinessService.getChannels($rootScope.session.token, paramObj, function (res) {
 				$scope.channelList = res.channelsList;
 				for (var i = 0; i < $scope.channelList.length; ++i) {
-					$scope.channelList[i].createDate = (new Date($scope.channelList[i].create_on * 1000)).toLocaleString();
+					$scope.channelList[i].createDate = $scope.getDateString($scope.channelList[i].create_on * 1000);
 					$scope.channelList[i].showDetails = false;
 				}
 			}, function (res) {
@@ -76,7 +76,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			BusinessService.getMembers($rootScope.session.token, paramObj, function (res) {
 				$scope.memberList = res.membersList;
 				for (var i = 0; i < $scope.memberList.length; ++i) {
-					$scope.memberList[i].createDate = (new Date($scope.memberList[i].create_on * 1000)).toLocaleString();
+					$scope.memberList[i].createDate = $scope.getDateString($scope.memberList[i].create_on * 1000);
 					$scope.memberList[i].showDetails = false;
 				}
 			}, function (res) {

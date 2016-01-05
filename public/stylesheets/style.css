@@ -13,6 +13,11 @@ a {
 	background-color: lightgreen;
 }
 
+.modal .form-horizontal .control-label {
+	padding-top: 6px;
+	text-align: right;
+}
+
 /*wechat*/
 .container-wechat {
 	padding-right: 5px;
@@ -21,6 +26,7 @@ a {
 
 	.container-wechat .control-label {
 		padding-top: 6px;
+		text-align: right;
 	}
 
 	.container-wechat .tab-content .form-control[readonly] {
@@ -29,4 +35,10 @@ a {
 
 	.container-wechat .panel .form-control[readonly] {
 		background-color: #DDF9DA;
+	}
+
+	.container-wechat .tab-content .tab-pane {
+		border: 1px solid #ddd;
+		border-top: none;
+		padding: 5px;
 	}
