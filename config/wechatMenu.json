@@ -9,11 +9,11 @@
             },{
                 "type":"view",
                 "name":"我的百城主页",
-                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/wechat_main&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
+                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/wechat-business&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
             },{
                 "type":"view",
                 "name":"完善账户信息",
-                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/wechat_finish_ac&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
+                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/wechat-complete&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
             }]
             //"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + config.wechat.appId + "&redirect_uri=" +  config.wechat.url + "&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
           },{
