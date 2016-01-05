@@ -170,7 +170,7 @@ exports.getChannelsList = function (token, offset, limit, filter, cb) {
 exports.getAccountInfo = function (token, cb) {
     var result = {};
     var statusCode = 200;
-    sessions.getSessionAttrs(token, ['role', 'user_id', 'user_name', 'superior', 'true_name', 'complete'], function (err, data) {
+    sessions.getSessionAttrs(token, ['role', 'user_id', 'user_name', 'superior', 'true_name', 'complete', 'phone'], function (err, data) {
         if (!err && data) {
             result = data;
         } else {
