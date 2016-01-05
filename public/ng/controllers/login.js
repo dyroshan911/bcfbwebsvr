@@ -20,7 +20,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 				$rootScope.session.userName = res.true_name;
 				$rootScope.session.role = res.role;
 				$rootScope.session.complete = res.complete;
-				$scope.saveSessionData();
+				$rootScope.saveSessionData();
 				$location.path('/business');
 			}, function (res) {
 				alert(res.message);

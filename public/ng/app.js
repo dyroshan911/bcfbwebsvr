@@ -32,6 +32,16 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 
 myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($route, $rootScope, $location, SessionService) {
 		$rootScope.session = {};
+		$rootScope.saveSessionData = function () {
+			if (sessionStorage) {
+				sessionStorage.logged = $rootScope.session.logged;
+				sessionStorage.wechatMode = $rootScope.session.wechatMode;
+				sessionStorage.userId = $rootScope.session.userId;
+				sessionStorage.userName = $rootScope.session.userName;
+				sessionStorage.role = $rootScope.session.role;
+				sessionStorage.complete = $rootScope.session.complete;
+			}
+		};
 		//$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
 		var firstStart = true;
 		$rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -49,7 +59,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 							$rootScope.session.userName = res.true_name;
 							$rootScope.session.role = res.role;
 							$rootScope.session.complete = res.complete;
-							$scope.saveSessionData();
+							$rootScope.saveSessionData();
 							alert('登录成功');
 							$location.path('/wechat-business');
 						}, function (res) {

@@ -22,7 +22,7 @@ angular.module('myApp').controller('CompleteCtrl', ['$scope', '$location', '$roo
 					$rootScope.session.userName = res.true_name;
 					$rootScope.session.role = res.role;
 					$rootScope.session.complete = res.complete;
-					$scope.saveSessionData();
+					$rootScope.saveSessionData();
 					$location.path('/wechat-business');
 				}, function () {
 					alert(res.message);
@@ -46,7 +46,7 @@ angular.module('myApp').controller('CompleteCtrl', ['$scope', '$location', '$roo
 					$rootScope.session.userName = res.true_name;
 					$rootScope.session.role = res.role;
 					$rootScope.session.complete = res.complete;
-					$scope.saveSessionData();
+					$rootScope.saveSessionData();
 					$location.path('/wechat-business');
 				}, function () {
 					alert(res.message);

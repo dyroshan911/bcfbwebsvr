@@ -11,17 +11,6 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 			});
 		};
 		
-		$scope.saveSessionData = function () {
-			if (sessionStorage) {
-				sessionStorage.logged = $rootScope.session.logged;
-				sessionStorage.wechatMode = $rootScope.session.wechatMode;
-				sessionStorage.userId = $rootScope.session.userId;
-				sessionStorage.userName = $rootScope.session.userName;
-				sessionStorage.role = $rootScope.session.role;
-				sessionStorage.complete = $rootScope.session.complete;
-			}
-		};
-		
 		$scope.getDateString = function (timestamp) {
 			var ts = timestamp || 0;
 			var date = new Date(ts);
