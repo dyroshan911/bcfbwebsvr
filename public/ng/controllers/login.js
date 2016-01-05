@@ -14,10 +14,12 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 				password: $scope.loginData.password
 			};
 			UserService.login($rootScope.session.token, dataObj, function (res) {
+				alert(JSON.stringify(res));
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;
 				$rootScope.session.userName = res.true_name;
 				$rootScope.session.role = res.role;
+				$rootScope.session.complete = res.complete;
 				$scope.saveSessionData();
 				$location.path('/business');
 			}, function (res) {

@@ -56,7 +56,8 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 			var obj = {
 				params: {
 					token: token
-				}
+				},
+				data: dataObj
 			};
 			ApiService.put('api/accounts/accountInfo', obj, successcb, failcb);
 		};

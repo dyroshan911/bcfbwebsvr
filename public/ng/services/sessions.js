@@ -67,26 +67,6 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			ApiService.get('api/sessions/user', obj, successcb, failcb);
 		};
 		
-		cfgData.createSessionUser = function (token, userName, password, securityCode, successcb, failcb) {
-			var obj = {
-				params: {
-					token: token
-				},
-				data: {
-					user_name: userName,
-					password: password,
-					security_code: securityCode
-				}
-			};
-			ApiService.post('api/sessions/user', obj, function (res) {
-				$rootScope.session.logged = true;
-				$rootScope.session.userId = res.user_id;
-				$rootScope.session.userName = res.user_name;
-				$rootScope.session.role = res.role;
-				successcb(res);
-			}, failcb);
-		};
-		
 		cfgData.deleteSessionUser = function (token, successcb, failcb) {
 			var obj = {
 				params : {

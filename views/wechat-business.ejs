@@ -1,4 +1,9 @@
 <div class="container-wechat">
+	<div class ="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="session.complete === false">
+			<a href="/wechat-complete">账号信息尚未完善，请点击这里完善账号信息</a>
+		</div>
+	</div>
 	<div class ="row" style="margin-top: 20px;">
 		<div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
 			<a href="/add-business" class="btn btn-success btn-lg btn-block">新增客户</a>

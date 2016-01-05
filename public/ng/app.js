@@ -69,6 +69,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 				$rootScope.session.userId = sessionStorage.userId;
 				$rootScope.session.userName = sessionStorage.userName;
 				$rootScope.session.role = sessionStorage.role;
+				$rootScope.session.complete = sessionStorage.complete === 'true' ? true : false;;
 			}
 		});
 	}]);

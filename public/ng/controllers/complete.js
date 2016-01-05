@@ -21,6 +21,7 @@ angular.module('myApp').controller('CompleteCtrl', ['$scope', '$location', '$roo
 					$rootScope.session.userId = res.user_id;
 					$rootScope.session.userName = res.true_name;
 					$rootScope.session.role = res.role;
+					$rootScope.session.complete = res.complete;
 					$scope.saveSessionData();
 					$location.path('/wechat-business');
 				}, function () {
@@ -44,6 +45,7 @@ angular.module('myApp').controller('CompleteCtrl', ['$scope', '$location', '$roo
 					$rootScope.session.userId = res.user_id;
 					$rootScope.session.userName = res.true_name;
 					$rootScope.session.role = res.role;
+					$rootScope.session.complete = res.complete;
 					$scope.saveSessionData();
 					$location.path('/wechat-business');
 				}, function () {

@@ -31,7 +31,7 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">密码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="password" class="form-control" name="password" placeholder="密码" title="请输入密码" required="" maxlength="20" ng-model="accountData.password"
+							<input type="password" class="form-control" name="password" placeholder="不修改时无需输入" title="请输入密码" maxlength="20" ng-model="accountData.password"
 							ng-minlength="6" ng-change="onCheckPassword()" />
 							<div ng-show="accountForm.password.$dirty &amp;&amp; accountForm.password.$invalid">
 								<small class="alert-danger well-sm" ng-show="accountForm.password.$error.minlength">最小长度为6个字符</small>
@@ -41,7 +41,7 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">确认密码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" required="" maxlength="20" ng-model="accountData.passwordConfirm"
+							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" maxlength="20" ng-model="accountData.passwordConfirm"
 							ng-change="onCheckPassword()" />
 							<div ng-show="accountForm.passwordConfirm.$dirty &amp;&amp; (accountData.passwordConfirm.length &gt; 0)">
 								<small class="alert-danger well-sm" ng-show="!accountData.checkPassword">请确认两次输入的密码一致</small>

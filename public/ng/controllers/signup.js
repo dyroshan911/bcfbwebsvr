@@ -37,6 +37,7 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 					$rootScope.session.userId = res.user_id;
 					$rootScope.session.userName = res.true_name;
 					$rootScope.session.role = res.role;
+					$rootScope.session.complete = res.complete;
 					$scope.saveSessionData();
 					$location.path('/business');
 				}, function (res) {
