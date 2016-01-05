@@ -43,5 +43,24 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 			ApiService.put('api/accounts/completeAcount', obj, successcb, failcb);
 		};
 		
+		cfgData.getAccountInfo = function (token, successcb, failcb) {
+			var obj = {
+				params: {
+					token: token
+				}
+			};
+			ApiService.get('api/accounts/accountInfo', obj, successcb, failcb);
+		};
+
+		cfgData.updateAccountInfo = function (token, dataObj, successcb, failcb) {
+			var obj = {
+				params: {
+					token: token
+				}
+			};
+			ApiService.put('api/accounts/accountInfo', obj, successcb, failcb);
+		};
+
+
 		return cfgData;
 	}]);

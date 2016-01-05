@@ -21,6 +21,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/wechat-customers', { templateUrl: ('partial/wechat-customers'), controller: 'CustomersCtrl' });
 		$routeProvider.when('/wechat-complete', { templateUrl: ('partial/wechat-complete'), controller: 'CompleteCtrl' });
 		$routeProvider.when('/wechat-bind', { templateUrl: ('partial/wechat-bind'), controller: 'CompleteCtrl' });
+		$routeProvider.when('/account', { templateUrl: ('partial/account'), controller: 'AccountCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		$locationProvider.html5Mode(true);
