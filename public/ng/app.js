@@ -44,6 +44,12 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 						SessionService.wechatAuth(args, function (res) {
 							firstStart = false;
 							alert(JSON.stringify(res));
+							$rootScope.session.logged = true;
+							$rootScope.session.userId = res.user_id;
+							$rootScope.session.userName = res.true_name;
+							$rootScope.session.role = res.role;
+							$rootScope.session.complete = res.complete;
+							$scope.saveSessionData();
 							alert('登录成功');
 							$location.path('/wechat-business');
 						}, function (res) {

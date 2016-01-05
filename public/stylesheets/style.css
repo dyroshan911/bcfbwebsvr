@@ -13,10 +13,15 @@ a {
 	background-color: lightgreen;
 }
 
-.container .control-label {
-	padding-top: 6px;
-	text-align: right;
+.container {
+	padding-right: 0;
+	padding-left: 0;
 }
+
+	.container .control-label {
+		padding-top: 6px;
+		text-align: right;
+	}
 
 .modal .form-horizontal .control-label {
 	padding-top: 6px;
