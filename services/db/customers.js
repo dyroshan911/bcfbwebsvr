@@ -72,6 +72,7 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, se
         var selectattr = 'id name phone  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on';
     }
     CustomerModel.find(queryObj)
+        .sort({create_on:-1})
         .skip(offset).
         limit(limit).
         select(selectattr).

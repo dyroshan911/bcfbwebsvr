@@ -55,4 +55,16 @@ router.get('/:account_id', function (req, res) {
     });
 });
 
+/* update customer info by id*/
+router.put('/:customer_id', function (req, res) {
+    var token = req.query.token;
+    var customerId = req.params.customer_id;
+    var dataObj = req.body.data;
+	//todo get custromer list by id
+    //httpResp(res, 200, {customerlist:'test get customer by id'});
+    customers.updateCustomerInfo(token, customerId, dataObj, function(statusCode, result){
+        httpResp(res, statusCode, result);
+    });
+});
+
 module.exports = router;

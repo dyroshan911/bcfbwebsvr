@@ -176,6 +176,7 @@ userObj.getMembersList = function (user_id, offset, limit, filter, cb) {
     queryObj['$and'].push({ role: 'member' });
 
     UserModel.find(queryObj)
+        .sort({ create_on: -1 })
         .skip(offset).
         limit(limit).
         select('create_on email id job_number phone role superior today_customers total_customers true_name').
@@ -234,6 +235,7 @@ userObj.getChannelsList = function (user_id, role, offset, limit, filter, cb) {
 
 
     UserModel.find(queryObj)
+        .sort({ create_on: -1 })
         .skip(offset).
         limit(limit).
         select('create_on email id job_number phone role superior today_customers total_customers true_name').
