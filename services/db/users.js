@@ -21,7 +21,7 @@ userObj.verifyUser = function (userName, password, cb) {
     UserModel.findOne({
         'user_name': userName,
         'password': password
-    }).select('id user_name true_name superior role').exec(function (err, user) {
+    }).select('id user_name true_name superior role complete').exec(function (err, user) {
         if (err) {
             cb(err, null);
         } else if (!user) {

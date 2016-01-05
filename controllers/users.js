@@ -186,7 +186,7 @@ exports.completeAcount = function (token, userName, password, cb) {
     var result = {};
     var statusCode = 200;
     sessions.getSessionAttrs(token, ['user_id', 'complete', 'open_id'], function (err, data) {
-        if (!err && data && data.complete == false) {
+        if (!err && data && data.complete == 'false') {
             users.completeAcount(data.user_id, userName, password, function (err, doc) {
                 if (!err) {
                     var userData = {

@@ -51,7 +51,8 @@ exports.createUser = function(token, userName, password, cb) {
                 user_name: doc.user_name,
                 role: doc.role,
                 superior: doc.superior,
-                true_name: doc.true_name
+                true_name: doc.true_name,
+                complete:doc.complete
             };
             sessions.updateSession(token, userData, function(err, data) {
                 if (!err) {
