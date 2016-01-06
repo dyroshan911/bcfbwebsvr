@@ -172,7 +172,8 @@ exports.getAccountInfo = function (token, cb) {
     var statusCode = 200;
     sessions.getSessionAttrs(token, ['user_id'], function (err, data) {
         if (!err && data) {
-            users.queryUser(data.user_id, function (err, user) {
+            var qeryAttr = 'role superior user_name true_name complete phone';
+            users.queryUser(data.user_id, qeryAttr, function (err, user) {
                 if (!err) {
                     cb(statusCode, user);
                 } else {

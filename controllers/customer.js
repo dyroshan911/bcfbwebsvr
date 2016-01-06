@@ -2,6 +2,7 @@
 var customers = require("../services/db").Customers;
 var sessions = require('../services/cache').Sessions;
 var users = require("../services/db").Users;
+var wechatApi = require("../services/wechat/wechatApi")
 
 
 exports.creatCustomer = function (token, customerObj, cb) {
@@ -19,9 +20,10 @@ exports.creatCustomer = function (token, customerObj, cb) {
                 users.increaseCustomer(data.user_id);
             }
         }
-        customers.createCustomer(customerObj, function (err, data) {
+        customers.createCustomer(customerObj, function (err, customer) {
             if (!err) {
-                result = data;
+                result = customer;
+                pushscheduleEventNew(data.user_id, customerObj);
                 cb(statusCode, result);
             } else {
                 statusCode = 500;
@@ -54,7 +56,8 @@ exports.getCustomerListById = function (token, accountId, offset, limit, filter,
         if (!err && data.user_id) {
             var seeTel = false;
             if (data.role = 'admin') seeTel = true;
-            users.queryUser(accountId, function (err, user) {
+            var qeryAttr = 'role superior';
+            users.queryUser(accountId, qeryAttr, function (err, user) {
                 if (user.role == 'member' && user.superior == data.user_id) {
                     seeTel = true;
                 }
@@ -93,5 +96,17 @@ exports.updateCustomerInfo = function (token, customerId, dataObj, cb) {
                 cb(statusCode, result);
             });
         }
+    });
+}
+
+function pushscheduleEventNew(user_id, customerObj) {
+    var qeryAttr = 'wechat_id';
+    users.queryUser(user_id, qeryAttr, function (err, user) {
+        if (!err && user && user.wechat_id) {
+            var title = '你好，你推荐用户:' + customerObj.name + '贷款金额' + customerObj.apply_amount + '已进件';
+            var result = '等待处理';
+            var detail = '详情请进入百城主页查看';
+            wechatApi.pushscheduleEvent(user.wechat_id, title, result, detail);
+        };
     });
 }
