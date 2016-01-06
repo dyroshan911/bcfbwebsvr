@@ -100,7 +100,7 @@ exports.updateCustomerInfo = function (token, customerId, dataObj, cb) {
 }
 
 function pushscheduleEventNew(user_id, customerObj) {
-    var qeryAttr = 'wechat_id';
+    var qeryAttr = 'wechat_id role superior true_name';
     users.queryUser(user_id, qeryAttr, function (err, user) {
         if (!err && user && user.wechat_id) {
             var title = '你好，你推荐用户:' + customerObj.name + '贷款金额' + customerObj.apply_amount + '已进件';
@@ -108,5 +108,19 @@ function pushscheduleEventNew(user_id, customerObj) {
             var detail = '详情请进入百城主页查看';
             wechatApi.pushscheduleEvent(user.wechat_id, title, result, detail);
         };
+        if(!err && user && user.role == 'member') {
+            qeryAttr = 'wechat_id';
+            users.queryUser(user.superior, qeryAttr, function (err, superiorUsr) {
+                if (!err && superiorUsr && superiorUsr.wechat_id) {
+                    var title = '你有一个新订单等待处理';
+                    var type = '推荐客户';
+                    var status = '未处理';
+                    var from = user.true_name;
+                    var detail = customerObj.name + '--->贷款' +  customerObj.apply_amount;
+                    var remark = '请尽快处理';
+                    wechatApi.pushIndentEvent(superiorUsr.wechat_id, title, type, status, from, detail, remark);
+                }
+            });
+        }
     });
 }
