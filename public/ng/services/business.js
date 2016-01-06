@@ -13,6 +13,17 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 			ApiService.post('api/customers', obj, successcb, failcb);
 		};
 		
+		cfgData.updateCustomer = function (token, userId, dataObj, successcb, failcb) {
+			var url = 'api/customers/' + userId;
+			var obj = {
+				params: {
+					token: token
+				},
+				data: dataObj
+			};
+			ApiService.put(url, obj, successcb, failcb);
+		};
+		
 		cfgData.getCustomers = function (token, successcb, failcb) {
 			var obj = {
 				params: {

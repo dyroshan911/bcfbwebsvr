@@ -118,7 +118,7 @@
 				<h4 class="modal-title" id="myModalLabel">编辑客户</h4>
 			</div>
 			<div class="modal-body">
-				<form name='editForm' role="form" class="form-horizontal" ng-submit="onLogin()">
+				<form name='editForm' role="form" class="form-horizontal" ng-submit="onSaveCustomer()">
 					<div class="form-group">
 						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">姓名</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -128,7 +128,7 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">电话号码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="phone" placeholder="新增" title="请输入新电话号码" required="" maxlength="20" ng-model="editCustomer.newPhone"
+							<input type="text" class="form-control" name="phone" placeholder="电话号码（新增)" title="请输入新电话号码" maxlength="20" ng-model="editCustomer.newPhone"
 							ng-pattern="/^\d+$/" />
 							<div ng-show="editForm.phone.$dirty &amp;&amp; editForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.phone.$error.pattern">请使用数字</small>
@@ -148,18 +148,19 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">状态</lable>
 						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<select class="form-control" ng-options="status.value for status in statusOptions" ng-model="editCustomer.status"></select>
+							<select class="form-control" ng-options="status.name for status in statusOptions" ng-model="editCustomer.status"></select>
+						</div>
+					</div>
+					<br/>
+					<div class="form-group">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="submit" class="btn btn-success btn-lg btn-block">保存</button>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
 						</div>
 					</div>
 				</form>
-			</div>
-			<div class="modal-footer">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<button type="button" class="btn btn-success btn-lg btn-block" data-dismiss="modal">保存</button>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
-				</div>
 			</div>
 		</div>
 	</div>

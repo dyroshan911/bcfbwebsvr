@@ -6,12 +6,12 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.channelList = [];
 		$scope.memberList = [];
 		$scope.statusOptions = [
-			{ value: 'init' },
-			{ value: 'successed' },
-			{ value: 'failed' },
-			{ value: 'cancelled' }
+			{ name: '已接受', value: 'init' },
+			{ name: '处理中', value: 'handled' },
+			{ name: '完成', value: 'finished' }
 		];
 		$scope.editCustomer = {
+			id: '',
 			name: '',
 			newPhone: '',
 			apply_amount: '',
@@ -28,14 +28,32 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		
 		//functions
 		$scope.onEditCustomer = function (customer) {
+			$scope.editCustomer.id = customer.id;
 			$scope.editCustomer.name = customer.name;
 			$scope.editCustomer.amount = customer.apply_amount;
 			for (var i = 0; i < $scope.statusOptions.length; ++i) {
-				if ($scope.statusOptions[i].value == customer.status) {
+				if ($scope.statusOptions[i].name == customer.status) {
 					$scope.editCustomer.status = $scope.statusOptions[i];
 				}
 			}
-			$('#editDialog').modal({ backdrop: false });
+			$('#editDialog').modal({ backdrop: false, keyboard: false });
+		};
+		
+		$scope.onSaveCustomer = function () {
+			var dataObj = {
+				comment: '',
+				finished_amount: '',
+				billing_date: '',
+				server_rate: '',
+				phone: $scope.editCustomer.status.newPhone,
+				status: $scope.editCustomer.status.value
+			};
+			BusinessService.updateCustomer($rootScope.session.token, $scope.editCustomer.id, dataObj, function (res) {
+				alert(JSON.stringify(res));
+				$('#editDialog').modal('toggle');
+			}, function (res) {
+				alert(res.message);
+			});
 		};
 		
 		function getCustomerList() {
@@ -43,6 +61,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.customerList = res.customerList;
 				for (var i = 0; i < $scope.customerList.length; ++i) {
 					$scope.customerList[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
+					$scope.customerList[i].status = getStatusName($scope.customerList[i].status);
 					$scope.customerList[i].showDetails = false;
 				}
 			}, function (res) {
@@ -82,6 +101,14 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			}, function (res) {
 				alert(res.message);
 			});
+		}
+		
+		function getStatusName(status) {
+			for (var i = 0; i < $scope.statusOptions.length; ++i) {
+				if (status == $scope.statusOptions[0].value) {
+					return $scope.statusOptions[0].name;
+				}
+			}
 		}
 		
 		//jQuery

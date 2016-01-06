@@ -40,7 +40,7 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 				},
 				data: dataObj
 			};
-			ApiService.put('api/accounts/completeAcount', obj, successcb, failcb);
+			ApiService.put('api/accounts', obj, successcb, failcb);
 		};
 		
 		cfgData.getAccountInfo = function (token, successcb, failcb) {
