@@ -12,6 +12,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
 		$routeProvider.when('/wechat-signup', { templateUrl: ('partial/wechat-signup'), controller: 'WechatCtrl' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl' });
+		$routeProvider.when('/account', { templateUrl: ('partial/account'), controller: 'AccountCtrl' });
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/wechat-business', { templateUrl: ('partial/wechat-business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/add-business', { templateUrl: ('partial/add-business'), controller: 'AddBusinessCtrl' });
@@ -21,7 +22,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/wechat-customers', { templateUrl: ('partial/wechat-customers'), controller: 'CustomersCtrl' });
 		$routeProvider.when('/wechat-complete', { templateUrl: ('partial/wechat-complete'), controller: 'CompleteCtrl' });
 		$routeProvider.when('/wechat-bind', { templateUrl: ('partial/wechat-bind'), controller: 'CompleteCtrl' });
-		$routeProvider.when('/account', { templateUrl: ('partial/account'), controller: 'AccountCtrl' });
+		$routeProvider.when('/wechat-warn', { templateUrl: ('partial/wechat-warn') });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		$locationProvider.html5Mode(true);
@@ -54,6 +55,12 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 						SessionService.wechatAuth(args, function (res) {
 							firstStart = false;
 							alert(JSON.stringify(res));
+							var path = $location.path();
+							alert(path);
+							if (path.indexOf('wechat-business') == -1) {
+								$location.path('/wechat-warn');
+								return;
+							}
 							$rootScope.session.logged = true;
 							$rootScope.session.userId = res.user_id;
 							$rootScope.session.userName = res.true_name;
