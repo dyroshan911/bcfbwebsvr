@@ -55,6 +55,8 @@ userObj.bindUsrByOpenid = function (openId, userName, password, cb) {
             cb(err, null);
         } else if (!user) {
             cb(new Error("User not found"), null);
+        } else if (user.wechat_id != '' ) {
+            cb(new Error("this account has bind other wechat"), null);
         } else {
             user.wechat_id = openId;
             user.modify_on = parseInt(Date.now() / 1000);
