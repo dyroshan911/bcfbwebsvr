@@ -31,7 +31,7 @@ angular.module('myApp').controller('CompleteCtrl', ['$scope', '$location', '$roo
 				alert(res.message);
 			})
 		};
-
+		
 		$scope.onBind = function () {
 			var dataObj = {
 				user_name: $scope.accountData.userName,
