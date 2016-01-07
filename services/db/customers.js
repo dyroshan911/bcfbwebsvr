@@ -102,10 +102,10 @@ customerObj.updateCustomer = function (userId, role, customerId, dataObj, cb) {
     var queryObj = {};
     if (role == 'admin') {
         queryObj = { 'id': customerId };
-    } else if (role = 'member') {
+    } else if (role == 'member') {
         queryObj = {
             'id': customerId,
-            'belong_channel': userId
+            'belong_mem': userId
         };
     } else {
         queryObj = {
@@ -126,5 +126,9 @@ customerObj.updateCustomer = function (userId, role, customerId, dataObj, cb) {
             }
         });
 
-    };
+    } else {
+        CustomerModel.update(queryObj, { $set: dataObj }, function (err, data) {
+            cb(err, data);
+        });
+    }
 }
