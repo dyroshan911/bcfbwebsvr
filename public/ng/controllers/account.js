@@ -11,8 +11,13 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 			checkPassword: true
 		};
 		
+		$scope.completeData = {
+			userName: '',
+			password: ''
+		};
+		
 		getAccountInfo();
-
+		
 		//functions
 		$scope.onSave = function () {
 			var dataObj = {
@@ -48,12 +53,34 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 			}
 		};
 		
+		$scope.onComplete = function () {
+			var dataObj = {
+				user_name: $scope.completeData.userName,
+				password: $scope.completeData.password
+			};
+			UserService.complete($rootScope.session.token, dataObj, function (res) {
+				alert(JSON.stringify(res));
+				$rootScope.session.logged = true;
+				$rootScope.session.userId = res.user_id;
+				$rootScope.session.userName = res.true_name;
+				$rootScope.session.role = res.role;
+				$rootScope.session.complete = res.complete;
+				$rootScope.saveSessionData();
+				$('#completeDialog').modal('toggle');
+			}, function (res) {
+				alert(res.message);
+			})
+		};
+		
 		function getAccountInfo() {
 			UserService.getAccountInfo($rootScope.session.token, function (res) {
 				alert(JSON.stringify(res));
 				$scope.accountData.userName = res.user_name;
 				$scope.accountData.name = res.true_name;
 				$scope.accountData.phone = res.phone;
+				if (res.complete == false) {
+					$('#completeDialog').modal({ backdrop: false, keyboard: false });
+				}
 			}, function (res) {
 				alert(res.message);
 			});
