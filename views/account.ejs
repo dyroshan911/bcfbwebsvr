@@ -33,7 +33,7 @@
 						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">密码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="password" class="form-control" name="password" placeholder="不修改时无需输入" title="请输入密码" maxlength="20" ng-model="accountData.password"
-							ng-minlength="6" ng-change="onCheckPassword()" />
+							ng-minlength="6" ng-change="onCheckPassword(accountData)" />
 							<div ng-show="accountForm.password.$dirty &amp;&amp; accountForm.password.$invalid">
 								<small class="alert-danger well-sm" ng-show="accountForm.password.$error.minlength">最小长度为6个字符</small>
 							</div>
@@ -43,7 +43,7 @@
 						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">确认密码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" maxlength="20" ng-model="accountData.passwordConfirm"
-							ng-change="onCheckPassword()" />
+							ng-change="onCheckPassword(accountData)" />
 							<div ng-show="accountForm.passwordConfirm.$dirty &amp;&amp; (accountData.passwordConfirm.length &gt; 0)">
 								<small class="alert-danger well-sm" ng-show="!accountData.checkPassword">请确认两次输入的密码一致</small>
 							</div>
@@ -51,10 +51,10 @@
 					</div>
 					<br/>
 					<div class="form-group">
-						<div class="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<button type="submit" class="btn btn-success btn-lg btn-block">保存</button>
 						</div>
-						<div class="col-xs-4 col-xs-offset-2 col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<button type="button" class="btn btn-warning btn-lg btn-block" ng-click="onCancel()">取消</button>
 						</div>
 					</div>
@@ -69,13 +69,15 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">X</span>
-				</button>
 				<h3 class="modal-title" id="myModalLabel">完善账号信息</h3>
 			</div>
 			<div class="modal-body">
 				<form name='completeForm' role="form" class="form-horizontal" ng-submit="onComplete()">
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<p style="color: red;">请先设置百城账号和密码。</p>
+						</div>
+					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
 							<input type="text" class="form-control" name="userName" placeholder="用户名" title="请输入用户名" required="" maxlength="20" ng-model="completeData.userName"
@@ -88,15 +90,25 @@
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="password" class="form-control" name="password" placeholder="密码" title="请输入密码" required="" maxlength="20" ng-model="completeData.password" />
+							<input type="password" class="form-control" name="password" placeholder="密码" title="请输入密码" required="" maxlength="20" ng-model="completeData.password"
+							ng-minlength="6" ng-change="onCheckPassword(completeData)" />
+							<div ng-show="signupForm.password.$dirty &amp;&amp; completeData.password.$invalid">
+								<small class="alert-danger well-sm" ng-show="completeData.password.$error.minlength">最小长度为6个字符</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" required="" maxlength="20" ng-model="completeData.passwordConfirm"
+							ng-change="onCheckPassword(completeData)" />
+							<div ng-show="completeForm.passwordConfirm.$dirty &amp;&amp; (completeData.passwordConfirm.length &gt; 0)">
+								<small class="alert-danger well-sm" ng-show="!completeData.checkPassword">请确认两次输入的密码一致</small>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
 							<button class="btn btn-success btn-lg btn-block" type="submit">确定</button>
-						</div>
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
 						</div>
 					</div>
 				</form>

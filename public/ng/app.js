@@ -21,7 +21,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/customers', { templateUrl: ('partial/customers'), controller: 'CustomersCtrl' });
 		$routeProvider.when('/wechat-customers', { templateUrl: ('partial/wechat-customers'), controller: 'CustomersCtrl' });
 		$routeProvider.when('/wechat-bind', { templateUrl: ('partial/wechat-bind'), controller: 'BindCtrl' });
-		$routeProvider.when('/wechat-warn', { templateUrl: ('partial/wechat-warn') });
+		$routeProvider.when('/wechat-warn', { templateUrl: ('partial/wechat-warn'), controller: 'WarnCtrl' });
 		$routeProvider.when('/wechat-apply', { templateUrl: ('partial/wechat-apply'), controller: 'ApplyCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
@@ -58,7 +58,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 							var path = $location.path();
 							alert(path);
 							if (path.indexOf('wechat-signup') != -1) {
-								$location.path('/wechat-warn');
+								$location.path('/wechat-warn').search({ type: 'completed' });
 							} else {
 								$rootScope.session.logged = true;
 								$rootScope.session.userId = res.user_id;

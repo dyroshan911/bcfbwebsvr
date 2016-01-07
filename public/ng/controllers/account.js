@@ -13,13 +13,18 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 		
 		$scope.completeData = {
 			userName: '',
-			password: ''
+			password: '',
+			passwordConfirm: '',
+			checkPassword: true
 		};
 		
 		getAccountInfo();
 		
 		//functions
 		$scope.onSave = function () {
+			if ($scope.accountForm.$invalid || !$scope.accountData.checkPassword) {
+				return;
+			}
 			var dataObj = {
 				true_name: $scope.accountData.name,
 				phone: $scope.accountData.phone,
@@ -45,15 +50,18 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 			}
 		};
 		
-		$scope.onCheckPassword = function () {
-			if ($scope.accountData.password !== $scope.accountData.passwordConfirm) {
-				$scope.accountData.checkPassword = false;
+		$scope.onCheckPassword = function (formData) {
+			if (formData.password !== formData.passwordConfirm) {
+				formData.checkPassword = false;
 			} else {
-				$scope.accountData.checkPassword = true;
+				formData.checkPassword = true;
 			}
 		};
 		
 		$scope.onComplete = function () {
+			if ($scope.completeForm.$invalid || !$scope.completeData.checkPassword) {
+				return;
+			}
 			var dataObj = {
 				user_name: $scope.completeData.userName,
 				password: $scope.completeData.password
@@ -66,7 +74,8 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 				$rootScope.session.role = res.role;
 				$rootScope.session.complete = res.complete;
 				$rootScope.saveSessionData();
-				$('#completeDialog').modal('toggle');
+				getAccountInfo();
+				$('#completeDialog').modal('toggle');			
 			}, function (res) {
 				alert(res.message);
 			})
@@ -83,6 +92,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 				}
 			}, function (res) {
 				alert(res.message);
+				$location.path('/wechat-warn').search({ type: 'need_singup' });
 			});
 		}
 	}]);
