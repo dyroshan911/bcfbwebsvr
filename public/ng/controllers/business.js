@@ -53,10 +53,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			}
 			var dataObj = {
 				phone: $scope.editCustomer.newPhone,
-				finished_amount: '',
-				server_rate: '',
-				billing_date: '',					
-				comment: '',
+				finished_amount: $scope.editCustomer.finishedAmount,
+				server_rate: $scope.editCustomer.serverRate,
+				billing_date: $scope.editCustomer.billingDate,					
+				comment: $scope.editCustomer.comment,
 				status: $scope.editCustomer.status.value
 			};
 			BusinessService.updateCustomer($rootScope.session.token, $scope.editCustomer.id, dataObj, function (res) {
