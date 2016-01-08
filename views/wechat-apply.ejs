@@ -1,0 +1,42 @@
+<div class="container">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+		<div class="panel panel-default" style="margin-top: 100px;">
+			<div class="panel-body">
+				<form name='customerForm' role="form" class="form-horizontal" ng-submit="onAddBusiness()">
+					<div class="form-group">
+						<h2 style="text-align: center;">贷款申请</h2>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="20" ng-model="customerData.name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="20" ng-model="customerData.phone"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="customerForm.phone.$dirty &amp;&amp; customerForm.phone.$invalid">
+								<small class="alert-danger well-sm" ng-show="customerForm.phone.$error.pattern">请使用数字</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="text" class="form-control" name="amount" placeholder="贷款金额" title="请输入贷款金额" required="" maxlength="20" ng-model="customerData.amount"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="customerForm.amount.$dirty &amp;&amp; customerForm.amount.$invalid">
+								<small class="alert-danger well-sm" ng-show="customerForm.amount.$error.pattern">请使用数字</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<br/>
+						<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+							<button class="btn btn-success btn-lg btn-block" type="submit">确定</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -22,7 +22,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/wechat-customers', { templateUrl: ('partial/wechat-customers'), controller: 'CustomersCtrl' });
 		$routeProvider.when('/wechat-bind', { templateUrl: ('partial/wechat-bind'), controller: 'BindCtrl' });
 		$routeProvider.when('/wechat-warn', { templateUrl: ('partial/wechat-warn'), controller: 'WarnCtrl' });
-		$routeProvider.when('/wechat-apply', { templateUrl: ('partial/wechat-apply'), controller: 'ApplyCtrl' });
+		$routeProvider.when('/wechat-apply', { templateUrl: ('partial/wechat-apply'), controller: 'AddBusinessCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		$locationProvider.html5Mode(true);
