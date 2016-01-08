@@ -7,7 +7,7 @@
 	</div>
 	<div class ="row" style="margin-top: 20px;">
 		<div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
-			<a href="/add-business" class="btn btn-success btn-lg btn-block">新增客户</a>
+			<a href="/wechat-apply" class="btn btn-success btn-lg btn-block">新增客户</a>
 		</div>
 	</div>
 	<div style="margin-top: 30px;">
@@ -30,7 +30,7 @@
 				<div class="panel panel-default" ng-repeat="customer in customerList">
 					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
 						<div class="row">
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="customer.name"></h3>
+							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="customer.name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
 						</div>
 					</div>
@@ -45,15 +45,39 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">贷款金额</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" ng-model="customer.apply_amount" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.finished_amount" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.server_rate" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款时间</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.billing_date" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请时间</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" ng-model="customer.createDate" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.comment" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -76,7 +100,7 @@
 				<div class="panel panel-default" ng-repeat="channel in channelList">
 					<div class="panel-heading" ng-click="channel.showDetails = !channel.showDetails;">
 						<div class="row">
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="channel.true_name"></h3>
+							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="channel.true_name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
 						</div>
 					</div>
@@ -120,7 +144,7 @@
 				<div class="panel panel-default" ng-repeat="member in memberList">
 					<div class="panel-heading" ng-click="member.showDetails = !member.showDetails;">
 						<div class="row">
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="member.true_name"></h3>
+							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="member.true_name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
 						</div>
 					</div>
@@ -178,7 +202,7 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">姓名</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="name" title="请输入姓名" required="" maxlength="20" ng-model="editCustomer.name" />
+							<input type="text" class="form-control" name="name" title="请输入姓名" maxlength="20" ng-model="editCustomer.name" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -192,19 +216,19 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">贷款金额</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="amount" title="请输入贷款金额" required="" maxlength="20" ng-model="editCustomer.amount"
+							<input type="text" class="form-control" name="applyAmount" title="请输入贷款金额" readonly="" maxlength="20" ng-model="editCustomer.applyAmount"
 							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.amount.$dirty &amp;&amp; editForm.amount.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.amount.$error.pattern">请使用数字</small>
+							<div ng-show="editForm.applyAmount.$dirty &amp;&amp; editForm.applyAmount.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.applyAmount.$error.pattern">请使用数字</small>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="finishedAmount" title="请输入已放款金额" required="" maxlength="20" ng-model="editCustomer.finishedAmount"
+							<input type="text" class="form-control" name="finishedAmount" title="请输入已放款金额" maxlength="20" ng-model="editCustomer.finishedAmount"
 							ng-pattern="/^\d+$/" />
 							<div ng-show="editForm.finishedAmount.$dirty &amp;&amp; editForm.finishedAmount.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.finishedAmount.$error.pattern">请使用数字</small>
@@ -212,22 +236,22 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="billingDate" title="请输入还款日期" required="" maxlength="20" ng-model="editCustomer.billingDate"
+							<input type="text" class="form-control" name="serverRate" title="请输入服务费率" maxlength="20" ng-model="editCustomer.serverRate"
 							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.billingDate.$dirty &amp;&amp; editForm.billingDate.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.billingDate.$error.pattern">请使用数字</small>
+							<div ng-show="editForm.serverRate.$dirty &amp;&amp; editForm.serverRate.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.serverRate.$error.pattern">请使用数字</small>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="serverRate" title="请输入服务费率" required="" maxlength="20" ng-model="editCustomer.serverRate"
+							<input type="text" class="form-control" name="billingDate" title="请输入还款日期" maxlength="20" ng-model="editCustomer.billingDate"
 							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.serverRate.$dirty &amp;&amp; editForm.serverRate.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.serverRate.$error.pattern">请使用数字</small>
+							<div ng-show="editForm.billingDate.$dirty &amp;&amp; editForm.billingDate.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.billingDate.$error.pattern">请使用数字</small>
 							</div>
 						</div>
 					</div>

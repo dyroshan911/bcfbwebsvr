@@ -39,6 +39,11 @@ a {
 	background-color: lightgreen;
 }
 
+/*home page*/
+#business-wall {
+	margin-left: 200px;
+}
+
 /*wechat*/
 .container-wechat {
 	padding-right: 0;

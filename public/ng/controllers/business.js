@@ -14,10 +14,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			id: '',
 			name: '',
 			newPhone: '',
-			apply_amount: '',
+			applyAmount: '',
 			finishedAmount: '',
-			billingDate: '',
 			serverRate: '',
+			billingDate: '',
 			comment: '',
 			status: {}
 		};
@@ -34,7 +34,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.onEditCustomer = function (customer) {
 			$scope.editCustomer.id = customer.id;
 			$scope.editCustomer.name = customer.name;
-			$scope.editCustomer.amount = customer.apply_amount;
+			$scope.editCustomer.applyAmount = customer.apply_amount;
+			$scope.editCustomer.finishedAmount = customer.finished_amount;
+			$scope.editCustomer.serverRate = customer.server_rate;
+			$scope.editCustomer.billingDate = customer.billing_date;
+			$scope.editCustomer.comment = customer.comment;
 			for (var i = 0; i < $scope.statusOptions.length; ++i) {
 				if ($scope.statusOptions[i].name == customer.status) {
 					$scope.editCustomer.status = $scope.statusOptions[i];
@@ -44,16 +48,20 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		};
 		
 		$scope.onSaveCustomer = function () {
+			if ($scope.editForm.$invalid) {
+				return;
+			}
 			var dataObj = {
-				comment: '',
+				phone: $scope.editCustomer.newPhone,
 				finished_amount: '',
-				billing_date: '',
 				server_rate: '',
-				phone: $scope.editCustomer.status.newPhone,
+				billing_date: '',					
+				comment: '',
 				status: $scope.editCustomer.status.value
 			};
 			BusinessService.updateCustomer($rootScope.session.token, $scope.editCustomer.id, dataObj, function (res) {
 				alert(JSON.stringify(res));
+				getCustomerList();
 				$('#editDialog').modal('toggle');
 			}, function (res) {
 				alert(res.message);
@@ -110,8 +118,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		
 		function getStatusName(status) {
 			for (var i = 0; i < $scope.statusOptions.length; ++i) {
-				if (status == $scope.statusOptions[0].value) {
-					return $scope.statusOptions[0].name;
+				if (status == $scope.statusOptions[i].value) {
+					return $scope.statusOptions[i].name;
 				}
 			}
 		}

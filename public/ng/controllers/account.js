@@ -75,7 +75,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 				$rootScope.session.complete = res.complete;
 				$rootScope.saveSessionData();
 				getAccountInfo();
-				$('#completeDialog').modal('toggle');			
+				$('#completeDialog').modal('toggle');
 			}, function (res) {
 				alert(res.message);
 			})
