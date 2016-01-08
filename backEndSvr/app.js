@@ -33,7 +33,8 @@ cache.init(function(err){
 var routes = require('./routes/index');
 var apiAccounts = require('./routes/users');
 var apiSessions = require('./routes/sessions');
-var apiBackDoor = require('./routes/backDoor');
+var apiProducts = require('./routes/products');
+var apiCases = require('./routes/cases');
 var app = express();
 
 // view engine setup
@@ -53,10 +54,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use(apiSessions.verify()); //@tip by Kai: Token should be verified every api request except create session
+app.use(apiSessions.verify()); 
 app.use('/api/sessions', apiSessions);
 app.use('/api/accounts', apiAccounts);
-app.use('/api/backDoor', apiBackDoor);
+app.use('/api/products', apiProducts);
+app.use('/api/cases', apiCases);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

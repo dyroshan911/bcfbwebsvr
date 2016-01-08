@@ -5,10 +5,14 @@
 */
 
 var users = require("./users.js");
+var products = require("./products.js")
+var cases = require("./cases.js")
 var mongoose = require('mongoose');
 
 var app = exports = module.exports = {
 	Users: users,
+    Cases: cases,
+    Products: products,
 	DB: mongoose,
 
 	config_data: {url:null, options:null},
@@ -43,6 +47,8 @@ app.start = function() {
 	        }	        
 	    } else {
 	    	app.Users.init(app);
+            app.Cases.init(app);
+            app.Products.init(app);
 	    	app.state = "init";
 	    }
 	});

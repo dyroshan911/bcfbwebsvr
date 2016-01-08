@@ -73,27 +73,4 @@ router.put('/:accountId', function (req, res) {
         httpResp(res, statusCode, result);
     }); 
 });
-
-/* add role for account info by id*/
-router.post('/:accountId/roles', function (req, res) {
-
-    var accountId = req.url.substring(1, req.url.indexOf('/roles'));
-    /*var token = req.query.token;
-    
-
-    users.getAccounts(obj, function (statusCode, result) {
-        httpResp(res, statusCode, result);
-    });*/
-});
-
-/* update role for account info by id*/
-router.put('/:accountId/roles', function (req, res) {
-    var accountId = req.url.substring(1, req.url.indexOf('/roles'));
-    /*var token = req.query.token,
-
-    //todo:
-    users.getAccounts(obj, function (statusCode, result) {
-        httpResp(res, statusCode, result);
-    }); */
-});
 module.exports = router;
