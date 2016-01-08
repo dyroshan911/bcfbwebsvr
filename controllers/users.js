@@ -235,8 +235,8 @@ exports.completeAcount = function (token, userName, password, cb) {
             result.message = 'no permision';
             result.description = 'no permision';
             result.source = '<<webui-completeAcount>>';
+            cb(statusCode, result);
         }
-        cb(statusCode, result);
     });
 }
 
