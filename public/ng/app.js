@@ -15,14 +15,14 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/account', { templateUrl: ('partial/account'), controller: 'AccountCtrl' });
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });
 		$routeProvider.when('/wechat-business', { templateUrl: ('partial/wechat-business'), controller: 'BusinessCtrl' });
-		$routeProvider.when('/add-business', { templateUrl: ('partial/add-business'), controller: 'AddBusinessCtrl' });
+		$routeProvider.when('/apply', { templateUrl: ('partial/apply'), controller: 'ApplyCtrl' });
 		//$routeProvider.when('/members', { templateUrl: ('partial/members'), controller: 'MembersCtrl' });
 		//$routeProvider.when('/wechat-members', { templateUrl: ('partial/wechat-members'), controller: 'MembersCtrl' });
 		$routeProvider.when('/customers', { templateUrl: ('partial/customers'), controller: 'CustomersCtrl' });
 		$routeProvider.when('/wechat-customers', { templateUrl: ('partial/wechat-customers'), controller: 'CustomersCtrl' });
 		$routeProvider.when('/wechat-bind', { templateUrl: ('partial/wechat-bind'), controller: 'BindCtrl' });
 		$routeProvider.when('/wechat-warn', { templateUrl: ('partial/wechat-warn'), controller: 'WarnCtrl' });
-		$routeProvider.when('/wechat-apply', { templateUrl: ('partial/wechat-apply'), controller: 'AddBusinessCtrl' });
+		$routeProvider.when('/wechat-apply', { templateUrl: ('partial/wechat-apply'), controller: 'ApplyCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		$locationProvider.html5Mode(true);
