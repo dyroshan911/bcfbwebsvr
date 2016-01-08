@@ -144,7 +144,7 @@ userObj.createUser = function (userObj, cb) {
                     });
                 }
                 else {
-                    cb(new Error("superior not found"), null);
+                    cb(new Error("superior not found"), 'job number error');
                 }
             });
         } else {
