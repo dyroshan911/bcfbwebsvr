@@ -7,10 +7,9 @@ a {
 	color: #00B7FF;
 }
 
-/*home page*/
-#home-header {
-	height: 200px;
-	background-color: lightgreen;
+.navbar {
+	margin-right: -15px;
+	margin-left: -15px;
 }
 
 .container {
@@ -19,13 +18,25 @@ a {
 }
 
 	.container .control-label {
-		padding-top: 6px;
+		padding-top: 7px;
 		text-align: right;
 	}
 
 .modal .form-horizontal .control-label {
 	padding-top: 6px;
 	text-align: right;
+}
+
+.form-select {
+	height: 21px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+/*home page*/
+#home-header {
+	height: 200px;
+	background-color: lightgreen;
 }
 
 /*wechat*/
@@ -35,7 +46,7 @@ a {
 }
 
 	.container-wechat .control-label {
-		padding-top: 6px;
+		padding-top: 7px;
 		text-align: right;
 	}
 

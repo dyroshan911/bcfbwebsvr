@@ -8,19 +8,19 @@
 						<h2 style="text-align: center;">个人信息</h2>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">账号</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">账号</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" readonly="" ng-model="accountData.userName" />
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">姓名</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">姓名</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="name" title="请输入姓名" required="" maxlength="20" ng-model="accountData.name" />
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">电话号码</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入新电话号码" required="" maxlength="20" ng-model="accountData.phone"
 							ng-pattern="/^\d+$/" />
@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">密码</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">密码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="password" class="form-control" name="password" placeholder="不修改时无需输入" title="请输入密码" maxlength="20" ng-model="accountData.password"
 							ng-minlength="6" ng-change="onCheckPassword(accountData)" />
@@ -40,7 +40,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">确认密码</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">确认密码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" maxlength="20" ng-model="accountData.passwordConfirm"
 							ng-change="onCheckPassword(accountData)" />

@@ -6,7 +6,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.channelList = [];
 		$scope.memberList = [];
 		$scope.statusOptions = [
-			{ name: '已接受', value: 'init' },
+			{ name: '等待处理', value: 'init' },
 			{ name: '处理中', value: 'handled' },
 			{ name: '完成', value: 'finished' }
 		];
@@ -15,6 +15,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			name: '',
 			newPhone: '',
 			apply_amount: '',
+			finishedAmount: '',
+			billingDate: '',
+			serverRate: '',
+			comment: '',
 			status: {}
 		};
 		
@@ -62,6 +66,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				for (var i = 0; i < $scope.customerList.length; ++i) {
 					$scope.customerList[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
 					$scope.customerList[i].status = getStatusName($scope.customerList[i].status);
+					$scope.customerList[i].phoneList = $scope.customerList[i].phone.split(',');
 					$scope.customerList[i].showDetails = false;
 				}
 			}, function (res) {

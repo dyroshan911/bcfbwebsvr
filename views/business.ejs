@@ -1,3 +1,57 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/home">首页</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						业务查询
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">贷款业务</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">公司详情</a>
+				</li>
+				<li>
+					<a href="#">公告资讯</a>
+				</li>
+				<li>
+					<a href="#">招贤纳士</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-if="!session.logged">
+					<a href="/login">用户登录</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="/business">欢迎，{{session.userName}}</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="#" ng-click="onLogout()">登出</a>
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
+</nav>
+
 <div class="container">
 	<div class ="row" style="margin-top: 20px;">
 		<div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
@@ -35,7 +89,11 @@
 					<tbody>
 						<tr ng-repeat="customer in customerList">
 							<td ng-bind="customer.name"></td>
-							<td ng-bind="customer.phone"></td>
+							<td>
+								<select class="form-control form-select">
+									<option ng-repeat="phone in customer.phoneList" ng-bind="phone"></option>
+								</select>
+							</td>
 							<td ng-bind="customer.apply_amount"></td>
 							<td ng-bind="customer.createDate"></td>
 							<td ng-bind="customer.status"></td>
@@ -117,13 +175,13 @@
 			<div class="modal-body">
 				<form name='editForm' role="form" class="form-horizontal" ng-submit="onSaveCustomer()">
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">姓名</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">姓名</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="name" title="请输入姓名" required="" maxlength="20" ng-model="editCustomer.name" />
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">电话号码</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="phone" placeholder="电话号码（新增)" title="请输入新电话号码" maxlength="20" ng-model="editCustomer.newPhone"
 							ng-pattern="/^\d+$/" />
@@ -133,7 +191,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">贷款金额</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">贷款金额</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="amount" title="请输入贷款金额" required="" maxlength="20" ng-model="editCustomer.amount"
 							ng-pattern="/^\d+$/" />
@@ -143,7 +201,43 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">状态</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="finishedAmount" title="请输入已放款金额" required="" maxlength="20" ng-model="editCustomer.finishedAmount"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="editForm.finishedAmount.$dirty &amp;&amp; editForm.finishedAmount.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.finishedAmount.$error.pattern">请使用数字</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="billingDate" title="请输入还款日期" required="" maxlength="20" ng-model="editCustomer.billingDate"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="editForm.billingDate.$dirty &amp;&amp; editForm.billingDate.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.billingDate.$error.pattern">请使用数字</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="serverRate" title="请输入服务费率" required="" maxlength="20" ng-model="editCustomer.serverRate"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="editForm.serverRate.$dirty &amp;&amp; editForm.serverRate.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.serverRate.$error.pattern">请使用数字</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="comment" title="请输入备注信息" maxlength="50" ng-model="editCustomer.comment" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">状态</lable>
 						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 							<select class="form-control" ng-options="status.name for status in statusOptions" ng-model="editCustomer.status"></select>
 						</div>
