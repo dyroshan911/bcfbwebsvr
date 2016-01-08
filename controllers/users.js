@@ -63,7 +63,7 @@ exports.bindAccount = function (token, accountObj, cb) {
                     result = { user_id: doc.id };
                 } else {
                     statusCode = 403;
-                    result.code = 'e1103';
+                    result.code = 'e1104';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
@@ -72,7 +72,7 @@ exports.bindAccount = function (token, accountObj, cb) {
             });
         } else {
             statusCode = 403;
-            result.code = 'e1103';
+            result.code = 'e2004';
             result.message = err.message;
             result.description = err.message;
             result.source = '<<webui>>';
@@ -92,7 +92,7 @@ exports.getMembersList = function (token, offset, limit, filter, cb) {
                     result = doc;
                 } else {
                     statusCode = 403;
-                    result.code = 'e2001';
+                    result.code = 'e1110';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
@@ -101,7 +101,7 @@ exports.getMembersList = function (token, offset, limit, filter, cb) {
             });
         } else {
             statusCode = 403;
-            result.code = 'e2001';
+            result.code = 'e1110';
             result.message = 'err.message';
             result.description = 'Without permission';
             result.source = '<<webui>>';
@@ -120,7 +120,7 @@ exports.getMembersListById = function (token, accountId, offset, limit, filter, 
                     result = doc;
                 } else {
                     statusCode = 403;
-                    result.code = 'e2001';
+                    result.code = 'e1110';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
@@ -129,7 +129,7 @@ exports.getMembersListById = function (token, accountId, offset, limit, filter, 
             });
         } else {
             statusCode = 403;
-            result.code = 'e2001';
+            result.code = 'e1110';
             result.message = 'err.message';
             result.description = 'Without permission';
             result.source = '<<webui>>';
@@ -149,7 +149,7 @@ exports.getChannelsList = function (token, offset, limit, filter, cb) {
                     result = doc;
                 } else {
                     statusCode = 403;
-                    result.code = 'e2001';
+                    result.code = 'e1110';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
@@ -158,7 +158,7 @@ exports.getChannelsList = function (token, offset, limit, filter, cb) {
             });
         } else {
             statusCode = 403;
-            result.code = 'e2001';
+            result.code = 'e1110';
             result.message = 'err.message';
             result.description = 'Without permission';
             result.source = '<<webui>>';
@@ -178,7 +178,7 @@ exports.getAccountInfo = function (token, cb) {
                     cb(statusCode, user);
                 } else {
                     statusCode = 403;
-                    result.code = 'e1103';
+                    result.code = 'e1110';
                     result.message = 'err.message';
                     result.description = 'err.message';
                     result.source = '<<webui>>';
@@ -187,7 +187,7 @@ exports.getAccountInfo = function (token, cb) {
             });
         } else {
             statusCode = 403;
-            result.code = 'e1103';
+            result.code = 'e1110';
             result.message = 'err.message';
             result.description = 'err.message';
             result.source = '<<webui>>';
@@ -222,7 +222,7 @@ exports.completeAcount = function (token, userName, password, cb) {
                     cb(statusCode, result);
                 } else {
                     statusCode = 403;
-                    result.code = 'e1103';
+                    result.code = 'e1104';
                     result.message = 'err.message';
                     result.description = 'err.message';
                     result.source = '<<webui>>';
@@ -231,7 +231,7 @@ exports.completeAcount = function (token, userName, password, cb) {
             });
         } else {
             statusCode = 403;
-            result.code = 'e1103';
+            result.code = 'e1110';
             result.message = 'no permision';
             result.description = 'no permision';
             result.source = '<<webui-completeAcount>>';
@@ -264,7 +264,7 @@ exports.updateAccountInfo = function (token, dataObj, cb) {
                     cb(statusCode, result);
                 } else {
                     statusCode = 403;
-                    result.code = 'e1103';
+                    result.code = 'e1110';
                     result.message = 'err.message';
                     result.description = 'err.message';
                     result.source = '<<webui>>';
@@ -273,7 +273,7 @@ exports.updateAccountInfo = function (token, dataObj, cb) {
             });
         } else {
             statusCode = 403;
-            result.code = 'e1103';
+            result.code = 'e1110';
             result.message = 'err.message';
             result.description = 'err.message';
             result.source = '<<webui>>';

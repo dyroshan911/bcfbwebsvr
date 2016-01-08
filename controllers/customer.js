@@ -45,6 +45,13 @@ exports.getCustomerList = function (token, offset, limit, filter, cb) {
                 result = doc;
                 cb(statusCode, result);
             });
+        } else {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
         }
     });
 }
@@ -66,6 +73,13 @@ exports.getCustomerListById = function (token, accountId, offset, limit, filter,
                     cb(statusCode, result);
                 });
             });
+        } else {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
         }
     });
 }
@@ -95,6 +109,13 @@ exports.updateCustomerInfo = function (token, customerId, dataObj, cb) {
                 result = doc;
                 cb(statusCode, result);
             });
+        } else {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
         }
     });
 }
@@ -121,6 +142,6 @@ function pushscheduleEventNew(user_id, customerObj) {
                     wechatApi.pushIndentEvent(superiorUsr.wechat_id, title, type, status, from, detail, remark);
                 }
             });
-        }
+        } 
     });
 }
