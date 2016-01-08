@@ -30,6 +30,9 @@ exports.creatAccount = function (token, accountObj, cb) {
             } else {
                 statusCode = 403;
                 result.code = 'e1103';
+                if(doc == 'job number error') {
+                    result.code = 'e1105';
+                }
                 result.message = err.message;
                 result.description = err.message;
                 result.source = '<<webui>>';
