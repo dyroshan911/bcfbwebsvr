@@ -7,7 +7,7 @@
 	</div>
 	<div class ="row" style="margin-top: 20px;">
 		<div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
-			<a href="/add-business" class="btn btn-success btn-lg btn-block">新增客户</a>
+			<a href="/wechat-apply" class="btn btn-success btn-lg btn-block">新增客户</a>
 		</div>
 	</div>
 	<div style="margin-top: 30px;">
@@ -30,7 +30,7 @@
 				<div class="panel panel-default" ng-repeat="customer in customerList">
 					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
 						<div class="row">
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="customer.name"></h3>
+							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="customer.name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
 						</div>
 					</div>
@@ -100,7 +100,7 @@
 				<div class="panel panel-default" ng-repeat="channel in channelList">
 					<div class="panel-heading" ng-click="channel.showDetails = !channel.showDetails;">
 						<div class="row">
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="channel.true_name"></h3>
+							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="channel.true_name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
 						</div>
 					</div>
@@ -144,7 +144,7 @@
 				<div class="panel panel-default" ng-repeat="member in memberList">
 					<div class="panel-heading" ng-click="member.showDetails = !member.showDetails;">
 						<div class="row">
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="member.true_name"></h3>
+							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="member.true_name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
 						</div>
 					</div>
