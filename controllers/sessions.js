@@ -12,7 +12,7 @@ exports.createSession = function (cb) {
             result.token = data;
         } else {
             statusCode = 500;
-            result.code = 'e1109';
+            result.code = 'e2001';
             result.message = err.message;
             result.description = err.message;
             result.source = '<<webui>>';
@@ -33,7 +33,7 @@ exports.verifyToken = function (token, cb) {
             result.source = '<<webui>>';
         } else if (!valid) {
             statusCode = 403;
-            result.code = 'e1110';
+            result.code = 'e2002';
             result.description = result.message = "verify failed";
             result.source = '<<webui>>';
         }
@@ -61,7 +61,7 @@ exports.createUser = function (token, userName, password, cb) {
                     cb(statusCode, result);
                 } else {
                     statusCode = 500;
-                    result.code = 'e1109';
+                    result.code = 'e2001';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
@@ -105,8 +105,14 @@ exports.createUserWechat = function (token, code, cb) {
                             delete userData.refresh_token;
                             delete userData.open_id;
                             result = userData;
-                            cb(statusCode, result);
+                        } else {
+                            statusCode = 500;
+                            result.code = 'e2001';
+                            result.message = err.message;
+                            result.description = err.message;
+                            result.source = '<<webui>>';
                         }
+                        cb(statusCode, result);
                     });
                 } else {
                     sessions.updateSession(token, userData, function (err, data) { });
@@ -118,6 +124,13 @@ exports.createUserWechat = function (token, code, cb) {
                     cb(statusCode, result);
                 }
             });
+        } else {
+            statusCode = 500;
+            result.code = 'e2003';
+            result.message = err.message;
+            result.description = err.message;
+            result.source = '<<webui>>';
+            cb(statusCode, result);
         }
     });
 };
@@ -143,7 +156,7 @@ exports.bindWechatUsr = function (token, userName, password, cb) {
                             cb(statusCode, result);
                         } else {
                             statusCode = 500;
-                            result.code = 'e1109';
+                            result.code = 'e2001';
                             result.message = err.message;
                             result.description = err.message;
                             result.source = '<<webui>>';
@@ -152,7 +165,7 @@ exports.bindWechatUsr = function (token, userName, password, cb) {
                     });
                 } else {
                     statusCode = 500;
-                    result.code = 'e1109';
+                    result.code = 'e2004';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
@@ -178,7 +191,7 @@ exports.signOut = function (token, cb) {
             statusCode = 200;
         } else {
             statusCode = 500;
-            result.code = 'e1110';
+            result.code = 'e2001';
             result.message = err.message;
             result.description = err.message;
             result.source = '<<webui>>';
@@ -194,7 +207,7 @@ exports.getUser = function (token, cb) {
         if (!err) {
             if (!data.user_id) {
                 statusCode = 404;
-                result.code = 'e0004';
+                result.code = 'e1110';
                 result.description = result.message = 'No user logged';
                 result.source = '<<webui>>';
             } else {
