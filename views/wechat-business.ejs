@@ -22,6 +22,9 @@
 			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
 				<a href="#myMembers" role="tab" data-toggle="tab">我的会员</a>
 			</li>
+			<li role="presentation" ng-show="checkCustomer.ownerId.length != 0">
+				<a href="#checkCustomers" role="tab" data-toggle="tab">{{checkCustomer.ownerName}}的客户</a>
+			</li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -132,7 +135,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6">
-									<a class="btn btn-info btn-lg btn-block" href="/wechat-customers?id={{channel.id}}">查看客户</a>
+									<a class="btn btn-info btn-lg btn-block" href="#" ng-click="onCheckCustomers(channel)">查看客户</a>
 								</div>
 							</div>
 						</form>
@@ -176,12 +179,68 @@
 							</div>
 							<div class="form-group">
 								<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6">
-									<a class="btn btn-info btn-lg btn-block" href="/wechat-customers?id={{member.id}}">查看客户</a>
+									<a class="btn btn-info btn-lg btn-block" href="#" ng-click="onCheckCustomers(member)">查看客户</a>
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers">
+				<div class="panel panel-default" ng-repeat="customer in checkCustomer.list">
+					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
+						<div class="row">
+							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="customer.name"></h3>
+							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
+						</div>
+					</div>
+					<div class="panel-body" ng-show="customer.showDetails">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.apply_amount" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.finished_amount" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.server_rate" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款时间</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.billing_date" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请时间</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.createDate" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.comment" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">状态</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.status" readonly="" />
+								</div>
+							</div>
+						</form>
+					</div>
 			</div>
 		</div>
 	</div>

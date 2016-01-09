@@ -70,6 +70,12 @@
 			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
 				<a href="#myMembers" role="tab" data-toggle="tab">我的会员</a>
 			</li>
+			<li role="presentation" ng-show="checkCustomer.ownerId.length != 0">
+				<a href="#checkCustomers" role="tab" data-toggle="tab">
+					{{checkCustomer.ownerName}}的客户
+					<span ng-show="">X</span>
+				</a>
+			</li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -127,13 +133,13 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="channel in channelList">
-							<td ng-bind="channel.true_name"></td>
-							<td ng-bind="channel.phone"></td>
-							<td ng-bind="channel.createDate"></td>
-							<td ng-bind="channel.today_customers"></td>
-							<td ng-bind="channel.total_customers"></td>
+							<td align="center" ng-bind="channel.true_name"></td>
+							<td align="center" ng-bind="channel.phone"></td>
+							<td align="center" ng-bind="channel.createDate"></td>
+							<td align="right" ng-bind="channel.today_customers"></td>
+							<td align="right" ng-bind="channel.total_customers"></td>
 							<td align="center">
-								<a href="/customers?id={{channel.id}}">查看客户</a>
+								<a href="#" ng-click="onCheckCustomers(channel)">查看客户</a>
 							</td>
 						</tr>
 					</tbody>
@@ -154,14 +160,43 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="member in memberList">
-							<td ng-bind="member.true_name"></td>
-							<td ng-bind="member.phone"></td>
-							<td ng-bind="member.createDate"></td>
-							<td ng-bind="member.today_customers"></td>
-							<td ng-bind="member.total_customers"></td>
+							<td align="center" ng-bind="member.true_name"></td>
+							<td align="center" ng-bind="member.phone"></td>
+							<td align="center" ng-bind="member.createDate"></td>
+							<td align="right" ng-bind="member.today_customers"></td>
+							<td align="right" ng-bind="member.total_customers"></td>
 							<td align="center">
-								<a href="/customers?id={{member.id}}">查看客户</a>
+								<a href="#" ng-click="onCheckCustomers(member)">查看客户</a>
 							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="10%">姓名</th>
+							<th width="10%">申请金额</th>
+							<th width="10%">放款金额</th>
+							<th width="10%">服务费率</th>
+							<th width="10%">还款时间</th>
+							<th width="15%">申请时间</th>
+							<th width="10%">备注</th>
+							<th width="10%">状态</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="customer in checkCustomer.list">
+							<td align="center" ng-bind="customer.name"></td>
+							<td align="right" ng-bind="customer.apply_amount"></td>
+							<td align="right" ng-bind="customer.finished_amount"></td>
+							<td align="right" ng-bind="customer.server_rate"></td>
+							<td align="center" ng-bind="customer.billing_date"></td>
+							<td align="center" ng-bind="customer.createDate"></td>
+							<td align="center" ng-bind="customer.comment"></td>
+							<td align="center" ng-bind="customer.status"></td>
 						</tr>
 					</tbody>
 				</table>

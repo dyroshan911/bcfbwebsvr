@@ -5,6 +5,12 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.customerList = [];
 		$scope.channelList = [];
 		$scope.memberList = [];
+		$scope.checkCustomer = {
+			ownerId: '',
+			ownerName: '',
+			list: []
+		};
+
 		$scope.statusOptions = [
 			{ name: '等待处理', value: 'init' },
 			{ name: '处理中', value: 'handled' },
@@ -68,6 +74,13 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			});
 		};
 		
+		$scope.onCheckCustomers = function (owner) {
+			$scope.checkCustomer.ownerId = owner.id;
+			$scope.checkCustomer.ownerName = owner.true_name;
+			$('#myTabs a[href="#checkCustomers"]').tab('show');
+			getCustomerListById(owner.id, 0, 0, '');
+		};
+		
 		function getCustomerList() {
 			BusinessService.getCustomers($rootScope.session.token, function (res) {
 				$scope.customerList = res.customerList;
@@ -85,7 +98,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		function getChannelList(offset, limit, filter) {
 			var paramObj = {
 				offset: offset,
-				oimit: limit,
+				limit: limit,
 				filter: filter
 			};
 			BusinessService.getChannels($rootScope.session.token, paramObj, function (res) {
@@ -116,6 +129,24 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			});
 		}
 		
+		function getCustomerListById(userId, offset, limit, filter) {
+			var paramObj = {
+				offset: offset,
+				limit: limit,
+				filter: filter
+			};
+			BusinessService.getCustomersById($rootScope.session.token, userId, function (res) {
+				$scope.checkCustomer.list = res.customerList;
+				for (var i = 0; i < $scope.checkCustomer.list.length; ++i) {
+					$scope.checkCustomer.list[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
+					$scope.checkCustomer.list[i].status = getStatusName($scope.checkCustomer.list[i].status);
+					$scope.checkCustomer.list[i].showDetails = false;
+				}
+			}, function (res) {
+				alert(res.message);
+			});
+		}
+		
 		function getStatusName(status) {
 			for (var i = 0; i < $scope.statusOptions.length; ++i) {
 				if (status == $scope.statusOptions[i].value) {
@@ -136,6 +167,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		})
 		
 		$('#myTabs a[href="#myMembers"]').click(function (e) {
+			e.preventDefault()
+			$(this).tab('show')
+		})
+
+		$('#myTabs a[href="#checkCustomers"]').click(function (e) {
 			e.preventDefault()
 			$(this).tab('show')
 		})
