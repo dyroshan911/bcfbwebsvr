@@ -100,7 +100,10 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, se
 
 customerObj.updateCustomer = function (userId, role, customerId, dataObj, cb) {
     var queryObj = {};
-    if (role == 'admin') {
+    if (role == 'member') {
+        cb(new Error("not permision"), "not permision");
+        return;
+    } else if (role == 'admin') {
         queryObj = { 'id': customerId };
     } else if (role == 'member') {
         queryObj = {
