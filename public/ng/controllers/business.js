@@ -6,11 +6,13 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.channelList = [];
 		$scope.memberList = [];
 		$scope.checkCustomer = {
+			show: false,
 			ownerId: '',
 			ownerName: '',
-			list: []
+			list: [],
+			showClose: false
 		};
-
+		
 		$scope.statusOptions = [
 			{ name: '等待处理', value: 'init' },
 			{ name: '处理中', value: 'handled' },
@@ -75,11 +77,19 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		};
 		
 		$scope.onCheckCustomers = function (owner) {
+			$scope.checkCustomer.show = true;
+			$scope.checkCustomer.showClose = true;
 			$scope.checkCustomer.ownerId = owner.id;
 			$scope.checkCustomer.ownerName = owner.true_name;
 			$('#myTabs a[href="#checkCustomers"]').tab('show');
 			getCustomerListById(owner.id, 0, 0, '');
 		};
+		
+		$scope.onCloseCheck = function () {
+			$('#myTabs a[href="#myCustomers"]').tab('show');
+			$scope.checkCustomer.show = false;
+			$scope.checkCustomer.showClose = false;
+		}
 		
 		function getCustomerList() {
 			BusinessService.getCustomers($rootScope.session.token, function (res) {
@@ -157,22 +167,34 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		
 		//jQuery
 		$('#myTabs a[href="#myCustomers"]').click(function (e) {
-			e.preventDefault()
-			$(this).tab('show')
+			e.preventDefault();
+			$(this).tab('show');
+			$scope.$apply(function () {
+				$scope.checkCustomer.showClose = false;
+			});
 		})
 		
 		$('#myTabs a[href="#myChannels"]').click(function (e) {
 			e.preventDefault()
-			$(this).tab('show')
+			$(this).tab('show');
+			$scope.$apply(function () {
+				$scope.checkCustomer.showClose = false;
+			});
 		})
 		
 		$('#myTabs a[href="#myMembers"]').click(function (e) {
 			e.preventDefault()
-			$(this).tab('show')
+			$(this).tab('show');
+			$scope.$apply(function () {
+				$scope.checkCustomer.showClose = false;
+			});
 		})
-
+		
 		$('#myTabs a[href="#checkCustomers"]').click(function (e) {
-			e.preventDefault()
-			$(this).tab('show')
+			e.preventDefault();
+			$(this).tab('show');
+			$scope.$apply(function () {
+				$scope.checkCustomer.showClose = true;
+			});
 		})
 	}]);

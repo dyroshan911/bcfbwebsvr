@@ -61,7 +61,7 @@
 	<div style="margin-top: 30px;">
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" id="myTabs" role="tablist">
-			<li role="presentation"  class="active">
+			<li role="presentation" class="active">
 				<a href="#myCustomers" role="tab" data-toggle="tab">我的客户</a>
 			</li>
 			<li role="presentation" ng-show="session.role == 'channel-mgr'">
@@ -70,12 +70,12 @@
 			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
 				<a href="#myMembers" role="tab" data-toggle="tab">我的会员</a>
 			</li>
-			<li role="presentation" ng-show="checkCustomer.ownerId.length != 0">
-				<a href="#checkCustomers" role="tab" data-toggle="tab">
-					{{checkCustomer.ownerName}}的客户
-					<span ng-show="">X</span>
-				</a>
+			<li role="presentation" ng-show="checkCustomer.show">
+				<a href="#checkCustomers" role="tab" data-toggle="tab">{{checkCustomer.ownerName}}的客户</a>
 			</li>
+			<span ng-show="checkCustomer.showClose" style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
+				<a href="#" ng-click="onCloseCheck()">&times;</a>
+			</span>
 		</ul>
 
 		<!-- Tab panes -->

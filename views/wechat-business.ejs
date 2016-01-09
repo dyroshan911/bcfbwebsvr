@@ -13,7 +13,7 @@
 	<div style="margin-top: 30px;">
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" id="myTabs" role="tablist">
-			<li role="presentation"  class="active">
+			<li role="presentation" class="active">
 				<a href="#myCustomers" role="tab" data-toggle="tab">我的客户</a>
 			</li>
 			<li role="presentation" ng-show="session.role == 'channel-mgr'">
@@ -22,9 +22,12 @@
 			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
 				<a href="#myMembers" role="tab" data-toggle="tab">我的会员</a>
 			</li>
-			<li role="presentation" ng-show="checkCustomer.ownerId.length != 0">
+			<li role="presentation" ng-show="checkCustomer.show">
 				<a href="#checkCustomers" role="tab" data-toggle="tab">{{checkCustomer.ownerName}}的客户</a>
 			</li>
+			<span ng-show="checkCustomer.showClose" style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
+				<a href="#" ng-click="onCloseCheck()">&times;</a>
+			</span>
 		</ul>
 
 		<!-- Tab panes -->
@@ -241,102 +244,102 @@
 							</div>
 						</form>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">X</span>
-				</button>
-				<h4 class="modal-title" id="myModalLabel">编辑客户</h4>
-			</div>
-			<div class="modal-body">
-				<form name='editForm' role="form" class="form-horizontal" ng-submit="onSaveCustomer()">
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">姓名</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="name" title="请输入姓名" maxlength="20" ng-model="editCustomer.name" />
-						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="phone" placeholder="电话号码（新增)" title="请输入新电话号码" maxlength="20" ng-model="editCustomer.newPhone"
-							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.phone.$dirty &amp;&amp; editForm.phone.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.phone.$error.pattern">请使用数字</small>
+	<!-- Modal -->
+	<div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">编辑客户</h4>
+				</div>
+				<div class="modal-body">
+					<form name='editForm' role="form" class="form-horizontal" ng-submit="onSaveCustomer()">
+						<div class="form-group">
+							<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">姓名</lable>
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<input type="text" class="form-control" name="name" title="请输入姓名" maxlength="20" ng-model="editCustomer.name" />
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="applyAmount" title="请输入贷款金额" readonly="" maxlength="20" ng-model="editCustomer.applyAmount"
-							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.applyAmount.$dirty &amp;&amp; editForm.applyAmount.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.applyAmount.$error.pattern">请使用数字</small>
+						<div class="form-group">
+							<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<input type="text" class="form-control" name="phone" placeholder="电话号码（新增)" title="请输入新电话号码" maxlength="20" ng-model="editCustomer.newPhone"
+								ng-pattern="/^\d+$/" />
+								<div ng-show="editForm.phone.$dirty &amp;&amp; editForm.phone.$invalid">
+									<small class="alert-danger well-sm" ng-show="editForm.phone.$error.pattern">请使用数字</small>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="finishedAmount" title="请输入已放款金额" maxlength="20" ng-model="editCustomer.finishedAmount"
-							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.finishedAmount.$dirty &amp;&amp; editForm.finishedAmount.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.finishedAmount.$error.pattern">请使用数字</small>
+						<div class="form-group">
+							<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<input type="text" class="form-control" name="applyAmount" title="请输入贷款金额" readonly="" maxlength="20" ng-model="editCustomer.applyAmount"
+								ng-pattern="/^\d+$/" />
+								<div ng-show="editForm.applyAmount.$dirty &amp;&amp; editForm.applyAmount.$invalid">
+									<small class="alert-danger well-sm" ng-show="editForm.applyAmount.$error.pattern">请使用数字</small>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="serverRate" title="请输入服务费率" maxlength="20" ng-model="editCustomer.serverRate"
-							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.serverRate.$dirty &amp;&amp; editForm.serverRate.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.serverRate.$error.pattern">请使用数字</small>
+						<div class="form-group">
+							<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<input type="text" class="form-control" name="finishedAmount" title="请输入已放款金额" maxlength="20" ng-model="editCustomer.finishedAmount"
+								ng-pattern="/^\d+$/" />
+								<div ng-show="editForm.finishedAmount.$dirty &amp;&amp; editForm.finishedAmount.$invalid">
+									<small class="alert-danger well-sm" ng-show="editForm.finishedAmount.$error.pattern">请使用数字</small>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="billingDate" title="请输入还款日期" maxlength="20" ng-model="editCustomer.billingDate"
-							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.billingDate.$dirty &amp;&amp; editForm.billingDate.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.billingDate.$error.pattern">请使用数字</small>
+						<div class="form-group">
+							<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率</lable>
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<input type="text" class="form-control" name="serverRate" title="请输入服务费率" maxlength="20" ng-model="editCustomer.serverRate"
+								ng-pattern="/^\d+$/" />
+								<div ng-show="editForm.serverRate.$dirty &amp;&amp; editForm.serverRate.$invalid">
+									<small class="alert-danger well-sm" ng-show="editForm.serverRate.$error.pattern">请使用数字</small>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="comment" title="请输入备注信息" maxlength="50" ng-model="editCustomer.comment" />
+						<div class="form-group">
+							<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<input type="text" class="form-control" name="billingDate" title="请输入还款日期" maxlength="20" ng-model="editCustomer.billingDate"
+								ng-pattern="/^\d+$/" />
+								<div ng-show="editForm.billingDate.$dirty &amp;&amp; editForm.billingDate.$invalid">
+									<small class="alert-danger well-sm" ng-show="editForm.billingDate.$error.pattern">请使用数字</small>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">状态</lable>
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<select class="form-control" ng-options="status.name for status in statusOptions" ng-model="editCustomer.status"></select>
+						<div class="form-group">
+							<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<input type="text" class="form-control" name="comment" title="请输入备注信息" maxlength="50" ng-model="editCustomer.comment" />
+							</div>
 						</div>
-					</div>
-					<br/>
-					<div class="form-group">
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<button type="submit" class="btn btn-success btn-lg btn-block">保存</button>
+						<div class="form-group">
+							<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">状态</lable>
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<select class="form-control" ng-options="status.name for status in statusOptions" ng-model="editCustomer.status"></select>
+							</div>
 						</div>
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
+						<br/>
+						<div class="form-group">
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<button type="submit" class="btn btn-success btn-lg btn-block">保存</button>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
+							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
