@@ -166,11 +166,9 @@ userObj.getMembersList = function (user_id, offset, limit, filter, cb) {
         queryObj['$and'] = [];
         for (var i = 0; i < count; ++i) {
             var queryElem = { '$or': [] };
-            queryElem['$or'].push({ user_name: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ true_name: new RegExp(textArr[i], 'i') });
             queryElem['$or'].push({ phone: new RegExp(textArr[i], 'i') });
-            queryElem['$or'].push({ status: new RegExp(textArr[i], 'i') });
             queryElem['$or'].push({ territory: new RegExp(textArr[i], 'i') });
-            queryElem['$or'].push({ comment: new RegExp(textArr[i], 'i') });
             queryObj['$and'].push(queryElem);
         }
     }
@@ -217,11 +215,11 @@ userObj.getChannelsList = function (user_id, role, offset, limit, filter, cb) {
         queryObj['$and'] = [];
         for (var i = 0; i < count; ++i) {
             var queryElem = { '$or': [] };
-            queryElem['$or'].push({ user_name: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({true_name: new RegExp(textArr[i], 'i') });
             queryElem['$or'].push({ phone: new RegExp(textArr[i], 'i') });
-            queryElem['$or'].push({ status: new RegExp(textArr[i], 'i') });
-            queryElem['$or'].push({ territory: new RegExp(textArr[i], 'i') });
-            queryElem['$or'].push({ comment: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ job_number: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ email: new RegExp(textArr[i], 'i') });
+
             queryObj['$and'].push(queryElem);
         }
     }
