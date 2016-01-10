@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default header-nav">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -117,6 +117,13 @@
 						</tr>
 					</tbody>
 				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in customerPageData.list">
+							<a href="#" ng-class="{true: 'currentPageStyle'}[page == customerPageData.current]" ng-bind="page.name" ng-click="gotoPage(customerPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="myChannels">
@@ -144,6 +151,13 @@
 						</tr>
 					</tbody>
 				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in channelPageData.list">
+							<a href="#" ng-class="{true: 'currentPageStyle'}[page == channelPageData.current]" ng-bind="page.name" ng-click="gotoPage(channelPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="myMembers">
@@ -171,6 +185,13 @@
 						</tr>
 					</tbody>
 				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in memberPageData.list">
+							<a href="#" ng-class="{true: 'currentPageStyle'}[page == memberPageData.current]" ng-bind="page.name" ng-click="gotoPage(memberPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers">
@@ -200,6 +221,13 @@
 						</tr>
 					</tbody>
 				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in checkCustomerPageData.list">
+							<a href="#" ng-class="{true: 'currentPageStyle'}[page == checkCustomerPageData.current]" ng-bind="page.name" ng-click="gotoPage(checkCustomerPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>
@@ -211,7 +239,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">X</span>
+					<span aria-hidden="true">&times;</span>
 				</button>
 				<h4 class="modal-title" id="myModalLabel">编辑客户</h4>
 			</div>
