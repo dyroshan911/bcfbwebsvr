@@ -34,6 +34,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			list: [],
 			total: 0
 		};
+		$scope.currentPageData = $scope.customerPageData;
 		
 		$scope.statusOptions = [
 			{ name: '等待处理', value: 'init' },
@@ -118,8 +119,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			selectPage(pageData, index);
 		};
 		
-		$scope.onSearch = function (pageData) {
-			getPageList(pageData, '0');
+		$scope.onSearch = function () {
+			getPageList($scope.currentPageData, '0');
 		};
 		
 		function getCustomerList(offset, limit, filter, currentPageIndex) {
@@ -371,10 +372,23 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.checkCustomer.showClose = true;
 			});
 		})
-
+		
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			$scope.$apply(function () {
-				$scope.search = '';
-			});
+			switch (e.target.hash) {
+				case '#myCustomers':
+					$scope.currentPageData = $scope.customerPageData;
+					break;
+				case '#myChannels':
+					$scope.currentPageData = $scope.channelPageData;
+					break;
+				case '#myMembers':
+					$scope.currentPageData = $scope.memberPageData;
+					break;
+				case '#checkCustomers':
+					$scope.currentPageData = $scope.checkCustomerPageData;
+					break;
+				default:
+					break;
+			}
 		})
 	}]);
