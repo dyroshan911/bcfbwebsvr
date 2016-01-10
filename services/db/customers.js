@@ -48,7 +48,7 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, se
         queryObj['$and'] = [];
         for (var i = 0; i < count; ++i) {
             var queryElem = { '$or': [] };
-            queryElem['$or'].push({ user_name: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ name: new RegExp(textArr[i], 'i') });
             queryElem['$or'].push({ phone: new RegExp(textArr[i], 'i') });
             queryElem['$or'].push({ status: new RegExp(textArr[i], 'i') });
             queryElem['$or'].push({ territory: new RegExp(textArr[i], 'i') });
