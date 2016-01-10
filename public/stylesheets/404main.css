@@ -1,0 +1,26 @@
+*{margin:0; padding:0}
+body{margin:0;padding:0; color:#304b62;font-size:14px;font-family:"宋体"; background:#e5e5e5;}
+h2,h3,p,ul,li,dl,dt,dd,span,em,img,input,a{margin:0; padding:0;}
+.left{}
+.right{float:right;}
+em{font-style:normal;}
+li{list-style:none;}
+img{border:0;}
+a{color:#304b62; text-decoration:none;}
+.clear{clear:both;}
+a:hover{color:#ec6c00; text-decoration:underline}
+.wrapper{margin:0 auto;width:830px; height:auto;}
+.left_content{float:left;width:460px; height:auto;}
+.logo{margin-top:40px; width:148px; height:50px;}
+.title{margin-top:170px;width:456px; height:35px; background:url(../img/404_bg.png) no-repeat;}
+.word_content{margin-top:30px;width:460px; height:auto; line-height:30px;}
+.word_content span{color:#ed6c00;}
+.word_content a{color:#006ac4; text-decoration:underline;}
+.icon_down{margin-top:45px;width:460px; height:80px; line-height:30px;}
+.icon_down li{float:left;display:inline; margin-right:60px;width:60px; height:75px; text-align:center;}
+.icon_down li a{float:left;display:block;width:60px; height:30px; text-decoration:none;}
+.icon_down li a.current1{width:60px; height:30px;background:url(../img/404_bg.png) no-repeat -15px -35px; padding-top:45px;}
+.icon_down li a.current2{width:60px; height:30px;background:url(../img/404_bg.png) no-repeat -86px -35px; padding-top:45px;}
+.icon_down li a.current3{width:60px; height:30px;background:url(../img/404_bg.png) no-repeat -166px -35px; padding-top:45px;}
+.icon_down li a.current4{width:60px; height:30px;background:url(../img/404_bg.png) no-repeat -246px -35px; padding-top:45px;}
+.right_content{ margin-top:130px;width:208px; height:335px;background:url(../img/404_bad.png) no-repeat;}
