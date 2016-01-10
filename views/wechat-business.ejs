@@ -98,7 +98,7 @@
 									<input type="text" class="form-control" ng-model="customer.status" readonly="" />
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="form-group" ng-hide="session.role == 'member'">
 								<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6">
 									<button type="button" class="btn btn-info btn-lg btn-block" ng-click="onEditCustomer(customer)">编辑</button>
 								</div>
