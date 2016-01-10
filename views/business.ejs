@@ -100,7 +100,7 @@
 							<th width="15%">申请时间</th>
 							<th width="10%">备注</th>
 							<th width="10%">状态</th>
-							<th width="5%"></th>
+							<th width="5%" ng-hide="session.role == 'member'"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -118,7 +118,7 @@
 							<td align="center" ng-bind="customer.createDate"></td>
 							<td align="center" ng-bind="customer.comment"></td>
 							<td align="center" ng-bind="customer.status"></td>
-							<td align="center">
+							<td align="center" ng-hide="session.role == 'member'">
 								<a href="#" ng-click="onEditCustomer(customer)">编辑</a>
 							</td>
 						</tr>
