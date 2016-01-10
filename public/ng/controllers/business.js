@@ -5,6 +5,13 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.customerList = [];
 		$scope.channelList = [];
 		$scope.memberList = [];
+		$scope.checkCustomer = {
+			show: false,
+			ownerId: '',
+			ownerName: '',
+			list: [],
+			showClose: false
+		};
 		
 		var eachPageCount = 10;
 		$scope.customerPageData = {
@@ -28,13 +35,6 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			total: 0
 		};
 		
-		$scope.checkCustomer = {
-			show: false,
-			ownerId: '',
-			ownerName: '',
-			list: [],
-			showClose: false
-		};
 		$scope.statusOptions = [
 			{ name: '等待处理', value: 'init' },
 			{ name: '处理中', value: 'handled' },
@@ -51,6 +51,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			comment: '',
 			status: {}
 		};
+		$scope.search = '';
 		
 		getCustomerList(0, eachPageCount, '');
 		if ($rootScope.session.role == 'channel-mgr') {
@@ -111,10 +112,14 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			$('#myTabs a[href="#myCustomers"]').tab('show');
 			$scope.checkCustomer.show = false;
 			$scope.checkCustomer.showClose = false;
-		}
+		};
 		
 		$scope.gotoPage = function (pageData, index) {
 			selectPage(pageData, index);
+		};
+		
+		$scope.onSearch = function (pageData) {
+			getPageList(pageData, '0');
 		};
 		
 		function getCustomerList(offset, limit, filter, currentPageIndex) {
@@ -132,7 +137,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					$scope.customerList[i].showDetails = false;
 				}
 				var total = res.total;
-				if (total) {
+				if (total >= 0) {
 					$scope.customerPageData.total = parseInt(total / eachPageCount);
 					if ((total % eachPageCount) != 0) {
 						$scope.customerPageData.total++;
@@ -159,7 +164,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					$scope.channelList[i].showDetails = false;
 				}
 				var total = res.total;
-				if (total) {
+				if (total >= 0) {
 					$scope.channelPageData.total = parseInt(total / eachPageCount);
 					if ((total % eachPageCount) != 0) {
 						$scope.channelPageData.total++;
@@ -186,7 +191,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					$scope.memberList[i].showDetails = false;
 				}
 				var total = res.total;
-				if (total) {
+				if (total >= 0) {
 					$scope.memberPageData.total = parseInt(total / eachPageCount);
 					if ((total % eachPageCount) != 0) {
 						$scope.memberPageData.total++;
@@ -209,12 +214,12 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			BusinessService.getCustomersById($rootScope.session.token, userId, paramObj, function (res) {
 				$scope.checkCustomer.list = res.customerList;
 				for (var i = 0; i < $scope.checkCustomer.list.length; ++i) {
-					$scope.checkCustomer.list[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
+					$scope.checkCustomer.list[i].createDate = $scope.getDateString($scope.checkCustomer.list[i].create_on * 1000);
 					$scope.checkCustomer.list[i].status = getStatusName($scope.checkCustomer.list[i].status);
 					$scope.checkCustomer.list[i].showDetails = false;
 				}
 				var total = res.total;
-				if (total) {
+				if (total >= 0) {
 					$scope.checkCustomerPageData.total = parseInt(total / eachPageCount);
 					if ((total % eachPageCount) != 0) {
 						$scope.checkCustomerPageData.total++;
@@ -303,22 +308,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				pageIndex = selectedIndex;
 			}
 			sortPages(pageData, pageIndex);
-			switch (pageData) {
-				case $scope.customerPageData:
-					getCustomerList(parseInt(pageIndex) * eachPageCount, eachPageCount, '', pageIndex);
-					break;
-				case $scope.channelPageData:
-					getChannelList(parseInt(pageIndex) * eachPageCount, eachPageCount, '', pageIndex);
-					break;
-				case $scope.memberPageData:
-					getMemberList(parseInt(pageIndex) * eachPageCount, eachPageCount, '', pageIndex);
-					break;
-				case $scope.checkCustomerPageData:
-					getCustomerListById($scope.checkCustomer.ownerId, parseInt(pageIndex) * eachPageCount, eachPageCount, '', pageIndex);
-					break;
-				default:
-					break;
-			}
+			getPageList(pageData, pageIndex);
 		}
 		
 		function setCurrentPage(pageData, selectedIndex) {
@@ -327,6 +317,25 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					pageData.current = pageData.list[i];
 					return;
 				}
+			}
+		}
+		
+		function getPageList(pageData, pageIndex) {
+			switch (pageData) {
+				case $scope.customerPageData:
+					getCustomerList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
+					break;
+				case $scope.channelPageData:
+					getChannelList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
+					break;
+				case $scope.memberPageData:
+					getMemberList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
+					break;
+				case $scope.checkCustomerPageData:
+					getCustomerListById($scope.checkCustomer.ownerId, parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
+					break;
+				default:
+					break;
 			}
 		}
 		
@@ -360,6 +369,12 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			$(this).tab('show');
 			$scope.$apply(function () {
 				$scope.checkCustomer.showClose = true;
+			});
+		})
+
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+			$scope.$apply(function () {
+				$scope.search = '';
 			});
 		})
 	}]);
