@@ -26,7 +26,6 @@
     <body ng-controller="IndexCtrl">
         <div class="container-fluid" ng-view>
         </div>
-        <% include footer%>
         <% var component = (env === 'dev')?'component':'component-min' %>
         <%- include(component) %>
     </body>
