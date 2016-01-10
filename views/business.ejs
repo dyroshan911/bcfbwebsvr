@@ -108,7 +108,7 @@
 							<td align="center" ng-bind="customer.name"></td>
 							<td>
 								<select class="form-control form-select">
-									<option ng-repeat="phone in customer.phoneList" ng-bind="phone"></option>
+									<option ng-repeat="phone in customer.phoneList" ng-bind="phone.value"></option>
 								</select>
 							</td>
 							<td align="right" ng-bind="customer.apply_amount"></td>
@@ -282,10 +282,11 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="finishedAmount" title="请输入已放款金额" maxlength="20" ng-model="editCustomer.finishedAmount"
-							ng-pattern="/^\d+$/" />
+							ng-pattern="/^\d+$/" ng-change="onCheckAmount()" />
 							<div ng-show="editForm.finishedAmount.$dirty &amp;&amp; editForm.finishedAmount.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.finishedAmount.$error.pattern">请使用数字</small>
 							</div>
+							<small class="alert-danger well-sm" ng-show="editCustomer.checkAmount == false">不能超过申请金额</small>
 						</div>
 					</div>
 					<div class="form-group">

@@ -50,7 +50,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			serverRate: '',
 			billingDate: '',
 			comment: '',
-			status: {}
+			status: {},
+			checkAmount: true
 		};
 		$scope.search = '';
 		
@@ -66,6 +67,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.onEditCustomer = function (customer) {
 			$scope.editCustomer.id = customer.id;
 			$scope.editCustomer.name = customer.name;
+			$scope.editCustomer.newPhone = '';
 			$scope.editCustomer.applyAmount = customer.apply_amount;
 			$scope.editCustomer.finishedAmount = customer.finished_amount;
 			$scope.editCustomer.serverRate = customer.server_rate;
@@ -98,6 +100,14 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			}, function (res) {
 				alert(res.message);
 			});
+		};
+		
+		$scope.onCheckAmount = function () {
+			if (parseInt($scope.editCustomer.finishedAmount) > parseInt($scope.editCustomer.applyAmount)) {
+				$scope.editCustomer.checkAmount = false;
+			} else {
+				$scope.editCustomer.checkAmount = true;
+			}
 		};
 		
 		$scope.onCheckCustomers = function (owner) {
@@ -134,7 +144,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				for (var i = 0; i < $scope.customerList.length; ++i) {
 					$scope.customerList[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
 					$scope.customerList[i].status = getStatusName($scope.customerList[i].status);
-					$scope.customerList[i].phoneList = $scope.customerList[i].phone.split(',');
+					var phoneList = $scope.customerList[i].phone.split(',');
+					$scope.customerList[i].phoneList = makePhoneList(phoneList);
 					$scope.customerList[i].showDetails = false;
 				}
 				var total = res.total;
@@ -240,6 +251,14 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					return $scope.statusOptions[i].name;
 				}
 			}
+		}
+		
+		function makePhoneList(list) {
+			var phoneList = [];
+			for (var i = 0; i < list.length; ++i) {
+				phoneList.push({ index: i, value: list[i] });
+			}
+			return phoneList;
 		}
 		
 		//pages
