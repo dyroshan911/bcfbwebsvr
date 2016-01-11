@@ -9,8 +9,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			show: false,
 			ownerId: '',
 			ownerName: '',
-			list: [],
-			showClose: false
+			list: []
 		};
 		
 		$scope.tabNames = {
@@ -54,7 +53,6 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			applyAmount: '',
 			finishedAmount: '',
 			serverRate: '',
-			billingDate: '',
 			comment: '',
 			status: {},
 			checkAmount: true
@@ -83,8 +81,20 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			$scope.editCustomer.applyAmount = customer.apply_amount;
 			$scope.editCustomer.finishedAmount = customer.finished_amount;
 			$scope.editCustomer.serverRate = customer.server_rate;
-			$scope.editCustomer.billingDate = customer.billing_date;
 			$scope.editCustomer.comment = customer.comment;
+			var billingDate = customer.billing_date;
+			if ($scope.editCustomer.billingDate) {
+				var date = $scope.getDateString($scope.editCustomer.billingDate * 1000).slice(0, 10);
+				$('#datepicker-input').attr('value', date);
+			}
+			$('#datepicker').datepicker({
+				format: 'yyyy-mm-dd',
+				language: 'zh-CN',
+				clearBtn: true,
+				todayBtn: 'linked',
+				autoclose: true,
+				todayHighlight: true
+			});
 			for (var i = 0; i < $scope.statusOptions.length; ++i) {
 				if ($scope.statusOptions[i].name == customer.status) {
 					$scope.editCustomer.status = $scope.statusOptions[i];
@@ -97,11 +107,15 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			if ($scope.editForm.$invalid) {
 				return;
 			}
+			var billingDate = $('#datepicker').datepicker('getDate');
+			if (billingDate) {
+				billingDate = billingDate.getTime() / 1000;
+			}
 			var dataObj = {
 				phone: $scope.editCustomer.newPhone,
 				finished_amount: $scope.editCustomer.finishedAmount,
 				server_rate: $scope.editCustomer.serverRate,
-				billing_date: $scope.editCustomer.billingDate,					
+				billing_date: billingDate,					
 				comment: $scope.editCustomer.comment,
 				status: $scope.editCustomer.status.value
 			};
@@ -124,7 +138,6 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		
 		$scope.onCheckCustomers = function (owner) {
 			$scope.checkCustomer.show = true;
-			$scope.checkCustomer.showClose = true;
 			$scope.checkCustomer.ownerId = owner.id;
 			$scope.checkCustomer.ownerName = owner.true_name;
 			$('#myTabs a[href="#checkCustomers"]').tab('show');
@@ -132,9 +145,9 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		};
 		
 		$scope.onCloseCheck = function () {
+			$scope.currentPageData = {};
 			$('#myTabs a[href="#myCustomers"]').tab('show');
 			$scope.checkCustomer.show = false;
-			$scope.checkCustomer.showClose = false;
 		};
 		
 		$scope.gotoPage = function (pageData, index) {
@@ -375,51 +388,42 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$('#myTabs a[href="#myCustomers"]').click(function (e) {
 			e.preventDefault();
 			$(this).tab('show');
-			$scope.$apply(function () {
-				$scope.checkCustomer.showClose = false;
-			});
 		})
 		
 		$('#myTabs a[href="#myChannels"]').click(function (e) {
 			e.preventDefault()
 			$(this).tab('show');
-			$scope.$apply(function () {
-				$scope.checkCustomer.showClose = false;
-			});
 		})
 		
 		$('#myTabs a[href="#myMembers"]').click(function (e) {
 			e.preventDefault()
 			$(this).tab('show');
-			$scope.$apply(function () {
-				$scope.checkCustomer.showClose = false;
-			});
 		})
 		
 		$('#myTabs a[href="#checkCustomers"]').click(function (e) {
 			e.preventDefault();
 			$(this).tab('show');
-			$scope.$apply(function () {
-				$scope.checkCustomer.showClose = true;
-			});
 		})
 		
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			switch (e.target.hash) {
-				case '#myCustomers':
-					$scope.currentPageData = $scope.customerPageData;
-					break;
-				case '#myChannels':
-					$scope.currentPageData = $scope.channelPageData;
-					break;
-				case '#myMembers':
-					$scope.currentPageData = $scope.memberPageData;
-					break;
-				case '#checkCustomers':
-					$scope.currentPageData = $scope.checkCustomerPageData;
-					break;
-				default:
-					break;
-			}
+			var tabName = e.target.hash;
+			$scope.$apply(function () {
+				switch (tabName) {
+					case '#myCustomers':
+						$scope.currentPageData = $scope.customerPageData;
+						break;
+					case '#myChannels':
+						$scope.currentPageData = $scope.channelPageData;
+						break;
+					case '#myMembers':
+						$scope.currentPageData = $scope.memberPageData;
+						break;
+					case '#checkCustomers':
+						$scope.currentPageData = $scope.checkCustomerPageData;
+						break;
+					default:
+						break;
+				}
+			});
 		})
 	}]);

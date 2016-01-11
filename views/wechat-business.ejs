@@ -22,16 +22,16 @@
 			<li role="presentation" class="active">
 				<a href="#myCustomers" role="tab" data-toggle="tab" ng-bind="tabNames.customer"></a>
 			</li>
-			<li role="presentation" ng-show="session.role == 'channel-mgr'">
+			<li role="presentation" ng-show="session.role == 'admin' || session.role == 'channel-mgr'">
 				<a href="#myChannels" role="tab" data-toggle="tab" ng-bind="tabNames.channel"></a>
 			</li>
-			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
+			<li role="presentation" ng-hide="session.role == 'member'">
 				<a href="#myMembers" role="tab" data-toggle="tab" ng-bind="tabNames.member"></a>
 			</li>
 			<li role="presentation" ng-show="checkCustomer.show">
 				<a href="#checkCustomers" role="tab" data-toggle="tab">{{checkCustomer.ownerName}}的客户</a>
 			</li>
-			<span ng-show="checkCustomer.showClose" style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
+			<span ng-show="currentPageData == checkCustomerPageData" style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
 				<a href="#" ng-click="onCloseCheck()">&times;</a>
 			</span>
 		</ul>
@@ -75,7 +75,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款时间</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" ng-model="customer.billing_date" readonly="" />
 								</div>
@@ -346,10 +346,11 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="billingDate" title="请输入还款日期" maxlength="20" ng-model="editCustomer.billingDate"
-							ng-pattern="/^\d+$/" />
-							<div ng-show="editForm.billingDate.$dirty &amp;&amp; editForm.billingDate.$invalid">
-								<small class="alert-danger well-sm" ng-show="editForm.billingDate.$error.pattern">请使用数字</small>
+							<div class="input-group date" id="datepicker">
+								<input type="text" class="form-control" id="datepicker-input" readonly="" />
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-th"></i>
+								</span>
 							</div>
 						</div>
 					</div>
