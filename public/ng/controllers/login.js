@@ -14,7 +14,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 				password: $scope.loginData.password
 			};
 			UserService.login($rootScope.session.token, dataObj, function (res) {
-				alert(JSON.stringify(res));
+				//alert(JSON.stringify(res));
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;
 				$rootScope.session.userName = res.true_name;

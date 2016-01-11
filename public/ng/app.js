@@ -50,9 +50,6 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 						$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
 						SessionService.wechatAuth(args, function (res) {
 							firstStart = false;
-							alert(JSON.stringify(res));
-							var path = $location.path();
-							alert(path);
 							if (path.indexOf('wechat-signup') != -1) {
 								$location.path('/wechat-warn').search({ type: 'completed' });
 							} else {
@@ -62,13 +59,15 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 								$rootScope.session.role = res.role;
 								$rootScope.session.complete = res.complete;
 								$rootScope.saveSessionData();
-								alert('登录成功');
 								$route.reload();
 							}
 						}, function (res) {
-							alert(JSON.stringify(res));
 							firstStart = false;
-							$route.reload();
+							if (path.indexOf('wechat-signup') != -1) {
+								$route.reload();
+							} else {
+								$location.path('/wechat-warn').search({ type: 'need_singup' });
+							}
 						});
 					} else {
 						firstStart = false;

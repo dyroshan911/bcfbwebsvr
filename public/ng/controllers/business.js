@@ -120,7 +120,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				status: $scope.editCustomer.status.value
 			};
 			BusinessService.updateCustomer($rootScope.session.token, $scope.editCustomer.id, dataObj, function (res) {
-				alert(JSON.stringify(res));
+				//alert(JSON.stringify(res));
 				getCustomerList(0, eachPageCount, '');
 				$('#editDialog').modal('toggle');
 			}, function (res) {

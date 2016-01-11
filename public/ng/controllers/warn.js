@@ -4,10 +4,10 @@ angular.module('myApp').controller('WarnCtrl', ['$scope', '$location', '$rootSco
 	function ($scope, $location, $rootScope) {
 		$scope.warningContent = '';
 		
-		getWarningTyoe();
+		getWarningType();
 		
 		//functions
-		function getWarningTyoe() {
+		function getWarningType() {
 			var type = $location.search().type;
 			switch (type) {
 				case 'completed':

@@ -31,7 +31,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 				password: $scope.accountData.passwordConfirm
 			};
 			UserService.updateAccountInfo($rootScope.session.token, dataObj, function (res) {
-				alert(JSON.stringify(res));
+				//alert(JSON.stringify(res));
 				if ($rootScope.session.wechatMode == true) {
 					$location.path('/wechat-business');
 				} else {
@@ -67,7 +67,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 				password: $scope.completeData.password
 			};
 			UserService.complete($rootScope.session.token, dataObj, function (res) {
-				alert(JSON.stringify(res));
+				//alert(JSON.stringify(res));
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;
 				$rootScope.session.userName = res.true_name;
@@ -83,7 +83,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 		
 		function getAccountInfo() {
 			UserService.getAccountInfo($rootScope.session.token, function (res) {
-				alert(JSON.stringify(res));
+				//alert(JSON.stringify(res));
 				$scope.accountData.userName = res.user_name;
 				$scope.accountData.name = res.true_name;
 				$scope.accountData.phone = res.phone;
@@ -92,7 +92,6 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 				}
 			}, function (res) {
 				alert(res.message);
-				$location.path('/wechat-warn').search({ type: 'need_singup' });
 			});
 		}
 	}]);
