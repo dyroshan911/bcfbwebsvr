@@ -9,7 +9,8 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngMessages', 'ngA
 myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	function ($routeProvider, $locationProvider, $resourceProvider) {
 		$routeProvider.when('/', { redirectTo: '/home' });
-		$routeProvider.when('/home', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
+        $routeProvider.when('/home', {redirectTo: '/home/members' });
+		$routeProvider.when('/home/:params', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
 		$routeProvider.otherwise({ redirectTo: '/404' });

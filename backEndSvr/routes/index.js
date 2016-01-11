@@ -12,6 +12,11 @@ router.get('/:spec', function(req, res) {
 	res.render('index', { title: 'MySite', env: env });
 });
 
+//
+router.get('/home/:spec', function(req, res) {
+	res.render('index', { title: 'MySite', env: env });
+});
+
 //for angular partial page service
 router.get('/partial/:spec', function(req, res) {
 	res.render(req.params.spec, { title: 'MySite', env: env });
