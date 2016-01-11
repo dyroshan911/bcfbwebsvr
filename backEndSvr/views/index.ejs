@@ -14,7 +14,8 @@
 		<link href="lib/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
         <link href="lib/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
 
-        <link href="stylesheets/style.css" rel="stylesheet">
+        <link href="stylesheets/Iframe.css" rel="stylesheet">
+		<link href="stylesheets/style.css" rel="stylesheet">
         <link href="lib/angular-busy/dist/angular-busy.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,10 +26,9 @@
         <![endif]-->
     </head>
     <body ng-controller="IndexCtrl">
-        <% include header%>
+
         <div ng-view>
         </div>
-        <% include footer%>
         <% var component = (env === 'dev')?'component':'component-min' %>
         <%- include(component) %>
     </body>

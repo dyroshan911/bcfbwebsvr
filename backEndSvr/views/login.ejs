@@ -1,23 +1,52 @@
-<div layout="row" flex layout-align="center">
-<md-content layout-padding>
-	<form name="LoginForm">
-	    <md-input-container >
-	        <label>User Name</label>
-	        <input name="username" ng-model="loginData.userName" md-maxlength="30" required>
-	        <div ng-messages="LoginForm.username.$error">
-	            <div ng-message="required">This is required.</div>
-	            <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
-	        </div>
-	    </md-input-container>
-	    <md-input-container >
-	        <label>Password</label>
-	        <input name="password" type="password" ng-model="loginData.password" md-maxlength="30" required>
-	        <div ng-messages="LoginForm.password.$error">
-	            <div ng-message="required">This is required.</div>                
-	            <div ng-message="md-maxlength">The password has to be less than 30 characters long.</div>
-	        </div>
-	    </md-input-container>
-	    <md-button class="md-raised" ng-click="login()">Login</md-button>
-	</form>
-</md-content>
+<link href="stylesheets/login.css" rel="stylesheet">
+<div class="loginpage">
+	<div class="loginbox">
+    	<div class="loginboxinner">
+        	
+            <div class="logo">
+            	<h1 class="logo">百城.<span>金融</span></h1>
+				<span class="slogan">后台管理系统</span>
+            </div><!--logo-->
+            
+            <br clear="all" /><br />
+            
+            <div class="nousername">
+				<div class="loginmsg">密码不正确.</div>
+            </div><!--nousername-->
+            
+            <div class="nopassword">
+				<div class="loginmsg">密码不正确.</div>
+                <div class="loginf">
+                    <div class="thumb"><img alt="" src="images/thumbs/avatar1.png" /></div>
+                    <div class="userlogged">
+                        <h4></h4>
+                        <a href="index.html">Not <span></span>?</a> 
+                    </div>
+                </div><!--loginf-->
+            </div><!--nopassword-->
+            
+            <form id="login" action="dashboard.html" method="post">
+            	
+                <div class="username">
+                	<div class="usernameinner">
+                    	<input type="text" name="username" id="username" />
+                    </div>
+                </div>
+                
+                <div class="password">
+                	<div class="passwordinner">
+                    	<input type="password" name="password" id="password" />
+                    </div>
+                </div>
+                
+                <button>登录</button>
+                
+                <div class="keep"><input type="checkbox" disabled/> </div>
+            
+            </form>
+            
+        </div><!--loginboxinner-->
+    </div><!--loginbox-->
+
+
 </div>
