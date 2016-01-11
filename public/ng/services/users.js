@@ -51,7 +51,7 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 			};
 			ApiService.get('api/accounts/accountInfo', obj, successcb, failcb);
 		};
-
+		
 		cfgData.updateAccountInfo = function (token, dataObj, successcb, failcb) {
 			var obj = {
 				params: {
@@ -61,7 +61,18 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 			};
 			ApiService.put('api/accounts/accountInfo', obj, successcb, failcb);
 		};
-
-
+		
+		cfgData.getJsConfigData = function (token, dataObj, successcb, failcb) {
+			var obj = {
+				params: {
+					token: token
+				},
+				data: dataObj
+			};
+			ApiService.post('api/wechat/js_config', obj, function (data) {
+				successcb(data);
+			}, failcb);
+		};
+		
 		return cfgData;
 	}]);
