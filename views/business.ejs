@@ -69,13 +69,13 @@
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" id="myTabs" role="tablist">
 			<li role="presentation" class="active">
-				<a href="#myCustomers" role="tab" data-toggle="tab">我的客户</a>
+				<a href="#myCustomers" role="tab" data-toggle="tab" ng-bind="tabNames.customer"></a>
 			</li>
 			<li role="presentation" ng-show="session.role == 'channel-mgr'">
-				<a href="#myChannels" role="tab" data-toggle="tab">我的渠道</a>
+				<a href="#myChannels" role="tab" data-toggle="tab" ng-bind="tabNames.channel"></a>
 			</li>
 			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
-				<a href="#myMembers" role="tab" data-toggle="tab">我的会员</a>
+				<a href="#myMembers" role="tab" data-toggle="tab" ng-bind="tabNames.member"></a>
 			</li>
 			<li role="presentation" ng-show="checkCustomer.show">
 				<a href="#checkCustomers" role="tab" data-toggle="tab">{{checkCustomer.ownerName}}的客户</a>

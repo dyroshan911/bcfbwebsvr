@@ -13,6 +13,12 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			showClose: false
 		};
 		
+		$scope.tabNames = {
+			customer: '我的客户',
+			channel: '我的渠道',
+			member: '我的会员'
+		};
+		
 		var eachPageCount = 10;
 		$scope.customerPageData = {
 			current: {},
@@ -56,7 +62,13 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.search = '';
 		
 		getCustomerList(0, eachPageCount, '');
-		if ($rootScope.session.role == 'channel-mgr') {
+		if ($rootScope.session.role == 'admin') {
+			getChannelList(0, eachPageCount, '');
+			getMemberList(0, eachPageCount, '');
+			$scope.tabNames.customer = '客户列表';
+			$scope.tabNames.channel = '渠道列表';
+			$scope.tabNames.member = '会员列表';
+		} else if ($rootScope.session.role == 'channel-mgr') {
 			getChannelList(0, eachPageCount, '');
 			getMemberList(0, eachPageCount, '');
 		} else if ($rootScope.session.role == 'channel') {
