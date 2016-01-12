@@ -19,13 +19,13 @@
 	<div style="margin-top: 30px;">
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" id="myTabs" role="tablist">
-			<li role="presentation" class="active">
-				<a href="#myCustomers" role="tab" data-toggle="tab" ng-bind="tabNames.customer"></a>
-			</li>
 			<li role="presentation" ng-show="session.role == 'admin' || session.role == 'channel-mgr'">
 				<a href="#myChannels" role="tab" data-toggle="tab" ng-bind="tabNames.channel"></a>
 			</li>
-			<li role="presentation" ng-hide="session.role == 'member'">
+			<li role="presentation" class="active">
+				<a href="#myCustomers" role="tab" data-toggle="tab" ng-bind="tabNames.customer"></a>
+			</li>
+			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
 				<a href="#myMembers" role="tab" data-toggle="tab" ng-bind="tabNames.member"></a>
 			</li>
 			<li role="presentation" ng-show="checkCustomer.show">
@@ -75,9 +75,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款日期</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" ng-model="customer.billing_date" readonly="" />
+									<input type="text" class="form-control" ng-model="customer.billingDate" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -344,7 +344,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">还款日期</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款日期</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<div class="input-group date" id="datepicker">
 								<input type="text" class="form-control" id="datepicker-input" readonly="" />

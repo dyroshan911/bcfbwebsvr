@@ -66,6 +66,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			$scope.tabNames.customer = '客户列表';
 			$scope.tabNames.channel = '渠道列表';
 			$scope.tabNames.member = '会员列表';
+			$('#myTabs a[href="#myChannels"]').tab('show');
 		} else if ($rootScope.session.role == 'channel-mgr') {
 			getChannelList(0, eachPageCount, '');
 			getMemberList(0, eachPageCount, '');
@@ -168,6 +169,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.customerList = res.customerList;
 				for (var i = 0; i < $scope.customerList.length; ++i) {
 					$scope.customerList[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
+					$scope.customerList[i].billingDate = $scope.customerList[i].billing_date ? $scope.getDateString($scope.customerList[i].billing_date * 1000).slice(0, 10) : '';
 					$scope.customerList[i].status = getStatusName($scope.customerList[i].status);
 					var phoneList = $scope.customerList[i].phone.split(',');
 					$scope.customerList[i].phoneList = makePhoneList(phoneList);
