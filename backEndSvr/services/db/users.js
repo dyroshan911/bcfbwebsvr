@@ -136,6 +136,12 @@ userObj.createUser = function (userObj, cb) {
     });
 };
 
+userObj.updateAccountInfo = function (userId, dataObj, cb) {
+    UserModel.update({ id: userId }, { $set: dataObj }, function (err, data) {
+        cb(err, data);
+    });
+};
+
 
 function pad(num, n) {
     var len = num.toString().length;
