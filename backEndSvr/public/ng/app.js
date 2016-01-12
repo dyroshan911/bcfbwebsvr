@@ -5,7 +5,7 @@
 var sessionStorage = window.sessionStorage;
 
 // Declare app level module which depends on filters, and services
-var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngMessages', 'ngAnimate', 'ngTouch', 'cgBusy']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTouch', 'ngResource', 'cgBusy']);
 myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	function ($routeProvider, $locationProvider, $resourceProvider) {
 		$routeProvider.when('/', { redirectTo: '/home' });
