@@ -54,6 +54,14 @@ router.get('/mgr', function (req, res) {
     });
 });
 
+/* update account info */
+router.put('/:account_id', function (req, res) {
+    var dataObj = req.body.data;
+    var accountId = req.params.account_id;
+    users.updateAccountInfo(accountId, dataObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
+});
 
 
 module.exports = router;
