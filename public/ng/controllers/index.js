@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootScope', 'UserService', 'SessionService',
-	function ($scope, $location, $rootScope, UserService, SessionService) {
+angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootScope', 'SessionService', 'UserService',
+	function ($scope, $location, $rootScope, SessionService, UserService) {
 		//functions
 		$scope.onLogout = function () {
 			SessionService.deleteSessionUser($rootScope.session.token, function (res) {
@@ -22,4 +22,37 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 			var s = date.getSeconds();
 			return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d) + ' , ' + (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
 		};
+		
+		$scope.wechatJsConfig = function () {
+			var dataObj = {
+				debug: false,
+				jsApiList: ['closeWindow'],
+				configUrl: $location.absUrl()
+			};
+			UserService.getJsConfigData($rootScope.session.token, dataObj, function (res) {
+				if (res.resultCode == 'S') {
+					JsConfig(res.content);
+				} else {
+					alert(res.content);
+				}
+			}, function (msg) {
+				alert(msg);
+			});
+		}
+		
+		function JsConfig(data) {
+			var obj = {
+				debug: data.debug,
+				appId: data.appId,
+				timestamp: parseInt(data.timestamp),
+				nonceStr: data.nonceStr,
+				signature: data.signature,
+				jsApiList: data.jsApiList
+			};
+			wx.config(obj);
+			//wx.ready(function () { });
+			wx.error(function (res) {
+				//alert(JSON.stringify(res));
+			});
+		}
 	}]);

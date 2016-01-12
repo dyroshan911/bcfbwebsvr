@@ -66,6 +66,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			$scope.tabNames.customer = '客户列表';
 			$scope.tabNames.channel = '渠道列表';
 			$scope.tabNames.member = '会员列表';
+			$('#myTabs a[href="#myChannels"]').tab('show');
 		} else if ($rootScope.session.role == 'channel-mgr') {
 			getChannelList(0, eachPageCount, '');
 			getMemberList(0, eachPageCount, '');
@@ -168,6 +169,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.customerList = res.customerList;
 				for (var i = 0; i < $scope.customerList.length; ++i) {
 					$scope.customerList[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
+					$scope.customerList[i].billingDate = $scope.customerList[i].billing_date ? $scope.getDateString($scope.customerList[i].billing_date * 1000).slice(0, 10) : '';
 					$scope.customerList[i].status = getStatusName($scope.customerList[i].status);
 					var phoneList = $scope.customerList[i].phone.split(',');
 					$scope.customerList[i].phoneList = makePhoneList(phoneList);
@@ -291,8 +293,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			var list = pageData.list;
 			var count = pageData.total;
 			list.splice(0, list.length);
-			list.push({ name: '|<<', index: 'start' });
-			list.push({ name: '<<', index: '-' });
+			if (count > 1) {
+				list.push({ name: '|<<', index: 'start' });
+				list.push({ name: '<<', index: '-' });
+			}
 			selectedIndex = parseInt(selectedIndex);
 			if (selectedIndex <= 4) {
 				var max = count < 5 ? count : 5;
@@ -316,8 +320,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				}
 				list.push({ name: '...', index: '.' });
 			}
-			list.push({ name: '>>', index: '+' });
-			list.push({ name: '>>|', index: 'end' });
+			if (count > 1) {
+				list.push({ name: '>>', index: '+' });
+				list.push({ name: '>>|', index: 'end' });
+			}
 		}
 		
 		function selectPage(pageData, selectedIndex) {
