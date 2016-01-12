@@ -47,7 +47,7 @@ userObj.queryUser = function (userName, cb) {
     });
 };
 
-userObj.getChannelsList = function (offset, limit, filter, cb) {
+userObj.getChannelsList = function (offset, limit, getMgrOnly, filter, cb) {
     if (!offset) offset = 0;
     if (!limit) limit = 30;
     if (!filter) filter = '';
@@ -67,7 +67,9 @@ userObj.getChannelsList = function (offset, limit, filter, cb) {
         }
     }
     var queryElem = { '$or': [] };
-    queryElem['$or'].push({ role: 'channel' });
+    if(getMgrOnly == false) {
+        queryElem['$or'].push({ role: 'channel' });
+    }
     queryElem['$or'].push({ role: 'channel-mgr' });
     queryObj['$and'].push(queryElem);
 

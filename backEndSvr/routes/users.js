@@ -42,32 +42,16 @@ router.post('/', function (req, res) {
     });
 });
 
-/* get account info  by id*/
-router.get('/:accountId', function (req, res) {
-    var token = req.query.token;
-    var accountId = req.url.substring(1, req.url.indexOf('?'));
-    users.getAccountInfo(token, accountId, function (statusCode, result) {
+
+/* get all my channel mgrlist user accounts info  */
+router.get('/', function (req, res) {
+    var offset = req.query.offset;
+    var limit = req.query.limit;
+    var filter = req.query.filter;
+    //todo: get all account list
+    users.getChannelsMgrList(offset, limit, filter, function (statusCode, result) {
         httpResp(res, statusCode, result);
     });
 });
 
-/* update account info by id*/
-router.put('/:accountId', function (req, res) {
-    
-    var token = req.query.token;
-    var accountId = req.url.substring(1, req.url.indexOf('?'));
-    var accountObj = {};
-    if (req.body.data.nick_name) {
-        accountObj.nickName = req.body.data.nick_name;
-    }
-    if (req.body.data.password) {
-        accountObj.password = req.body.data.password;
-    }
-    if (req.body.data.enable) {
-        accountObj.enable = req.body.data.enable;
-    }
-    users.updateAccount(token, accountId, accountObj, function (statusCode, result) {
-        httpResp(res, statusCode, result);
-    }); 
-});
 module.exports = router;
