@@ -4,13 +4,13 @@
 var sessionStorage = window.sessionStorage;
 
 // Declare app level module which depends on filters, and services
-var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngMessages', 'ngAnimate', 'ngTouch', 'cgBusy']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngTouch', 'ngResource', 'cgBusy']);
 myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	function ($routeProvider, $locationProvider, $resourceProvider) {
 		$routeProvider.when('/', { redirectTo: '/home' });
 		$routeProvider.when('/home', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
-		$routeProvider.when('/wechat-signup', { templateUrl: ('partial/wechat-signup'), controller: 'WechatCtrl' });
+		$routeProvider.when('/wechat-signup', { templateUrl: ('partial/wechat-signup'), controller: 'WechatSignupCtrl' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl' });
 		$routeProvider.when('/account', { templateUrl: ('partial/account'), controller: 'AccountCtrl' });
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl' });

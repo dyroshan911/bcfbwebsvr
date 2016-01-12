@@ -2,7 +2,7 @@
 	<br/>
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
 		<div class="panel panel-default">
-			<div class="panel-body">
+			<div class="panel-body" cg-busy="myPromiseInfo">
 				<form name='accountForm' role="form" class="form-horizontal" ng-submit="onSave()">
 					<div class="form-group">
 						<h2 style="text-align: center;">个人信息</h2>
@@ -67,7 +67,7 @@
 <!-- Modal -->
 <div class="modal fade" id="completeDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content" cg-busy="myPromiseComplete">
 			<div class="modal-header">
 				<h3 class="modal-title" id="myModalLabel">完善账号信息</h3>
 			</div>

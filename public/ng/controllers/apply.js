@@ -18,7 +18,7 @@ angular.module('myApp').controller('ApplyCtrl', ['$scope', '$location', '$rootSc
 				phone: $scope.customerData.phone,		
 				apply_amount: $scope.customerData.amount
 			};
-			BusinessService.addCustomer($rootScope.session.token, dataObj, function (res) {
+			$scope.myPromise = BusinessService.addCustomer($rootScope.session.token, dataObj, function (res) {
 				//alert(JSON.stringify(res));
 				if ($rootScope.session.wechatMode == true) {
 					$location.path('/wechat-business');

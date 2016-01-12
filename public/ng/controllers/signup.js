@@ -26,7 +26,7 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 				email : $scope.signupData.email,
 				superior: $scope.signupData.superior
 			};
-			UserService.signup($rootScope.session.token, dataOdj, function (res) {
+			$scope.myPromise = UserService.signup($rootScope.session.token, dataOdj, function (res) {
 				//alert(JSON.stringify(res));
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;

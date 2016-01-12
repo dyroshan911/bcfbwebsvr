@@ -38,7 +38,7 @@
 
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane fade in active" id="myCustomers">
+			<div role="tabpanel" class="tab-pane fade in active" id="myCustomers" cg-busy="myPromiseCustomers">
 				<div class="panel panel-default" ng-repeat="customer in customerList">
 					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
 						<div class="row">
@@ -115,7 +115,7 @@
 				</nav>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade in" id="myChannels">
+			<div role="tabpanel" class="tab-pane fade in" id="myChannels" cg-busy="myPromiseChannels">
 				<div class="panel panel-default" ng-repeat="channel in channelList">
 					<div class="panel-heading" ng-click="channel.showDetails = !channel.showDetails;">
 						<div class="row">
@@ -138,13 +138,13 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">今日业绩</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">今日进件</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" ng-model="channel.today_customers" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">历史业绩</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">历史进件</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" ng-model="channel.total_customers" readonly="" />
 								</div>
@@ -166,7 +166,7 @@
 				</nav>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade in" id="myMembers">
+			<div role="tabpanel" class="tab-pane fade in" id="myMembers" cg-busy="myPromiseMembers">
 				<div class="panel panel-default" ng-repeat="member in memberList">
 					<div class="panel-heading" ng-click="member.showDetails = !member.showDetails;">
 						<div class="row">
@@ -189,13 +189,13 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">今日业绩</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">今日进件</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" ng-model="member.today_customers" readonly="" />
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">历史业绩</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">历史进件</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" ng-model="member.total_customers" readonly="" />
 								</div>
@@ -217,7 +217,7 @@
 				</nav>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers">
+			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers" cg-busy="myPromiseCheckCustomers">
 				<div class="panel panel-default" ng-repeat="customer in checkCustomer.list">
 					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
 						<div class="row">
@@ -287,7 +287,7 @@
 <!-- Modal -->
 <div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content" cg-busy="myPromiseUpdate">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>

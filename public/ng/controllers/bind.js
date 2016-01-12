@@ -13,7 +13,7 @@ angular.module('myApp').controller('BindCtrl', ['$scope', '$location', '$rootSco
 				user_name: $scope.bindData.userName,
 				password: $scope.bindData.password
 			};
-			UserService.bind($rootScope.session.token, dataObj, function (res) {
+			$scope.myPromise = UserService.bind($rootScope.session.token, dataObj, function (res) {
 				//alert(JSON.stringify(res));
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;

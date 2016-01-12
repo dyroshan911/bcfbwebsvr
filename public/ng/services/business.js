@@ -10,7 +10,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 				},
 				data: dataObj
 			};
-			ApiService.post('api/customers', obj, successcb, failcb);
+			return ApiService.post('api/customers', obj, successcb, failcb);
 		};
 		
 		cfgData.updateCustomer = function (token, userId, dataObj, successcb, failcb) {
@@ -21,7 +21,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 				},
 				data: dataObj
 			};
-			ApiService.put(url, obj, successcb, failcb);
+			return ApiService.put(url, obj, successcb, failcb);
 		};
 		
 		cfgData.getCustomers = function (token, paramObj, successcb, failcb) {
@@ -33,7 +33,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 					filter: paramObj.filter
 				}
 			};
-			ApiService.get('api/customers', obj, successcb, failcb);
+			return ApiService.get('api/customers', obj, successcb, failcb);
 		};
 		
 		cfgData.getCustomersById = function (token, userId, paramObj, successcb, failcb) {
@@ -46,7 +46,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 					filter: paramObj.filter
 				}
 			};
-			ApiService.get(url, obj, successcb, failcb);
+			return ApiService.get(url, obj, successcb, failcb);
 		};
 		
 		cfgData.getChannels = function (token, paramObj, successcb, failcb) {
@@ -58,7 +58,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 					filter: paramObj.filter
 				}
 			};
-			ApiService.get('api/accounts/channel', obj, successcb, failcb);
+			return ApiService.get('api/accounts/channel', obj, successcb, failcb);
 		};
 		
 		cfgData.getMembers = function (token, paramObj, successcb, failcb) {
@@ -70,7 +70,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 					filter: paramObj.filter
 				}
 			};
-			ApiService.get('api/accounts/member', obj, successcb, failcb);
+			return ApiService.get('api/accounts/member', obj, successcb, failcb);
 		};
 		
 		cfgData.getMembersById = function (token, userId, paramObj, successcb, failcb) {
@@ -83,7 +83,7 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 					filter: paramObj.filter
 				}
 			};
-			ApiService.get(url, obj, successcb, failcb);
+			return ApiService.get(url, obj, successcb, failcb);
 		};
 		
 		return cfgData;

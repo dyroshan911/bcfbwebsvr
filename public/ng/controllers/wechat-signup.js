@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').controller('WechatCtrl', ['$scope', '$location', '$rootScope', 'UserService', 
+angular.module('myApp').controller('WechatSignupCtrl', ['$scope', '$location', '$rootScope', 'UserService', 
 	function ($scope, $location, $rootScope, UserService) {
 		$scope.wechatSignupData = {
 			name: '',
@@ -21,7 +21,7 @@ angular.module('myApp').controller('WechatCtrl', ['$scope', '$location', '$rootS
 				email : '',
 				superior: $scope.wechatSignupData.superior
 			};
-			UserService.signup($rootScope.session.token, dataOdj, function (res) {
+			$scope.myPromise = UserService.signup($rootScope.session.token, dataOdj, function (res) {
 				//alert(JSON.stringify(res));
 				if ($rootScope.session.wechatMode == true) {
 					$location.path('/wechat-business');

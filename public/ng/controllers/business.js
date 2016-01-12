@@ -70,6 +70,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		} else if ($rootScope.session.role == 'channel-mgr') {
 			getChannelList(0, eachPageCount, '');
 			getMemberList(0, eachPageCount, '');
+			$('#myTabs a[href="#myChannels"]').tab('show');
 		} else if ($rootScope.session.role == 'channel') {
 			getMemberList(0, eachPageCount, '');
 		}
@@ -120,7 +121,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				comment: $scope.editCustomer.comment,
 				status: $scope.editCustomer.status.value
 			};
-			BusinessService.updateCustomer($rootScope.session.token, $scope.editCustomer.id, dataObj, function (res) {
+			$scope.myPromiseUpdate = BusinessService.updateCustomer($rootScope.session.token, $scope.editCustomer.id, dataObj, function (res) {
 				//alert(JSON.stringify(res));
 				getCustomerList(0, eachPageCount, '');
 				$('#editDialog').modal('toggle');
@@ -165,7 +166,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				limit: limit,
 				filter: filter
 			};
-			BusinessService.getCustomers($rootScope.session.token, paramObj, function (res) {
+			$scope.myPromiseCustomers = BusinessService.getCustomers($rootScope.session.token, paramObj, function (res) {
 				$scope.customerList = res.customerList;
 				for (var i = 0; i < $scope.customerList.length; ++i) {
 					$scope.customerList[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
@@ -196,7 +197,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				limit: limit,
 				filter: filter
 			};
-			BusinessService.getChannels($rootScope.session.token, paramObj, function (res) {
+			$scope.myPromiseChannels = BusinessService.getChannels($rootScope.session.token, paramObj, function (res) {
 				$scope.channelList = res.channelsList;
 				for (var i = 0; i < $scope.channelList.length; ++i) {
 					$scope.channelList[i].createDate = $scope.getDateString($scope.channelList[i].create_on * 1000);
@@ -223,7 +224,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				limit: limit,
 				filter: filter
 			};
-			BusinessService.getMembers($rootScope.session.token, paramObj, function (res) {
+			$scope.myPromiseMembers = BusinessService.getMembers($rootScope.session.token, paramObj, function (res) {
 				$scope.memberList = res.membersList;
 				for (var i = 0; i < $scope.memberList.length; ++i) {
 					$scope.memberList[i].createDate = $scope.getDateString($scope.memberList[i].create_on * 1000);
@@ -250,7 +251,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				limit: limit,
 				filter: filter
 			};
-			BusinessService.getCustomersById($rootScope.session.token, userId, paramObj, function (res) {
+			$scope.myPromiseCheckCustomers = BusinessService.getCustomersById($rootScope.session.token, userId, paramObj, function (res) {
 				$scope.checkCustomer.list = res.customerList;
 				for (var i = 0; i < $scope.checkCustomer.list.length; ++i) {
 					$scope.checkCustomer.list[i].createDate = $scope.getDateString($scope.checkCustomer.list[i].create_on * 1000);

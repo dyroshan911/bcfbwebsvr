@@ -63,7 +63,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 				user_name: $scope.completeData.userName,
 				password: $scope.completeData.password
 			};
-			UserService.complete($rootScope.session.token, dataObj, function (res) {
+			$scope.myPromiseComplete = UserService.complete($rootScope.session.token, dataObj, function (res) {
 				//alert(JSON.stringify(res));
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;
@@ -79,7 +79,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 		};
 		
 		function getAccountInfo() {
-			UserService.getAccountInfo($rootScope.session.token, function (res) {
+			$scope.myPromiseInfo = UserService.getAccountInfo($rootScope.session.token, function (res) {
 				//alert(JSON.stringify(res));
 				$scope.accountData.userName = res.user_name;
 				$scope.accountData.name = res.true_name;

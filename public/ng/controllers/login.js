@@ -13,7 +13,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 				user_name: $scope.loginData.userName,
 				password: $scope.loginData.password
 			};
-			UserService.login($rootScope.session.token, dataObj, function (res) {
+			$scope.myPromise = UserService.login($rootScope.session.token, dataObj, function (res) {
 				//alert(JSON.stringify(res));
 				$rootScope.session.logged = true;
 				$rootScope.session.userId = res.user_id;

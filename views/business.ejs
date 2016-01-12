@@ -87,7 +87,7 @@
 
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane fade in active" id="myCustomers">
+			<div role="tabpanel" class="tab-pane fade in active" id="myCustomers" cg-busy="myPromiseCustomers">
 				<table class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
@@ -133,15 +133,15 @@
 				</nav>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade in" id="myChannels">
+			<div role="tabpanel" class="tab-pane fade in" id="myChannels" cg-busy="myPromiseChannels">
 				<table class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
 							<th width="10%">姓名</th>
 							<th width="10%">联系电话</th>
 							<th width="15%">注册时间</th>
-							<th width="10%">今日业绩</th>
-							<th width="10%">历史业绩</th>
+							<th width="10%">今日进件</th>
+							<th width="10%">历史进件</th>
 							<th width="10%"></th>
 						</tr>
 					</thead>
@@ -167,15 +167,15 @@
 				</nav>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade in" id="myMembers">
+			<div role="tabpanel" class="tab-pane fade in" id="myMembers" cg-busy="myPromiseMembers">
 				<table class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
 							<th width="10%">会员姓名</th>
 							<th width="10%">联系电话</th>
 							<th width="15%">注册时间</th>
-							<th width="10%">今日业绩</th>
-							<th width="10%">历史业绩</th>
+							<th width="10%">今日进件</th>
+							<th width="10%">历史进件</th>
 							<th width="10%"></th>
 						</tr>
 					</thead>
@@ -201,7 +201,7 @@
 				</nav>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers">
+			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers" cg-busy="myPromiseCheckCustomers">
 				<table class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
@@ -243,7 +243,7 @@
 <!-- Modal -->
 <div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content" cg-busy="myPromiseUpdate">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
