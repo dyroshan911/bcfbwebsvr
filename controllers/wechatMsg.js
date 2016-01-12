@@ -32,12 +32,11 @@ exports.link = function (message, req, res, next) {
 exports.event = function (message, req, res, next) {
 	console.log(message);
 	if (message.Event == 'subscribe') {
-		subscribeUser(message.FromUserName);
 		res.reply([{
 		        title: '欢迎关注',
-		        description: '欢迎关注百城富邦',
-		        picurl: 'http://sn9kwt.sonix.cn/web/img/msgIcon/snsense.png',
-		        url: 'http://sn9kwt.sonix.cn/web/'
+		        description: '点击快速申请贷款',
+		        picurl: 'http://120.25.122.178/img/product-depict.jpg',
+		        url: 'http://120.25.122.178/wechat-apply'
 	      }]);
 	} 
 };
