@@ -15,7 +15,7 @@ var modelObj = exports = module.exports = {
 var AdminSchema = new Schema({
     user_name: {type: String, unique: true, required: true},    //登录名
     password: {type: String, required: true},                   //密码
-    channelCount:{type:Number, default:0}
+    channelCount:{type:Number, default:1}
 });
 
 

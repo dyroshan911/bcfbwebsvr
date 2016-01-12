@@ -7,6 +7,7 @@ var uuid = require('uuid');
 var userObj = exports = module.exports = {};
 
 var UserModel = model.AccountModel;
+var AdminModel = model.AdminModel;
 
 userObj.init = function (ap) {
     userObj.app = ap;
@@ -18,22 +19,22 @@ userObj.init = function (ap) {
 */
 
 userObj.verifyUser = function (userName, password, cb) {
-	UserModel.findOne({
-        'user_name': userName, 
+    AdminModel.findOne({
+        'user_name': userName,
         'password': password
     }).select('id').exec(function (err, user) {
-		if (err) {
-			cb(err, null);
+        if (err) {
+            cb(err, null);
         } else if (!user) {
-			cb(new Error('Verify user failed'), null);
-		} else {
+            cb(new Error('Verify user failed'), null);
+        } else {
             cb(null, user);
-		}
+        }
     });
 };
 
-userObj.queryUser = function(userName, cb) {
-    UserModel.findOne({
+userObj.queryUser = function (userName, cb) {
+    AdminModel.findOne({
         'user_name': userName
     }).select('id').exec(function (err, user) {
         if (err) {
@@ -46,90 +47,99 @@ userObj.queryUser = function(userName, cb) {
     });
 };
 
+userObj.getChannelsList = function (offset, limit, filter, cb) {
+    if (!offset) offset = 0;
+    if (!limit) limit = 30;
+    if (!filter) filter = '';
+    var textArr = filter.split(' ');
+    var count = textArr.length;
+    var queryObj = {};
+    if (count !== 0) {
+        queryObj['$and'] = [];
+        for (var i = 0; i < count; ++i) {
+            var queryElem = { '$or': [] };
+            queryElem['$or'].push({ true_name: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ phone: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ job_number: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ email: new RegExp(textArr[i], 'i') });
+
+            queryObj['$and'].push(queryElem);
+        }
+    }
+    var queryElem = { '$or': [] };
+    queryElem['$or'].push({ role: 'channel' });
+    queryElem['$or'].push({ role: 'channel-mgr' });
+    queryObj['$and'].push(queryElem);
+
+    UserModel.find(queryObj)
+        .sort({ create_on: -1 })
+        .skip(offset).
+        limit(limit).
+        select('create_on email id job_number phone role superior  true_name').
+        exec(function (err, channels) {
+            if (err) {
+                cb(err, null);
+            } else if (!channels) {
+                cb(new Error("not found"), null);
+            } else {
+                UserModel.count(queryObj, function (errcount, count) {
+                    if (errcount) {
+                        cb(errcount, null);
+                    }
+                    else {
+                        var dataList = {};
+                        dataList.channelsList = channels;
+                        dataList.total = count;
+                        cb(null, dataList);
+                    }
+                });
+            }
+        });
+}
+
 userObj.createUser = function (userObj, cb) {
     var userInfo = {
         id: uuid.v4(),
-        userName:userObj.userName,
-        password:userObj.password,
-        email:userObj.email,
-        phone:userObj.phone,
-        true_name:userObj.true_name ,
-        superior:userObj.superior
+        user_name: userObj.user_name,
+        password: userObj.user_name + '123456',
+        email: userObj.email,
+        phone: userObj.phone,
+        true_name: userObj.true_name,
+        superior: userObj.superior,
+        create_on: parseInt(Date.now() / 1000)
     };
-    var newUser = new UserModel(userInfo);
-    newUser.save ( function ( err, user ){
-        if (err) {
-            cb(err, null);
-        } else {
-            var result = {
-                id: user.id
-            };
-            cb(null, result);
-        }
-    });
-};
 
-userObj.updateUser = function (userId, userObj, cb) {
     UserModel.findOne({
-        'id': userId
+        user_name: userInfo.user_name
     }, function (err, user) {
-        if (err) {
-            cb(err, null);
-        } else if (!user) {
-            cb(new Error("User not found"), null);
-        } else {
-            for (var key in userObj) {
-                if (key === 'password') {
-                    user.password = userObj.password;
+        if (!err && !user) {
+            AdminModel.findOne({
+                user_name: 'admin'
+            }, function (err, admin) {
+                if (admin) {
+                    userInfo.job_number = 'cd' + pad(admin.channelCount++, 4);
+                    var newUser = new UserModel(userInfo);
+                    newUser.save(function (err, user) {
+                        cb(err, user);
+                        admin.save(function (err, user) { });
+                    });
                 }
-                if (key === 'nick_name') {
-                    user.nick_name = userObj.nick_name;
-                }
-                //todo: add other attrs here
-                //...
-                user.modify_on = Date.now();
-            }
-            user.save(function (err, result) {
-                if (err) {
-                    cb(err, null);
-                } else {
-                    cb(null, user);
+                else {
+                    cb(new Error("admin acount error"), 'job number error');
                 }
             });
-        }
-    });
-};
-
-userObj.getUserInfo = function (userId, cb) {
-    var acId = userId;
-    UserModel.findOne({id: acId})
-    .select('id user_name nick_name create_on modify_on enabled')
-    .exec(function (err, user) {
-        if (err) {
-            cb(err, null)
-        } else if (!user) {
-            cb(new Error("Can not find user by user id " + acId), null);
         } else {
-            cb(null, user);
+            cb(new Error("already existing"), null);
         }
     });
 };
 
 
-/**
-* get user list
-*   
-*/
-userObj.getUserList = function (offset, limit, cb) {
-    UserModel.find()
-    .skip(offset)
-    .limit(limit)
-    .select('id user_name nick_name create_on modify_on enabled')
-    .exec(function(err, users) {
-        if (err) {
-            cb(err, null)
-        } else {
-            cb(null, users);
-        }
-    });
-};
+function pad(num, n) {
+    var len = num.toString().length;
+    while (len < n) {
+        num = "0" + num;
+        len++;
+    }
+    return num;
+}  

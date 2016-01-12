@@ -13,36 +13,33 @@ function httpResp(res, code, result) {
 
 
 
-/* get all user accounts info  */
+/* get all my channel user accounts info  */
 router.get('/', function (req, res) {
-    var token = req.query.token;
-    var obj = {
-        offset: req.query.offset,
-        limit: req.query.limit,
-        tenantId: req.query.tenantId
-    };
-    //todo:
-    users.getAccounts(token, obj, function (statusCode, result) {
+    var offset = req.query.offset;
+    var limit = req.query.limit;
+    var filter = req.query.filter;
+    //todo: get all account list
+    users.getChannelsList(offset, limit, filter, function (statusCode, result) {
         httpResp(res, statusCode, result);
-    }); 
+    });
 });
 
-/* create user, user sign up. */
+
+/* create channel user. */
 router.post('/', function (req, res) {
-    //var token = req.body.params.token;
     var accountObj = {
-        userName: req.body.data.user_name,
-        password: req.body.data.password,
+        user_name: req.body.data.user_name,
         email: req.body.data.email,
         phone: req.body.data.phone,
-        true_name : req.body.data.true_name,
+        true_name: req.body.data.true_name,
+        role: req.body.data.role,
         superior: req.body.data.superior
     };
-	//todo: verify checkcode
-	//...
+    //todo: verify checkcode
+    //...
     users.creatAccount(accountObj, function (statusCode, result) {
         httpResp(res, statusCode, result);
-    }); 
+    });
 });
 
 /* get account info  by id*/
