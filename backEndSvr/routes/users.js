@@ -44,7 +44,7 @@ router.post('/', function (req, res) {
 
 
 /* get all my channel mgrlist user accounts info  */
-router.get('/', function (req, res) {
+router.get('/mgr', function (req, res) {
     var offset = req.query.offset;
     var limit = req.query.limit;
     var filter = req.query.filter;
@@ -53,5 +53,7 @@ router.get('/', function (req, res) {
         httpResp(res, statusCode, result);
     });
 });
+
+
 
 module.exports = router;
