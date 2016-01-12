@@ -43,7 +43,7 @@
 					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
 						<div class="row">
 							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="customer.name"></h3>
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
+							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">{{customer.finished_amount || 0}}/{{customer.apply_amount || 0}}</h3>
 						</div>
 					</div>
 					<div class="panel-body" ng-show="customer.showDetails">
@@ -120,7 +120,7 @@
 					<div class="panel-heading" ng-click="channel.showDetails = !channel.showDetails;">
 						<div class="row">
 							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="channel.true_name"></h3>
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
+							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">{{channel.today_customers || 0}}/{{channel.total_customers || 0}}</h3>
 						</div>
 					</div>
 					<div class="panel-body" ng-show="channel.showDetails">
@@ -171,7 +171,7 @@
 					<div class="panel-heading" ng-click="member.showDetails = !member.showDetails;">
 						<div class="row">
 							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="member.true_name"></h3>
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
+							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">{{member.today_customers || 0}}/{{member.total_customers || 0}}</h3>
 						</div>
 					</div>
 					<div class="panel-body" ng-show="member.showDetails">
@@ -222,7 +222,7 @@
 					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
 						<div class="row">
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="customer.name"></h3>
-							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6">点击查看/隐藏详情</h3>
+							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">{{customer.finished_amount || 0}}/{{customer.apply_amount || 0}}</h3>
 						</div>
 					</div>
 					<div class="panel-body" ng-show="customer.showDetails">

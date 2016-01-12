@@ -19,6 +19,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 		};
 		
 		getAccountInfo();
+		$scope.wechatJsConfig();
 		
 		//functions
 		$scope.onSave = function () {
@@ -43,11 +44,7 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 		};
 		
 		$scope.onCancel = function () {
-			if ($rootScope.session.wechatMode == true) {
-				$location.path('/wechat-business');
-			} else {
-				$location.path('/business');
-			}
+			wx.closeWindow();
 		};
 		
 		$scope.onCheckPassword = function (formData) {

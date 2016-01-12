@@ -291,8 +291,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			var list = pageData.list;
 			var count = pageData.total;
 			list.splice(0, list.length);
-			list.push({ name: '|<<', index: 'start' });
-			list.push({ name: '<<', index: '-' });
+			if (count > 1) {
+				list.push({ name: '|<<', index: 'start' });
+				list.push({ name: '<<', index: '-' });
+			}
 			selectedIndex = parseInt(selectedIndex);
 			if (selectedIndex <= 4) {
 				var max = count < 5 ? count : 5;
@@ -316,8 +318,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				}
 				list.push({ name: '...', index: '.' });
 			}
-			list.push({ name: '>>', index: '+' });
-			list.push({ name: '>>|', index: 'end' });
+			if (count > 1) {
+				list.push({ name: '>>', index: '+' });
+				list.push({ name: '>>|', index: 'end' });
+			}
 		}
 		
 		function selectPage(pageData, selectedIndex) {
