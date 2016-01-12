@@ -8,16 +8,16 @@ var keyPrefix = '';
 var keyPrefixLen = 0;
 var client = null;
 var cache = null;
-var EXPIRE_TIME = 60*30;
+var EXPIRE_TIME = 60 * 30;
 
 function keyWrapper(key) {
-    return keyPrefix+key;
+    return keyPrefix + key;
 }
 function keyStrip(key) {
     return key.slice(keyPrefixLen);
 }
 
-exports.init = function(cacheMou, cb) {
+exports.init = function (cacheMou, cb) {
     cache = cacheMou;
     if (!config) {
         cb(new Error('Failed to init session, please check if config file exist.'));
@@ -25,7 +25,7 @@ exports.init = function(cacheMou, cb) {
     }
 
     sessions = config.sessions;
-    if (sessions.use === "cluster") {        
+    if (sessions.use === "cluster") {
         var cluster = new Redis.Cluster(config.cluster);
         if (!cluster) {
             cb(new Error('Failed to init session, please check cluster deployment according to the config file.'));
@@ -44,12 +44,12 @@ exports.init = function(cacheMou, cb) {
     keyPrefixLen = keyPrefix.length;
 };
 
-exports.createSession = function(cb) {
+exports.createSession = function (cb) {
     var token = uuid.v4();
     var key = keyWrapper(token);
     var date = Date.now();
 
-    client.hset(key, "create_on", date, function(err, reply) {
+    client.hset(key, "create_on", date, function (err, reply) {
         if (err) {
             cb(err, null);
         } else {
@@ -59,15 +59,15 @@ exports.createSession = function(cb) {
     });
 };
 
-exports.clearSession = function(token, cb) {
+exports.clearSession = function (token, cb) {
     var key = keyWrapper(token);
-    client.exists(key, function(err, reply) {
+    client.exists(key, function (err, reply) {
         if (err) {
             cb(err, null);
         } else if (reply !== 1) {
-            cb(new Error('token '+ token + ' is not exist, maybe expired.'), null);
+            cb(new Error('token ' + token + ' is not exist, maybe expired.'), null);
         } else {
-            client.hkeys(key, function(err, reply) {
+            client.hkeys(key, function (err, reply) {
                 if (err) {
                     cb(err, null);
                 } else {
@@ -83,35 +83,35 @@ exports.clearSession = function(token, cb) {
                     client.expire(key, EXPIRE_TIME);
                     cb(null, true);
                 }
-            });    
+            });
         }
     });
 };
 
-exports.updateSession = function(token, obj, cb) {
+exports.updateSession = function (token, obj, cb) {
     var key = keyWrapper(token);
-    client.exists(key, function(err, reply) {
+    client.exists(key, function (err, reply) {
         if (err) {
             cb(err, null);
         } else if (reply !== 1) {
-            cb(new Error('token '+ token + ' is not exist, maybe expired.'), null);
+            cb(new Error('token ' + token + ' is not exist, maybe expired.'), null);
         } else {
-            client.hmset(key, obj, function(err, reply) {
+            client.hmset(key, obj, function (err, reply) {
                 if (err) {
                     cb(err, null);
                 } else {
                     client.expire(key, EXPIRE_TIME);
                     cb(null, token);
-                }        
-            });            
+                }
+            });
         }
     });
 };
 
-exports.getSessionObject = function(token, cb) {
+exports.getSessionObject = function (token, cb) {
     //return token
     var key = keyWrapper(token);
-    client.hgetall(key, function(err, reply) {
+    client.hgetall(key, function (err, reply) {
         if (err) {
             cb(err, null);
         } else {
@@ -121,9 +121,9 @@ exports.getSessionObject = function(token, cb) {
     });
 };
 
-exports.getSessionAttrs = function(token, arr, cb) {
+exports.getSessionAttrs = function (token, arr, cb) {
     var key = keyWrapper(token);
-    client.hmget(key, arr, function(err, reply) {
+    client.hmget(key, arr, function (err, reply) {
         if (err) {
             cb(err, null);
         } else {
@@ -138,14 +138,26 @@ exports.getSessionAttrs = function(token, arr, cb) {
     });
 };
 
-exports.verifyToken = function(token, cb) {
+exports.verifyToken = function (token, cb) {
     var key = keyWrapper(token);
-    client.exists(key, function(err, reply) {
+    client.exists(key, function (err, reply) {
         if (err) {
             cb(err, null);
         } else {
             client.expire(key, EXPIRE_TIME);
             cb(null, (reply !== 1) ? false : true);
+        }
+    });
+};
+
+exports.verifyTokenLogin = function (token, cb) {
+    var key = keyWrapper(token);
+    client.hmget(key, ['login_flag'], function (err, reply) {
+        if (err) {
+            cb(err, null);
+        } else {
+            client.expire(key, EXPIRE_TIME);
+            cb(null, (reply[0] == 'true') ? true : false);
         }
     });
 };

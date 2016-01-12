@@ -40,30 +40,49 @@ exports.verifyToken = function(token, cb) {
     });
 };
 
-exports.createUser = function(userName, password, cb) {
-	users.verifyUser(userName, password, function(err, doc){
-		var result = {};
+exports.verifyTokenLogin = function(token, cb) {
+    sessions.verifyTokenLogin(token, function(err, valid){
+        var result = {};
         var statusCode = 200;
-		if (!err) {
+        if (err) {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = err.message;
+            result.description = err.message;
+            result.source = '<<webui>>';
+        } else if (!valid) {            
+            statusCode = 403;
+            result.code = 'e1110';
+            result.description = result.message = "verify failed";
+            result.source = '<<webui>>';
+        }
+        cb(statusCode, result);
+    });
+};
+
+exports.createUser = function (token, userName, password, cb) {
+    users.verifyUser(userName, password, function (err, doc) {
+        var result = {};
+        var statusCode = 200;
+        if (!err) {
             var userData = {
                 user_id: doc.id,
-                user_name: doc.user_name,
-                role: doc.role
+                login_flag:'true'
             };
-            sessions.updateSession(token, userData, function(err, data) {
+            sessions.updateSession(token, userData, function (err, data) {
                 if (!err) {
-                    result = userData;
+                    result = 'login success';
                     cb(statusCode, result);
-                } else {                    
+                } else {
                     statusCode = 500;
-                    result.code = 'e1109';
+                    result.code = 'e2001';
                     result.message = err.message;
                     result.description = err.message;
                     result.source = '<<webui>>';
                     cb(statusCode, result);
                 }
             });
-		} else {
+        } else {
             statusCode = 500;
             result.code = 'e1109';
             result.message = err.message;
@@ -71,7 +90,7 @@ exports.createUser = function(userName, password, cb) {
             result.source = '<<webui>>';
             cb(statusCode, result);
         }
-	});
+    });
 };
 
 exports.signOut = function (token, cb) {
@@ -83,31 +102,6 @@ exports.signOut = function (token, cb) {
         } else {
             statusCode = 500;
             result.code = 'e1110';
-            result.message = err.message;
-            result.description = err.message;
-            result.source = '<<webui>>';
-        }
-        cb(statusCode, result);
-    });
-};
-
-exports.getUser = function (token, cb) {
-    sessions.getSessionAttrs(token, ['user_id', 'user_name', 'nick_name'], function(err, data) {
-        var result = {};
-        var statusCode = 200;
-        if (!err) {
-            if (!data.user_id) {
-                statusCode = 404;
-                result.code = 'e0004';
-                result.description = result.message = 'No user logged';
-                result.source = '<<webui>>';
-            } else {
-                statusCode = 200;
-                result = data;
-            }
-        } else {
-            statusCode = 404;
-            result.code = 'e2001';
             result.message = err.message;
             result.description = err.message;
             result.source = '<<webui>>';
