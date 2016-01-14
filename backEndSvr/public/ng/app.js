@@ -8,8 +8,8 @@ var sessionStorage = window.sessionStorage;
 var myApp = angular.module('myApp', ['ngRoute', 'ngTouch', 'ngResource', 'cgBusy']);
 myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	function ($routeProvider, $locationProvider, $resourceProvider) {
-		$routeProvider.when('/', { redirectTo: '/home' });
-        $routeProvider.when('/home', {redirectTo: '/home/members' });
+		$routeProvider.when('/', { redirectTo: '/login' });
+		$routeProvider.when('/home', { redirectTo: '/home/members' });
 		$routeProvider.when('/home/:params', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });
@@ -20,15 +20,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	}
 ]);
 
-myApp.run(['$location', 'SessionsService', function ($location, SessionsService) {
-		return;
-		SessionsService.initSession(function (data) {
-			$location.path(path);
+myApp.run(['$location', 'SessionService', function ($location, SessionService) {
+		SessionService.initSession(function (data) {
+			
 		}, function (err) {
-			if (err.name == 'NeedSignIn') {
-				$location.path('/login');
-			} else {
-				alert(err.message);
-			}
+			
 		});
 	}]);
