@@ -261,6 +261,9 @@ exports.updateAccountInfo = function (token, dataObj, cb) {
             if (dataObj && dataObj.email && dataObj.email != '') {
                 updateData.email = dataObj.email;
             }
+            if (dataObj && dataObj.unbind && dataObj.unbind == true) {
+                updateData.wechat_id = "";
+            }
             users.updateAccountInfo(data.user_id, updateData, function (err, doc) {
                 if (!err) {
                     result = doc;
