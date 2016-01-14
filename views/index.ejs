@@ -27,8 +27,7 @@
         <![endif]-->
     </head>
     <body ng-controller="IndexCtrl">
-        <div class="container-fluid" ng-view>
-        </div>
+        <div class="container-fluid" ng-view=""></div>
         <% var component = (env === 'dev')?'component':'component-min' %>
         <%- include(component) %>
     </body>

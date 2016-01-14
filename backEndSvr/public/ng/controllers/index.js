@@ -9,7 +9,4 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 				$location.path('/login');
 			});
 		};
-		$scope.login = function () {
-			$location.path('/login');
-		};
 	}]);

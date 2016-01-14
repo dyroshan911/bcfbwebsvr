@@ -10,21 +10,17 @@ angular.module('myApp').factory('UserService', ['ApiService', function (ApiServi
 					user_name: userName
 				}
 			};
-			ApiService.head('/api/users', obj, successcb, failcb);
+			ApiService.head('api/users', obj, successcb, failcb);
 		};
 		
-		cfgData.createUser = function (token, userName, password, securityCode, successcb, failcb) {
+		cfgData.login = function (token, dataObj, successcb, failcb) {
 			var obj = {
 				params: {
 					token: token
 				},
-				data: {
-					user_name: userName,
-					password: password,
-					security_code: securityCode
-				}
+				data: dataObj
 			};
-			ApiService.post('/api/users', obj, successcb, failcb);
+			ApiService.post('api/sessions/user', obj, successcb, failcb);
 		};
 		
 		cfgData.createUser = function (token, userName, password, securityCode, successcb, failcb) {

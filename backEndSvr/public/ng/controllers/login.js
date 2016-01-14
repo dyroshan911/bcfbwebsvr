@@ -11,11 +11,19 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 	function ($scope, $location, $rootScope, UserService) {
 		$scope.loginData = {
 			userName: '',
-			password: '',
-			securityCode: ''
+			password: ''
 		};
-
-		$scope.login = function () {
-			
+		
+		//functions
+		$scope.onLogin = function () {
+			var dataObj = {
+				user_name: $scope.loginData.userName,
+				password: $scope.loginData.password
+			};
+			UserService.login($rootScope.session.token, dataObj, function (res) {
+				alert(JSON.stringify(res));
+			}, function (res) {
+				alert(res.message);
+			})
 		};
 	}]);

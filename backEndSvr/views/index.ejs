@@ -9,14 +9,18 @@
 
         <!-- Bootstrap -->
         <!--<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
 		<!-- Bootstrap material-->
         <link href="lib/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
 		<link href="lib/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
         <link href="lib/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
 
+		<!-- Angular-busy -->
+		<link href="lib/angular-busy/dist/angular-busy.min.css" rel="stylesheet">
+
+		<!-- My Style -->
         <link href="stylesheets/Iframe.css" rel="stylesheet">
 		<link href="stylesheets/style.css" rel="stylesheet">
-        <link href="lib/angular-busy/dist/angular-busy.min.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,9 +30,7 @@
         <![endif]-->
     </head>
     <body ng-controller="IndexCtrl">
-
-        <div ng-view>
-        </div>
+		<div ng-view=""></div>
         <% var component = (env === 'dev')?'component':'component-min' %>
         <%- include(component) %>
     </body>

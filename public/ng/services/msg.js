@@ -17,7 +17,7 @@ angular.module('myApp').factory('MsgService', function () {
 	"e1103": { "name": "CreateUserFail", "zh-cn": "新增使用者账户失败，可能因为使用者已经存在，或者服务器忙碌，请检查后重试" },
 	"e1104": { "name": "CompleteUserFail", "zh-cn": "完善账户失败，可能因为使用者已经存在，或者服务器忙碌，请检查后重试" },
 	"e1105": { "name": "jobNumberError", "zh-cn": "推荐人ID错误，请核对后重新填写" },
-	"e1109": { "name": "LoginFail", "zh-cn": "登入失败，请检查用户名或密码" },
+	"e1109": { "name": "LoginFail", "zh-cn": "登入失败，请检查用户名和密码" },
 	"e1110": { "name": "VisitForbidden", "zh-cn": "您有内容无权访问，可能是因为您的登录已经失效，请重新登录" },
 	"e2001": { "name": "ConnectFail", "zh-cn": "无法连接服务器，请稍后重试" },
 	"e2002": { "name": "VisitForbidden", "zh-cn": "网页过期，请刷新页面，微信用户请重新打开页面" },
