@@ -20,7 +20,7 @@ var AccountSchema = new Schema({
     email:    {type: String},                                   //fixme:validator
     phone:    {type: String, required: true},                                   //fixme:validator
     true_name: {type: String, required: true},                                  //真实姓名
-    role:{type:String, enum:['admin','web-admin','channel-mgr','channel','member'],default:'member',required:true},
+    role:{type:String, enum:['admin','channel-mgr','channel','member'],default:'member',required:true},
     superior:{type:String},                                         //所属上级ID
     wechat_id:{type:String},                                    //微信ID
     job_number:{type:String} ,                                         //工号
