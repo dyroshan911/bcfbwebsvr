@@ -62,6 +62,6 @@ var AccountSchema = new Schema({
 });
 
 modelObj.AccountModel = mongoose.model('websvr.accounts', AccountSchema);
-modelObj.AdminModel = mongoose.model('websvr.admin.account', AdminSchema);
+modelObj.AdminModel = mongoose.model('websvr.backend.accounts', AdminSchema);
 modelObj.ProductModel = mongoose.model('websvr.products', ProductShowSchema);
 modelObj.CaseModel = mongoose.model('websvr.cases', CaseSchem);

@@ -22,7 +22,7 @@ userObj.verifyUser = function (userName, password, cb) {
     AdminModel.findOne({
         'user_name': userName,
         'password': password
-    }).select('id').exec(function (err, user) {
+    }).exec(function (err, user) {
         if (err) {
             cb(err, null);
         } else if (!user) {
