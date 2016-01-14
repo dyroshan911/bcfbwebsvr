@@ -39,7 +39,7 @@ router.verify = function () {
     return function (req, res, next) {
         if (req.path == '/api/sessions' && req.method == 'POST') {
             next();
-        } else if (req.path == '/api/sessions/user' && req.method == 'POST') {
+        } else if ((req.path == '/api/sessions/user' && req.method == 'POST') || (req.path == '/api/sessions' && req.method == 'HEAD')) {
             sessions.verifyToken(req.query.token, function (statusCode, result) {
                 if (statusCode >= 400) {
                     res.status(statusCode).json(result);
