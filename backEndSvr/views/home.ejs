@@ -45,14 +45,14 @@
 </div>
 
 <div id="right-content" class="right-content">
-	<div class="content" ng-if="currentPage == 'staff'">
+	<div class="content" ng-if="currentPage == 'staff'" ng-controller="StaffCtrl">
 		<% include staff%>
 	</div>
-	<div class="content" ng-if="currentPage == 'product'">
+	<div class="content" ng-if="currentPage == 'product'" ng-controller="ProductCtrl">
 		<% include product%>
 	</div>
-	<div class="content" ng-if="currentPage == 'success'">
-		<% include success%>
+	<div class="content" ng-if="currentPage == 'success'" ng-controller="SuccessCaseCtrl">
+		<% include success-case%>
 	</div>
 </div>
 

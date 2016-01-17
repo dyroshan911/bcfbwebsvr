@@ -10,16 +10,16 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			total: 0
 		};
 		$scope.roleList = [
-			{ name: '渠道总监', value: 'channel-mgr' },
-			{ name: '渠道', value: 'channel' }
+			{ name: '渠道', value: 'channel' },
+			{ name: '渠道总监', value: 'channel-mgr' }
 		];
 		$scope.search = '';
 		
 		$scope.addUserData = {
 			userName: '',
-			phone: '',
 			name: '',
-			role: {},
+			phone: '',
+			role: $scope.roleList[0],
 			superior: {}
 		};
 		
@@ -35,7 +35,23 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 		};
 		
 		$scope.onAddUser = function () {
-
+			if ($scope.addForm.$invalid) {
+				return;
+			}
+			var dataObj = {
+				user_name: $scope.addUserData.userName,
+				true_name: $scope.addUserData.name,
+				phone: $scope.addUserData.phone,
+				role: $scope.addUserData.role.value,
+				superior: $scope.addUserData.superior.id
+			};
+			$scope.myPromiseAdd = ManageService.addChannel($rootScope.session.token, dataObj, function (res) {
+				alert(JSON.stringify(res));
+				getChannelList(0, $scope.eachPageCount, '');
+				$('#addDialog').modal('toggle');
+			}, function (res) {
+				alert(res.message);
+			});
 		};
 		
 		$scope.onUpdateUser = function () {
@@ -64,6 +80,19 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 					$scope.sortPages($scope.pageData, currentPageIndex);
 					$scope.setCurrentPage($scope.pageData, currentPageIndex);
 				}
+			}, function (res) {
+				alert(res.message);
+			});
+		}
+		
+		function getChannelMgrList(offset, limit, filter) {
+			var paramObj = {
+				offset: offset,
+				limit: limit,
+				filter: filter
+			};
+			ManageService.getChannelMgr($rootScope.session.token, paramObj, function (res) {
+				$scope.channelMgrList = res.channelsList;
 			}, function (res) {
 				alert(res.message);
 			});
