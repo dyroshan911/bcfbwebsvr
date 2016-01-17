@@ -43,6 +43,22 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
 			});
 		};
 		
+		$scope.onUnbind = function () {
+			var dataObj = {
+				true_name: $scope.accountData.name,
+				phone: $scope.accountData.phone,
+				password: '',
+				unbind: true
+			};
+			UserService.updateAccountInfo($rootScope.session.token, dataObj, function (res) {
+				//alert(JSON.stringify(res));
+				alert('解除绑定成功');
+				wx.closeWindow();
+			}, function (res) {
+				alert(res.message);
+			});
+		};
+		
 		$scope.onCancel = function () {
 			wx.closeWindow();
 		};
