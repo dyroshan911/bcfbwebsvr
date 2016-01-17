@@ -5,21 +5,20 @@
             "sub_button":[{
                 "type":"view",
                 "name":"注册百城",
-                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/wechat-signup&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
+                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa9f06e429c6e2a22&redirect_uri=http%3a%2f%2fwww.baichengfubang.com%2fwechat-signup&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
             },{
                 "type":"view",
                 "name":"我的百城主页",
-                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/wechat-business&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
+                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa9f06e429c6e2a22&redirect_uri=http://www.baichengfubang.com/wechat-business&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
             },{
                 "type":"view",
                 "name":"完善账户信息",
-                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx21698b391a99a42b&redirect_uri=http://120.25.122.178/account&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
+                "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa9f06e429c6e2a22&redirect_uri=http://www.baichengfubang.com/account&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
             }]
-            //"url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + config.wechat.appId + "&redirect_uri=" +  config.wechat.url + "&response_type=code&scope=snsapi_base&state=2#wechat_redirect"
           },{
                 "type":"view",
                 "name":"我要贷款",
-                "url":"http://120.25.122.178/wechat-apply"
+                "url":"http://www.baichengfubang.com/wechat-apply"
             }]
     }
 }

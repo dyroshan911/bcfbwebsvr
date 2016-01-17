@@ -55,26 +55,6 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			}, failcb);
 		};
 		
-		cfgData.createSessionUser = function (token, userName, password, securityCode, successcb, failcb) {
-			var obj = {
-				params: {
-					token: token
-				},
-				data: {
-					user_name: userName,
-					password: password,
-					security_code: securityCode
-				}
-			};
-			ApiService.post('/api/sessions/user', obj, function (data) {
-				$rootScope.session.logged = true;
-				$rootScope.session.userName = data.user_name;
-				$rootScope.session.nickName = data.nick_name; //for display
-				$rootScope.session.userId = data.user_id;
-				successcb(data);
-			}, failcb);
-		};
-		
 		cfgData.deleteSessionUser = function (token, successcb, failcb) {
 			var obj = {
 				params : {
@@ -83,28 +63,12 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 			};
 			//whatever successful or not, clear session's user info
 			ApiService.delete('/api/sessions/user', obj, function (data) {
-				delete $rootScope.session.userName;
-				delete $rootScope.session.nickName;
-				delete $rootScope.session.userId;
 				$rootScope.session.logged = false;
 				successcb(data);
 			}, function (err) {
-				delete $rootScope.session.userName;
-				delete $rootScope.session.nickName;
-				delete $rootScope.session.userId;
 				$rootScope.session.logged = false;
 				failcb(err);
 			});
-		};
-		
-		
-		cfgData.getSessionUser = function (token, successcb, failcb) {
-			var obj = {
-				params : {
-					token: token
-				}
-			};
-			ApiService.get('/api/sessions/user', obj, successcb, failcb);
 		};
 		
 		cfgData.verifyToken = function (token, successcb, failcb) {

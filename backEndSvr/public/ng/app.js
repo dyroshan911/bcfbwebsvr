@@ -9,7 +9,7 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngTouch', 'ngResource', 'cgBusy
 myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	function ($routeProvider, $locationProvider, $resourceProvider) {
 		$routeProvider.when('/', { redirectTo: '/login' });
-		$routeProvider.when('/home', { redirectTo: '/home/members' });
+		$routeProvider.when('/home', { redirectTo: '/home/staff' });
 		$routeProvider.when('/home/:params', { templateUrl: ('partial/home'), controller: 'HomeCtrl' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), controller: '' });

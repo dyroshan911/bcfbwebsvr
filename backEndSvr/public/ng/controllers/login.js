@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name myApp.controller:LoginCtrl
- * @description
- * # LoginCtrl
- * Controller of the myApp
- */
 angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootScope', 'UserService',
 	function ($scope, $location, $rootScope, UserService) {
 		$scope.loginData = {
@@ -22,6 +15,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 			};
 			UserService.login($rootScope.session.token, dataObj, function (res) {
 				alert(JSON.stringify(res));
+				$location.path('/home');
 			}, function (res) {
 				alert(res.message);
 			})
