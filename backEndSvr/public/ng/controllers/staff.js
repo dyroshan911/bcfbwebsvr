@@ -3,6 +3,7 @@
 angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootScope', 'ManageService',
 	function ($scope, $location, $rootScope, ManageService) {
 		$scope.channelList = [];
+		$scope.channelMgrList = [];
 		$scope.pageData = {
 			current: {},
 			list: [],
@@ -13,6 +14,14 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			{ name: '渠道', value: 'channel' }
 		];
 		$scope.search = '';
+		
+		$scope.addUserData = {
+			userName: '',
+			phone: '',
+			name: '',
+			role: {},
+			superior: {}
+		};
 		
 		getChannelList(0, $scope.eachPageCount, '');
 		
@@ -25,13 +34,21 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			getPageList($scope.pageData, '0');
 		};
 		
+		$scope.onAddUser = function () {
+
+		};
+		
+		$scope.onUpdateUser = function () {
+
+		};
+		
 		function getChannelList(offset, limit, filter, currentPageIndex) {
 			var paramObj = {
 				offset: offset,
 				limit: limit,
 				filter: filter
 			};
-			$scope.myPromise = ManageService.getChannels($rootScope.session.token, paramObj, function (res) {
+			$scope.myPromiseStaff = ManageService.getChannels($rootScope.session.token, paramObj, function (res) {
 				$scope.channelList = res.channelsList;
 				for (var i = 0; i < $scope.channelList.length; ++i) {
 					$scope.channelList[i].createDate = $scope.getDateString($scope.channelList[i].create_on * 1000);
