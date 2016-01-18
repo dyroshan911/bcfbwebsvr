@@ -13,6 +13,10 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			{ name: '渠道', value: 'channel' },
 			{ name: '渠道总监', value: 'channel-mgr' }
 		];
+		$scope.statusList = [
+			{ name: '启用', value: true },
+			{ name: '禁用', value: false }
+		]
 		$scope.search = '';
 		
 		$scope.addUserData = {
@@ -22,10 +26,18 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			role: $scope.roleList[0],
 			superior: {}
 		};
+		$scope.updateUserData = {
+			userName: '',
+			name: '',
+			phone: '',
+			role: $scope.roleList[0],
+			superior: {},
+			enable: {}
+		};
 		
 		getChannelList(0, $scope.eachPageCount, '');
 		getChannelMgrList(0, $scope.eachPageCount, '');
-
+		
 		//functions
 		$scope.gotoPage = function (pageData, index) {
 			$scope.selectPage(pageData, index, getPageList);
@@ -55,8 +67,31 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			});
 		};
 		
-		$scope.onUpdateUser = function () {
-
+		$scope.onEditUser = function (user) {
+			$scope.updateUserData.userName = user.user_name;
+			$scope.updateUserData.name = user.true_name;
+			$scope.updateUserData.phone = user.phone;
+			$scope.updateUserData.enable = $scope.statusList[0];
+			for (var i = 0; i < $scope.roleList.length; ++i) {
+				if (user.role == $scope.roleList[i].value) {
+					$scope.updateUserData.role = $scope.roleList[i];
+					break;
+				}
+			}
+			for (var i = 0; i < $scope.channelMgrList.length; ++i) {
+				if (user.superior == $scope.channelMgrList[i].id) {
+					$scope.updateUserData.superior = $scope.channelMgrList[i];
+					break;
+				}
+			}
+			$('#editDialog').modal({ backdrop: false, keyboard: false });
+		};
+		
+		$scope.onSave = function () {
+			if ($scope.updateForm.$invalid) {
+				return;
+			}
+			updateUser();
 		};
 		
 		function getChannelList(offset, limit, filter, currentPageIndex) {
@@ -98,6 +133,22 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				alert(res.message);
 			});
 		}
+		
+		function updateUser() {
+			var dataObj = {
+				true_name: $scope.updateUserData.name,
+				phone: $scope.updateUserData.phone,
+				role: $scope.updateUserData.role.value,
+				superior: $scope.updateUserData.superior.value,
+				enable: $scope.updateUserData.enable.value
+			};
+			$scope.myPromiseEdit = ManageService.updateAccount($rootScope.session.token, $scope.updateUserData.id, dataObj, function (res) {
+				alert(JSON.stringify(res));
+				$('#editDialog').modal('toggle');
+			}, function (res) {
+				alert(res.message);
+			});
+		};
 		
 		function getPageList(pageData, pageIndex) {
 			getChannelList(parseInt(pageIndex) * $scope.eachPageCount, $scope.eachPageCount, $scope.search, pageIndex);
