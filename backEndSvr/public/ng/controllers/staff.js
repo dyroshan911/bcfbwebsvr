@@ -27,6 +27,7 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			superior: {}
 		};
 		$scope.updateUserData = {
+			selectedUser: {},
 			userName: '',
 			name: '',
 			phone: '',
@@ -68,6 +69,7 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 		};
 		
 		$scope.onEditUser = function (user) {
+			$scope.updateUserData.selectedUser = user;
 			$scope.updateUserData.userName = user.user_name;
 			$scope.updateUserData.name = user.true_name;
 			$scope.updateUserData.phone = user.phone;
@@ -144,6 +146,11 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			};
 			$scope.myPromiseEdit = ManageService.updateAccount($rootScope.session.token, $scope.updateUserData.id, dataObj, function (res) {
 				alert(JSON.stringify(res));
+				$scope.updateUserData.selectedUser.true_name = $scope.updateUserData.name;
+				$scope.updateUserData.selectedUser.phone = $scope.updateUserData.phone;
+				$scope.updateUserData.selectedUser.role = $scope.updateUserData.role.value;
+				$scope.updateUserData.selectedUser.roleName = $scope.updateUserData.role.name;
+				$scope.updateUserData.selectedUser.superior = $scope.updateUserData.superior.id;
 				$('#editDialog').modal('toggle');
 			}, function (res) {
 				alert(res.message);

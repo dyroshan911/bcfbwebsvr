@@ -48,10 +48,12 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 		
 		cfgData.get = function (url, obj, successcb, failcb) {
 			if (obj.params) {
+				var date = new Date();
+				obj.params._timestamp = date.getTime();
 				url = makeUrl(url, obj.params);
 				delete obj.params;
 			}
-			obj.timeout = (1000 * 30);
+			obj.timeout = (1000 * 30);		
 			return $http.get(url, obj).success(function (data, status, headers, config) {
 				successcb(data);
 			}).error(function (data, status, headers, config) {

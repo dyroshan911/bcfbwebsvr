@@ -7,6 +7,10 @@
 	text-align: right;
 }
 
+.input-group span a:hover {
+	text-decoration: none;
+}
+
 * {
 	padding: 0px;
 	margin: 0px;

@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('myApp').factory('ApiService', ['$http', 'MsgService', function ($http, MsgService) {
+angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
+	function ($http, MsgService) {
 		var cfgData = {};
 		
 		var makeArg = function (arg) {
@@ -45,6 +46,8 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService', function (
 		
 		cfgData.get = function (url, obj, successcb, failcb) {
 			if (obj.params) {
+				var date = new Date();
+				obj.params._timestamp = date.getTime();
 				url = makeUrl(url, obj.params);
 				delete obj.params;
 			}
