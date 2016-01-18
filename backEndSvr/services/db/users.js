@@ -77,7 +77,7 @@ userObj.getChannelsList = function (offset, limit, getMgrOnly, filter, cb) {
         .sort({ create_on: -1 })
         .skip(offset).
         limit(limit).
-        select('create_on email id job_number phone role superior  true_name').
+        select('user_name create_on email id job_number phone role superior  true_name').
         exec(function (err, channels) {
             if (err) {
                 cb(err, null);
@@ -108,6 +108,7 @@ userObj.createUser = function (userObj, cb) {
         phone: userObj.phone,
         true_name: userObj.true_name,
         superior: userObj.superior,
+        role : dataObj.role,
         create_on: parseInt(Date.now() / 1000)
     };
 
