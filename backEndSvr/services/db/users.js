@@ -100,6 +100,10 @@ userObj.getChannelsList = function (offset, limit, getMgrOnly, filter, cb) {
 }
 
 userObj.createUser = function (userObj, cb) {
+    var role = 'member';
+    if (userObj.role == "channel" || userObj.role == "channel-mgr") {
+        role = userObj.role;
+    }
     var userInfo = {
         id: uuid.v4(),
         user_name: userObj.user_name,
@@ -108,7 +112,7 @@ userObj.createUser = function (userObj, cb) {
         phone: userObj.phone,
         true_name: userObj.true_name,
         superior: userObj.superior,
-        role : dataObj.role,
+        role : role,
         create_on: parseInt(Date.now() / 1000)
     };
 
@@ -120,7 +124,7 @@ userObj.createUser = function (userObj, cb) {
                 user_name: 'admin'
             }, function (err, admin) {
                 if (admin) {
-                    userInfo.job_number = 'cd' + pad(admin.channelCount++, 4);
+                    userInfo.job_number = 'cd' + pad(++admin.channelCount, 4);
                     var newUser = new UserModel(userInfo);
                     newUser.save(function (err, user) {
                         cb(err, user);
