@@ -24,7 +24,8 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 		};
 		
 		getChannelList(0, $scope.eachPageCount, '');
-		
+		getChannelMgrList(0, $scope.eachPageCount, '');
+
 		//functions
 		$scope.gotoPage = function (pageData, index) {
 			$scope.selectPage(pageData, index, getPageList);

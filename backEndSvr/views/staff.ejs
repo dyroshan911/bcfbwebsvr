@@ -16,8 +16,8 @@
 		<table class="table table-bordered table-striped table-hover" cg-busy="myPromiseStaff">
 			<thead>
 				<tr>
-					<th width="10%">账号</th>
 					<th width="10%">姓名</th>
+					<th width="10%">账号</th>
 					<th width="10%">工号</th>
 					<th width="10%">身份</th>
 					<th width="10%">电话</th>
@@ -28,8 +28,8 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="channel in channelList">
-					<td align="center" ng-bind="channel.id"></td>
 					<td align="center" ng-bind="channel.true_name"></td>
+					<td align="center" ng-bind="channel.user_name"></td>
 					<td align="center" ng-bind="channel.job_number"></td>
 					<td align="center" ng-bind="channel.roleName"></td>
 					<td align="center" ng-bind="channel.phone"></td>
@@ -99,7 +99,7 @@
 					<div class="form-group" ng-show="addUserData.role.value == 'channel'">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">上级</lable>
 						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<select class="form-control" reng-options="mgr.name for mgr in channelMgrList" ng-model="addUserData.superior"></select>
+							<select class="form-control" ng-options="mgr.true_name for mgr in channelMgrList" ng-model="addUserData.superior"></select>
 						</div>
 					</div>
 					<br/>
