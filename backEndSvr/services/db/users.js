@@ -47,7 +47,7 @@ userObj.queryUser = function (userName, cb) {
     });
 };
 
-userObj.getChannelsList = function (offset, limit, getMgrOnly, filter, cb) {
+userObj.getChannelsList = function (offset, limit, filter, getMgrOnly, cb) {
     if (!offset) offset = 0;
     if (!limit) limit = 30;
     if (!filter) filter = '';
