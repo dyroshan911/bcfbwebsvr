@@ -22,7 +22,7 @@ var AccountSchema = new Schema({
     true_name: {type: String, required: true},                                  //真实姓名
     role:{type:String, enum:['admin','channel-mgr','channel','member'],default:'member',required:true},
     superior:{type:String},                                         //所属上级ID
-    wechat_id:{type:String},                                    //微信ID
+    wechat_id:{type:String, default:""},                                    //微信ID
     job_number:{type:String} ,                                         //工号
     
     total_customers:{type:Number, default:0},              //客户数
