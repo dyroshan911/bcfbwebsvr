@@ -72,6 +72,8 @@ exports.event = function (message, req, res, next) {
             picurl: 'http://120.25.122.178/img/product-depict.jpg',
             url: 'http://120.25.122.178/wechat-apply'
         }]);
-    }
+    }  else if (message.Event == 'CLICK') {
+		res.wait('main');
+	}
 };
 
