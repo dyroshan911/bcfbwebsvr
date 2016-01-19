@@ -19,20 +19,41 @@ exports.creatCustomer = function (token, customerObj, cb) {
                 customerObj.channel_id = data.user_id;
                 users.increaseCustomer(data.user_id);
             }
+            customers.createCustomer(customerObj, function (err, customer) {
+                if (!err) {
+                    result = customer;
+                    //pushscheduleEventNew(data.user_id, customerObj);
+                    cb(statusCode, result);
+                } else {
+                    statusCode = 500;
+                    result.code = 'e0001';
+                    result.message = err.message;
+                    result.description = 'creatCustomer';
+                    result.source = '<<webui>>';
+                }
+            });
+        } else {
+            users.getRandomChannel(function (err, user) {
+                if(!err) {
+                    customerObj.channel_id = user.id;
+                    users.increaseCustomer(user.id);
+                }
+                customers.createCustomer(customerObj, function (err, customer) {
+                    if (!err) {
+                        result = customer;
+                        //pushscheduleEventNew(data.user_id, customerObj);
+                        cb(statusCode, result);
+                    } else {
+                        statusCode = 500;
+                        result.code = 'e0001';
+                        result.message = err.message;
+                        result.description = 'creatCustomer';
+                        result.source = '<<webui>>';
+                    }
+                });
+            });
         }
-        customers.createCustomer(customerObj, function (err, customer) {
-            if (!err) {
-                result = customer;
-                pushscheduleEventNew(data.user_id, customerObj);
-                cb(statusCode, result);
-            } else {
-                statusCode = 500;
-                result.code = 'e0001';
-                result.message = err.message;
-                result.description = 'creatCustomer';
-                result.source = '<<webui>>';
-            }
-        });
+
     });
 };
 

@@ -274,6 +274,22 @@ userObj.completeAcount = function (userId, userName, password, cb) {
     })
 }
 
+userObj.getRandomChannel = function (cb) {
+    var queryObj = {};
+    queryObj['$and'] = [];
+    var queryElem = { '$or': [] };
+    queryElem['$or'].push({ role: 'channel' });
+    queryElem['$or'].push({ role: 'channel-mgr' });
+    queryObj['$and'].push(queryElem);
+    UserModel.find(queryObj, function (err, user) {
+        if (!err && user) {
+            cb(null, user[parseInt(Math.random()*user.length)]);
+        } else {
+            cb(new Error('not find any'), null);
+        }
+    })
+}
+
 
 userObj.updateAccountInfo = function (userId, dataObj, cb) {
     UserModel.update({ id: userId }, { $set: dataObj }, function (err, data) {
