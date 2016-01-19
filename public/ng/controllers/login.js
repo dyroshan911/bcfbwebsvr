@@ -22,8 +22,8 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 				$rootScope.session.complete = res.complete;
 				$rootScope.saveSessionData();
 				$location.path('/business');
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			})
 		};
 	}]);

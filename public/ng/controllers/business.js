@@ -125,8 +125,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				//alert(JSON.stringify(res));
 				getCustomerList(0, eachPageCount, '');
 				$('#editDialog').modal('toggle');
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		};
 		
@@ -186,8 +186,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					sortPages($scope.customerPageData, currentPageIndex);
 					setCurrentPage($scope.customerPageData, currentPageIndex);
 				}
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		}
 		
@@ -213,8 +213,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					sortPages($scope.channelPageData, currentPageIndex);
 					setCurrentPage($scope.channelPageData, currentPageIndex);
 				}
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		}
 		
@@ -240,8 +240,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					sortPages($scope.memberPageData, currentPageIndex);
 					setCurrentPage($scope.memberPageData, currentPageIndex);
 				}
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		}
 		
@@ -268,8 +268,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					sortPages($scope.checkCustomerPageData, currentPageIndex);
 					setCurrentPage($scope.checkCustomerPageData, currentPageIndex);
 				}
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		}
 		

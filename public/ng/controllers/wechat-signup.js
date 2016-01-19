@@ -28,8 +28,8 @@ angular.module('myApp').controller('WechatSignupCtrl', ['$scope', '$location', '
 				} else {
 					$location.path('/business');
 				}
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			})
 		};
 	}]);

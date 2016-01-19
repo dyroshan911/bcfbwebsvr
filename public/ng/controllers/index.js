@@ -5,9 +5,9 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 		//functions
 		$scope.onLogout = function () {
 			SessionService.deleteSessionUser($rootScope.session.token, function (res) {
-				$location.path('/').search('');
-			}, function (res) {
-				alert(res.message);
+				$location.path('/login').search('');
+			}, function (err) {
+				alert(err.message);
 			});
 		};
 		

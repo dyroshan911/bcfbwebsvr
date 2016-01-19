@@ -38,8 +38,8 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
                 } else {
                     $location.path('/business');
                 }
-            }, function (res) {
-                alert(res.message);
+            }, function (err) {
+                alert(err.message);
             });
         };
 
@@ -81,8 +81,8 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
                 $rootScope.saveSessionData();
                 getAccountInfo();
                 $('#completeDialog').modal('toggle');
-            }, function (res) {
-                alert(res.message);
+            }, function (err) {
+                alert(err.message);
             })
         };
 
@@ -95,8 +95,8 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
                 if (res.complete == false) {
                     $('#completeDialog').modal({ backdrop: false, keyboard: false });
                 }
-            }, function (res) {
-                alert(res.message);
+            }, function (err) {
+                alert(err.message);
             });
         }
 
@@ -111,8 +111,8 @@ angular.module('myApp').controller('AccountCtrl', ['$scope', '$location', '$root
                 //alert(JSON.stringify(res));
                 alert('解除绑定成功');
                 wx.closeWindow();
-            }, function (res) {
-                alert(res.message);
+            }, function (err) {
+                alert(err.message);
             });
         }
     }]);

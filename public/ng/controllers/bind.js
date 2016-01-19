@@ -22,8 +22,8 @@ angular.module('myApp').controller('BindCtrl', ['$scope', '$location', '$rootSco
 				$rootScope.session.complete = res.complete;
 				$rootScope.saveSessionData();
 				$location.path('/wechat-business');
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			})
 		};
 	}]);

@@ -63,8 +63,8 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				alert(JSON.stringify(res));
 				getChannelList(0, $scope.eachPageCount, '');
 				$('#addDialog').modal('toggle');
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		};
 		
@@ -118,8 +118,8 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 					$scope.sortPages($scope.pageData, currentPageIndex);
 					$scope.setCurrentPage($scope.pageData, currentPageIndex);
 				}
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		}
 		
@@ -131,8 +131,8 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			};
 			ManageService.getChannelMgr($rootScope.session.token, paramObj, function (res) {
 				$scope.channelMgrList = res.channelsList;
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		}
 		
@@ -152,8 +152,8 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				$scope.updateUserData.selectedUser.roleName = $scope.updateUserData.role.name;
 				$scope.updateUserData.selectedUser.superior = $scope.updateUserData.superior.id;
 				$('#editDialog').modal('toggle');
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			});
 		};
 		

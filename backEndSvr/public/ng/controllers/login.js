@@ -15,9 +15,11 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 			};
 			UserService.login($rootScope.session.token, dataObj, function (res) {
 				alert(JSON.stringify(res));
+				$rootScope.session.logged = true;
+				$rootScope.saveSessionData();
 				$location.path('/home');
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			})
 		};
 	}]);

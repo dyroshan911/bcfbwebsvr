@@ -46,12 +46,12 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 		};
 		
 		cfgData.createSession = function (successcb, failcb) {
-			ApiService.post('/api/sessions', {}, function (data) {
-				$rootScope.session.token = data.token;
+			ApiService.post('/api/sessions', {}, function (res) {
+				$rootScope.session.token = res.token;
 				if (typeof (Storage) !== 'undefined') {
-					sessionStorage.token = data.token;
+					sessionStorage.token = res.token;
 				}
-				successcb(data);
+				successcb(res);
 			}, failcb);
 		};
 		
@@ -62,11 +62,13 @@ angular.module('myApp').factory('SessionService', ['$rootScope', 'MsgService', '
 				}
 			};
 			//whatever successful or not, clear session's user info
-			ApiService.delete('/api/sessions/user', obj, function (data) {
+			ApiService.delete('/api/sessions/user', obj, function (res) {
 				$rootScope.session.logged = false;
-				successcb(data);
+				sessionStorage.logged = false;
+				successcb(res);
 			}, function (err) {
 				$rootScope.session.logged = false;
+				sessionStorage.logged = false;
 				failcb(err);
 			});
 		};

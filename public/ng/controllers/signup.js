@@ -35,8 +35,8 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 				$rootScope.session.complete = res.complete;
 				$rootScope.saveSessionData();
 				$location.path('/business');
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			})
 		};
 		

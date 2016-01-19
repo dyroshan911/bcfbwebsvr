@@ -25,8 +25,8 @@ angular.module('myApp').controller('ApplyCtrl', ['$scope', '$location', '$rootSc
 				} else {
 					$location.path('/business');
 				}
-			}, function (res) {
-				alert(res.message);
+			}, function (err) {
+				alert(err.message);
 			})
 		}
 	}]);

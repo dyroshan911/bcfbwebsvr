@@ -1,16 +1,16 @@
 'use strict';
 
-angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootScope', 'UserService', 'SessionService', 
-	function ($scope, $location, $rootScope, UserService, SessionService) {
+angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootScope', 'SessionService', 'UserService',
+	function ($scope, $location, $rootScope, SessionService, UserService) {
 		//functions
-		$scope.logout = function () {
-			SessionService.deleteSessionUser($rootScope.session.token, function (data) {
-				$location.path('/login');
+		$scope.onLogout = function () {
+			SessionService.deleteSessionUser($rootScope.session.token, function (res) {
+				$location.path('/login').search('');
 			}, function (err) {
-				alert(res.message);
+				alert(err.message);
 			});
 		};
-
+		
 		$scope.getDateString = function (timestamp) {
 			var ts = timestamp || 0;
 			var date = new Date(ts);

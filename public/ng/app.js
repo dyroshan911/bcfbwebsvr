@@ -62,7 +62,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 								$rootScope.saveSessionData();
 								$route.reload();
 							}
-						}, function (res) {
+						}, function (err) {
 							firstStart = false;
 							if ($location.path().indexOf('wechat-signup') != -1) {
 								$route.reload();
@@ -75,7 +75,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 						firstStart = false;
 						$route.reload();
 					}
-				}, function () {
+				}, function (err) {
 					alert('Initiate session failed');
 				});
 			}
@@ -89,7 +89,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 				$rootScope.session.userId = sessionStorage.userId;
 				$rootScope.session.userName = sessionStorage.userName;
 				$rootScope.session.role = sessionStorage.role;
-				$rootScope.session.complete = sessionStorage.complete === 'true' ? true : false;;
+				$rootScope.session.complete = sessionStorage.complete === 'true' ? true : false;
 			}
 		});
 	}]);
