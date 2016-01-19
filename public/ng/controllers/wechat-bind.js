@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').controller('BindCtrl', ['$scope', '$location', '$rootScope', 'UserService',
+angular.module('myApp').controller('WechatBindCtrl', ['$scope', '$location', '$rootScope', 'UserService',
 	function ($scope, $location, $rootScope, UserService) {
 		$scope.bindData = {
 			userName: '',

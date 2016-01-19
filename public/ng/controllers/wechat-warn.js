@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').controller('WarnCtrl', ['$scope', '$location', '$rootScope',
+angular.module('myApp').controller('WechatWarnCtrl', ['$scope', '$location', '$rootScope',
 	function ($scope, $location, $rootScope) {
 		$scope.warningContent = '';
 		

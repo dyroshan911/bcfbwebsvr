@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').controller('ApplyCtrl', ['$scope', '$location', '$rootScope', 'BusinessService',
+angular.module('myApp').controller('AddCustomerCtrl', ['$scope', '$location', '$rootScope', 'BusinessService',
 	function ($scope, $location, $rootScope, BusinessService) {
 		$scope.customerData = {
 			name: '',
