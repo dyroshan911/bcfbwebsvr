@@ -38,7 +38,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 				sessionStorage.complete = $rootScope.session.complete;
 			}
 		};
-		$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
+		//$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
 		var firstStart = true;
 		$rootScope.$on('$routeChangeStart', function (event, next, current) {
 			if (firstStart) {
