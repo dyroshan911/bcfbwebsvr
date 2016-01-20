@@ -66,6 +66,7 @@ var apiCustomers = require('./routes/customer');
 var wechats = require('./routes/wechats');
 var apiSessions = require('./routes/sessions');
 var apiBackDoor = require('./routes/backDoor');
+var apiWebShows = require('./routes/webShow');
 var wechatMsg = require('./controllers/wechatMsg.js');
 var accounts = require('./controllers/users.js');
 var app = express();
@@ -117,6 +118,8 @@ app.use('/api/accounts', apiAccounts);
 app.use('/api/wechat', wechats);
 app.use('/api/customers', apiCustomers);
 app.use('/api/backDoor', apiBackDoor);
+app.use('/api/webShow', apiWebShows);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

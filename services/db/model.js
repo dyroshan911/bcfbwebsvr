@@ -63,6 +63,30 @@ var CustomerSchema = new Schema({
     modify_on: {type: Number},                                    //修改时间
 });
 
+//产品
+var ProductShowSchema = new Schema({
+    id: {type: String, unique: true, required: true},    //id
+    title: {type: String, required: true},   
+    type: {type: String, required: true},
+    money_min:{type:Number, required: true},
+    money_max:{type:Number, required: true},
+    detail:{type:String, required: true}
+});
+
+//成功案例
+var CaseSchem = new Schema({
+    id: {type: String, unique: true, required: true},    //id
+    title:{type: String, required: true},                   //如张先生 信用贷
+    territory:{type: String},                                  //地域
+    amount:{type:String, required:true},            //金额
+    time_limit:{type:String , required:true},       //还款期限
+    rate:{type:String , required:true},             //利率
+    date:{type:String , required:true},             //贷款日期  
+    detail:{type:String, required: true}           //详细描述
+});
+
 
 modelObj.AccountModel = mongoose.model('websvr.accounts', AccountSchema);
 modelObj.CustomerModel = mongoose.model('websvr.customers', CustomerSchema);
+modelObj.ProductModel = mongoose.model('websvr.products', ProductShowSchema);
+modelObj.CaseModel = mongoose.model('websvr.cases', CaseSchem);
