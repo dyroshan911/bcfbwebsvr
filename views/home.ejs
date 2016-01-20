@@ -1,162 +1,134 @@
 <nav class="navbar navbar-default header-nav">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
             aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/home">首页</a>
-        </div>
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">首页</a>
+		</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						业务查询
 						<span class="caret"></span>
 					</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">贷款业务</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">公司详情</a>
-                </li>
-                <li>
-                    <a href="#">公告资讯</a>
-                </li>
-                <li>
-                    <a href="#">招贤纳士</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-if="!session.logged">
-                    <a href="/login">用户登录</a>
-                </li>
-                <li ng-if="session.logged">
-                    <a href="/business">欢迎，{{session.userName}}</a>
-                </li>
-                <li ng-if="session.logged">
-                    <a href="#" ng-click="onLogout()">登出</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:void(0);">贷款业务</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0);">公司详情</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">公告资讯</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">招贤纳士</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-if="!session.logged">
+					<a href="/login">用户登录</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="/business">欢迎，{{session.userName}}</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="javascript:void(0);" ng-click="onLogout()">登出</a>
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
 </nav>
 
 <div>
-    <div class="banner">
-        <ul class="banList">
-            <li class="active">
-                <a href="/"><img src="img/img1.jpg" /></a>
-            </li>
-            <li>
-                <a href="/"><img src="img/img2.jpg" /></a>
-            </li>
-            <li>
-                <a href="/"><img src="img/img3.jpg" /></a>
-            </li>
-        </ul>
-        <div class="fomW">
-            <div class="jsNav">
-                <a href="javascript:;" class="trigger current"></a>
-                <a href="javascript:;" class="trigger"></a>
-                <a href="javascript:;" class="trigger"></a>
-            </div>
-        </div>
-    </div>
+	<div class="row home-banner">
+		<div id="banners-area">
+			<div id="myCarousel" class="carousel slide hidden-sm hidden-xs" data-ride="carousel" style="max-width: 100%; margin: 0 auto;">
+				<div class="carousel-inner">
+					<div class="item active">
+						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox1">
+							<div class="car-main-cont" style="background-image: url(img/img1.jpg);">
+								<div class="container">
+									<div style="width: 600px; margin-top: 65px;">
+										<div class="car-text"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox2">
+							<div class="car-main-cont" style="background-image: url(img/img2.jpg);">
+								<div class="container">
+									<div style="width: 600px; margin-top: 65px;">
+										<div class="car-text"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox3">
+							<div class="car-main-cont" style="background-image: url(img/img3.jpg);">
+								<div class="container">
+									<div style="width: 600px; margin-top: 65px;">
+										<div class="car-text"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ol class="carousel-indicators" style="left: 20%; bottom: 0%;">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+					<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+				</ol>
+				<a class="left carousel-control" href="javascript:void(0);" data-target="#myCarousel" data-slide="prev">
+					<i class="icon-prev fa fa-angle-left" style="font-size: 80px; margin-top: -30px;"></i>
+				</a>
+				<a class="right carousel-control" href="javascript:void(0);" data-target="#myCarousel" data-slide="next">
+					<i class="icon-next fa fa-angle-right" style="font-size: 80px; margin-top: -30px;"></i>
+				</a>
+			</div>
+		</div>
+	</div>
 
-    <div class="product" style="cursor:pointer;">
-        <div class="dk-adv ac">
-            <a href="javascript:;"><img src="img/product-depict.jpg" data-bd-imgshare-binded="1"></a>
-        </div>
-    </div>
+	<div class="container">
+		<img width="100%" src="img/product-depict.jpg"></img>
+	</div>
 
-    <div class="box fl btwo">
-        <div class = "quit_title">
-            <h3 style="color: #ff7c00; text-align: center;">快速申请贷款</h3>
-        </div>
-        <div style="padding:10px; width:320px;">
-            <div class="quit_sq">
-                <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                    <tbody>
-                        <tr>
-                            <td>您的姓名:</td>
-                            <td>
-                                <input type="text" maxlength="6" id="user_name" placeholder="如：李江涛" class="quit_sq_ipt">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>手机号码:</td>
-                            <td>
-                                <input type="text" placeholder="您的手机号码" name="tel" class="quit_sq_ipt">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>申贷金额:</td>
-                            <td>
-                                <input type="text" maxlength="7" placeholder="请输入数字" class="quit_sq_ipt">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="center">
-                                <input type="button" value="申请贷款" class="quit_sq_btn">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="quit_other">请确认联系方式无误。提交申请后，客服会拨打您的手机，为您免费定制方案</div>
-        </div>
-    </div>
-
-
-    <div class="w1000">
-        <div class="titledk">
-            <h2>合作银行</h2><span class="enw">bank</span></div>
-        <div class="abank">
-            <span class="bk"><img src="img/bank/gsyh.jpg"></span>
-            <span class="bk"><img src="img/bank/nyyh.jpg"></span>
-            <span class="bk"><img src="img/bank/zgyh.jpg"></span>
-            <span class="bk"><img src="img/bank/jsyh.jpg"></span>
-            <span class="bk"><img src="img/bank/zxyh.jpg"></span>
-            <span class="bk noright"><img src="img/bank/xyyh.jpg"></span>
-
-            <span class="bk"><img src="img/bank/zsyh.jpg"></span>
-            <span class="bk"><img src="img/bank/jtyh.jpg"></span>
-            <span class="bk"><img src="img/bank/yzyh.jpg"></span>
-            <span class="bk"><img src="img/bank/msyh.jpg"></span>
-            <span class="bk"><img src="img/bank/payh.jpg"></span>
-            <span class="bk noright"><img src="/img/bank/nbyh.jpg"></span>
-
-            <span class="bk"><img src="img/bank/gfyh.jpg"></span>
-            <span class="bk"><img src="img/bank/szyh.jpg"></span>
-            <span class="bk"><img src="img/bank/pfyh.jpg"></span>
-            <span class="bk"><img src="img/bank/gdyh.jpg"></span>
-            <span class="bk"><img src="img/bank/bjyh.jpg"></span>
-            <span class="bk noright"><img src="img/bank/njyh.jpg"></span>
-        </div>
-        <div class="titledk">
-            <h2>合作机构</h2><span class="enw">AGENCIES</span></div>
-        <div class="ajg">
-            <span class="jg">宜信</span><span class="jg">平安易贷</span><span class="jg">平安陆金所</span><span class="jg">平安银行</span>
-            <span class="jg">阳光小贷</span><span class="jg">友信</span><span class="jg">亚联财</span>
-        </div>
-    </div>
-
+	<div class="container">
+		<img src="img/bank/gsyh.jpg" />
+		<img src="img/bank/nyyh.jpg" />
+		<img src="img/bank/zgyh.jpg" />
+		<img src="img/bank/jsyh.jpg" />
+		<img src="img/bank/zxyh.jpg" />
+		<img src="img/bank/xyyh.jpg" />
+		<img src="img/bank/zsyh.jpg" />
+		<img src="img/bank/jtyh.jpg" />
+		<img src="img/bank/yzyh.jpg" />
+		<img src="img/bank/msyh.jpg" />
+		<img src="img/bank/payh.jpg" />
+		<img src="img/bank/nbyh.jpg" />
+		<img src="img/bank/gfyh.jpg" />
+		<img src="img/bank/szyh.jpg" />
+		<img src="img/bank/pfyh.jpg" />
+		<img src="img/bank/gdyh.jpg" />
+		<img src="img/bank/bjyh.jpg" />
+		<img src="img/bank/njyh.jpg" />
+	</div>
 </div>
-<% include footer%>
-    <script type="text/javascript">
-        $(function(){
-	$(".banner").swBanner();
-});
-    </script>
