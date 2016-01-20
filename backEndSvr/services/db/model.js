@@ -21,7 +21,7 @@ var AdminSchema = new Schema({
 
 var ProductShowSchema = new Schema({
     id: {type: String, unique: true, required: true},    //id
-    title: {type: String, required: true},    //登录名
+    title: {type: String, required: true},    //
     type: {type: String, required: true},
     money_min:{type:Number, required: true},
     money_max:{type:Number, required: true},
@@ -30,6 +30,7 @@ var ProductShowSchema = new Schema({
 
 
 var CaseSchem = new Schema({
+    id: {type: String, unique: true, required: true},    //id
     territory:{type: String},
     amount:{type:String, required:true},
     time_limit:{type:String , required:true},

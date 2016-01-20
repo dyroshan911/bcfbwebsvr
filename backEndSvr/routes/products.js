@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-/** a common fcuntion to package response */
+var products = require('../controllers/products.js');
 
 function httpResp(res, code, result) {
     res.status(code).json(result);
@@ -12,39 +12,34 @@ function httpResp(res, code, result) {
 
 /* create product, */
 router.post('/', function (req, res) {
-    var token = req.query.token;
     var dataObj = req.body.data;
-	//...
-    
-    httpResp(res, 201, {create:'create product'});
+	products.createProduct(dataObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
 });
 
 
 /* get product list*/
 router.get('/', function (req, res) {
-    var token = req.query.token;
     var offset = req.query.offset;
     var limit = req.query.limit;
-    var filter = req.query.filter;
-
-    httpResp(res, 200, {productlist:'test get product'});
-
+    products.getProductsList(offset, limit, function(statusCode, result){
+        httpResp(res, statusCode, result);
+    });
 });
 
 
-/* get product list by id*/
-router.get('/:product_id', function (req, res) {
-    var token = req.query.token;
+/* delete product list by id*/
+router.delete('/:product_id', function (req, res) {
+
     var productId = req.params.product_id;
-    var offset = req.query.offset;
-    var limit = req.query.limit;
-    var filter = req.query.filter;
-	//todo get custromer list by id
-    httpResp(res, 200, {customerlist:'test get product by id'});
+	products.deleteProduct(productId, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
 
 });
 
-/* update product info by id*/
+/* update product info by id
 router.put('/:customer_id', function (req, res) {
     var token = req.query.token;
     var customerId = req.params.customer_id;
@@ -52,6 +47,6 @@ router.put('/:customer_id', function (req, res) {
 	//todo get custromer list by id
     httpResp(res, 200, {customerlist:'test get product by id'});
 
-});
+});*/
 
 module.exports = router;

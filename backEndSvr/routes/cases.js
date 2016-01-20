@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var cases = require('../controllers/cases.js');
+
 /** a common fcuntion to package response */
 
 function httpResp(res, code, result) {
@@ -12,39 +14,35 @@ function httpResp(res, code, result) {
 
 /* create case, */
 router.post('/', function (req, res) {
-    var token = req.query.token;
     var dataObj = req.body.data;
-	//...
-    
-    httpResp(res, 201, {create:'create case'});
+    cases.createCase(dataObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
 });
 
 
 /* get case list*/
 router.get('/', function (req, res) {
-    var token = req.query.token;
     var offset = req.query.offset;
     var limit = req.query.limit;
-    var filter = req.query.filter;
-
-    httpResp(res, 200, {caselist:'test get case'});
+    cases.getCasesList(offset, limit, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
 
 });
 
 
-/* get case list by id*/
-router.get('/:case_id', function (req, res) {
-    var token = req.query.token;
+/* delete case list by id*/
+router.delete('/:case_id', function (req, res) {
+
     var caseId = req.params.case_id;
-    var offset = req.query.offset;
-    var limit = req.query.limit;
-    var filter = req.query.filter;
-	//todo get custromer list by id
-    httpResp(res, 200, {customerlist:'test get case by id'});
+    cases.deleteCase(caseId, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
 
 });
 
-/* update case info by id*/
+/* update case info by id
 router.put('/:customer_id', function (req, res) {
     var token = req.query.token;
     var customerId = req.params.customer_id;
@@ -52,6 +50,6 @@ router.put('/:customer_id', function (req, res) {
 	//todo get custromer list by id
     httpResp(res, 200, {customerlist:'test get case by id'});
 
-});
+});*/
 
 module.exports = router;
