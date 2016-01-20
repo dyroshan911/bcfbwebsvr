@@ -77,7 +77,7 @@ userObj.getChannelsList = function (offset, limit, filter, getMgrOnly, cb) {
         .sort({ create_on: -1 })
         .skip(offset).
         limit(limit).
-        select('user_name create_on email id job_number phone role superior  true_name').
+        select('user_name create_on email id job_number phone role superior  true_name enabled').
         exec(function (err, channels) {
             if (err) {
                 cb(err, null);

@@ -39,6 +39,7 @@ var AccountSchema = new Schema({
 var CustomerSchema = new Schema({
     id:       {type: String, unique: true, required: true},
     name: {type: String, required: true},                                  //真实姓名
+    sex:     {type:String, enum:['male','female'],default:'male',},   //性别
     
     email:    {type: String},                                   //fixme:validator
     phone:    {type: String, required: true},                                   //fixme:validator

@@ -20,7 +20,8 @@ userObj.init = function (ap) {
 userObj.verifyUser = function (userName, password, cb) {
     UserModel.findOne({
         'user_name': userName,
-        'password': password
+        'password': password,
+        'enabled':true
     }).select('id user_name true_name superior role complete phone').exec(function (err, user) {
         if (err) {
             cb(err, null);
@@ -35,6 +36,7 @@ userObj.verifyUser = function (userName, password, cb) {
 userObj.verifyUserByOpenid = function (openId, cb) {
     UserModel.findOne({
         'wechat_id': openId,
+        'enabled':true
     }).select('id user_name true_name role superior complete phone').exec(function (err, user) {
         if (err) {
             cb(err, null);
@@ -49,7 +51,8 @@ userObj.verifyUserByOpenid = function (openId, cb) {
 userObj.bindUsrByOpenid = function (openId, userName, password, cb) {
     UserModel.findOne({
         'user_name': userName,
-        'password': password
+        'password': password,
+        'enabled':true
     }, function (err, user) {
         if (err) {
             cb(err, null);
