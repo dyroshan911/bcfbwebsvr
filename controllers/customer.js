@@ -22,7 +22,7 @@ exports.creatCustomer = function (token, customerObj, cb) {
             customers.createCustomer(customerObj, function (err, customer) {
                 if (!err) {
                     result = customer;
-                    //pushscheduleEventNew(data.user_id, customerObj);
+                    pushscheduleEventNew(data.user_id, customerObj);
                     cb(statusCode, result);
                 } else {
                     statusCode = 500;
@@ -148,10 +148,10 @@ function pushscheduleEventNew(user_id, customerObj) {
     var qeryAttr = 'wechat_id role superior true_name phone';
     users.queryUser(user_id, qeryAttr, function (err, user) {
         if (!err && user && user.role == 'member') {
-            qeryAttr = 'wechat_id';
+            qeryAttr = 'true_name phone';
             users.queryUser(user.superior, qeryAttr, function (err, superiorUsr) {
-                if (!err && superiorUsr && superiorUsr.wechat_id) {
-                    var title = '你好，您提交的:' + customerObj.name + '贷款订单处理进度通知';
+                if (!err && superiorUsr) {
+                    var title = '你好，您提交的' + customerObj.name + '贷款订单处理进度通知';
                     var handleBy = superiorUsr.true_name;
                     var phone = superiorUsr.phone;
                     var result = '已进件，等待处理';
