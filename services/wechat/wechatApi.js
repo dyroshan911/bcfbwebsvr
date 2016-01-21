@@ -14,7 +14,7 @@ exports.createMenu = function (menu, callback) {
 }
 
 
-exports.pushscheduleEvent = function (open_id, title, result, detail) {
+exports.pushscheduleEvent = function (open_id, title, handleBy, phone, result, detail) {
     var templateId = config.wechat.pushMsgs.schedule.id;
     // URL置空，则在发送后,点击模板消息会进入一个空白页面（ios）, 或无法点击（android）
     var url = '';
@@ -36,12 +36,20 @@ exports.pushscheduleEvent = function (open_id, title, result, detail) {
             "value": title,
             "color": "#173177"
         },
-        "CreateDate": {
-            "value": time,
+        "keyword1": {
+            "value": handleBy,
             "color": "#173177"
         },
-        "ProcessingResults": {
+        "keyword2": {
+            "value": phone,
+            "color": "#173177"
+        },
+        "keyword3": {
             "value": result,
+            "color": "#173177"
+        },
+        "keyword4": {
+            "value": time,
             "color": "#173177"
         },
         "remark": {
