@@ -23,7 +23,7 @@ i, cite, em, var, address, dfn {
 
 /*business page*/
 #business-wall {
-	margin-left: 200px;
+	min-width: 1280px;
 }
 
 .nav li a span {
@@ -133,6 +133,11 @@ i, cite, em, var, address, dfn {
 	min-width: 1280px;
 }
 
+	.home-section > .container > div {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+
 .bank > img {
 	padding: 7px;
 }
@@ -149,3 +154,15 @@ i, cite, em, var, address, dfn {
 .panel-body p {
 	margin-bottom: 0;
 }
+
+#case .panel-body {
+	padding-left: 0;
+	padding-right: 0;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #337ab7;
+}
+
+	#case .panel-body .control-label {
+		text-align: left;
+	}

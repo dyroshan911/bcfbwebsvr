@@ -12,4 +12,11 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location',
 			{ name: '房产抵押贷款', edu: '20万 ~ 150万', lilv: '0.56 ~ 1.55%', content: '利率低，放款快' },
 			{ name: '汽车抵押贷款', edu: '3万 ~ 50万', lilv: '0.60 ~ 1.84%', content: '只需有车即可办理' }
 		];
+
+		$scope.caseList = [
+			{ name:'王先生', type: '信用贷款', amount: '10万', lilv: '0.60%' },
+			{ name:'赵先生', type: '企业贷款', amount: '100万', lilv: '0.70%' },
+			{ name:'吴女士', type: '房产抵押贷款', amount: '20万', lilv: '0.565%' },
+			{ name:'李先生', type: '汽车抵押贷款', amount: '3万', lilv: '1.84%' }
+		];
 	}]);
