@@ -11,6 +11,40 @@ i, cite, em, var, address, dfn {
 	font-style: normal;
 }
 
+.navbar-default {
+	background-color: #333;
+	font-weight: bold;
+}
+
+	.navbar-default .navbar-header a {
+		color: #fff;
+	}
+
+		.navbar-default .navbar-header a:hover {
+			color: #00B7FF;
+		}
+
+		.navbar-default .navbar-header a:focus {
+			color: #00B7FF;
+		}
+
+	.navbar-default .navbar-nav > li > a {
+		color: #fff;
+	}
+
+		.navbar-default .navbar-nav > li > a:hover {
+			color: #00B7FF;
+		}
+
+		.navbar-default .navbar-nav > li > a:focus {
+			color: #00B7FF;
+		}
+
+	.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+		color: #fff;
+		background-color: #555;
+	}
+
 .container {
 	padding-right: 0;
 	padding-left: 0;
@@ -192,6 +226,6 @@ i, cite, em, var, address, dfn {
 	min-width: 1280px;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	background-color: #337ab7;
+	background-color: #333;
 	color: #fff;
 }
