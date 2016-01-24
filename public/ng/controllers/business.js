@@ -41,14 +41,20 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		};
 		$scope.currentPageData = $scope.customerPageData;
 		
+		$scope.sexOptions = [
+			{ name: '先生', value: 'male' },
+			{ name: '女士', value: 'female' }
+		];
 		$scope.statusOptions = [
 			{ name: '等待处理', value: 'init' },
 			{ name: '处理中', value: 'handled' },
 			{ name: '完成', value: 'finished' }
 		];
 		$scope.editCustomer = {
+			selectedCustomer: {},
 			id: '',
 			name: '',
+			sex: '',
 			newPhone: '',
 			applyAmount: '',
 			finishedAmount: '',
@@ -77,8 +83,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		
 		//functions
 		$scope.onEditCustomer = function (customer) {
+			$scope.editCustomer.selectedCustomer = customer;
 			$scope.editCustomer.id = customer.id;
 			$scope.editCustomer.name = customer.name;
+			$scope.editCustomer.sex = customer.sex;
 			$scope.editCustomer.newPhone = '';
 			$scope.editCustomer.applyAmount = customer.apply_amount;
 			$scope.editCustomer.finishedAmount = customer.finished_amount;
@@ -98,7 +106,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				todayHighlight: true
 			});
 			for (var i = 0; i < $scope.statusOptions.length; ++i) {
-				if ($scope.statusOptions[i].name == customer.status) {
+				if (customer.statusName == $scope.statusOptions[i].name) {
 					$scope.editCustomer.status = $scope.statusOptions[i];
 				}
 			}
@@ -114,6 +122,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				billingDate = billingDate.getTime() / 1000;
 			}
 			var dataObj = {
+				name: $scope.editCustomer.name,
+				sex: $scope.editCustomer.sex,
 				phone: $scope.editCustomer.newPhone,
 				finished_amount: $scope.editCustomer.finishedAmount,
 				server_rate: $scope.editCustomer.serverRate,
@@ -123,7 +133,15 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			};
 			$scope.myPromiseUpdate = BusinessService.updateCustomer($rootScope.session.token, $scope.editCustomer.id, dataObj, function (res) {
 				//alert(JSON.stringify(res));
-				getCustomerList(0, eachPageCount, '');
+				$scope.editCustomer.selectedCustomer.name = $scope.editCustomer.name;
+				$scope.editCustomer.selectedCustomer.sex = $scope.editCustomer.sex;
+				$scope.editCustomer.selectedCustomer.name = $scope.editCustomer.name;
+				$scope.editCustomer.selectedCustomer.finished_amount = $scope.editCustomer.finishedAmount;
+				$scope.editCustomer.selectedCustomer.server_rate = $scope.editCustomer.serverRate;
+				$scope.editCustomer.selectedCustomer.billing_date = $scope.editCustomer.billing_date;
+				$scope.editCustomer.selectedCustomer.comment = $scope.editCustomer.comment;
+				$scope.editCustomer.selectedCustomer.status = $scope.editCustomer.status.value;
+				$scope.editCustomer.selectedCustomer.statusName = $scope.editCustomer.status.name;
 				$('#editDialog').modal('toggle');
 			}, function (err) {
 				alert(err.message);
@@ -171,7 +189,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				for (var i = 0; i < $scope.customerList.length; ++i) {
 					$scope.customerList[i].createDate = $scope.getDateString($scope.customerList[i].create_on * 1000);
 					$scope.customerList[i].billingDate = $scope.customerList[i].billing_date ? $scope.getDateString($scope.customerList[i].billing_date * 1000).slice(0, 10) : '';
-					$scope.customerList[i].status = getStatusName($scope.customerList[i].status);
+					$scope.customerList[i].statusName = getNameByValue($scope.customerList[i].status, $scope.statusOptions);
+					$scope.customerList[i].sexName = getNameByValue($scope.customerList[i].sex, $scope.sexOptions);
 					var phoneList = $scope.customerList[i].phone.split(',');
 					$scope.customerList[i].phoneList = makePhoneList(phoneList);
 					$scope.customerList[i].showDetails = false;
@@ -255,7 +274,8 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.checkCustomer.list = res.customerList;
 				for (var i = 0; i < $scope.checkCustomer.list.length; ++i) {
 					$scope.checkCustomer.list[i].createDate = $scope.getDateString($scope.checkCustomer.list[i].create_on * 1000);
-					$scope.checkCustomer.list[i].status = getStatusName($scope.checkCustomer.list[i].status);
+					$scope.checkCustomer.list[i].statusName = getNameByValue($scope.checkCustomer.list[i].status, $scope.statusOptions);
+					$scope.checkCustomer.list[i].sexName = getNameByValue($scope.checkCustomer.list[i].sex, $scope.sexOptions);
 					$scope.checkCustomer.list[i].showDetails = false;
 				}
 				var total = res.total;
@@ -273,10 +293,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			});
 		}
 		
-		function getStatusName(status) {
-			for (var i = 0; i < $scope.statusOptions.length; ++i) {
-				if (status == $scope.statusOptions[i].value) {
-					return $scope.statusOptions[i].name;
+		function getNameByValue(value, list) {
+			for (var i = 0; i < list.length; ++i) {
+				if (value == list[i].value) {
+					return list[i].name;
 				}
 			}
 		}

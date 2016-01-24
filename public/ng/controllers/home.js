@@ -1,10 +1,36 @@
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', 
-	function ($scope, $location) {
+angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', 'BusinessService',
+	function ($scope, $location, BusinessService) {
 		$('.carousel').carousel({
 			interval: 5000
 		})
+		
+		$scope.customerData = {
+			name: '',
+			sex: 'male',
+			phone: '',
+			amount: ''
+		};
+		
+		//functions
+		$scope.onApply = function () {
+			if ($scope.customerForm.$invalid) {
+				return;
+			}
+			var dataObj = {
+				name: $scope.customerData.name,
+				sex: $scope.customerData.sex,
+				phone: $scope.customerData.phone,		
+				apply_amount: $scope.customerData.amount
+			};
+			$scope.myPromise = BusinessService.addCustomer($rootScope.session.token, dataObj, function (res) {
+				//alert(JSON.stringify(res));
+				alert('申请成功');
+			}, function (err) {
+				alert(err.message);
+			})
+		}
 		
 		$scope.staffList = [
 			{ name: '员工A', phone: '15828540001', business: '信用贷款，企业贷款', content: '资深员工，放款快捷' },

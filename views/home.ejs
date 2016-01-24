@@ -116,16 +116,20 @@
 	<div class="home-section">
 		<div class="container" style="min-width:1170px; margin-top: 20px;">
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-				<div class="panel panel-success">
+				<div class="panel panel-success" id="apply" cg-busy="myPromise">
 					<div class="panel-heading" align="center" style="background-color: #7aab13; color: #fff; font-size: 20px;">快捷申请</div>
 					<div class="panel-body">
-						<form class="form-horizontal">
+						<form name='customerForm' role="form" class="form-horizontal" ng-submit="onApply()">
 							<div class="form-group">
 								<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-yen"></span>
 									</span>
-									<input type="text" class="form-control" placeholder="贷款金额" title="请输入贷款金额" />
+									<input type="text" class="form-control" name="amount" placeholder="贷款金额" title="请输入贷款金额" required="" maxlength="20" ng-model="customerData.amount"
+									ng-pattern="/^\d+$/" />
+									<div ng-show="customerForm.amount.$dirty &amp;&amp; customerForm.amount.$invalid">
+										<small class="alert-danger well-sm" ng-show="customerForm.amount.$error.pattern">请使用数字</small>
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -133,7 +137,11 @@
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-earphone"></span>
 									</span>
-									<input type="text" class="form-control" placeholder="联系电话" title="请输入联系电话" />
+									<input type="text" class="form-control" name="phone" placeholder="联系电话" title="请输入联系电话" required="" maxlength="20" ng-model="customerData.phone"
+									ng-pattern="/^\d+$/" />
+									<div ng-show="customerForm.phone.$dirty &amp;&amp; customerForm.phone.$invalid">
+										<small class="alert-danger well-sm" ng-show="customerForm.phone.$error.pattern">请使用数字</small>
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -141,7 +149,7 @@
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-user"></span>
 									</span>
-									<input type="text" class="form-control" placeholder="您的尊姓" title="请输入您的姓氏" />
+									<input type="text" class="form-control" name="name" placeholder="您的尊姓" title="请输入您的姓氏" required="" maxlength="20" ng-model="customerData.name" />
 								</div>
 							</div>
 							<div class="form-group">

@@ -4,12 +4,13 @@ angular.module('myApp').controller('WechatApplyCtrl', ['$scope', '$location', '$
 	function ($scope, $location, $rootScope, BusinessService) {
 		$scope.customerData = {
 			name: '',
+			sex: 'male',
 			phone: '',
 			amount: ''
 		};
 		
 		$scope.wechatJsConfig();
-
+		
 		//functions
 		$scope.onApply = function () {
 			if ($scope.customerForm.$invalid) {
@@ -17,6 +18,7 @@ angular.module('myApp').controller('WechatApplyCtrl', ['$scope', '$location', '$
 			}
 			var dataObj = {
 				name: $scope.customerData.name,
+				sex: $scope.customerData.sex,
 				phone: $scope.customerData.phone,		
 				apply_amount: $scope.customerData.amount
 			};

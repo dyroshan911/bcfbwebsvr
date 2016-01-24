@@ -229,3 +229,7 @@ i, cite, em, var, address, dfn {
 	background-color: #333;
 	color: #fff;
 }
+
+#apply .panel-body .input-group .input-group-addon {
+	line-height: 20px;
+}
