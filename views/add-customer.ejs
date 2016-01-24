@@ -7,8 +7,12 @@
 						<h2 style="text-align: center;">新增客户</h2>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="20" ng-model="customerData.name" />
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="text" class="form-control" name="amount" placeholder="贷款金额" title="请输入贷款金额" required="" maxlength="20" ng-model="customerData.amount"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="customerForm.amount.$dirty &amp;&amp; customerForm.amount.$invalid">
+								<small class="alert-danger well-sm" ng-show="customerForm.amount.$error.pattern">请使用数字</small>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -21,11 +25,23 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="amount" placeholder="贷款金额" title="请输入贷款金额" required="" maxlength="20" ng-model="customerData.amount"
-							ng-pattern="/^\d+$/" />
-							<div ng-show="customerForm.amount.$dirty &amp;&amp; customerForm.amount.$invalid">
-								<small class="alert-danger well-sm" ng-show="customerForm.amount.$error.pattern">请使用数字</small>
+						<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="20" ng-model="customerData.name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<div class="radio-inline">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="customerData.sex" />
+									先生
+								</label>
+							</div>
+							<div class="radio-inline">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="customerData.sex" />
+									女士
+								</label>
 							</div>
 						</div>
 					</div>

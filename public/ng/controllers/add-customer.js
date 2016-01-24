@@ -4,6 +4,7 @@ angular.module('myApp').controller('AddCustomerCtrl', ['$scope', '$location', '$
 	function ($scope, $location, $rootScope, BusinessService) {
 		$scope.customerData = {
 			name: '',
+			sex: 'male',
 			phone: '',
 			amount: ''
 		};
@@ -15,6 +16,7 @@ angular.module('myApp').controller('AddCustomerCtrl', ['$scope', '$location', '$
 			}
 			var dataObj = {
 				name: $scope.customerData.name,
+				sex: $scope.customerData.sex,
 				phone: $scope.customerData.phone,		
 				apply_amount: $scope.customerData.amount
 			};
