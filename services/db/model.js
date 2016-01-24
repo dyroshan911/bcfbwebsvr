@@ -66,23 +66,25 @@ var CustomerSchema = new Schema({
 //产品
 var ProductShowSchema = new Schema({
     id: {type: String, unique: true, required: true},    //id
-    title: {type: String, required: true},   
+    title: {type: String, required: true},    //
     type: {type: String, required: true},
-    money_min:{type:Number, required: true},
-    money_max:{type:Number, required: true},
-    detail:{type:String, required: true}
+    money_min:{type:String},
+    money_max:{type:String},
+    rate_min:{type:String},
+    rate_max:{type:String},
+    detail:{type:String, }
 });
 
-//成功案例
+
 var CaseSchem = new Schema({
     id: {type: String, unique: true, required: true},    //id
-    title:{type: String, required: true},                   //如张先生 信用贷
-    territory:{type: String},                                  //地域
-    amount:{type:String, required:true},            //金额
-    time_limit:{type:String , required:true},       //还款期限
-    rate:{type:String , required:true},             //利率
-    date:{type:String , required:true},             //贷款日期  
-    detail:{type:String, required: true}           //详细描述
+    name:{type: String},
+    type:{type: String},
+    amount:{type:String, required:true},
+    time_limit:{type:String },
+    rate:{type:String },
+    date:{type:String },
+    detail:{type:String}
 });
 
 

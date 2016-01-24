@@ -23,20 +23,23 @@ var ProductShowSchema = new Schema({
     id: {type: String, unique: true, required: true},    //id
     title: {type: String, required: true},    //
     type: {type: String, required: true},
-    money_min:{type:Number, required: true},
-    money_max:{type:Number, required: true},
-    detail:{type:String, required: true}
+    money_min:{type:String},
+    money_max:{type:String},
+    rate_min:{type:String},
+    rate_max:{type:String},
+    detail:{type:String, }
 });
 
 
 var CaseSchem = new Schema({
     id: {type: String, unique: true, required: true},    //id
-    territory:{type: String},
+    name:{type: String},
+    type:{type: String},
     amount:{type:String, required:true},
-    time_limit:{type:String , required:true},
-    rate:{type:String , required:true},
-    date:{type:String , required:true},
-    detail:{type:String, required: true}
+    time_limit:{type:String },
+    rate:{type:String },
+    date:{type:String },
+    detail:{type:String}
 });
 
 

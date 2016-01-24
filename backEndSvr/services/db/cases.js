@@ -43,7 +43,8 @@ caseObj.getCasesList = function (offset, limit, cb) {
 caseObj.createCase = function (caseObj, cb) {
     var caseInfo = {
         id: uuid.v4(),
-        territory: caseObj.territory,
+        name: caseObj.name,
+        type:caseObj.type,
         amount:  caseObj.amount,
         time_limit: caseObj.time_limit,
         rate: caseObj.rate,

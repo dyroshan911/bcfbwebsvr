@@ -46,6 +46,8 @@ productObj.createProduct = function (productObj, cb) {
         type: productObj.type,
         money_min: productObj.money_min,
         money_max: productObj.money_max,
+        rate_min: productObj.rate_min,
+        rate_max: productObj.rate_max,
         detail: productObj.detail
     }
     var newproduct = new ProductModel(productInfo);

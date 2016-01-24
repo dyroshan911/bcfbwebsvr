@@ -21,6 +21,7 @@ customerObj.createCustomer = function (dataObj, cb) {
         belong_mem: dataObj.mem_id,
         belong_channel: dataObj.channel_id,
         apply_amount: dataObj.apply_amount,
+        sex:dataObj.sex,
         create_on: parseInt(Date.now() / 1000)
     };
     var newCustomer = new CustomerModel(customerInfo);
