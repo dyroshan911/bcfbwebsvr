@@ -126,6 +126,9 @@ exports.updateCustomerInfo = function (token, customerId, dataObj, cb) {
             if (dataObj.phone && dataObj.phone != '') {
                 updateData.phone = dataObj.phone;
             }
+            if (dataObj.sex && dataObj.sex != '') {
+                updateData.sex = dataObj.sex;
+            }
             if (dataObj.finished_amount && dataObj.finished_amount != '') {
                 updateData.finished_amount = dataObj.finished_amount;
             }
