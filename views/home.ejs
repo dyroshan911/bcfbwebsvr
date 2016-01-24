@@ -114,7 +114,7 @@
 	</div>
 
 	<div class="home-section">
-		<div class="container" style="margin-top: 20px;">
+		<div class="container" style="min-width:1170px; margin-top: 20px;">
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				<div class="panel panel-success">
 					<div class="panel-heading" align="center" style="background-color: #7aab13; color: #fff; font-size: 20px;">快捷申请</div>
@@ -168,6 +168,31 @@
 						</form>
 					</div>
 				</div>
+				<div class="panel panel-default" id="staff" ng-repeat="staff in staffList">
+					<div class="panel-body" style="padding: 5px;">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<img width="100%" src="img/avatar.jpg"></img>
+						</div>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<div class="row">
+								<span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4" ng-bind="staff.name"></span>
+								<span class="col-xs-8 col-sm-8 col-md-8 col-lg-8 label label-warning">优秀员工</span>
+							</div>
+							<div class="row">
+								<span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">联系方式:</span>
+								<span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.phone"></span>
+							</div>
+							<div class="row">
+								<span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">业务范围:</span>
+								<span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.business"></span>
+							</div>
+							<div class="row">
+								<span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">员工简介:</span>
+								<span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.content"></span>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -191,6 +216,18 @@
 			</div>
 
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div class="panel panel-info" id="info">
+					<div class="panel-heading" align="center">热门资讯</div>
+					<div class="panel-body">
+						<div class="row" ng-repeat="info in infoList">
+							<span ng-bind="info.date"></span>
+							<a href="#" ng-bind="info.title"></a>
+						</div>
+					</div>
+					<div class="panel-footer" align="center">
+						<a href="#">查看更多</a>
+					</div>
+				</div>
 				<div class="panel panel-primary" id="case" style="border-bottom: none;">
 					<div class="panel-heading" align="center">成功案例</div>
 					<div class="panel-body" ng-repeat="case in caseList">
@@ -205,17 +242,6 @@
 							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">贷款金额 {{case.amount}}</lable>
 							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">月利率 {{case.lilv}}</lable>
 						</div>
-					</div>
-				</div>
-				<div class="panel panel-info">
-					<div class="panel-heading" align="center">近期资讯</div>
-					<div class="panel-body">
-						<a href="#" style="display: block">百城官方网站上线</a>
-						<a href="#" style="display: block">百城微信公众号启动服务</a>
-						<a href="#" style="display: block">百城全新业务</a>
-					</div>
-					<div class="panel-footer" align="center">
-						<a href="#">查看更多</a>
 					</div>
 				</div>
 			</div>

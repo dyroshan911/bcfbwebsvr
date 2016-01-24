@@ -166,3 +166,20 @@ i, cite, em, var, address, dfn {
 	#case .panel-body .control-label {
 		text-align: left;
 	}
+
+#staff .panel-body {
+}
+
+	#staff .panel-body span {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	#staff .panel-body .title {
+		font-weight: bold;
+	}
+
+#info .row {
+	margin-left: 0;
+	margin-right: 0;
+}
