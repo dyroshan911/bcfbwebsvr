@@ -38,18 +38,19 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 				sessionStorage.complete = $rootScope.session.complete;
 			}
 		};
-		$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
+		//$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
 		var firstStart = true;
 		$rootScope.$on('$routeChangeStart', function (event, next, current) {
 			if (firstStart) {
 				event.preventDefault();
+				var path = $location.path();
 				SessionService.initSession(function (data) {
 					var args = $location.search();
 					if ((args.code && args.state) || args.openid) {
 						$rootScope.session.wechatMode = sessionStorage.wechatMode = true;
 						SessionService.wechatAuth(args, function (res) {
 							firstStart = false;
-							if ($location.path().indexOf('wechat-signup') != -1) {
+							if (path.indexOf('wechat-signup') != -1) {
 								$location.path('/wechat-warn').search({ type: 'completed' });
 								$location.replace();
 							} else {
@@ -63,7 +64,7 @@ myApp.run(['$route', '$rootScope', '$location', 'SessionService', function ($rou
 							}
 						}, function (err) {
 							firstStart = false;
-							if ($location.path().indexOf('wechat-signup') != -1) {
+							if (path.indexOf('wechat-signup') != -1 || path.indexOf('wechat-apply') != -1) {
 								$route.reload();
 							} else {
 								$location.path('/wechat-warn').search({ type: 'need_singup' });
