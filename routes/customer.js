@@ -18,7 +18,8 @@ router.post('/', function (req, res) {
     var customerObj = {
         name: req.body.data.name,
         phone: req.body.data.phone,
-        apply_amount: req.body.data.apply_amount
+        apply_amount: req.body.data.apply_amount,
+        sex:req.body.data.sex
     };
 	//...
     customers.creatCustomer(token, customerObj, function (statusCode, result) {
