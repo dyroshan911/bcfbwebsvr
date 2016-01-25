@@ -19,6 +19,16 @@ router.post('/', function (req, res) {
 });
 
 
+/* update product, */
+router.put('/:productId', function (req, res) {
+    var dataObj = req.body.data;
+    var productId = req.params.productId;
+	products.updateProduct(productId, dataObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
+});
+
+
 /* get product list*/
 router.get('/', function (req, res) {
     var offset = req.query.offset;

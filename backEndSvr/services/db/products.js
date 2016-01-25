@@ -56,6 +56,21 @@ productObj.createProduct = function (productObj, cb) {
     });
 };
 
+productObj.updateProduct = function (productId, productObj, cb) {
+    var productInfo = {
+        title: productObj.title,
+        type: productObj.type,
+        money_min: productObj.money_min,
+        money_max: productObj.money_max,
+        rate_min: productObj.rate_min,
+        rate_max: productObj.rate_max,
+        detail: productObj.detail
+    }
+    ProductModel.update({id:productId},{$set:productInfo},function (err, products) {
+        cb(err, products);
+    });
+};
+
 
 
 productObj.deleteProduct = function (productId, cb) {
