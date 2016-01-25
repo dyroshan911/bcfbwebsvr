@@ -22,4 +22,15 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 			var s = date.getSeconds();
 			return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d) + ' , ' + (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
 		};
+		
+		$scope.makeFloat = function (n) {
+			n = n.toString();
+			if (n.indexOf('.') === -1) {
+				return n + '.00';
+			} else if (n.indexOf('.') === n.length - 2) {
+				return n + '0';
+			} else {
+				return n;
+			}
+		};
 	}]);

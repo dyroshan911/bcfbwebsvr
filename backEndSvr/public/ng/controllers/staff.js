@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootScope', 'ManageService',
-	function ($scope, $location, $rootScope, ManageService) {
+angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootScope', 'StaffService',
+	function ($scope, $location, $rootScope, StaffService) {
 		$scope.channelList = [];
 		$scope.channelMgrList = [];
 		$scope.pageData = {
@@ -33,7 +33,7 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			phone: '',
 			role: $scope.roleList[0],
 			superior: {},
-			enable: {}   
+			enable: {}
 		};
 		
 		getChannelList(0, $scope.eachPageCount, '');
@@ -59,9 +59,10 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				role: $scope.addUserData.role.value,
 				superior: $scope.addUserData.superior.id
 			};
-			$scope.myPromiseAdd = ManageService.addChannel($rootScope.session.token, dataObj, function (res) {
+			$scope.myPromiseAdd = StaffService.addChannel($rootScope.session.token, dataObj, function (res) {
 				getChannelList(0, $scope.eachPageCount, '');
-                getChannelMgrList(0, $scope.eachPageCount, '');
+				getChannelMgrList(0, $scope.eachPageCount, '');
+				alert('新增账号成功');
 				$('#addDialog').modal('toggle');
 			}, function (err) {
 				alert(err.message);
@@ -93,7 +94,23 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			if ($scope.updateForm.$invalid) {
 				return;
 			}
-			updateUser();
+			var dataObj = {
+				true_name: $scope.updateUserData.name,
+				phone: $scope.updateUserData.phone,
+				role: $scope.updateUserData.role.value,
+				superior: $scope.updateUserData.superior.id,
+				enable: $scope.updateUserData.enable.value
+			};
+			$scope.myPromiseEdit = StaffService.updateAccount($rootScope.session.token, $scope.updateUserData.selectedUser.id, dataObj, function (res) {
+				$scope.updateUserData.selectedUser.true_name = $scope.updateUserData.name;
+				$scope.updateUserData.selectedUser.phone = $scope.updateUserData.phone;
+				$scope.updateUserData.selectedUser.role = $scope.updateUserData.role.value;
+				$scope.updateUserData.selectedUser.roleName = $scope.updateUserData.role.name;
+				$scope.updateUserData.selectedUser.superior = $scope.updateUserData.superior.id;
+				$('#editDialog').modal('toggle');
+			}, function (err) {
+				alert(err.message);
+			});
 		};
 		
 		function getChannelList(offset, limit, filter, currentPageIndex) {
@@ -102,7 +119,7 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				limit: limit,
 				filter: filter
 			};
-			$scope.myPromiseStaff = ManageService.getChannels($rootScope.session.token, paramObj, function (res) {
+			$scope.myPromiseStaff = StaffService.getChannels($rootScope.session.token, paramObj, function (res) {
 				$scope.channelList = res.channelsList;
 				for (var i = 0; i < $scope.channelList.length; ++i) {
 					$scope.channelList[i].createDate = $scope.getDateString($scope.channelList[i].create_on * 1000);
@@ -129,32 +146,12 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				limit: limit,
 				filter: filter
 			};
-			ManageService.getChannelMgr($rootScope.session.token, paramObj, function (res) {
+			StaffService.getChannelMgr($rootScope.session.token, paramObj, function (res) {
 				$scope.channelMgrList = res.channelsList;
 			}, function (err) {
 				alert(err.message);
 			});
 		}
-		
-		function updateUser() {
-			var dataObj = {
-				true_name: $scope.updateUserData.name,
-				phone: $scope.updateUserData.phone,
-				role: $scope.updateUserData.role.value,
-				superior: $scope.updateUserData.superior.id,
-				enable: $scope.updateUserData.enable.value
-			};
-			$scope.myPromiseEdit = ManageService.updateAccount($rootScope.session.token, $scope.updateUserData.selectedUser.id, dataObj, function (res) {
-				$scope.updateUserData.selectedUser.true_name = $scope.updateUserData.name;
-				$scope.updateUserData.selectedUser.phone = $scope.updateUserData.phone;
-				$scope.updateUserData.selectedUser.role = $scope.updateUserData.role.value;
-				$scope.updateUserData.selectedUser.roleName = $scope.updateUserData.role.name;
-				$scope.updateUserData.selectedUser.superior = $scope.updateUserData.superior.id;
-				$('#editDialog').modal('toggle');
-			}, function (err) {
-				alert(err.message);
-			});
-		};
 		
 		function getPageList(pageData, pageIndex) {
 			getChannelList(parseInt(pageIndex) * $scope.eachPageCount, $scope.eachPageCount, $scope.search, pageIndex);
@@ -168,14 +165,14 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			}
 			return '';
 		}
-        
-        $scope.getChannelMgrNameById = function (id) {
-            for(var i = 0; i < $scope.channelMgrList.length; ++i) {
-                if (id == $scope.channelMgrList[i].id) {
-                    return $scope.channelMgrList[i].true_name;
-                }
-            }
-            return '';
-        }
+		
+		$scope.getChannelMgrNameById = function (id) {
+			for (var i = 0; i < $scope.channelMgrList.length; ++i) {
+				if (id == $scope.channelMgrList[i].id) {
+					return $scope.channelMgrList[i].true_name;
+				}
+			}
+			return '';
+		}
         
 	}]);

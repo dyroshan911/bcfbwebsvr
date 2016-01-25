@@ -53,7 +53,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 				url = makeUrl(url, obj.params);
 				delete obj.params;
 			}
-			obj.timeout = (1000 * 30);		
+			obj.timeout = (1000 * 30);
 			return $http.get(url, obj).success(function (data, status, headers, config) {
 				successcb(data);
 			}).error(function (data, status, headers, config) {
@@ -63,6 +63,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					msg.debug();
 				} else {
 					console.error(data);
+					failcb({ message: '未知错误' });
 				}
 			});
 		};
@@ -82,6 +83,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					msg.debug();
 				} else {
 					console.error(data);
+					failcb({ message: '未知错误' });
 				}
 			});
 		};
@@ -101,6 +103,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					msg.debug();
 				} else {
 					console.error(data);
+					failcb({ message: '未知错误' });
 				}
 			});
 		};
@@ -120,6 +123,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					msg.debug();
 				} else {
 					console.error(data);
+					failcb({ message: '未知错误' });
 				}
 			});
 		};
@@ -133,9 +137,14 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 			return $http.head(url, obj).success(function (data, status, headers, config) {
 				successcb('');
 			}).error(function (data, status, headers, config) {
-				var msg = MsgService.getMsg('e0004');
-				failcb(msg);
-				msg.debug();
+				if (data.code) {
+					var msg = MsgService.getMsg(data.code);
+					failcb(msg);
+					msg.debug();
+				} else {
+					console.error(data);
+					failcb({ message: '未知错误' });
+				}
 			});
 		};
 		

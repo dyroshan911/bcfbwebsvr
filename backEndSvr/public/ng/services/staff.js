@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('ManageService', ['ApiService', function (ApiService) {
+angular.module('myApp').factory('StaffService', ['ApiService', function (ApiService) {
 		var cfgData = {};
 		
 		cfgData.getChannels = function (token, paramObj, successcb, failcb) {

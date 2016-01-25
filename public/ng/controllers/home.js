@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', 'BusinessService',
-	function ($scope, $location, BusinessService) {
+angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', 'WebShowService', 'BusinessService',
+	function ($scope, $location, WebShowService, BusinessService) {
 		$('.carousel').carousel({
 			interval: 5000
 		})
@@ -59,4 +59,30 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', 'Business
 			{ title: '百城会员开放注册', date: '2016-01-10' },
 			{ title: '百城新业务启动', date: '2015-21-20' }
 		];
+		
+		function getProducts(offset, limit, filter, currentPageIndex) {
+			var paramObj = {
+				offset: offset,
+				limit: limit,
+				filter: filter
+			};
+			WebShowService.getProducts($rootScope.session.token, paramObj, function (res) {
+
+			}, function (err) {
+
+			});
+		}
+		
+		function getCases(offset, limit, filter, currentPageIndex) {
+			var paramObj = {
+				offset: offset,
+				limit: limit,
+				filter: filter
+			};
+			WebShowService.getCases($rootScope.session.token, paramObj, function (res) {
+
+			}, function (err) {
+
+			});
+		}
 	}]);

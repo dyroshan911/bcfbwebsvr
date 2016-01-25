@@ -61,12 +61,15 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					msg.debug();
 				} else {
 					console.error(data);
+					failcb({ message: '未知错误' });
 				}
 			});
 		};
 		
 		cfgData.post = function (url, obj, successcb, failcb) {
 			if (obj.params) {
+				var date = new Date();
+				obj.params._timestamp = date.getTime();
 				url = makeUrl(url, obj.params);
 				delete obj.params;
 			}
@@ -80,12 +83,15 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					msg.debug();
 				} else {
 					console.error(data);
+					failcb({ message: '未知错误' });
 				}
 			});
 		};
 		
 		cfgData.put = function (url, obj, successcb, failcb) {
 			if (obj.params) {
+				var date = new Date();
+				obj.params._timestamp = date.getTime();
 				url = makeUrl(url, obj.params);
 				delete obj.params;
 			}
@@ -99,12 +105,15 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					msg.debug();
 				} else {
 					console.error(data);
+					failcb({ message: '未知错误' });
 				}
 			});
 		};
 		
 		cfgData.delete = function (url, obj, successcb, failcb) {
 			if (obj.params) {
+				var date = new Date();
+				obj.params._timestamp = date.getTime();
 				url = makeUrl(url, obj.params);
 				delete obj.params;
 			}
@@ -118,12 +127,15 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					msg.debug();
 				} else {
 					console.error(data);
+					failcb({ message: '未知错误' });
 				}
 			});
 		};
 		
 		cfgData.head = function (url, obj, successcb, failcb) {
 			if (obj.params) {
+				var date = new Date();
+				obj.params._timestamp = date.getTime();
 				url = makeUrl(url, obj.params);
 				delete obj.params;
 			}
@@ -131,9 +143,14 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 			return $http.head(url, obj).success(function (data, status, headers, config) {
 				successcb('');
 			}).error(function (data, status, headers, config) {
-				var msg = MsgService.getMsg('e0004');
-				failcb(msg);
-				msg.debug();
+				if (data.code) {
+					var msg = MsgService.getMsg(data.code);
+					failcb(msg);
+					msg.debug();
+				} else {
+					console.error(data);
+					failcb({ message: '未知错误' });
+				};
 			});
 		};
 		

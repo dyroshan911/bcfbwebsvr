@@ -44,8 +44,8 @@ angular.module('myApp').controller('WechatAccountCtrl', ['$scope', '$location', 
 		};
 		
 		$scope.onUnbind = function () {
-			var choice = window.confirm('确定解除账号绑定？');
-			if (choice == true) {
+			var answer = window.confirm('确定解除账号绑定？');
+			if (answer == true) {
 				unbind();
 			} else {
 				return;
