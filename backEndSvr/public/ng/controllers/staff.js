@@ -33,7 +33,7 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			phone: '',
 			role: $scope.roleList[0],
 			superior: {},
-			enable: {}
+			enable: {}   
 		};
 		
 		getChannelList(0, $scope.eachPageCount, '');
@@ -60,8 +60,8 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				superior: $scope.addUserData.superior.id
 			};
 			$scope.myPromiseAdd = ManageService.addChannel($rootScope.session.token, dataObj, function (res) {
-				alert(JSON.stringify(res));
 				getChannelList(0, $scope.eachPageCount, '');
+                getChannelMgrList(0, $scope.eachPageCount, '');
 				$('#addDialog').modal('toggle');
 			}, function (err) {
 				alert(err.message);
@@ -141,11 +141,10 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				true_name: $scope.updateUserData.name,
 				phone: $scope.updateUserData.phone,
 				role: $scope.updateUserData.role.value,
-				superior: $scope.updateUserData.superior.value,
+				superior: $scope.updateUserData.superior.id,
 				enable: $scope.updateUserData.enable.value
 			};
-			$scope.myPromiseEdit = ManageService.updateAccount($rootScope.session.token, $scope.updateUserData.id, dataObj, function (res) {
-				alert(JSON.stringify(res));
+			$scope.myPromiseEdit = ManageService.updateAccount($rootScope.session.token, $scope.updateUserData.selectedUser.id, dataObj, function (res) {
 				$scope.updateUserData.selectedUser.true_name = $scope.updateUserData.name;
 				$scope.updateUserData.selectedUser.phone = $scope.updateUserData.phone;
 				$scope.updateUserData.selectedUser.role = $scope.updateUserData.role.value;
@@ -169,4 +168,14 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			}
 			return '';
 		}
+        
+        $scope.getChannelMgrNameById = function (id) {
+            for(var i = 0; i < $scope.channelMgrList.length; ++i) {
+                if (id == $scope.channelMgrList[i].id) {
+                    return $scope.channelMgrList[i].true_name;
+                }
+            }
+            return '';
+        }
+        
 	}]);
