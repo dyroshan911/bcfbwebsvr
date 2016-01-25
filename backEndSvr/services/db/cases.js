@@ -44,8 +44,8 @@ caseObj.createCase = function (caseObj, cb) {
     var caseInfo = {
         id: uuid.v4(),
         name: caseObj.name,
-        type:caseObj.type,
-        amount:  caseObj.amount,
+        type: caseObj.type,
+        amount: caseObj.amount,
         time_limit: caseObj.time_limit,
         rate: caseObj.rate,
         date: caseObj.date,
@@ -58,8 +58,24 @@ caseObj.createCase = function (caseObj, cb) {
 };
 
 
+caseObj.updateCase = function (caseId, caseObj, cb) {
+    var caseInfo = {
+        name: caseObj.name,
+        type: caseObj.type,
+        amount: caseObj.amount,
+        time_limit: caseObj.time_limit,
+        rate: caseObj.rate,
+        date: caseObj.date,
+        detail: caseObj.detail
+    }
+    CaseModel.update({ id: caseId }, { $set: caseInfo }, function (err, products) {
+        cb(err, products);
+    });
+};
+
+
 caseObj.deleteCase = function (caseId, cb) {
-    CaseModel.remove({id:caseId},function(err, result){
+    CaseModel.remove({ id: caseId }, function (err, result) {
         cb(err, result);
     });
 };

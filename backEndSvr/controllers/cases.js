@@ -20,6 +20,15 @@ exports.createCase = function (dataObj, cb) {
     });
 }
 
+exports.updateCase = function (caseId, dataObj, cb) {
+    var result = {};
+    var statusCode = 200;
+    cases.updateCase(caseId, dataObj, function (err, doc) {
+        result = doc;
+        cb(statusCode, result);
+    });
+}
+
 exports.deleteCase = function (caseId, cb) {
     var result = {};
     var statusCode = 200;

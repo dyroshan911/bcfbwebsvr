@@ -20,6 +20,15 @@ router.post('/', function (req, res) {
     });
 });
 
+/* update case, */
+router.put('/:caseId', function (req, res) {
+    var dataObj = req.body.data;
+    var caseId = req.params.caseId;
+    cases.updateCase(caseId, dataObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
+});
+
 
 /* get case list*/
 router.get('/', function (req, res) {
