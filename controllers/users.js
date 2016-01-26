@@ -24,20 +24,23 @@ exports.creatAccount = function (token, accountObj, cb) {
                 };
                 sessions.updateSession(token, userData, function (err, data) {
                     if (err) { console.error('update session error'); }
+                    delete userData.open_id;
+                    result = userData;
+                    cb(statusCode, result);
                 });
-                delete userData.open_id;
-                result = userData;
+
             } else {
                 statusCode = 403;
                 result.code = 'e1103';
-                if(doc == 'job number error') {
+                if (doc == 'job number error') {
                     result.code = 'e1105';
                 }
                 result.message = err.message;
                 result.description = err.message;
                 result.source = '<<webui>>';
+                cb(statusCode, result);
             }
-            cb(statusCode, result);
+
         });
     })
 
