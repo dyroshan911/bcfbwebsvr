@@ -90,7 +90,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			$scope.editCustomer.newPhone = '';
 			$scope.editCustomer.applyAmount = customer.apply_amount;
 			$scope.editCustomer.finishedAmount = customer.finished_amount;
-			$scope.editCustomer.serverRate = customer.server_rate;
+			$scope.editCustomer.serverRate = $scope.makeFloat(parseFloat(customer.server_rate));
 			$scope.editCustomer.comment = customer.comment;
 			var billingDate = customer.billing_date;
 			if ($scope.editCustomer.billingDate) {

@@ -31,4 +31,12 @@ angular.module('myApp').controller('AddCustomerCtrl', ['$scope', '$location', '$
 				alert(err.message);
 			})
 		}
+
+		$scope.onCancel = function () {
+			if ($rootScope.session.wechatMode == true) {
+					$location.path('/wechat-business');
+				} else {
+					$location.path('/business');
+				}
+		}
 	}]);

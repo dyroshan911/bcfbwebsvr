@@ -24,6 +24,9 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 		};
 		
 		$scope.makeFloat = function (n) {
+			if (!n && n !== 0) {
+				return '';
+			}
 			n = n.toString();
 			if (n.indexOf('.') === -1) {
 				return n + '.00';
