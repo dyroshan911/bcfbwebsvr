@@ -148,7 +148,8 @@ exports.bindWechatUsr = function (token, userName, password, cb) {
                         user_id: doc.id,
                         user_name: doc.user_name,
                         role: doc.role,
-                        superior: doc.superior
+                        superior: doc.superior,
+                        open_id: data.open_id
                     };
                     sessions.updateSession(token, userData, function (err, data) {
                         if (!err) {

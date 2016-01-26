@@ -213,14 +213,10 @@ exports.completeAcount = function (token, userName, password, cb) {
                         role: doc.role,
                         superior: doc.superior,
                         true_name: doc.true_name,
-                        open_id: data.open_id,
                         complete: doc.complete,
                         phone: doc.phone
                     };
-                    sessions.updateSession(token, userData, function (err, data) {
-                        if (err) { console.error('update session error'); }
-                    });
-                    delete userData.open_id;
+
                     result = userData;
                     cb(statusCode, result);
                 } else {
