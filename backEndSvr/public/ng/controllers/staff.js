@@ -37,7 +37,7 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 		};
 		
 		getChannelList(0, $scope.eachPageCount, '');
-		getChannelMgrList(0, $scope.eachPageCount, '');
+		getChannelMgrList(0, 100, '');
 		
 		//functions
 		$scope.gotoPage = function (pageData, index) {
@@ -60,8 +60,8 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				superior: $scope.addUserData.superior.id
 			};
 			$scope.myPromiseAdd = StaffService.addChannel($rootScope.session.token, dataObj, function (res) {
-				getChannelList(0, $scope.eachPageCount, '');
-				getChannelMgrList(0, $scope.eachPageCount, '');
+				getChannelList($scope.eachPageCount * parseInt($scope.pageData.current.index), $scope.eachPageCount, $scope.search, $scope.pageData.current.index);
+				getChannelMgrList(0, 100, '');
 				alert('新增账号成功');
 				$('#addDialog').modal('toggle');
 			}, function (err) {

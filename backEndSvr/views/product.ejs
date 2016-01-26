@@ -170,7 +170,7 @@
 							<input type="text" class="form-control" name="moneyMin" placeholder="最低额度" title="请输入产品最低额度" required="" maxlength="20" ng-model="updateProductData.moneyMin"
 							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="updateForm.moneyMin.$dirty &amp;&amp; updateForm.moneyMin.$invalid">
-								<small class="alert-danger well-sm" ng-show="updateForm.moneyMin.$error.pattern">请使用数字或小数</small>
+								<small class="alert-danger well-sm" ng-show="updateForm.moneyMin.$error.pattern">请输入正确的格式，如“5.00”</small>
 							</div>
 						</div>
 					</div>
@@ -180,7 +180,7 @@
 							<input type="text" class="form-control" name="moneyMax" placeholder="最高额度" title="请输入产品最高额度" required="" maxlength="20" ng-model="updateProductData.moneyMax"
 							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="updateForm.moneyMax.$dirty &amp;&amp; updateForm.moneyMax.$invalid">
-								<small class="alert-danger well-sm" ng-show="updateForm.moneyMax.$error.pattern">请使用数字或小数</small>
+								<small class="alert-danger well-sm" ng-show="updateForm.moneyMax.$error.pattern">请输入正确的格式，如“5.00”</small>
 							</div>
 						</div>
 					</div>
@@ -190,7 +190,7 @@
 							<input type="text" class="form-control" name="rateMin" placeholder="最低利率" title="请输入产品最低利率" required="" maxlength="20" ng-model="updateProductData.rateMin"
 							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="updateForm.rateMin.$dirty &amp;&amp; updateForm.rateMin.$invalid">
-								<small class="alert-danger well-sm" ng-show="updateForm.rateMin.$error.pattern">输入正确的格式，如“0.65”</small>
+								<small class="alert-danger well-sm" ng-show="updateForm.rateMin.$error.pattern">请输入正确的格式，如“0.65”</small>
 							</div>
 						</div>
 					</div>
@@ -200,7 +200,7 @@
 							<input type="text" class="form-control" name="rateMax" placeholder="最高利率" title="请输入产品最高利率" required="" maxlength="20" ng-model="updateProductData.rateMax"
 							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="updateForm.rateMax.$dirty &amp;&amp; updateForm.rateMax.$invalid">
-								<small class="alert-danger well-sm" ng-show="updateForm.rateMax.$error.pattern">输入正确的格式，如“0.65”</small>
+								<small class="alert-danger well-sm" ng-show="updateForm.rateMax.$error.pattern">请输入正确的格式，如“0.65”</small>
 							</div>
 						</div>
 					</div>

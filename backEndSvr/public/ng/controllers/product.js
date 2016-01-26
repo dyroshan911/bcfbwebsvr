@@ -55,7 +55,7 @@ angular.module('myApp').controller('ProductCtrl', ['$scope', '$location', '$root
 				detail: $scope.addProductData.detail,
 			};
 			$scope.myPromiseAdd = ProductService.addProduct($rootScope.session.token, dataObj, function (res) {
-				getProductList(0, $scope.eachPageCount, '');
+				getProductList($scope.eachPageCount * parseInt($scope.pageData.current.index), $scope.eachPageCount, $scope.search, $scope.pageData.current.index);
 				alert('新增产品成功');
 				$('#addDialog').modal('toggle');
 			}, function (err) {
@@ -109,6 +109,13 @@ angular.module('myApp').controller('ProductCtrl', ['$scope', '$location', '$root
 				$scope.myPromiseProduct = ProductService.removeProduct($rootScope.session.token, product.id, function (res) {
 					alert('删除成功');
 					$scope.productList.splice(index, 1);
+					if ($scope.productList.length == 0) {
+						$scope.pageData = {
+							current: {},
+							list: [],
+							total: 0
+						};
+					}
 				}, function (err) {
 					alert(err.message);
 				});
