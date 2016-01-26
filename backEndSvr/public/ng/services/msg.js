@@ -1,15 +1,8 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name myApp.service:MsgService
- * @description
- * # MsgService
- * Service of the myApp
- */
-angular.module('myApp').factory('MsgService',
-function () {
+angular.module('myApp').factory('MsgService', function () {
 	var serviceData = {};
+	
 	var msgTab = {
 		//web server error
 		"e0001": { "name": "CreateFail", "zh-cn": "新增失败" },

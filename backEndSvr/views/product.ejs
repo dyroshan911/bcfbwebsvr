@@ -85,7 +85,7 @@
 							<input type="text" class="form-control" name="moneyMin" placeholder="最低额度" title="请输入产品最低额度" required="" maxlength="20" ng-model="addProductData.moneyMin"
 							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="addForm.moneyMin.$dirty &amp;&amp; addForm.moneyMin.$invalid">
-								<small class="alert-danger well-sm" ng-show="addForm.moneyMin.$error.pattern">请使用数字或小数</small>
+								<small class="alert-danger well-sm" ng-show="addForm.moneyMin.$error.pattern">请输入正确的格式，如“5.00”</small>
 							</div>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 							<input type="text" class="form-control" name="moneyMax" placeholder="最高额度" title="请输入产品最高额度" required="" maxlength="20" ng-model="addProductData.moneyMax"
 							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="addForm.moneyMax.$dirty &amp;&amp; addForm.moneyMax.$invalid">
-								<small class="alert-danger well-sm" ng-show="addForm.moneyMax.$error.pattern">请使用数字或小数</small>
+								<small class="alert-danger well-sm" ng-show="addForm.moneyMax.$error.pattern">请输入正确的格式，如“5.00”</small>
 							</div>
 						</div>
 					</div>
@@ -105,7 +105,7 @@
 							<input type="text" class="form-control" name="rateMin" placeholder="最低利率" title="请输入产品最低利率" required="" maxlength="20" ng-model="addProductData.rateMin"
 							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="addForm.rateMin.$dirty &amp;&amp; addForm.rateMin.$invalid">
-								<small class="alert-danger well-sm" ng-show="addForm.rateMin.$error.pattern">输入正确的格式，如“0.65”</small>
+								<small class="alert-danger well-sm" ng-show="addForm.rateMin.$error.pattern">请输入正确的格式，如“0.65”</small>
 							</div>
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 							<input type="text" class="form-control" name="rateMax" placeholder="最高利率" title="请输入产品最高利率" required="" maxlength="20" ng-model="addProductData.rateMax"
 							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="addForm.rateMax.$dirty &amp;&amp; addForm.rateMax.$invalid">
-								<small class="alert-danger well-sm" ng-show="addForm.rateMax.$error.pattern">输入正确的格式，如“0.65”</small>
+								<small class="alert-danger well-sm" ng-show="addForm.rateMax.$error.pattern">请输入正确的格式，如“0.65”</small>
 							</div>
 						</div>
 					</div>
