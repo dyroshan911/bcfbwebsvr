@@ -106,33 +106,32 @@ customerObj.updateCustomer = function (userId, role, customerId, dataObj, cb) {
         return;
     } else if (role == 'admin') {
         queryObj = { 'id': customerId };
-    } else if (role == 'member') {
-        queryObj = {
-            'id': customerId,
-            'belong_mem': userId
-        };
     } else {
         queryObj = {
             'id': customerId,
             'belong_channel': userId
         };
     }
-
-    if (dataObj.phone) {
-        CustomerModel.findOne(queryObj, function (err, user) {
-            if (!err && user) {
+    CustomerModel.findOne(queryObj, function (err, user) {
+        if (!err && user) {
+            if(dataObj.phone) {
                 dataObj.phone = user.phone + ',' + dataObj.phone;
-                CustomerModel.update(queryObj, { $set: dataObj }, function (err, data) {
-                    cb(err, data);
-                });
-            } else {
-                cb(err, user);
             }
-        });
-
-    } else {
-        CustomerModel.update(queryObj, { $set: dataObj }, function (err, data) {
-            cb(err, data);
-        });
-    }
+            var sendMsg = false;
+            var customer,status = '';
+            if  (dataObj.status != user.status && user.belong_mem != '') {
+                sendMsg = true;
+                status = (dataObj.status == 'handled') ? '正在处理':'处理完成';
+                customer = user;
+            }
+            CustomerModel.update(queryObj, { $set: dataObj }, function (err, data) {
+                data.sendMsg = sendMsg;
+                data.status = status;
+                data.customer = customer;
+                cb(err, data);
+            });
+        } else {
+            cb(err, user);
+        }
+    });
 }

@@ -133,6 +133,9 @@ exports.updateCustomerInfo = function (token, customerId, dataObj, cb) {
                 updateData.finished_amount = dataObj.finished_amount;
             }
             customers.updateCustomer(data.user_id, data.role, customerId, updateData, function (err, doc) {
+                if (doc.sendMsg) {
+                    pushscheduleEventUpdate(doc.customer.belong_mem, doc.customer, doc.status);
+                }
                 result = doc;
                 cb(statusCode, result);
             });
@@ -149,18 +152,50 @@ exports.updateCustomerInfo = function (token, customerId, dataObj, cb) {
 
 function pushscheduleEventNew(user_id, customerObj) {
     var qeryAttr = 'wechat_id role superior true_name phone';
+    var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
     users.queryUser(user_id, qeryAttr, function (err, user) {
         if (!err && user && user.role == 'member') {
-            qeryAttr = 'true_name phone';
+            qeryAttr = 'true_name phone wechat_id';
             users.queryUser(user.superior, qeryAttr, function (err, superiorUsr) {
-                if (!err && superiorUsr) {
-                    var title = '你好，您提交的' + customerObj.name + '贷款订单处理进度通知';
+                if (!err && superiorUsr) {                    
+                    var title = '你好，您提交的' + customerObj.name + sex + '贷款订单处理进度通知';
                     var handleBy = superiorUsr.true_name;
                     var phone = superiorUsr.phone;
                     var result = '已进件，等待处理';
                     var detail = '详情请查看在百城主页中查看，如有疑问请拨打处理人电话';
                     wechatApi.pushscheduleEvent(user.wechat_id, title, handleBy, phone, result, detail);
+                    
+                    var title2 = '你好，你有一个贷款订单进件\n';
+                    title2 = title2 + '贷款人: '  + customerObj.name  + sex + '\n';
+                    title2 = title2 + '贷款金额:' +  customerObj.apply_amount + '\n';
+                    title2 = title2 + '联系电话:' + customerObj.phone;
+                    var handleBy2 = '来自会员：' + user.true_name;
+                    var phone2 =  user.phone;
+                    var result2 =  '已进件，等待处理';
+                    var detail2 = '详情进入百城主页查看，请尽快处理';
+                    wechatApi.pushscheduleEvent(superiorUsr.wechat_id, title2, handleBy2, phone2, result2, detail2);
                 }
+            });
+        }
+    });
+}
+
+
+function pushscheduleEventUpdate(user_id, customerObj, status) {
+    var qeryAttr = 'wechat_id role superior true_name phone';
+    var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
+    users.queryUser(user_id, qeryAttr, function (err, user) {
+        if (!err && user && user.wechat_id != '') {
+            qeryAttr = 'true_name phone';
+            users.queryUser(user.superior, qeryAttr, function (err, superiorUsr) {
+                if (!err && superiorUsr) {
+                    var title = '你好，您提交的' + customerObj.name + sex + '贷款订单处理进度通知';
+                    var handleBy = superiorUsr.true_name;
+                    var phone = superiorUsr.phone;
+                    var result = status;
+                    var detail = '详情请查看在百城主页中查看，如有疑问请拨打处理人电话';
+                    wechatApi.pushscheduleEvent(user.wechat_id, title, handleBy, phone, result, detail);
+                }                    
             });
         }
     });
