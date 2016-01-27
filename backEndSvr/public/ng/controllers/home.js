@@ -3,7 +3,7 @@
 angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', '$routeParams',
 	function ($scope, $location, $routeParams) {
 		$scope.currentPage = $routeParams.params;
-		$scope.eachPageCount = 5;
+		$scope.eachPageCount = 15;
 
 		//functions
 		//pages
