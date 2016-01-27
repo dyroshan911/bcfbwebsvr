@@ -31,6 +31,7 @@ angular.module('myApp').controller('WechatSignupCtrl', ['$scope', '$location', '
 				$rootScope.session.complete = res.complete;
 				$rootScope.saveSessionData();
 				$location.path('/wechat-business');
+				$location.replace();
 			}, function (err) {
 				alert(err.message);
 			})

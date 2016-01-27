@@ -23,6 +23,7 @@ angular.module('myApp').controller('WechatBindCtrl', ['$scope', '$location', '$r
 				$rootScope.session.complete = res.complete;
 				$rootScope.saveSessionData();
 				$location.path('/wechat-business');
+				$location.replace();
 			}, function (err) {
 				alert(err.message);
 			})
