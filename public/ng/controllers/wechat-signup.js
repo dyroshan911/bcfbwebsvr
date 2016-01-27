@@ -23,11 +23,14 @@ angular.module('myApp').controller('WechatSignupCtrl', ['$scope', '$location', '
 			};
 			$scope.myPromise = UserService.signup($rootScope.session.token, dataOdj, function (res) {
 				//alert(JSON.stringify(res));
-				if ($rootScope.session.wechatMode == true) {
-					$location.path('/wechat-business');
-				} else {
-					$location.path('/business');
-				}
+				$rootScope.session.logged = true;
+				$rootScope.session.wechatMode = true;
+				$rootScope.session.userId = res.user_id;
+				$rootScope.session.userName = res.true_name;
+				$rootScope.session.role = res.role;
+				$rootScope.session.complete = res.complete;
+				$rootScope.saveSessionData();
+				$location.path('/wechat-business');
 			}, function (err) {
 				alert(err.message);
 			})

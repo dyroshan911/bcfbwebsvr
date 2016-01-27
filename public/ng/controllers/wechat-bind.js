@@ -16,6 +16,7 @@ angular.module('myApp').controller('WechatBindCtrl', ['$scope', '$location', '$r
 			$scope.myPromise = UserService.bind($rootScope.session.token, dataObj, function (res) {
 				//alert(JSON.stringify(res));
 				$rootScope.session.logged = true;
+				$rootScope.session.wechatMode = true;
 				$rootScope.session.userId = res.user_id;
 				$rootScope.session.userName = res.true_name;
 				$rootScope.session.role = res.role;
