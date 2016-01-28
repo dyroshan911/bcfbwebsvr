@@ -13,16 +13,35 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', 'WebShowS
 			amount: ''
 		};
 		
+		$scope.applyData = {
+			name: '',
+			sex: 'male',
+			phone: '',
+			amount: ''
+		};
+		
 		//functions
 		$scope.onApply = function () {
-			if ($scope.customerForm.$invalid) {
-				return;
-			}
 			var dataObj = {
 				name: $scope.customerData.name,
 				sex: $scope.customerData.sex,
 				phone: $scope.customerData.phone,		
 				apply_amount: $scope.customerData.amount
+			};
+			$scope.myPromise = BusinessService.addCustomer($rootScope.session.token, dataObj, function (res) {
+				//alert(JSON.stringify(res));
+				alert('申请成功');
+			}, function (err) {
+				alert(err.message);
+			})
+		}
+		
+		$scope.onApply_ = function () {
+			var dataObj = {
+				name: $scope.applyData.name,
+				sex: $scope.applyData.sex,
+				phone: $scope.applyData.phone,		
+				apply_amount: $scope.applyData.amount
 			};
 			$scope.myPromise = BusinessService.addCustomer($rootScope.session.token, dataObj, function (res) {
 				//alert(JSON.stringify(res));

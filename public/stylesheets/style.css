@@ -206,6 +206,7 @@ i, cite, em, var, address, dfn {
 	}
 
 #staff .panel-body {
+	border: hidden;
 }
 
 	#staff .panel-body span {
@@ -232,4 +233,18 @@ i, cite, em, var, address, dfn {
 
 #apply .panel-body .input-group .input-group-addon {
 	line-height: 20px;
+}
+
+#home-footer a {
+	color: #fff;
+}
+
+#home-footer a:hover {
+	text-decoration: none;
+}
+
+.car-text {
+	font-size: 15px;
+	background-color: #000;
+	opacity: 0.5;
 }
