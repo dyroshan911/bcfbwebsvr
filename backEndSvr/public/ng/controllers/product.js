@@ -89,13 +89,13 @@ angular.module('myApp').controller('ProductCtrl', ['$scope', '$location', '$root
 				detail: $scope.updateProductData.detail,
 			};
 			$scope.myPromiseEdit = ProductService.updateProduct($rootScope.session.token, $scope.updateProductData.selectedProduct.id, dataObj, function (res) {
-				$scope.updateProductData.selectedProduct.title = $scope.updateProductData.title;
-				$scope.updateProductData.selectedProduct.type = $scope.updateProductData.type;
-				$scope.updateProductData.selectedProduct.money_min = $scope.updateProductData.money_min;
-				$scope.updateProductData.selectedProduct.money_max = $scope.updateProductData.money_max;
-				$scope.updateProductData.selectedProduct.rate_min = $scope.updateProductData.rate_min;
-				$scope.updateProductData.selectedProduct.rate_max = $scope.updateProductData.rate_max;
-				$scope.updateProductData.selectedProduct.detail = $scope.updateProductData.detail;
+				$scope.updateProductData.selectedProduct.title = dataObj.title;
+				$scope.updateProductData.selectedProduct.type = dataObj.type;
+				$scope.updateProductData.selectedProduct.money_min = dataObj.money_min;
+				$scope.updateProductData.selectedProduct.money_max = dataObj.money_max;
+				$scope.updateProductData.selectedProduct.rate_min = dataObj.rate_min;
+				$scope.updateProductData.selectedProduct.rate_max = dataObj.rate_max;
+				$scope.updateProductData.selectedProduct.detail = dataObj.detail;
 				$('#editDialog').modal('toggle');
 			}, function (err) {
 				alert(err.message);
