@@ -1,0 +1,59 @@
+<!--顶部-->
+<div class="top">
+	<div style="float: left">
+		<span style="font-size: 16px;line-height: 45px;padding-left: 20px;color: #fff">百城金融管理中心</span>
+	</div>
+	<div id="ad_setting" class="ad_setting">
+		<a class="ad_setting_a" href="javascript:void(0);" ng-click="onLogout()">退出登录</a>
+	</div>
+</div>
+<!--顶部结束-->
+
+<!--菜单-->
+<div class="left-menu">
+	<ul id="menu">
+		<li class="menu-list">
+			<a style="cursor:pointer" class="firsta">
+				<i  class="glyph-icon xlcd"></i>企业管理<s class="sz"></s>
+			</a>
+			<ul>
+				<li>
+					<a href="/home/staff">
+						<i class="glyph-icon icon-chevron-right1"></i>员工管理
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="menu-list">
+			<a style="cursor:pointer" class="firsta">
+				<i  class="glyph-icon xlcd"></i>产品与服务<s class="sz"></s>
+			</a>
+			<ul>
+				<li>
+					<a href="/home/product" >
+						<i class="glyph-icon icon-chevron-right2"></i>产品管理
+					</a>
+				</li>
+				<li>
+					<a href="/home/success">
+						<i class="glyph-icon icon-chevron-right3"></i>成功案例管理
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div id="right-content" class="right-content">
+	<div class="content" ng-if="currentPage == 'staff'" ng-controller="StaffCtrl">
+		<% include staff%>
+	</div>
+	<div class="content" ng-if="currentPage == 'product'" ng-controller="ProductCtrl">
+		<% include product%>
+	</div>
+	<div class="content" ng-if="currentPage == 'success'" ng-controller="SuccessCaseCtrl">
+		<% include success-case%>
+	</div>
+</div>
+
+

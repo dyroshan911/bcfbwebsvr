@@ -1,0 +1,123 @@
+<div class="container">
+	<br/>
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-body" cg-busy="myPromiseInfo">
+				<form name='accountForm' role="form" class="form-horizontal" ng-submit="onSave()">
+					<div class="form-group">
+						<h2 style="text-align: center;">个人信息</h2>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">账号</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" readonly="" ng-model="accountData.userName" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">姓名</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="name" title="请输入姓名" required="" maxlength="20" ng-model="accountData.name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入新电话号码" required="" maxlength="20" ng-model="accountData.phone"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="accountForm.phone.$dirty &amp;&amp; accountForm.phone.$invalid">
+								<small class="alert-danger well-sm" ng-show="accountForm.phone.$error.pattern">请使用数字</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">密码</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="password" class="form-control" name="password" placeholder="不修改时无需输入" title="请输入密码" maxlength="20" ng-model="accountData.password"
+							ng-minlength="6" ng-change="onCheckPassword(accountData)" />
+							<div ng-show="accountForm.password.$dirty &amp;&amp; accountForm.password.$invalid">
+								<small class="alert-danger well-sm" ng-show="accountForm.password.$error.minlength">最小长度为6个字符</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">确认密码</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" maxlength="20" ng-model="accountData.passwordConfirm"
+							ng-change="onCheckPassword(accountData)" />
+							<div ng-show="accountForm.passwordConfirm.$dirty &amp;&amp; (accountData.passwordConfirm.length &gt; 0)">
+								<small class="alert-danger well-sm" ng-show="!accountData.checkPassword">请确认两次输入的密码一致</small>
+							</div>
+						</div>
+					</div>
+					<br/>
+					<div class="form-group">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="submit" class="btn btn-success btn-lg btn-block">保存</button>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="button" class="btn btn-warning btn-lg btn-block" ng-click="onCancel()">取消</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11" align="right">
+							<a href="javascript:void(0);" ng-click="onUnbind()">解除账号绑定</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="completeDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" cg-busy="myPromiseComplete">
+			<div class="modal-header">
+				<h3 class="modal-title" id="myModalLabel">完善账号信息</h3>
+			</div>
+			<div class="modal-body">
+				<form name='completeForm' role="form" class="form-horizontal" ng-submit="onComplete()">
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<p style="color: red;">请先设置百城账号和密码。</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="text" class="form-control" name="userName" placeholder="用户名" title="请输入用户名" required="" maxlength="20" ng-model="completeData.userName"
+							ng-minlength="6" ng-pattern="/^\w+$/" />
+							<div ng-show="completeForm.userName.$dirty &amp;&amp; completeForm.userName.$invalid">
+								<small class="alert-danger well-sm" ng-show="completeForm.userName.$error.pattern">请使用字母，数字或者下划线</small>
+								<small class="alert-danger well-sm" ng-show="completeForm.userName.$error.minlength &amp;&amp; !completeForm.userName.$error.pattern">最小长度为6个字符</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="password" class="form-control" name="password" placeholder="密码" title="请输入密码" required="" maxlength="20" ng-model="completeData.password"
+							ng-minlength="6" ng-change="onCheckPassword(completeData)" />
+							<div ng-show="completeForm.password.$dirty &amp;&amp; completeForm.password.$invalid">
+								<small class="alert-danger well-sm" ng-show="completeForm.password.$error.minlength">最小长度为6个字符</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" required="" maxlength="20" ng-model="completeData.passwordConfirm"
+							ng-change="onCheckPassword(completeData)" />
+							<div ng-show="completeForm.passwordConfirm.$dirty &amp;&amp; (completeData.passwordConfirm.length &gt; 0)">
+								<small class="alert-danger well-sm" ng-show="!completeData.checkPassword">请确认两次输入的密码一致</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+							<button class="btn btn-success btn-lg btn-block" type="submit">确定</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

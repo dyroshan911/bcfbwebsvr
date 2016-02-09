@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+		<div class="panel panel-default" style="margin-top: 50px;" cg-busy="myPromise">
+			<div class="panel-body">
+				<form name='loginForm' role="form" class="form-horizontal" ng-submit="onLogin()">
+					<div class="form-group">
+						<h2 style="text-align: center;">登录</h2>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="text" class="form-control" name="userName" placeholder="用户名" title="请输入用户名" required="" maxlength="20" ng-model="loginData.userName" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+							<input type="password" class="form-control" name="password" placeholder="密码" title="请输入密码" required="" maxlength="20" ng-model="loginData.password" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11" align="right">
+							<a href="/signup">新用户注册</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+							<button class="btn btn-success btn-lg btn-block" type="submit">确定</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

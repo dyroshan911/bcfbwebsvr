@@ -1,0 +1,226 @@
+<div class ="container-fluid">
+	<br/>
+	<div class="row">
+		<div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
+			<button class="btn btn-md btn-block" style="color: #fff; background-color: #32415a;" data-toggle="modal" data-target="#addDialog">新增产品</button>
+		</div>
+		<div class="input-group col-xs-5 col-sm-4 col-md-3 col-lg-2">
+			<input type="text" class="form-control" placeholder="搜索" maxlength="10" ng-model="search" />
+			<span class="input-group-addon">
+				<a href="javascript:void(0);" class="glyphicon glyphicon-search" ng-click="onSearch()"></a>
+			</span>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<table class="table table-bordered table-striped table-hover" cg-busy="myPromiseProduct">
+			<thead>
+				<tr>
+					<th width="10%">产品名称</th>
+					<th width="10%">类型</th>
+					<th width="10%">最低额度(万元)</th>
+					<th width="10%">最高额度(万元)</th>
+					<th width="10%">最低利率(%)</th>
+					<th width="10%">最低利率(%)</th>
+					<th width="20%">简介</th>
+					<th width="5%"></th>
+					<th width="5%"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in productList">
+					<td align="center" ng-bind="product.title"></td>
+					<td align="center" ng-bind="product.type"></td>
+					<td align="right" ng-bind="product.money_min"></td>
+					<td align="right" ng-bind="product.money_max"></td>
+					<td align="right" ng-bind="product.rate_min"></td>
+					<td align="right" ng-bind="product.rate_max"></td>
+					<td align="center" ng-bind="product.detail"></td>
+					<td align="center">
+						<a href="javascript:void(0);" ng-click="onEditProduct(product)">编辑</a>
+					</td>
+					<td align="center">
+						<a href="javascript:void(0);" style="color: red;" ng-click="onRemoveProduct($index, product)">删除</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<nav>
+		<ul class="pagination">
+			<li ng-repeat="page in pageData.list">
+				<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == pageData.current]" ng-bind="page.name" ng-click="gotoPage(pageData, page.index)"></a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" cg-busy="myPromiseAdd">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">新增产品</h4>
+			</div>
+			<div class="modal-body">
+				<form name='addForm' role="form" class="form-horizontal" ng-submit="onAddProduct()">
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">名称</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="title" placeholder="名称" title="请输入产品名称" required="" maxlength="20" ng-model="addProductData.title" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">类型</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="type" placeholder="类型" title="请输入产品类型" required="" maxlength="20" ng-model="addProductData.type" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">最低额度(万元)</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="moneyMin" placeholder="最低额度" title="请输入产品最低额度" required="" maxlength="20" ng-model="addProductData.moneyMin"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="addForm.moneyMin.$dirty &amp;&amp; addForm.moneyMin.$invalid">
+								<small class="alert-danger well-sm" ng-show="addForm.moneyMin.$error.pattern">请输入正确的格式，如“5.00”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">最高额度(万元)</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="moneyMax" placeholder="最高额度" title="请输入产品最高额度" required="" maxlength="20" ng-model="addProductData.moneyMax"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="addForm.moneyMax.$dirty &amp;&amp; addForm.moneyMax.$invalid">
+								<small class="alert-danger well-sm" ng-show="addForm.moneyMax.$error.pattern">请输入正确的格式，如“5.00”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">最低利率(%)</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="rateMin" placeholder="最低利率" title="请输入产品最低利率" required="" maxlength="20" ng-model="addProductData.rateMin"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="addForm.rateMin.$dirty &amp;&amp; addForm.rateMin.$invalid">
+								<small class="alert-danger well-sm" ng-show="addForm.rateMin.$error.pattern">请输入正确的格式，如“0.65”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">最高利率(%)</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="rateMax" placeholder="最高利率" title="请输入产品最高利率" required="" maxlength="20" ng-model="addProductData.rateMax"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="addForm.rateMax.$dirty &amp;&amp; addForm.rateMax.$invalid">
+								<small class="alert-danger well-sm" ng-show="addForm.rateMax.$error.pattern">请输入正确的格式，如“0.65”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">简介</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="detail" placeholder="简介" title="请输入产品简介" maxlength="50" ng-model="addProductData.detail" />
+						</div>
+					</div>
+					<br/>
+					<div class="form-group">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="submit" class="btn btn-md btn-block" style="color: #fff; background-color: #32415a;">新增</button>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="button" class="btn btn-md btn-block" style="color: #fff; background-color: #32415a;" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" cg-busy="myPromiseEdit">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">编辑产品</h4>
+			</div>
+			<div class="modal-body">
+				<form name='updateForm' role="form" class="form-horizontal" ng-submit="onSave()">
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">名称</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="title" placeholder="名称" title="请输入产品名称" required="" maxlength="20" ng-model="updateProductData.title" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">类型</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="type" placeholder="类型" title="请输入产品类型" required="" maxlength="20" ng-model="updateProductData.type" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">最低额度(万元)</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="moneyMin" placeholder="最低额度" title="请输入产品最低额度" required="" maxlength="20" ng-model="updateProductData.moneyMin"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="updateForm.moneyMin.$dirty &amp;&amp; updateForm.moneyMin.$invalid">
+								<small class="alert-danger well-sm" ng-show="updateForm.moneyMin.$error.pattern">请输入正确的格式，如“5.00”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">最高额度(万元)</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="moneyMax" placeholder="最高额度" title="请输入产品最高额度" required="" maxlength="20" ng-model="updateProductData.moneyMax"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="updateForm.moneyMax.$dirty &amp;&amp; updateForm.moneyMax.$invalid">
+								<small class="alert-danger well-sm" ng-show="updateForm.moneyMax.$error.pattern">请输入正确的格式，如“5.00”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">最低利率(%)</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="rateMin" placeholder="最低利率" title="请输入产品最低利率" required="" maxlength="20" ng-model="updateProductData.rateMin"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="updateForm.rateMin.$dirty &amp;&amp; updateForm.rateMin.$invalid">
+								<small class="alert-danger well-sm" ng-show="updateForm.rateMin.$error.pattern">请输入正确的格式，如“0.65”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">最高利率(%)</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="rateMax" placeholder="最高利率" title="请输入产品最高利率" required="" maxlength="20" ng-model="updateProductData.rateMax"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="updateForm.rateMax.$dirty &amp;&amp; updateForm.rateMax.$invalid">
+								<small class="alert-danger well-sm" ng-show="updateForm.rateMax.$error.pattern">请输入正确的格式，如“0.65”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">简介</lable>
+						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
+							<input type="text" class="form-control" name="detail" placeholder="简介" title="请输入产品简介" maxlength="50" ng-model="updateProductData.detail" />
+						</div>
+					</div>
+					<br/>
+					<div class="form-group">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="submit" class="btn btn-md btn-block" style="color: #fff; background-color: #32415a;">保存</button>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="button" class="btn btn-md btn-block" style="color: #fff; background-color: #32415a;" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

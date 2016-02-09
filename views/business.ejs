@@ -1,0 +1,359 @@
+<nav class="row navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">首页</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						业务查询
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:void(0);">贷款业务</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0);">公司详情</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">公告资讯</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">招贤纳士</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-if="!session.logged">
+					<a href="/login">用户登录</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="/business">欢迎，{{session.userName}}</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="javascript:void(0);" ng-click="onLogout()">登出</a>
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
+</nav>
+
+<div class="wall" id="business-wall">
+	<div class ="row" style="margin-top: 20px;">
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			<a href="/add-customer" class="btn btn-success btn-md btn-block">新增客户</a>
+		</div>
+		<div class="input-group col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			<input type="text" class="form-control" placeholder="搜索" maxlength="10" ng-model="search" />
+			<span class="input-group-addon">
+				<a href="javascript:void(0);" class="glyphicon glyphicon-search" ng-click="onSearch()"></a>
+			</span>
+		</div>
+	</div>
+	<br/>
+	<div>
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" id="myTabs" role="tablist">
+			<li role="presentation" ng-show="session.role == 'admin' || session.role == 'channel-mgr'">
+				<a href="#myChannels" role="tab" data-toggle="tab" ng-bind="tabNames.channel"></a>
+			</li>
+			<li role="presentation" class="active">
+				<a href="#myCustomers" role="tab" data-toggle="tab" ng-bind="tabNames.customer"></a>
+			</li>
+			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
+				<a href="#myMembers" role="tab" data-toggle="tab" ng-bind="tabNames.member"></a>
+			</li>
+			<li role="presentation" ng-show="checkCustomer.show">
+				<a href="#checkCustomers" role="tab" data-toggle="tab">{{checkCustomer.ownerName}}的客户</a>
+			</li>
+			<span ng-show="currentPageData == checkCustomerPageData" style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
+				<a href="javascript:void(0);" ng-click="onCloseCheck()">&times;</a>
+			</span>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="myCustomers" cg-busy="myPromiseCustomers">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="10%">姓名</th>
+							<th width="5%">性别</th>
+							<th width="10%">联系电话</th>
+							<th width="10%">申请金额</th>
+							<th width="10%">放款金额</th>
+							<th width="10%">服务费率(%)</th>
+							<th width="10%">放款日期</th>
+							<th width="10%">申请时间</th>
+							<th width="10%">备注</th>
+							<th width="10%">状态</th>
+							<th width="5%" ng-hide="session.role == 'member'"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="customer in customerList">
+							<td align="center" ng-bind="customer.name"></td>
+							<td align="center" ng-bind="customer.sexName"></td>
+							<td>
+								<select class="form-control form-select">
+									<option ng-repeat="phone in customer.phoneList" ng-bind="phone.value"></option>
+								</select>
+							</td>
+							<td align="right" ng-bind="customer.apply_amount"></td>
+							<td align="right" ng-bind="customer.finished_amount"></td>
+							<td align="right" ng-bind="customer.server_rate"></td>
+							<td align="center" ng-bind="customer.billingDate"></td>
+							<td align="center" ng-bind="customer.createDate"></td>
+							<td align="center" ng-bind="customer.comment"></td>
+							<td align="center" ng-bind="customer.statusName"></td>
+							<td align="center" ng-hide="session.role == 'member'">
+								<a href="javascript:void(0);" ng-click="onEditCustomer(customer)">编辑</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in customerPageData.list">
+							<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == customerPageData.current]" ng-bind="page.name" ng-click="gotoPage(customerPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="myChannels" cg-busy="myPromiseChannels">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="10%">姓名</th>
+							<th width="10%">联系电话</th>
+							<th width="15%">注册时间</th>
+							<th width="10%">今日进件</th>
+							<th width="10%">历史进件</th>
+							<th width="10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="channel in channelList">
+							<td align="center" ng-bind="channel.true_name"></td>
+							<td align="center" ng-bind="channel.phone"></td>
+							<td align="center" ng-bind="channel.createDate"></td>
+							<td align="right" ng-bind="channel.today_customers"></td>
+							<td align="right" ng-bind="channel.total_customers"></td>
+							<td align="center">
+								<a href="javascript:void(0);" ng-click="onCheckCustomers(channel)">查看客户</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in channelPageData.list">
+							<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == channelPageData.current]" ng-bind="page.name" ng-click="gotoPage(channelPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="myMembers" cg-busy="myPromiseMembers">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="10%">会员姓名</th>
+							<th width="10%">联系电话</th>
+							<th width="15%">注册时间</th>
+							<th width="10%">今日进件</th>
+							<th width="10%">历史进件</th>
+							<th width="10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="member in memberList">
+							<td align="center" ng-bind="member.true_name"></td>
+							<td align="center" ng-bind="member.phone"></td>
+							<td align="center" ng-bind="member.createDate"></td>
+							<td align="right" ng-bind="member.today_customers"></td>
+							<td align="right" ng-bind="member.total_customers"></td>
+							<td align="center">
+								<a href="javascript:void(0);" ng-click="onCheckCustomers(member)">查看客户</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in memberPageData.list">
+							<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == memberPageData.current]" ng-bind="page.name" ng-click="gotoPage(memberPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers" cg-busy="myPromiseCheckCustomers">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="10%">姓名</th>
+							<th width="5%">性别</th>
+							<th width="10%">申请金额</th>
+							<th width="10%">放款金额</th>
+							<th width="10%">服务费率</th>
+							<th width="10%">还款时间</th>
+							<th width="10%">申请时间</th>
+							<th width="10%">备注</th>
+							<th width="10%">状态</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="customer in checkCustomer.list">
+							<td align="center" ng-bind="customer.name"></td>
+							<td align="center" ng-bind="customer.sexName"></td>
+							<td align="right" ng-bind="customer.apply_amount"></td>
+							<td align="right" ng-bind="customer.finished_amount"></td>
+							<td align="right" ng-bind="customer.server_rate"></td>
+							<td align="center" ng-bind="customer.billing_date"></td>
+							<td align="center" ng-bind="customer.createDate"></td>
+							<td align="center" ng-bind="customer.comment"></td>
+							<td align="center" ng-bind="customer.statusName"></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in checkCustomerPageData.list">
+							<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == checkCustomerPageData.current]" ng-bind="page.name" ng-click="gotoPage(checkCustomerPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" cg-busy="myPromiseUpdate">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">编辑客户</h4>
+			</div>
+			<div class="modal-body">
+				<form name='editForm' role="form" class="form-horizontal" ng-submit="onSaveCustomer()">
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">姓名</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="name" title="请输入姓名" maxlength="20" ng-model="editCustomer.name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">性别</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<div class="radio-inline">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="editCustomer.sex" />
+									先生
+								</label>
+							</div>
+							<div class="radio-inline">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="editCustomer.sex" />
+									女士
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="phone" placeholder="电话号码（新增)" title="请输入新电话号码" maxlength="20" ng-model="editCustomer.newPhone"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="editForm.phone.$dirty &amp;&amp; editForm.phone.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.phone.$error.pattern">请使用数字</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="applyAmount" title="请输入贷款金额" readonly="" maxlength="20" ng-model="editCustomer.applyAmount"
+							ng-pattern="/^\d+$/" />
+							<div ng-show="editForm.applyAmount.$dirty &amp;&amp; editForm.applyAmount.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.applyAmount.$error.pattern">请使用数字</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="finishedAmount" title="请输入已放款金额" maxlength="20" ng-model="editCustomer.finishedAmount"
+							ng-pattern="/^\d+$/" ng-change="onCheckAmount()" />
+							<div ng-show="editForm.finishedAmount.$dirty &amp;&amp; editForm.finishedAmount.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.finishedAmount.$error.pattern">请使用数字</small>
+							</div>
+							<small class="alert-danger well-sm" ng-show="editCustomer.checkAmount == false">不能超过申请金额</small>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率(%)</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="serverRate" title="请输入服务费率" maxlength="20" ng-model="editCustomer.serverRate"
+							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+							<div ng-show="editForm.serverRate.$dirty &amp;&amp; editForm.serverRate.$invalid">
+								<small class="alert-danger well-sm" ng-show="editForm.serverRate.$error.pattern">输入正确的格式，如“0.65”</small>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款日期</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<div class="input-group date" id="datepicker">
+								<input type="text" class="form-control" id="datepicker-input" readonly="" />
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-th"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="comment" title="请输入备注信息" maxlength="50" ng-model="editCustomer.comment" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">状态</lable>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<select class="form-control" ng-options="status.name for status in statusOptions" ng-model="editCustomer.status"></select>
+						</div>
+					</div>
+					<br/>
+					<div class="form-group">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="submit" class="btn btn-success btn-lg btn-block">保存</button>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
