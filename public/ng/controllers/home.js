@@ -62,13 +62,16 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', '$rootSco
         $scope.staffList = [
             { name: '员工A', phone: '15828540001', business: '信用贷款，企业贷款', content: '资深员工，放款快捷' },
             { name: '员工B', phone: '15828540002', business: '房产抵押贷款', content: '资深员工，放款快捷' },
-            { name: '员工C', phone: '15828540003', business: '房产抵押贷款，汽车抵押贷款', content: '资深员工，放款快捷' }
+            { name: '员工C', phone: '15828540003', business: '房产抵押贷款，汽车抵押贷款', content: '资深员工，放款快捷' },
+            { name: '员工D', phone: '15828540004', business: '房产抵押贷款，汽车抵押贷款', content: '资深员工，放款快捷' }
         ];
 
         $scope.infoList = [
             { title: '百城官方网站上线', date: '2016-01-20' },
             { title: '百城微信公众号上线', date: '2016-01-20' },
             { title: '百城会员开放注册', date: '2016-01-10' },
+            { title: '百城新业务启动', date: '2015-21-20' },
+            { title: '百城新业务启动', date: '2015-21-20' },
             { title: '百城新业务启动', date: '2015-21-20' }
         ];
 

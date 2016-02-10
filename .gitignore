@@ -6,3 +6,7 @@
 /public/lib
 .vscode/launch.json
 npm-debug.log
+/backEndSvr/node_modules
+/backEndSvr/public/lib
+/backEndSvr/.vscode/launch.json
+/backEndSvr/npm-debug.log
