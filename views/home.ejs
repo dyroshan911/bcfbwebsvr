@@ -316,19 +316,19 @@
 				<div class="panel panel-success" ng-repeat="product in productList">
 					<div class="panel-heading">
 						<span class="glyphicon glyphicon-tags"></span>
-						<span ng-bind="product.name"></span>
+						<span ng-bind="product.title"></span>
 					</div>
 					<div class="panel-body" style="padding: 5px;">
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<p>放款额度</p>
-							<span class="label label-success" ng-bind="product.edu"></span>
+							<span class="label label-success" ng-bind="product.amount"></span>
 						</div>
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<p>贷款利率</p>
-							<span class="label label-info" ng-bind="product.lilv"></span>
+							<span class="label label-info" ng-bind="product.rate"></span>
 						</div>
 					</div>
-					<div class="panel-footer" ng-bind="product.content"></div>
+					<div class="panel-footer" ng-bind="product.detail"></div>
 				</div>
 			</div>
 
@@ -347,7 +347,7 @@
 				</div>
 				<div class="panel panel-primary" id="case" style="border-bottom: none;">
 					<div class="panel-heading" align="center">成功案例</div>
-					<div class="panel-body" ng-repeat="case in caseList">
+					<div class="panel-body" ng-repeat="case in casesList">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<span class="glyphicon glyphicon-ok" style="color: green;"></span>
@@ -357,7 +357,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">贷款金额 {{case.amount}}</lable>
-							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">月利率 {{case.lilv}}</lable>
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">月利率 {{case.rate}}</lable>
 						</div>
 					</div>
 				</div>
