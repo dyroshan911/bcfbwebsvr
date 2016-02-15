@@ -1,448 +1,436 @@
 <nav class="row navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
             aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">首页</a>
-        </div>
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">首页</a>
+		</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						业务查询
 						<span class="caret"></span>
 					</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="javascript:void(0);">贷款业务</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">公司详情</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">公告资讯</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">招贤纳士</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-if="!session.logged">
-                    <a href="/login">用户登录</a>
-                </li>
-                <li ng-if="session.logged">
-                    <a href="/business">欢迎，{{session.userName}}</a>
-                </li>
-                <li ng-if="session.logged">
-                    <a href="javascript:void(0);" ng-click="onLogout()">登出</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:void(0);">贷款业务</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0);">公司详情</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">公告资讯</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">招贤纳士</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-if="!session.logged">
+					<a href="/login">用户登录</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="/business">欢迎，{{session.userName}}</a>
+				</li>
+				<li ng-if="session.logged">
+					<a href="javascript:void(0);" ng-click="onLogout()">登出</a>
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
 </nav>
 
 <div class="row" id="home-body">
-    <div class="home-banner">
-        <div id="banners-area">
-            <div id="myCarousel" class="carousel slide home-section" data-ride="carousel" style="max-width: 100%; margin: 0 auto;">
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox1">
-                            <div class="car-main-cont" style="background-image: url(img/img1.jpg);">
-                                <div class="container">
-                                    <div style="width: 300px; margin-top: 65px;">
-                                        <div class="car-text">
-                                            <form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group" align="left">
-                                                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <div class="radio-inline">
-                                                            <label>
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio-inline">
-                                                            <label>
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox2">
-                            <div class="car-main-cont" style="background-image: url(img/img2.jpg);">
-                                <div class="container">
-                                    <div style="width: 300px; margin-top: 65px;">
-                                        <div class="car-text">
-                                            <form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group" align="left">
-                                                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <div class="radio-inline">
-                                                            <label>
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio-inline">
-                                                            <label>
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox3">
-                            <div class="car-main-cont" style="background-image: url(img/img3.jpg);">
-                                <div class="container">
-                                    <div style="width: 300px; margin-top: 65px;">
-                                        <div class="car-text">
-                                            <form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group" align="left">
-                                                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <div class="radio-inline">
-                                                            <label>
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio-inline">
-                                                            <label>
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                                        <button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <ol class="carousel-indicators" style="left: 20%; bottom: 0%;">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                    <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-                </ol>
-                <a class="left carousel-control" href="javascript:void(0);" data-target="#myCarousel" data-slide="prev">
-                    <i class="icon-prev fa fa-angle-left" style="font-size: 80px; margin-top: -30px;"></i>
-                </a>
-                <a class="right carousel-control" href="javascript:void(0);" data-target="#myCarousel" data-slide="next">
-                    <i class="icon-next fa fa-angle-right" style="font-size: 80px; margin-top: -30px;"></i>
-                </a>
-            </div>
-        </div>
-    </div>
+	<div class="home-banner">
+		<div id="banners-area">
+			<div id="myCarousel" class="carousel slide home-section" data-ride="carousel" style="max-width: 100%; margin: 0 auto;">
+				<div class="carousel-inner">
+					<div class="item active">
+						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox1">
+							<div class="car-main-cont" style="background-image: url(img/img1.jpg);">
+								<div class="container">
+									<div style="width: 300px; margin-top: 65px;">
+										<div class="car-text">
+											<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
+													</div>
+												</div>
+												<div class="form-group" align="left">
+													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<div class="radio-inline">
+															<label>
+																<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
+															</label>
+														</div>
+														<div class="radio-inline">
+															<label>
+																<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
+															</label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox2">
+							<div class="car-main-cont" style="background-image: url(img/img2.jpg);">
+								<div class="container">
+									<div style="width: 300px; margin-top: 65px;">
+										<div class="car-text">
+											<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
+													</div>
+												</div>
+												<div class="form-group" align="left">
+													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<div class="radio-inline">
+															<label>
+																<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
+															</label>
+														</div>
+														<div class="radio-inline">
+															<label>
+																<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
+															</label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox3">
+							<div class="car-main-cont" style="background-image: url(img/img3.jpg);">
+								<div class="container">
+									<div style="width: 300px; margin-top: 65px;">
+										<div class="car-text">
+											<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
+													</div>
+												</div>
+												<div class="form-group" align="left">
+													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<div class="radio-inline">
+															<label>
+																<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
+															</label>
+														</div>
+														<div class="radio-inline">
+															<label>
+																<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
+															</label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+														<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ol class="carousel-indicators" style="left: 20%; bottom: 0%;">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+					<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+				</ol>
+				<a class="left carousel-control" href="javascript:void(0);" data-target="#myCarousel" data-slide="prev">
+					<i class="icon-prev fa fa-angle-left" style="font-size: 80px; margin-top: -30px;"></i>
+				</a>
+				<a class="right carousel-control" href="javascript:void(0);" data-target="#myCarousel" data-slide="next">
+					<i class="icon-next fa fa-angle-right" style="font-size: 80px; margin-top: -30px;"></i>
+				</a>
+			</div>
+		</div>
+	</div>
 
-    <div class="home-section" style="background-color: #fff;">
-        <div class="container">
-            <img width="100%" src="img/product-depict.jpg"></img>
-        </div>
-    </div>
+	<div class="home-section" style="background-color: #fff;">
+		<div class="container">
+			<img width="100%" src="img/product-depict.jpg"></img>
+		</div>
+	</div>
 
-    <div class="home-section">
-        <div class="container" style="min-width:1170px; margin-top: 20px;">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <div class="panel panel-success" id="apply" cg-busy="myPromise">
-                    <div class="panel-heading" align="center" style="background-color: #7aab13; color: #fff; font-size: 20px;">快捷申请</div>
-                    <div class="panel-body">
-                        <form name='customerForm' role="form" class="form-horizontal" ng-submit="onApply()">
-                            <div class="form-group">
-                                <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                    <span class="input-group-addon">
+	<div class="home-section">
+		<div class="container" style="min-width:1170px; margin-top: 20px;">
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div class="panel panel-success" id="apply" cg-busy="myPromise">
+					<div class="panel-heading" align="center" style="background-color: #7aab13; color: #fff; font-size: 20px;">快捷申请</div>
+					<div class="panel-body">
+						<form name='customerForm' role="form" class="form-horizontal" ng-submit="onApply()">
+							<div class="form-group">
+								<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-yen"></span>
-                                    </span>
-                                    <input type="text" class="form-control" name="amount" placeholder="贷款金额" title="请输入贷款金额" required="" maxlength="20" ng-model="customerData.amount"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                    <span class="input-group-addon">
+									</span>
+									<input type="text" class="form-control" name="amount" placeholder="贷款金额" title="请输入贷款金额" required="" maxlength="20" ng-model="customerData.amount" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-earphone"></span>
-                                    </span>
-                                    <input type="text" class="form-control" name="phone" placeholder="联系电话" title="请输入联系电话" required="" maxlength="20" ng-model="customerData.phone"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                    <span class="input-group-addon">
+									</span>
+									<input type="text" class="form-control" name="phone" placeholder="联系电话" title="请输入联系电话" required="" maxlength="20" ng-model="customerData.phone" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-user"></span>
-                                    </span>
-                                    <input type="text" class="form-control" name="name" placeholder="您的尊姓" title="请输入您的姓氏" required="" maxlength="20" ng-model="customerData.name"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                    <div class="radio-inline">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="customerData.sex" /> 先生
-                                        </label>
-                                    </div>
-                                    <div class="radio-inline">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="customerData.sex" /> 女士
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-                                    <button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">立即申请</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div style="overflow: auto; max-height: 506px;">
-                    <div class="panel panel-default" id="staff" ng-repeat="staff in staffList">
-                        <div class="panel-body" style="padding: 5px;">
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <img width="100%" src="img/avatar.jpg"></img>
-                            </div>
-                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                <div class="row">
-                                    <span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4" ng-bind="staff.name"></span>
-                                    <span class="col-xs-8 col-sm-8 col-md-8 col-lg-8 label label-warning">优秀员工</span>
-                                </div>
-                                <div class="row">
-                                    <span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">联系方式:</span>
-                                    <span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.phone"></span>
-                                </div>
-                                <div class="row">
-                                    <span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">业务范围:</span>
-                                    <span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.business"></span>
-                                </div>
-                                <div class="row">
-                                    <span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">员工简介:</span>
-                                    <span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.content"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+									</span>
+									<input type="text" class="form-control" name="name" placeholder="您的尊姓" title="请输入您的姓氏" required="" maxlength="20" ng-model="customerData.name" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+									<div class="radio-inline">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="customerData.sex" /> 先生
+										</label>
+									</div>
+									<div class="radio-inline">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="customerData.sex" /> 女士
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+									<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">立即申请</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div style="overflow: auto; max-height: 524px;">
+					<div class="panel panel-default" id="staff" ng-repeat="staff in staffList">
+						<div class="panel-body" style="padding: 5px;">
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<img width="100%" src="img/avatar.jpg"></img>
+							</div>
+							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<div class="row">
+									<span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4" ng-bind="staff.name"></span>
+									<span class="col-xs-8 col-sm-8 col-md-8 col-lg-8 label label-warning">优秀员工</span>
+								</div>
+								<div class="row">
+									<span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">联系方式:</span>
+									<span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.phone"></span>
+								</div>
+								<div class="row">
+									<span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">业务范围:</span>
+									<span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.business"></span>
+								</div>
+								<div class="row">
+									<span class="title col-xs-4 col-sm-4 col-md-4 col-lg-4">员工简介:</span>
+									<span class="col-xs-8 col-sm-8 col-md-8 col-lg-8" ng-bind="staff.content"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="overflow: auto; max-height: 831px;">
-                <div class="panel panel-success" ng-repeat="product in productList">
-                    <div class="panel-heading">
-                        <span class="glyphicon glyphicon-tags"></span>
-                        <span ng-bind="product.title"></span>
-                    </div>
-                    <div class="panel-body" style="padding: 5px;">
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                            <p>放款额度</p>
-                            <span class="label label-success" ng-bind="product.amount"></span>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                            <p>贷款利率</p>
-                            <span class="label label-info" ng-bind="product.rate"></span>
-                        </div>
-                    </div>
-                    <div class="panel-footer" ng-bind="product.detail"></div>
-                </div>
-            </div>
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="overflow: auto; max-height: 849px;">
+				<div class="panel panel-success" ng-repeat="product in productList">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-tags"></span>
+						<span ng-bind="product.title"></span>
+					</div>
+					<div class="panel-body" style="padding: 5px;">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<p>放款额度</p>
+							<span class="label label-success" ng-bind="product.amount"></span>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<p>贷款利率</p>
+							<span class="label label-info" ng-bind="product.rate"></span>
+						</div>
+					</div>
+					<div class="panel-footer" ng-bind="product.detail"></div>
+				</div>
+			</div>
 
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <div class="panel panel-warning" id="info">
-                    <div class="panel-heading" align="center">热门资讯</div>
-                    <div class="panel-body">
-                        <div class="row" ng-repeat="info in infoList">
-                            <span ng-bind="info.date"></span>
-                            <a href="#" ng-bind="info.title"></a>
-                        </div>
-                    </div>
-                    <div class="panel-footer" align="center">
-                        <a href="#">查看更多</a>
-                    </div>
-                </div>
-                <div class="panel panel-primary" id="case" style="border-bottom: none; overflow: auto; max-height: 565px;">
-                    <div class="panel-heading" align="center">成功案例</div>
-                    <div class="panel-body" ng-repeat="case in casesList">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <span class="glyphicon glyphicon-ok" style="color: green;"></span> {{case.name}}
-                            </lable>
-                            <lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="case.type"></lable>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">贷款金额 {{case.amount}}</lable>
-                            <lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">月利率 {{case.rate}}</lable>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div class="panel panel-warning" id="info">
+					<div class="panel-heading" align="center">热门资讯</div>
+					<div class="panel-body">
+						<div class="row" ng-repeat="info in infoList">
+							<span ng-bind="info.date"></span>
+							<a href="#" ng-bind="info.title"></a>
+						</div>
+					</div>
+					<div class="panel-footer" align="center">
+						<a href="#">查看更多</a>
+					</div>
+				</div>
+				<div class="panel panel-primary" id="case" style="border-bottom: none; overflow: auto; max-height: 583px;">
+					<div class="panel-heading" align="center">成功案例</div>
+					<div class="panel-body" ng-repeat="case in casesList">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<span class="glyphicon glyphicon-ok" style="color: green;"></span> {{case.name}}
+							</lable>
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="case.type"></lable>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">贷款金额 {{case.amount}}</lable>
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">月利率 {{case.rate}}</lable>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <div class="container home-section bank" style="background-color: #fff;">
-            <h2>合作银行</h2>
-            <img src="img/bank/zgyh.jpg" />
-            <img src="img/bank/jsyh.jpg" />
-            <img src="img/bank/zsyh.jpg" />
-            <img src="img/bank/gsyh.jpg" />
-            <img src="img/bank/jtyh.jpg" />
-            <img src="img/bank/nyyh.jpg" />
-            <img src="img/bank/zxyh.jpg" />
-            <img src="img/bank/xyyh.jpg" />
-            <img src="img/bank/yzyh.jpg" />
-            <img src="img/bank/msyh.jpg" />
-            <img src="img/bank/payh.jpg" />
-            <img src="img/bank/nbyh.jpg" />
-            <img src="img/bank/gfyh.jpg" />
-            <img src="img/bank/szyh.jpg" />
-            <img src="img/bank/pfyh.jpg" />
-            <img src="img/bank/gdyh.jpg" />
-            <img src="img/bank/bjyh.jpg" />
-            <img src="img/bank/njyh.jpg" />
-        </div>
-    </div>
+		<div class="container home-section bank" style="background-color: #fff;">
+			<h2>合作银行</h2>
+			<img src="img/bank/zgyh.jpg" />
+			<img src="img/bank/jsyh.jpg" />
+			<img src="img/bank/zsyh.jpg" />
+			<img src="img/bank/gsyh.jpg" />
+			<img src="img/bank/jtyh.jpg" />
+			<img src="img/bank/nyyh.jpg" />
+			<img src="img/bank/zxyh.jpg" />
+			<img src="img/bank/xyyh.jpg" />
+			<img src="img/bank/yzyh.jpg" />
+			<img src="img/bank/msyh.jpg" />
+			<img src="img/bank/payh.jpg" />
+			<img src="img/bank/nbyh.jpg" />
+			<img src="img/bank/gfyh.jpg" />
+			<img src="img/bank/szyh.jpg" />
+			<img src="img/bank/pfyh.jpg" />
+			<img src="img/bank/gdyh.jpg" />
+			<img src="img/bank/bjyh.jpg" />
+			<img src="img/bank/njyh.jpg" />
+		</div>
+	</div>
 </div>
 
 <div class="row" id="home-footer">
-    <div class="container">
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="row">
-                    <a href="javascript:void(0);">关于百城富邦</a>
-                </div>
-                <div class="row">
-                    <a href="javascript:void(0);">联系我们</a>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="row">
-                    <a href="javascript:void(0);">合作伙伴</a>
-                </div>
-                <div class="row">
-                    <a href="javascript:void(0);">贷款商家</a>
-                </div>
-            </div>
-        </div>
+	<div class="container">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<div class="row">
+					<a href="javascript:void(0);">关于百城富邦</a>
+				</div>
+				<div class="row">
+					<a href="javascript:void(0);">联系我们</a>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<div class="row">
+					<a href="javascript:void(0);">合作伙伴</a>
+				</div>
+				<div class="row">
+					<a href="javascript:void(0);">贷款商家</a>
+				</div>
+			</div>
+		</div>
 
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" align="center">
-            <p>扫一扫，关注我们</p>
-            <img src="img/qrcodeMap.jpg" width="180px" height="180px" />
-        </div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" align="center">
+			<p>扫一扫，关注我们</p>
+			<img src="img/qrcodeMap.jpg" width="180px" height="180px" />
+		</div>
 
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div class="row">
-                <span class="glyphicon glyphicon-phone-alt"></span> 客服热线（工作时间 8:00-22:00）
-            </div>
-            <div class="row">
-                400-XXX-XXX
-            </div>
-            <br/>
-            <div class="row">
-                <span class="glyphicon glyphicon-home"></span> 公司地址：成都市XXXXXXXXXXXXXXXX
-            </div>
-            <div class="row">
-                <span class="glyphicon glyphicon-envelope"></span> 邮政编码：610000"
-            </div>
-            <div class="row">
-                <span class="glyphicon glyphicon-cloud"></span> Email：mail@XXX.com
-            </div>
-            <br/>
-            <div class="row">
-                四川百城富贷金融信息服务有限公司
-            </div>
-            <div class="row">
-                蜀ICP备xxxxxxx-1号-1&nbsp;&nbsp;川B -xxxxxxx
-            </div>
-        </div>
-    </div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="row">
+				<span class="glyphicon glyphicon-phone-alt"></span> 客服热线（工作时间 8:00-22:00）
+			</div>
+			<div class="row">
+				400-XXX-XXX
+			</div>
+			<br/>
+			<div class="row">
+				<span class="glyphicon glyphicon-home"></span> 公司地址：成都市XXXXXXXXXXXXXXXX
+			</div>
+			<div class="row">
+				<span class="glyphicon glyphicon-envelope"></span> 邮政编码：610000"
+			</div>
+			<div class="row">
+				<span class="glyphicon glyphicon-cloud"></span> Email：mail@XXX.com
+			</div>
+			<br/>
+			<div class="row">
+				四川百城富贷金融信息服务有限公司
+			</div>
+			<div class="row">
+				蜀ICP备xxxxxxx-1号-1&nbsp;&nbsp;川B -xxxxxxx
+			</div>
+		</div>
+	</div>
 </div>
