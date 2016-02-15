@@ -4,6 +4,7 @@
 
 /node_modules
 /public/lib
+/config
 .vscode/launch.json
 npm-debug.log
 /backEndSvr/node_modules
