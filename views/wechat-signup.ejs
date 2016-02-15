@@ -13,10 +13,11 @@
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="20" ng-model="wechatSignupData.phone"
-							ng-pattern="/^\d+$/" />
+							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="11" ng-model="wechatSignupData.phone"
+							ng-minlength="11" ng-pattern="/^\d+$/" />
 							<div ng-show="wechatSignupForm.phone.$dirty &amp;&amp; wechatSignupForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="wechatSignupForm.phone.$error.pattern">请使用数字</small>
+								<small class="alert-danger well-sm" ng-show="wechatSignupForm.phone.$error.minlength &amp;&amp; !wechatSignupForm.phone.$error.pattern">请输入11位手机号码</small>
 							</div>
 						</div>
 					</div>

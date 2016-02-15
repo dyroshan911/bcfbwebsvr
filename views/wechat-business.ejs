@@ -322,10 +322,11 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="phone" placeholder="电话号码（新增)" title="请输入新电话号码" maxlength="20" ng-model="editCustomer.newPhone"
-							ng-pattern="/^\d+$/" />
+							<input type="text" class="form-control" name="phone" placeholder="电话号码（新增)" title="请输入新电话号码" maxlength="11" ng-model="editCustomer.newPhone"
+							ng-minlength="11" ng-pattern="/^\d+$/" />
 							<div ng-show="editForm.phone.$dirty &amp;&amp; editForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.phone.$error.pattern">请使用数字</small>
+								<small class="alert-danger well-sm" ng-show="editForm.phone.$error.minlength &amp;&amp; !editForm.phone.$error.pattern">请输入11位手机号码</small>
 							</div>
 						</div>
 					</div>

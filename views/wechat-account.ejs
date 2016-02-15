@@ -22,10 +22,11 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入新电话号码" required="" maxlength="20" ng-model="accountData.phone"
-							ng-pattern="/^\d+$/" />
+							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入新电话号码" required="" maxlength="11" ng-model="accountData.phone"
+							ng-minlength="11" ng-pattern="/^\d+$/" />
 							<div ng-show="accountForm.phone.$dirty &amp;&amp; accountForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="accountForm.phone.$error.pattern">请使用数字</small>
+								<small class="alert-danger well-sm" ng-show="accountForm.phone.$error.minlength &amp;&amp; !accountForm.phone.$error.pattern">请输入11位手机号码</small>
 							</div>
 						</div>
 					</div>

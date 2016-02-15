@@ -83,10 +83,11 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
 						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
-							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="20" ng-model="addUserData.phone"
-							ng-pattern="/^\d+$/" />
+							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="11" ng-model="addUserData.phone"
+							ng-minlength="11" ng-pattern="/^\d+$/" />
 							<div ng-show="addForm.phone.$dirty &amp;&amp; addForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="addForm.phone.$error.pattern">请使用数字</small>
+								<small class="alert-danger well-sm" ng-show="addForm.phone.$error.minlength &amp;&amp; !addForm.phone.$error.pattern">请输入11位手机号码</small>
 							</div>
 						</div>
 					</div>
@@ -144,10 +145,11 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
 						<div class="col-xs-8 col-sm-7 col-md-6 col-lg-6">
-							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="20" ng-model="updateUserData.phone"
-							ng-pattern="/^\d+$/" />
+							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="11" ng-model="updateUserData.phone"
+							ng-minlength="11" ng-pattern="/^\d+$/" />
 							<div ng-show="updateForm.phone.$dirty &amp;&amp; updateForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="updateForm.phone.$error.pattern">请使用数字</small>
+								<small class="alert-danger well-sm" ng-show="updateForm.phone.$error.minlength &amp;&amp; !updateForm.phone.$error.pattern">请输入11位手机号码</small>
 							</div>
 						</div>
 					</div>
