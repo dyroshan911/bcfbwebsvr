@@ -205,18 +205,26 @@ i, cite, em, var, address, dfn {
 		text-align: left;
 	}
 
-#staff .panel-body {
-	border: hidden;
+#staff {
+	margin-bottom: 10px;
 }
 
-	#staff .panel-body span {
-		padding-left: 0;
-		padding-right: 0;
+	#staff .panel-body {
+		border: hidden;
 	}
 
-	#staff .panel-body .title {
-		font-weight: bold;
-	}
+		#staff .panel-body span {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		#staff .panel-body .content {
+			font-weight: bold;
+		}
+
+		#staff .panel-body .name {
+			font-weight: bold;
+		}
 
 #info .row {
 	margin-left: 0;
@@ -239,9 +247,9 @@ i, cite, em, var, address, dfn {
 	color: #fff;
 }
 
-#home-footer a:hover {
-	text-decoration: none;
-}
+	#home-footer a:hover {
+		text-decoration: none;
+	}
 
 .car-text {
 	font-size: 15px;
