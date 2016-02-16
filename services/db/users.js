@@ -84,13 +84,25 @@ userObj.increaseCustomer = function (userId) {
 };
 
 userObj.clearTodayCount = function () {
-    UserModel.update({}, { today_customers: 0 }, { multi: true }, function (err) {
+    UserModel.update({}, { today_customers: 0, today_members: 0 }, { multi: true }, function (err) {
+        if (err) {
+            console.error(err);
+        }
+    });
+    /*UserModel.update({}, { today_members: 0 }, { multi: true }, function (err) {
+        if (err) {
+            console.error(err);
+        }
+    });*/
+};
+
+userObj.increaseMember = function (userId) {
+    UserModel.update({ id: userId }, { $inc: { total_members: 1, today_members: 1 } }, function (err) {
         if (err) {
             console.error(err);
         }
     });
 };
-
 
 
 userObj.queryUser = function (user_id, queryAttr, cb) {
@@ -142,6 +154,7 @@ userObj.createUser = function (userObj, cb) {
                         if (err) {
                             cb(err, null);
                         } else {
+                            UserModel.update({ id: userInfo.superior }, { $inc: { total_members: 1, today_members: 1 } }, function (err) {});
                             cb(null, user);
                         }
                     });
