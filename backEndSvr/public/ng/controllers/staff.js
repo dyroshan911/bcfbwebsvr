@@ -37,7 +37,7 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 		};
 		
 		getChannelList(0, $scope.eachPageCount, '');
-		getChannelMgrList(0, 100, '');
+		getChannelMgrList(0, '', '');
 		
 		//functions
 		$scope.gotoPage = function (pageData, index) {
@@ -74,7 +74,12 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			$scope.updateUserData.userName = user.user_name;
 			$scope.updateUserData.name = user.true_name;
 			$scope.updateUserData.phone = user.phone;
-			$scope.updateUserData.enable = $scope.statusList[0];
+			for (var i = 0; i < $scope.statusList.length; ++i) {
+				if (user.enabled == $scope.statusList[i].value) {
+					$scope.updateUserData.enable = $scope.statusList[i];
+					break;
+				}
+			}
 			for (var i = 0; i < $scope.roleList.length; ++i) {
 				if (user.role == $scope.roleList[i].value) {
 					$scope.updateUserData.role = $scope.roleList[i];
@@ -107,6 +112,7 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 				$scope.updateUserData.selectedUser.role = $scope.updateUserData.role.value;
 				$scope.updateUserData.selectedUser.roleName = $scope.updateUserData.role.name;
 				$scope.updateUserData.selectedUser.superior = $scope.updateUserData.superior.id;
+				$scope.updateUserData.selectedUser.enabled = $scope.updateUserData.enable.value;
 				$('#editDialog').modal('toggle');
 			}, function (err) {
 				alert(err.message);
