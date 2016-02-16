@@ -8,7 +8,11 @@
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="20" ng-model="wechatSignupData.name" />
+							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="10" ng-model="wechatSignupData.name"
+                            ng-pattern="/[\u4e00-\u9fa5]+$/" />
+                            <div ng-show="wechatSignupForm.name.$dirty &amp;&amp; wechatSignupForm.name.$invalid">
+								<small class="alert-danger well-sm" ng-show="wechatSignupForm.name.$error.pattern">请使用中文</small>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
