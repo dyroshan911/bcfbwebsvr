@@ -7,8 +7,9 @@
 						<h2 style="text-align: center;">贷款申请</h2>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="amount" placeholder="贷款金额" title="请输入贷款金额" required="" maxlength="20" ng-model="customerData.amount"
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">贷款金额</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="amount" placeholder="金额" title="请输入贷款金额" required="" maxlength="20" ng-model="customerData.amount"
 							ng-pattern="/^\d+$/" />
 							<div ng-show="customerForm.amount.$dirty &amp;&amp; customerForm.amount.$invalid">
 								<small class="alert-danger well-sm" ng-show="customerForm.amount.$error.pattern">请使用数字</small>
@@ -16,8 +17,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入联系电话" required="" maxlength="11" ng-model="customerData.phone"
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="text" class="form-control" name="phone" placeholder="电话" title="请输入联系电话" required="" maxlength="11" ng-model="customerData.phone"
 							ng-minlength="11" ng-pattern="/^\d+$/" />
 							<div ng-show="customerForm.phone.$dirty &amp;&amp; customerForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="customerForm.phone.$error.pattern">请使用数字</small>
@@ -26,12 +28,13 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">客户姓名</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="20" ng-model="customerData.name" />
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-10 col-xs-offset-1 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+						<div class="col-xs-10 col-xs-offset-4 col-sm-10 col-sm-offset-4 col-md-10 col-md-offset-4 col-lg-10 col-lg-offset-4">
 							<div class="radio-inline">
 								<label>
 									<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="customerData.sex" />
