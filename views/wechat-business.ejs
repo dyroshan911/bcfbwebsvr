@@ -100,7 +100,7 @@
 							</div>
 							<div class="form-group" ng-hide="session.role == 'member'">
 								<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6">
-									<button type="button" class="btn btn-info btn-lg btn-block" ng-click="onEditCustomer(customer)">编辑</button>
+									<button type="button" class="btn btn-info btn-md btn-block" ng-click="onEditCustomer(customer)">编辑</button>
 								</div>
 							</div>
 						</form>
@@ -150,8 +150,20 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">新增会员</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="channel.today_members" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">总会员数</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="channel.total_members" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6">
-									<a class="btn btn-info btn-lg btn-block" href="javascript:void(0);" ng-click="onCheckCustomers(channel)">查看客户</a>
+									<a class="btn btn-info btn-md btn-block" href="javascript:void(0);" ng-click="onCheckCustomers(channel)">查看客户</a>
 								</div>
 							</div>
 						</form>
@@ -202,7 +214,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6">
-									<a class="btn btn-info btn-lg btn-block" href="javascript:void(0);" ng-click="onCheckCustomers(member)">查看客户</a>
+									<a class="btn btn-info btn-md btn-block" href="javascript:void(0);" ng-click="onCheckCustomers(member)">查看客户</a>
 								</div>
 							</div>
 						</form>
@@ -240,7 +252,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率</lable>
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率(%)</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" ng-model="customer.server_rate" readonly="" />
 								</div>

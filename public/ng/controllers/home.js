@@ -60,10 +60,9 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', '$rootSco
         }
 
         $scope.staffList = [
-            { name: '员工A', phone: '15828540001', business: '信用贷款，企业贷款', content: '资深员工，放款快捷' },
-            { name: '员工B', phone: '15828540002', business: '房产抵押贷款', content: '资深员工，放款快捷' },
-            { name: '员工C', phone: '15828540003', business: '房产抵押贷款，汽车抵押贷款', content: '资深员工，放款快捷' },
-            { name: '员工D', phone: '15828540004', business: '房产抵押贷款，汽车抵押贷款', content: '资深员工，放款快捷' }
+            { name: '高经理', phone: '13699469616', business: '信用贷款，抵押贷款，企业贷款', content: '4年' },
+			{ name: '何经理', phone: '13018290880', business: '房产抵押贷款，汽车抵押贷款', content: '3年' },
+            { name: '张经理', phone: '18782000388', business: '银行类信用、抵押、企业贷款', content: '4年' }
         ];
 
         $scope.infoList = [

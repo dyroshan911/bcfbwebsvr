@@ -144,6 +144,8 @@
 							<th width="15%">注册时间</th>
 							<th width="10%">今日进件</th>
 							<th width="10%">历史进件</th>
+							<th width="10%">新增会员</th>
+							<th width="10%">总会员数</th>
 							<th width="10%"></th>
 						</tr>
 					</thead>
@@ -154,6 +156,8 @@
 							<td align="center" ng-bind="channel.createDate"></td>
 							<td align="right" ng-bind="channel.today_customers"></td>
 							<td align="right" ng-bind="channel.total_customers"></td>
+							<td align="right" ng-bind="channel.today_members"></td>
+							<td align="right" ng-bind="channel.total_members"></td>
 							<td align="center">
 								<a href="javascript:void(0);" ng-click="onCheckCustomers(channel)">查看客户</a>
 							</td>
@@ -211,7 +215,7 @@
 							<th width="5%">性别</th>
 							<th width="10%">申请金额</th>
 							<th width="10%">放款金额</th>
-							<th width="10%">服务费率</th>
+							<th width="10%">服务费率(%)</th>
 							<th width="10%">还款时间</th>
 							<th width="10%">申请时间</th>
 							<th width="10%">备注</th>
