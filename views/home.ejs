@@ -1,57 +1,6 @@
-<nav class="row navbar navbar-default">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-            aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/">首页</a>
-		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="dropdown">
-					<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						业务查询
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="javascript:void(0);">贷款业务</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:void(0);">公司详情</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);">公告资讯</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);">招贤纳士</a>
-				</li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li ng-if="!session.logged">
-					<a href="/login">用户登录</a>
-				</li>
-				<li ng-if="session.logged">
-					<a href="/business">欢迎，{{session.userName}}</a>
-				</li>
-				<li ng-if="session.logged">
-					<a href="javascript:void(0);" ng-click="onLogout()">登出</a>
-				</li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container-fluid -->
-</nav>
+<div class="row">
+	<% include header %>
+</div>
 
 <div class="row" id="home-body">
 	<div class="home-banner">
@@ -61,47 +10,43 @@
 					<div class="item active">
 						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox1">
 							<div class="car-main-cont" style="background-image: url(img/img1.jpg);">
-								<div class="container">
-									<div style="width: 300px; margin-top: 65px;">
-										<div class="car-text">
-											<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
-													</div>
-												</div>
-												<div class="form-group" align="left">
-													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<div class="radio-inline">
-															<label>
-																<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
-															</label>
-														</div>
-														<div class="radio-inline">
-															<label>
-																<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
-															</label>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
-													</div>
-												</div>
-											</form>
+								<div class="car-text">
+									<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
+											</div>
 										</div>
-									</div>
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
+											</div>
+										</div>
+										<div class="form-group" align="left">
+											<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<div class="radio-inline">
+													<label>
+														<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
+													</label>
+												</div>
+												<div class="radio-inline">
+													<label>
+														<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -109,47 +54,43 @@
 					<div class="item">
 						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox2">
 							<div class="car-main-cont" style="background-image: url(img/img2.jpg);">
-								<div class="container">
-									<div style="width: 300px; margin-top: 65px;">
-										<div class="car-text">
-											<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
-													</div>
-												</div>
-												<div class="form-group" align="left">
-													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<div class="radio-inline">
-															<label>
-																<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
-															</label>
-														</div>
-														<div class="radio-inline">
-															<label>
-																<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
-															</label>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
-													</div>
-												</div>
-											</form>
+								<div class="car-text">
+									<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
+											</div>
 										</div>
-									</div>
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
+											</div>
+										</div>
+										<div class="form-group" align="left">
+											<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<div class="radio-inline">
+													<label>
+														<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
+													</label>
+												</div>
+												<div class="radio-inline">
+													<label>
+														<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -157,47 +98,43 @@
 					<div class="item">
 						<div id="row-cont" style="cursor: pointer; cursor: hand;" class="itembox3">
 							<div class="car-main-cont" style="background-image: url(img/img3.jpg);">
-								<div class="container">
-									<div style="width: 300px; margin-top: 65px;">
-										<div class="car-text">
-											<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
-													</div>
-												</div>
-												<div class="form-group" align="left">
-													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<div class="radio-inline">
-															<label>
-																<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
-															</label>
-														</div>
-														<div class="radio-inline">
-															<label>
-																<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
-															</label>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-														<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
-													</div>
-												</div>
-											</form>
+								<div class="car-text">
+									<form name='applyForm' role="form" class="form-horizontal" ng-submit="onApply_()">
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount" />
+											</div>
 										</div>
-									</div>
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="phone" placeholder="联系电话" required="" maxlength="20" ng-model="applyData.phone" />
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<input type="text" class="form-control" name="name" placeholder="您的尊姓" required="" maxlength="20" ng-model="applyData.name" />
+											</div>
+										</div>
+										<div class="form-group" align="left">
+											<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<div class="radio-inline">
+													<label>
+														<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="applyData.sex" /> 先生
+													</label>
+												</div>
+												<div class="radio-inline">
+													<label>
+														<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="applyData.sex" /> 女士
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+												<button class="btn btn-md btn-block" style="background-color: #7aab13; color: #fff;">免费申请</button>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>

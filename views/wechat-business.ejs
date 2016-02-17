@@ -18,23 +18,25 @@
 	</div>
 	<div style="margin-top: 30px;">
 		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" id="myTabs" role="tablist">
-			<li role="presentation" ng-show="session.role == 'admin' || session.role == 'channel-mgr'">
-				<a href="#myChannels" role="tab" data-toggle="tab" ng-bind="tabNames.channel"></a>
-			</li>
-			<li role="presentation" class="active">
-				<a href="#myCustomers" role="tab" data-toggle="tab" ng-bind="tabNames.customer"></a>
-			</li>
-			<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
-				<a href="#myMembers" role="tab" data-toggle="tab" ng-bind="tabNames.member"></a>
-			</li>
-			<li role="presentation" ng-show="checkCustomer.show" style="">
-				<a href="#checkCustomers" role="tab" data-toggle="tab" style="white-space: nowrap; max-width: 100px; overflow: hidden; text-overflow: ellipsis;">{{checkCustomer.ownerName}}的客户</a>
-			</li>
-			<span ng-show="currentPageData == checkCustomerPageData" style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
-				<a href="javascript:void(0);" ng-click="onCloseCheck()">X</a>
-			</span>
-		</ul>
+		<nav>
+			<ul class="nav nav-tabs" id="myTabs" role="tablist">
+				<li role="presentation" ng-show="session.role == 'admin' || session.role == 'channel-mgr'">
+					<a href="#myChannels" role="tab" data-toggle="tab" ng-bind="tabNames.channel"></a>
+				</li>
+				<li role="presentation" class="active">
+					<a href="#myCustomers" role="tab" data-toggle="tab" ng-bind="tabNames.customer"></a>
+				</li>
+				<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
+					<a href="#myMembers" role="tab" data-toggle="tab" ng-bind="tabNames.member"></a>
+				</li>
+				<li role="presentation" ng-show="checkCustomer.show" style="">
+					<a href="#checkCustomers" role="tab" data-toggle="tab" style="white-space: nowrap; max-width: 100px; overflow: hidden; text-overflow: ellipsis;">{{checkCustomer.ownerName}}的客户</a>
+				</li>
+				<span ng-show="currentPageData == checkCustomerPageData" style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
+					<a href="javascript:void(0);" ng-click="onCloseCheck()">X</a>
+				</span>
+			</ul>
+		</nav>
 
 		<!-- Tab panes -->
 		<div class="tab-content">
@@ -313,7 +315,7 @@
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="name" title="请输入姓名" maxlength="10" ng-model="editCustomer.name"
                             ng-pattern="/[\u4e00-\u9fa5]+$/" />
-                            <div ng-show="editForm.name.$dirty &amp;&amp; editForm.name.$invalid">
+							<div ng-show="editForm.name.$dirty &amp;&amp; editForm.name.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.name.$error.pattern">请使用中文</small>
 							</div>
 						</div>

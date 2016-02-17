@@ -8,6 +8,7 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngTouch', 'ngResource', 'cgBusy
 myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	function ($routeProvider, $locationProvider, $resourceProvider) {
 		$routeProvider.when('/', { templateUrl: ('partial/home'), controller: 'HomeCtrl', permission: 'none' });
+		$routeProvider.when('/work-chance', { templateUrl: ('partial/work-chance'), controller: 'WorkChanceCtrl', permission: 'none' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl', permission: 'none' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl', permission: 'login' });
 		$routeProvider.when('/business', { templateUrl: ('partial/business'), controller: 'BusinessCtrl', permission: 'logged' });
