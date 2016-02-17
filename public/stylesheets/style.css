@@ -121,8 +121,9 @@ i, cite, em, var, address, dfn {
 	}
 
 	.container-wechat .nav-tabs li > a {
-		padding-left: 5px;
-		padding-right: 5px;
+		font-size: 12px;
+		padding-left: 3px;
+		padding-right: 3px;
 	}
 
 /*home*/
