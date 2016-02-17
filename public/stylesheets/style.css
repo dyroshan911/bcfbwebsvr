@@ -119,6 +119,11 @@ i, cite, em, var, address, dfn {
 		border-top: none;
 		padding: 5px;
 	}
+	
+	.container-wechat .nav-tabs li > a {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
 
 /*home*/
 #home-body {
