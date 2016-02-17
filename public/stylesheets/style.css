@@ -143,7 +143,7 @@ i, cite, em, var, address, dfn {
 
 .car-text {
 	width: 300px;
-	position: a;
+	position: relative;
 	left: 300px;
 	top: 50px;
 	padding: 25px 10px 10px 10px;
