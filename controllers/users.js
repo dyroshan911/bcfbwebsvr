@@ -66,7 +66,9 @@ exports.bindAccount = function (token, accountObj, cb) {
                     sessions.updateSession(token, userData, function (err, data) {
                         if (err) { console.error('update session error'); }
                     });
-                    result = { user_id: doc.id };
+                    delete userData.open_id;
+                    delete userData.superior;
+                    result = userData;
                 } else {
                     statusCode = 403;
                     result.code = 'e1104';
