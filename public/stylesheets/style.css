@@ -11,6 +11,11 @@ i, cite, em, var, address, dfn {
 	font-style: normal;
 }
 
+.glyphicon {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
 .navbar-default {
 	background-color: #333;
 	font-weight: bold;
@@ -241,6 +246,24 @@ i, cite, em, var, address, dfn {
 #info .row {
 	margin-left: 0;
 	margin-right: 0;
+}
+
+#info a {
+	display: block;
+	color: #555;
+	text-decoration: none;
+	max-width: 90%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+	#info a:hover {
+		color: red;
+	}
+
+#info hr {
+	margin: 1px;
 }
 
 #home-footer {

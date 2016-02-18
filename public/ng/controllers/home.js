@@ -66,12 +66,11 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', '$rootSco
         ];
 
         $scope.infoList = [
-            { title: '百城官方网站上线', date: '2016-01-20' },
-            { title: '百城微信公众号上线', date: '2016-01-20' },
-            { title: '百城会员开放注册', date: '2016-01-10' },
-            { title: '百城新业务启动', date: '2015-21-20' },
-            { title: '百城新业务启动', date: '2015-21-20' },
-            { title: '百城新业务启动', date: '2015-21-20' }
+            { title: '中国农业银行首推农民群体专属个人房贷产品', link: '/info/001' },
+            { title: '提醒：定期查询个人信用报告 避免背“黑锅”', link: '/info/003' },
+            { title: '2.5万亿贷款投向何处？政府加速加杠杆', link: '/info/003' },
+            { title: '央行等八部委：落实差别化工业信贷政策', link: '/info/004' },
+            { title: '成都高新区双创突围：5年建成万亿级国际创新创业中心', link: '/info/005' }
         ];
 
         function getProducts(offset, limit, filter, currentPageIndex) {

@@ -20,6 +20,9 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/wechat-business', { templateUrl: ('partial/wechat-business'), controller: 'BusinessCtrl', permission: 'wechat' });
 		$routeProvider.when('/wechat-account', { templateUrl: ('partial/wechat-account'), controller: 'WechatAccountCtrl', permission: 'wechat' });
 		$routeProvider.when('/404', { templateUrl: ('partial/404'), permission: 'none' });
+		
+		$routeProvider.when('/info', { templateUrl: ('partial/info'), permission: 'none' });
+
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		
 		$locationProvider.html5Mode(true);
