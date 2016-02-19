@@ -299,8 +299,44 @@ i, cite, em, var, address, dfn {
 	margin-right: 50px;
 }
 
-/*about page*/
-#about p {
-	text-indent: 2em;
-	color: #555;
+/*about & info & information page*/
+.information h2 {
+	font-weight: bold;
 }
+
+.information a {
+	display: block;
+	color: #555;
+	text-decoration: none;
+	max-width: 90%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+	.information a:hover {
+		color: red;
+	}
+
+	.information hr {
+		margin: 1px;
+	}
+	
+	.information p {
+		text-indent: 2em;
+		color: #555;
+	}
+	
+	.information p > a{
+		color: #777;
+		display: inline;
+		white-space: normal;
+		overflow: unset;
+		text-overflow: unset;
+	}
+
+	.information .comment {
+		font-size: 13px;
+		color: #777;
+		text-indent: 0;
+	}

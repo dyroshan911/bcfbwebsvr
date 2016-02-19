@@ -9,6 +9,8 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	function ($routeProvider, $locationProvider, $resourceProvider) {
 		$routeProvider.when('/', { templateUrl: ('partial/home'), controller: 'HomeCtrl', permission: 'none' });
 		$routeProvider.when('/about', { templateUrl: ('partial/about'), permission: 'none' });
+		$routeProvider.when('/info', { templateUrl: ('partial/info'), permission: 'none' });
+		$routeProvider.when('/information', { templateUrl: ('partial/information'), controller: 'InformationCtrl', permission: 'none' });
 		$routeProvider.when('/work-chance', { templateUrl: ('partial/work-chance'), controller: 'WorkChanceCtrl', permission: 'none' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl', permission: 'none' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl', permission: 'login' });
@@ -20,10 +22,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/wechat-warn', { templateUrl: ('partial/wechat-warn'), controller: 'WechatWarnCtrl', permission: 'wechat' });
 		$routeProvider.when('/wechat-business', { templateUrl: ('partial/wechat-business'), controller: 'BusinessCtrl', permission: 'wechat' });
 		$routeProvider.when('/wechat-account', { templateUrl: ('partial/wechat-account'), controller: 'WechatAccountCtrl', permission: 'wechat' });
-		$routeProvider.when('/404', { templateUrl: ('partial/404'), permission: 'none' });
-		
-		$routeProvider.when('/info', { templateUrl: ('partial/info'), permission: 'none' });
-
+		$routeProvider.when('/404', { templateUrl: ('partial/404'), permission: 'none' });	
 		$routeProvider.otherwise({ redirectTo: '/404' });
 		
 		$locationProvider.html5Mode(true);
