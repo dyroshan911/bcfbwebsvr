@@ -11,6 +11,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 		$routeProvider.when('/about', { templateUrl: ('partial/about'), permission: 'none' });
 		$routeProvider.when('/info', { templateUrl: ('partial/info'), permission: 'none' });
 		$routeProvider.when('/information', { templateUrl: ('partial/information'), controller: 'InformationCtrl', permission: 'none' });
+		$routeProvider.when('/product', { templateUrl: ('partial/product'), controller: 'ProductCtrl', permission: 'none' });
 		$routeProvider.when('/work-chance', { templateUrl: ('partial/work-chance'), controller: 'WorkChanceCtrl', permission: 'none' });
 		$routeProvider.when('/signup', { templateUrl: ('partial/signup'), controller: 'SignupCtrl', permission: 'none' });
 		$routeProvider.when('/login', { templateUrl: ('partial/login'), controller: 'LoginCtrl', permission: 'login' });

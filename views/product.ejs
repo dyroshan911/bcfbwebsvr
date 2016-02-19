@@ -1,0 +1,27 @@
+<div class="row">
+	<% include header %>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" ng-repeat="product in productList">
+			<div class="panel panel-success product">
+				<div class="panel-heading">
+					<span class="glyphicon glyphicon-tags"></span>
+					<span ng-bind="product.title"></span>
+				</div>
+				<div class="panel-body" style="padding: 5px;">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<p>放款额度</p>
+						<span class="label label-success" ng-bind="product.amount"></span>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<p>贷款利率</p>
+						<span class="label label-info" ng-bind="product.rate"></span>
+					</div>
+				</div>
+				<div class="panel-footer" ng-bind="product.detail"></div>
+			</div>
+		</div>
+	</div>
+</div>

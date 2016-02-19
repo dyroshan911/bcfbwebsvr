@@ -15,7 +15,7 @@
 										<div class="form-group">
 											<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
 												<input type="text" class="form-control" name="amount" placeholder="贷款金额" required="" maxlength="20" ng-model="applyData.amount"
-												 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+												onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
 											</div>
 										</div>
 										<div class="form-group">
@@ -254,7 +254,7 @@
 				</div>
 			</div>
 
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="overflow: auto; max-height: 849px;">
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				<div class="panel panel-success" ng-repeat="product in productList">
 					<div class="panel-heading">
 						<span class="glyphicon glyphicon-tags"></span>
@@ -271,6 +271,11 @@
 						</div>
 					</div>
 					<div class="panel-footer" ng-bind="product.detail"></div>
+				</div>
+				<div class="panel panel-success">
+					<div class="panel-heading" align="center">
+						<a href="/product">更多贷款产品</a>
+					</div>
 				</div>
 			</div>
 
@@ -290,21 +295,25 @@
 						<a href="/info">查看更多</a>
 					</div>
 				</div>
-				<div class="panel panel-info" id="case" style="border-bottom: none; overflow: auto; max-height: 583px;">
+				<div class="panel panel-info" id="case" style="border-bottom: none; overflow: auto; max-height: 453px;">
 					<div class="panel-heading" align="center">
 						<span class="glyphicon glyphicon-credit-card"></span>
 						<span>成功案例</span>
 					</div>
 					<div class="panel-body" ng-repeat="case in casesList">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">
-								<span class="glyphicon glyphicon-ok" style="color: green;"></span> {{case.name}}
-							</lable>
-							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-bind="case.type"></lable>
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: center;" ng-bind="case.name"></lable>
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: center;" ng-bind="case.type"></lable>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">贷款金额 {{case.amount}}</lable>
-							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">月利率 {{case.rate}}</lable>
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<span class="glyphicon glyphicon-ok" style="color: green;"></span>
+								贷款金额 {{case.amount}}
+							</lable>
+							<lable class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<span class="glyphicon glyphicon-hourglass"></span>
+								月利率 {{case.rate}}
+							</lable>
 						</div>
 					</div>
 				</div>

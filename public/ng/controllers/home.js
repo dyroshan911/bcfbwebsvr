@@ -25,8 +25,8 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', '$rootSco
             amount: ''
         };
 
-        getProducts(0, 100, '');
-        getCases(0, 100, '');
+        getProducts(0, '', '');
+        getCases(0, '', '');
 		
         //functions
         $scope.onApply = function () {
@@ -81,6 +81,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', '$rootSco
             };
             WebShowService.getProducts($rootScope.session.token, paramObj, function (res) {
                 $scope.productList = res.productsList;
+				$scope.productList = $scope.productList.slice(0, 4);
                 for (var i = 0; i < $scope.productList.length; ++i) {
                     $scope.productList[i].amount = $scope.productList[i].money_min + ' ~ ' + $scope.productList[i].money_max + ' 万';
                     $scope.productList[i].rate = $scope.productList[i].rate_min + '% ~ ' + $scope.productList[i].rate_max + '%';
@@ -99,9 +100,9 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', '$rootSco
             WebShowService.getCases($rootScope.session.token, paramObj, function (res) {
                 $scope.casesList = res.casesList;
                 for (var i = 0; i < $scope.casesList.length; ++i) {
-                    $scope.casesList[i].type = $scope.casesList[i].type + ' (' + $scope.casesList[i].time_limit + '个月)';
+                    $scope.casesList[i].type = $scope.casesList[i].type;
                     $scope.casesList[i].amount = $scope.casesList[i].amount + '万';
-                    $scope.casesList[i].rate = $scope.casesList[i].rate + '%';
+                    $scope.casesList[i].rate = $scope.casesList[i].rate + '%' + ' (' + $scope.casesList[i].time_limit + '期)';
                 }
             }, function (err) {
                 //alert(err.message);

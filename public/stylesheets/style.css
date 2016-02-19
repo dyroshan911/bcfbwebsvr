@@ -7,6 +7,10 @@ a {
 	color: #00B7FF;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 a:focus {
 	text-decoration: none;
 }
@@ -221,12 +225,16 @@ i, cite, em, var, address, dfn {
 #case .panel-body {
 	padding-left: 0;
 	padding-right: 0;
+	padding-top: 12px;
+	padding-bottom: 13px;
 	border-bottom-width: 1px;
 	border-bottom-style: dashed;
 	border-bottom-color: #337ab7;
 }
 
 	#case .panel-body .control-label {
+		padding-left: 0;
+		padding-right: 0;
 		text-align: left;
 	}
 
@@ -340,3 +348,8 @@ i, cite, em, var, address, dfn {
 		color: #777;
 		text-indent: 0;
 	}
+	
+/*product page*/
+.product {
+	margin-bottom: 50px;
+}
