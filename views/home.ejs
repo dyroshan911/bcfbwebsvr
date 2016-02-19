@@ -282,7 +282,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="row" ng-repeat="info in infoList">
-							<a ng-href="info.link" title="{{info.title}}" ng-bind="info.title"></a>
+							<a href="{{info.link}}" title="{{info.title}}" ng-bind="info.title"></a>
 							<hr/>
 						</div>
 					</div>
@@ -290,7 +290,7 @@
 						<a href="/info">查看更多</a>
 					</div>
 				</div>
-				<div class="panel panel-primary" id="case" style="border-bottom: none; overflow: auto; max-height: 583px;">
+				<div class="panel panel-info" id="case" style="border-bottom: none; overflow: auto; max-height: 583px;">
 					<div class="panel-heading" align="center">
 						<span class="glyphicon glyphicon-credit-card"></span>
 						<span>成功案例</span>
@@ -336,11 +336,11 @@
 </div>
 
 <div class="row" id="home-footer">
-	<div class="container">
-		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+	<div class="container" style="min-width: 1080px;">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" align="right">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<div class="row">
-					<a href="javascript:void(0);">关于百城富邦</a>
+					<a href="/about">关于百城富邦</a>
 				</div>
 				<div class="row">
 					<a href="javascript:void(0);">联系我们</a>
@@ -363,24 +363,27 @@
 
 		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 			<div>
-				<span class="glyphicon glyphicon-phone-alt"></span> 客服热线（工作时间 9:00-22:00）
+				<span class="glyphicon glyphicon-phone-alt"></span>客服热线(工作时间 8:30-18:00)
 			</div>
 			<div>
 				028-67010408
 			</div>
 			<br/>
 			<div>
-				<span class="glyphicon glyphicon-home"></span> 公司地址：
+				<span class="glyphicon glyphicon-home"></span>公司地址：
 			</div>
 			<div>
-				成都市武侯区航空路6号丰德国际广场A座2单元1601
+				成都市武侯区航空路6号丰德国际广场
+			</div>
+			<div>
+				A座2单元1601
 			</div>
 			<br/>
 			<div>
-				<span class="glyphicon glyphicon-envelope"></span> 邮政编码：610041
+				<span class="glyphicon glyphicon-envelope"></span>邮政编码：610041
 			</div>
 			<div>
-				<span class="glyphicon glyphicon-cloud"></span> Email：mail@XXX.com
+				<span class="glyphicon glyphicon-cloud"></span>Email：mail@XXX.com
 			</div>
 			<br/>
 			<div>

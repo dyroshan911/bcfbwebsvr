@@ -67,7 +67,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', '$location', '$rootSco
 
         $scope.infoList = [
             { title: '中国农业银行首推农民群体专属个人房贷产品', link: '/info/001' },
-            { title: '提醒：定期查询个人信用报告 避免背“黑锅”', link: '/info/003' },
+            { title: '提醒：定期查询个人信用报告 避免背“黑锅”', link: '/info/002' },
             { title: '2.5万亿贷款投向何处？政府加速加杠杆', link: '/info/003' },
             { title: '央行等八部委：落实差别化工业信贷政策', link: '/info/004' },
             { title: '成都高新区双创突围：5年建成万亿级国际创新创业中心', link: '/info/005' }

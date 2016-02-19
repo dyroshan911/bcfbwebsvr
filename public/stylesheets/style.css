@@ -7,6 +7,14 @@ a {
 	color: #00B7FF;
 }
 
+a:focus {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
 i, cite, em, var, address, dfn {
 	font-style: normal;
 }
@@ -289,4 +297,10 @@ i, cite, em, var, address, dfn {
 /*work-chance page*/
 .tab-span {
 	margin-right: 50px;
+}
+
+/*about page*/
+#about p {
+	text-indent: 2em;
+	color: #555;
 }
