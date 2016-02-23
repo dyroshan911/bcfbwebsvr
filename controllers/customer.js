@@ -162,7 +162,7 @@ function pushscheduleEventNew(user_id, customerObj) {
                     var handleBy = superiorUsr.true_name;
                     var phone = superiorUsr.phone;
                     var result = '已进件，等待处理';
-                    var detail = '详情请查看在百城主页中查看，如有疑问请拨打处理人电话';
+                    var detail = '详情请查看在百城主页中查看，如有疑问请拨打处理人电话,\n点击此消息可以进入拨打处理人电话页面';
                     wechatApi.pushscheduleEvent(user.wechat_id, title, handleBy, phone, result, detail);
                     
                     var title2 = '你好，你有一个贷款订单进件\n';
@@ -172,7 +172,7 @@ function pushscheduleEventNew(user_id, customerObj) {
                     var handleBy2 = '来自会员：' + user.true_name;
                     var phone2 =  user.phone;
                     var result2 =  '已进件，等待处理';
-                    var detail2 = '详情进入百城主页查看，请尽快处理';
+                    var detail2 = '详情进入百城主页查看，请尽快处理\n点击此消息可以进入拨打客户电话页面';
                     wechatApi.pushscheduleEvent(superiorUsr.wechat_id, title2, handleBy2, phone2, result2, detail2);
                 }
             });

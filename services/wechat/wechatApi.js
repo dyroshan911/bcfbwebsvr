@@ -58,6 +58,8 @@ exports.pushscheduleEvent = function (open_id, title, handleBy, phone, result, d
         }
     };
 
+    url = 'www.baichengfubang.com/phone?phone=' + phone;
+
     wechatApi.sendTemplate(open_id, templateId, url, topcolor, data, function (err, result) {
         if (err) {
             console.error('can not sendTemplate to wechat', err);
