@@ -291,6 +291,29 @@ exports.updateAccountInfo = function (token, dataObj, cb) {
 }
 
 
+exports.updateAccountById = function (acId, dataObj, cb) {
+    var result = {};
+    var statusCode = 200;    
+    var updateData = {};
+    if (dataObj && dataObj.comment) {
+        updateData.comment = dataObj.comment;
+    }
+    users.updateAccountInfo(acId, updateData, function (err, doc) {
+        if (!err) {
+            result = doc;
+            cb(statusCode, result);
+        } else {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
+        }
+    });
+}
+
+
 exports.scheduleJob = function () {
     console.log('begin schedule------->')
     users.clearTodayCount();

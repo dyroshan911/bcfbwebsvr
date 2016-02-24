@@ -85,6 +85,17 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 			};
 			return ApiService.get(url, obj, successcb, failcb);
 		};
+
+		cfgData.updateMemberById = function (token, userId, dataObj, successcb, failcb) {
+			var url = 'api/accounts/' + userId;
+			var obj = {
+				params: {
+					token: token
+				},
+				data: dataObj
+			};
+			return ApiService.put(url, obj, successcb, failcb);
+		};
 		
 		return cfgData;
 	}]);

@@ -139,9 +139,9 @@ router.put('/:account_id', function (req, res) {
     //todo: verify checkcode
     //...
     //todo:update account info
-    httpResp(res, 200, { customerlist: 'update account info' });
-    /*users.getAccounts(token, obj, function (statusCode, result) {
+    //httpResp(res, 200, { customerlist: 'update account info' });
+    users.updateAccountById(accountId, updateData, function (statusCode, result) {
         httpResp(res, statusCode, result);
-    });*/
+    });
 });
 module.exports = router;

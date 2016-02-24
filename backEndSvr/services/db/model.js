@@ -65,7 +65,9 @@ var AccountSchema = new Schema({
     modify_on: {type: Number},                                    //修改时间
     
     complete:{type:Boolean, default:true},
-    enabled:  {type: Boolean, default: true}                    //账号禁用开关
+    enabled:  {type: Boolean, default: true},                    //账号禁用开关
+
+    comment:{type:String, default:""},                                    //备注信息
 });
 
 modelObj.AccountModel = mongoose.model('websvr.accounts', AccountSchema);

@@ -195,7 +195,7 @@ userObj.getMembersList = function (user_id, offset, limit, filter, cb) {
         .sort({ create_on: -1 })
         .skip(offset).
         limit(limit).
-        select('create_on email id job_number phone role superior today_customers total_customers true_name').
+        select('create_on email id job_number phone role superior today_customers total_customers true_name comment').
         exec(function (err, members) {
             if (err) {
                 cb(err, null);

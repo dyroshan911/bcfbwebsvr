@@ -64,6 +64,25 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			checkAmount: true
 		};
 		$scope.search = '';
+
+
+		$scope.onEditComment = function (member) {
+			member.changed = true;
+		}
+
+		$scope.onComitComment = function (member) {
+			if(member.changed == true) {
+				member.changed = false;
+				var dataObj = {
+					comment: member.comment
+				}
+				BusinessService.updateMemberById($rootScope.session.token, member.id, dataObj, function (res) {
+
+				},function(errMsg){
+
+				});
+			}
+		}
 		
 		getCustomerList(0, eachPageCount, '');
 		if ($rootScope.session.role == 'admin') {
