@@ -295,7 +295,7 @@ exports.updateAccountById = function (acId, dataObj, cb) {
     var result = {};
     var statusCode = 200;    
     var updateData = {};
-    if (dataObj && dataObj.comment) {
+    if (dataObj) {
         updateData.comment = dataObj.comment;
     }
     users.updateAccountInfo(acId, updateData, function (err, doc) {

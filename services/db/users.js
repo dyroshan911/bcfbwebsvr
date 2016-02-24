@@ -185,6 +185,7 @@ userObj.getMembersList = function (user_id, offset, limit, filter, cb) {
             queryElem['$or'].push({ true_name: new RegExp(textArr[i], 'i') });
             queryElem['$or'].push({ phone: new RegExp(textArr[i], 'i') });
             queryElem['$or'].push({ territory: new RegExp(textArr[i], 'i') });
+            queryElem['$or'].push({ comment: new RegExp(textArr[i], 'i') });
             queryObj['$and'].push(queryElem);
         }
     }
