@@ -142,7 +142,7 @@
 						<tr ng-repeat="member in memberList">
 							<td align="center" ng-bind="member.true_name"></td>
 							<td align="center" >
-								<input type="text" class="form-control" title="{{member.comment}}" ng-model="member.comment" ng-change="onEditComment(member)" ng-blur="onComitComment(member)"/>
+								<input type="text" class="form-control form-input" maxlength="20" title="{{member.comment}}"  />
 							</td>
 							<td align="center" ng-bind="member.phone"></td>
 							<td align="center" ng-bind="member.createDate"></td>

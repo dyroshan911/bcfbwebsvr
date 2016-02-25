@@ -11,13 +11,13 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			ownerName: '',
 			list: []
 		};
-		
+
 		$scope.tabNames = {
 			customer: '我的客户',
 			channel: '我的渠道',
 			member: '我的会员'
 		};
-		
+
 		var eachPageCount = 10;
 		$scope.customerPageData = {
 			current: {},
@@ -40,7 +40,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			total: 0
 		};
 		$scope.currentPageData = $scope.customerPageData;
-		
+
 		$scope.sexOptions = [
 			{ name: '先生', value: 'male' },
 			{ name: '女士', value: 'female' }
@@ -71,19 +71,19 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		}
 
 		$scope.onComitComment = function (member) {
-			if(member.changed == true) {
+			if (member.changed == true) {
 				member.changed = false;
 				var dataObj = {
 					comment: member.comment
 				}
 				BusinessService.updateMemberById($rootScope.session.token, member.id, dataObj, function (res) {
 
-				},function(errMsg){
-
+				}, function (err) {
+					alert(err.message);
 				});
 			}
 		}
-		
+
 		getCustomerList(0, eachPageCount, '');
 		if ($rootScope.session.role == 'admin') {
 			getChannelList(0, eachPageCount, '');
@@ -131,7 +131,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			}
 			$('#editDialog').modal({ backdrop: false, keyboard: false });
 		};
-		
+
 		$scope.onSaveCustomer = function () {
 			if ($scope.editForm.$invalid) {
 				return;
@@ -146,7 +146,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				phone: $scope.editCustomer.newPhone,
 				finished_amount: $scope.editCustomer.finishedAmount,
 				server_rate: $scope.editCustomer.serverRate,
-				billing_date: billingDate,					
+				billing_date: billingDate,
 				comment: $scope.editCustomer.comment,
 				status: $scope.editCustomer.status.value
 			};
@@ -166,7 +166,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				alert(err.message);
 			});
 		};
-		
+
 		$scope.onCheckAmount = function () {
 			if (parseInt($scope.editCustomer.finishedAmount) > parseInt($scope.editCustomer.applyAmount)) {
 				$scope.editCustomer.checkAmount = false;
@@ -174,7 +174,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.editCustomer.checkAmount = true;
 			}
 		};
-		
+
 		$scope.onCheckCustomers = function (owner) {
 			$scope.checkCustomer.show = true;
 			$scope.checkCustomer.ownerId = owner.id;
@@ -182,21 +182,21 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			$('#myTabs a[href="#checkCustomers"]').tab('show');
 			getCustomerListById(owner.id, 0, eachPageCount, '');
 		};
-		
+
 		$scope.onCloseCheck = function () {
 			$scope.currentPageData = {};
 			$('#myTabs a[href="#myCustomers"]').tab('show');
 			$scope.checkCustomer.show = false;
 		};
-		
+
 		$scope.gotoPage = function (pageData, index) {
 			selectPage(pageData, index);
 		};
-		
+
 		$scope.onSearch = function () {
 			getPageList($scope.currentPageData, '0');
 		};
-		
+
 		function getCustomerList(offset, limit, filter, currentPageIndex) {
 			var paramObj = {
 				offset: offset,
@@ -228,7 +228,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				alert(err.message);
 			});
 		}
-		
+
 		function getChannelList(offset, limit, filter, currentPageIndex) {
 			var paramObj = {
 				offset: offset,
@@ -255,7 +255,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				alert(err.message);
 			});
 		}
-		
+
 		function getMemberList(offset, limit, filter, currentPageIndex) {
 			var paramObj = {
 				offset: offset,
@@ -282,7 +282,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				alert(err.message);
 			});
 		}
-		
+
 		function getCustomerListById(userId, offset, limit, filter, currentPageIndex) {
 			var paramObj = {
 				offset: offset,
@@ -311,7 +311,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				alert(err.message);
 			});
 		}
-		
+
 		function getNameByValue(value, list) {
 			for (var i = 0; i < list.length; ++i) {
 				if (value == list[i].value) {
@@ -319,7 +319,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				}
 			}
 		}
-		
+
 		function makePhoneList(list) {
 			var phoneList = [];
 			for (var i = 0; i < list.length; ++i) {
@@ -365,7 +365,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				list.push({ name: '>>|', index: 'end' });
 			}
 		}
-		
+
 		function selectPage(pageData, selectedIndex) {
 			var pageIndex = '';
 			if (selectedIndex == '.') {
@@ -401,7 +401,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			sortPages(pageData, pageIndex);
 			getPageList(pageData, pageIndex);
 		}
-		
+
 		function setCurrentPage(pageData, selectedIndex) {
 			for (var i = 0; i < pageData.list.length; ++i) {
 				if (pageData.list[i].index == selectedIndex) {
@@ -410,7 +410,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				}
 			}
 		}
-		
+
 		function getPageList(pageData, pageIndex) {
 			switch (pageData) {
 				case $scope.customerPageData:
@@ -435,22 +435,22 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			e.preventDefault();
 			$(this).tab('show');
 		})
-		
+
 		$('#myTabs a[href="#myChannels"]').click(function (e) {
 			e.preventDefault()
 			$(this).tab('show');
 		})
-		
+
 		$('#myTabs a[href="#myMembers"]').click(function (e) {
 			e.preventDefault()
 			$(this).tab('show');
 		})
-		
+
 		$('#myTabs a[href="#checkCustomers"]').click(function (e) {
 			e.preventDefault();
 			$(this).tab('show');
 		})
-		
+
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			var tabName = e.target.hash;
 			$scope.$apply(function () {

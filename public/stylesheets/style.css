@@ -112,6 +112,12 @@ i, cite, em, var, address, dfn {
 	padding-bottom: 0;
 }
 
+.form-input {
+	height: 21px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
 /*wechat*/
 .container-wechat {
 	padding-right: 0;
