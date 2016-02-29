@@ -249,7 +249,7 @@ i, cite, em, var, address, dfn {
 	}
 
 #staff {
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 
 	#staff .panel-body {
@@ -315,6 +315,10 @@ i, cite, em, var, address, dfn {
 /*work-chance page*/
 .tab-span {
 	margin-right: 50px;
+}
+
+.work-chance-panel {
+	margin-top: 30px;
 }
 
 /*about & info & information page*/
