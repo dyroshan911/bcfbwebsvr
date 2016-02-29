@@ -293,6 +293,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.checkCustomer.list = res.customerList;
 				for (var i = 0; i < $scope.checkCustomer.list.length; ++i) {
 					$scope.checkCustomer.list[i].createDate = $scope.getDateString($scope.checkCustomer.list[i].create_on * 1000);
+					$scope.checkCustomer.list[i].billingDate = $scope.checkCustomer.list[i].billing_date ? $scope.getDateString($scope.checkCustomer.list[i].billing_date * 1000).slice(0, 10) : '';
 					$scope.checkCustomer.list[i].statusName = getNameByValue($scope.checkCustomer.list[i].status, $scope.statusOptions);
 					$scope.checkCustomer.list[i].sexName = getNameByValue($scope.checkCustomer.list[i].sex, $scope.sexOptions);
 					$scope.checkCustomer.list[i].showDetails = false;
