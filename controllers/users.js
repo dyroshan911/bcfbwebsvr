@@ -205,6 +205,36 @@ exports.getAccountInfo = function (token, cb) {
 };
 
 
+exports.getMemberInfoById = function (token, accountId, cb) {
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['role'], function (err, data) {
+        if (!err && data && data.role != 'member') {
+            var qeryAttr = 'true_name phone';
+            users.queryUser(accountId, qeryAttr, function (err, user) {
+                if (!err) {
+                    cb(statusCode, user);
+                } else {
+                    statusCode = 403;
+                    result.code = 'e1110';
+                    result.message = 'err.message';
+                    result.description = 'err.message';
+                    result.source = '<<webui>>';
+                    cb(statusCode, result);
+                }
+            });
+        } else {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
+        }
+    });
+};
+
+
 exports.completeAcount = function (token, userName, password, cb) {
     var result = {};
     var statusCode = 200;

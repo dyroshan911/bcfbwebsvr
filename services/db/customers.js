@@ -68,9 +68,9 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, se
         return;
     }
 
-    var selectattr = 'id name sex  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on';
+    var selectattr = 'id name sex  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on belong_mem belong_channel';
     if (seeTel) {
-        var selectattr = 'id name sex phone  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on';
+        var selectattr = 'id name sex phone  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on belong_mem belong_channel';
     }
     CustomerModel.find(queryObj)
         .sort({ create_on: -1 })

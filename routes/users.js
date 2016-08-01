@@ -144,4 +144,16 @@ router.put('/:account_id', function (req, res) {
         httpResp(res, statusCode, result);
     });
 });
+
+
+/* get all memberinfo by  id*/
+router.get('/memberinfo/:account_id', function (req, res) {
+    var token = req.query.token;
+    var accountId = req.params.account_id;
+
+    users.getMemberInfoById(token, accountId, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    });
+});
+
 module.exports = router;
