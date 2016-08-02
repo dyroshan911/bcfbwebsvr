@@ -96,6 +96,16 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 			};
 			return ApiService.put(url, obj, successcb, failcb);
 		};
+
+		cfgData.getOwnerById = function (token, userId, successcb, failcb) {
+			var url = 'api/accounts/memberinfo/' + userId;
+			var obj = {
+				params: {
+					token: token
+				}
+			};
+			return ApiService.get(url, obj, successcb, failcb);
+		};
 		
 		return cfgData;
 	}]);

@@ -43,16 +43,17 @@
 				<table class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
-							<th width="10%">姓名</th>
+							<th width="8%">姓名</th>
 							<th width="5%">性别</th>
 							<th width="10%">联系电话</th>
-							<th width="10%">申请金额</th>
-							<th width="10%">放款金额</th>
-							<th width="10%">服务费率(%)</th>
+							<th width="8%">申请金额</th>
+							<th width="8%">放款金额</th>
+							<th width="8%">服务费率(%)</th>
 							<th width="10%">放款日期</th>
 							<th width="10%">申请时间</th>
-							<th width="10%">备注</th>
-							<th width="10%">状态</th>
+							<th width="15%">所属会员</th>
+							<th width="8%">备注</th>
+							<th width="5%">状态</th>
 							<th width="5%" ng-hide="session.role == 'member'"></th>
 						</tr>
 					</thead>
@@ -70,6 +71,10 @@
 							<td align="right" ng-bind="customer.server_rate"></td>
 							<td align="center" ng-bind="customer.billingDate"></td>
 							<td align="center" ng-bind="customer.createDate"></td>
+							<td align="center">
+								<a href="#" ng-if="customer.owner == null" ng-click="onGetOwner(customer)">点击查看</a>
+								<span ng-if="customer.owner != null" ng-bind="customer.owner"></span>
+							</td>
 							<td align="center" ng-bind="customer.comment"></td>
 							<td align="center" ng-bind="customer.statusName"></td>
 							<td align="center" ng-hide="session.role == 'member'">
