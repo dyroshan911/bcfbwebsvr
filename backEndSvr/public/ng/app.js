@@ -1,7 +1,6 @@
 /*
  * angular.js file
  */
-'use strict';
 var sessionStorage = window.sessionStorage;
 
 // Declare app level module which depends on filters, and services
