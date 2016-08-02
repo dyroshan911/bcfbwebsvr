@@ -1,8 +1,7 @@
 /*
  * angular.js file
  */
-'use strict';
-var session_Storage = window.sessionStorage;
+var sessionStorage = window.sessionStorage;
 
 // Declare app level module which depends on filters, and services
 var myApp = angular.module('myApp', ['ngRoute', 'ngTouch', 'ngResource', 'cgBusy']);
@@ -23,8 +22,8 @@ myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 myApp.run(['$location', '$rootScope', 'SessionService', function ($location, $rootScope, SessionService) {
 		$rootScope.session = {};
 		$rootScope.saveSessionData = function () {
-			if (session_Storage) {
-				session_Storage.logged = $rootScope.session.logged;
+			if (sessionStorage) {
+				sessionStorage.logged = $rootScope.session.logged;
 			}
 		};
 		
@@ -37,13 +36,13 @@ myApp.run(['$location', '$rootScope', 'SessionService', function ($location, $ro
 		$rootScope.$on('$routeChangeStart', function (event, next, current) {
 			var permission = next.$$route.permission;
 			if (permission == 'login') {
-				if (session_Storage.logged === 'true') {
+				if (sessionStorage.logged === 'true') {
 					$location.path('/home');
 				} else {
 					return;
 				}
 			} else if (permission == 'logged') {
-				if (session_Storage.logged === 'false') {
+				if (sessionStorage.logged === 'false') {
 					$location.path('/login');
 				}
 				else {
@@ -55,9 +54,9 @@ myApp.run(['$location', '$rootScope', 'SessionService', function ($location, $ro
 		});
 		
 		$rootScope.$on('$routeChangeSuccess', function (event, next, current) {
-			if (session_Storage) {
-				$rootScope.session.token = session_Storage.token;
-				$rootScope.session.logged = session_Storage.logged === 'true' ? true : false;
+			if (sessionStorage) {
+				$rootScope.session.token = sessionStorage.token;
+				$rootScope.session.logged = sessionStorage.logged === 'true' ? true : false;
 			}
 		});
 	}]);
