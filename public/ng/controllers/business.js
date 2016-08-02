@@ -85,7 +85,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		}
 
 		$scope.onGetOwner = function (customer) {
-			var userId = customer.belong_mem || 'channel-mgr1';
+			if (!customer.belong_mem) {
+				customer.owner = '不属于任何会员';
+				return;
+			}
+			var userId = customer.belong_mem;
 			BusinessService.getOwnerById($rootScope.session.token, userId, function (res) {
 				customer.owner = res.true_name + '，' + res.phone;
 			}, function (err) {
