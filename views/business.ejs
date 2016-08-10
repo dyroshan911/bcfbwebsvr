@@ -71,7 +71,7 @@
 							<td align="right" ng-bind="customer.server_rate"></td>
 							<td align="center" ng-bind="customer.billingDate"></td>
 							<td align="center" ng-bind="customer.createDate"></td>
-							<td align="center">
+							<td align="center" ng-if="!session.role == 'member'">
 								<a href="#" ng-if="customer.owner == null" ng-click="onGetOwner(customer)">点击查看</a>
 								<span ng-if="customer.owner != null" ng-bind="customer.owner"></span>
 							</td>
