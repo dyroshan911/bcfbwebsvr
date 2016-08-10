@@ -225,6 +225,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					$scope.customerList[i].sexName = getNameByValue($scope.customerList[i].sex, $scope.sexOptions);
 					var phoneList = $scope.customerList[i].phone.split(',');
 					$scope.customerList[i].phoneList = makePhoneList(phoneList);
+					$scope.customerList[i].showDetails = false;
 					$scope.customerList[i].owner = null;
 				}
 				var total = res.total;
@@ -252,6 +253,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.channelList = res.channelsList;
 				for (var i = 0; i < $scope.channelList.length; ++i) {
 					$scope.channelList[i].createDate = $scope.getDateString($scope.channelList[i].create_on * 1000);
+					$scope.channelList[i].showDetails = false;
 				}
 				var total = res.total;
 				if (total >= 0) {
@@ -278,6 +280,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				$scope.memberList = res.membersList;
 				for (var i = 0; i < $scope.memberList.length; ++i) {
 					$scope.memberList[i].createDate = $scope.getDateString($scope.memberList[i].create_on * 1000);
+					$scope.memberList[i].showDetails = false;
 				}
 				var total = res.total;
 				if (total >= 0) {
@@ -307,6 +310,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					$scope.checkCustomer.list[i].billingDate = $scope.checkCustomer.list[i].billing_date ? $scope.getDateString($scope.checkCustomer.list[i].billing_date * 1000).slice(0, 10) : '';
 					$scope.checkCustomer.list[i].statusName = getNameByValue($scope.checkCustomer.list[i].status, $scope.statusOptions);
 					$scope.checkCustomer.list[i].sexName = getNameByValue($scope.checkCustomer.list[i].sex, $scope.sexOptions);
+					$scope.checkCustomer.list[i].showDetails = false;
 				}
 				var total = res.total;
 				if (total >= 0) {

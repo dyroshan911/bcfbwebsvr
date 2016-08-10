@@ -42,13 +42,13 @@
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane fade in active" id="myCustomers" cg-busy="myPromiseCustomers">
 				<div class="panel panel-default" ng-repeat="customer in customerList">
-					<div class="panel-heading" data-toggle="collapse" href="#customer">
+					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
 						<div class="row">
 							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5">{{customer.name}} {{customer.sexName}}</h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">{{customer.finished_amount || 0}}/{{customer.apply_amount || 0}}</h3>
 						</div>
 					</div>
-					<div class="panel-body collapse" id="customer">
+					<div class="panel-body" ng-show="customer.showDetails">
 						<form class="form-horizontal">
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
@@ -126,13 +126,13 @@
 
 			<div role="tabpanel" class="tab-pane fade in" id="myChannels" cg-busy="myPromiseChannels">
 				<div class="panel panel-default" ng-repeat="channel in channelList">
-					<div class="panel-heading" data-toggle="collapse" href="#channel">
+					<div class="panel-heading" ng-click="channel.showDetails = !channel.showDetails;">
 						<div class="row">
 							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="channel.true_name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">{{channel.today_customers || 0}}/{{channel.total_customers || 0}}</h3>
 						</div>
 					</div>
-					<div class="panel-body collapse" id="channel">
+					<div class="panel-body" ng-show="channel.showDetails">
 						<form class="form-horizontal">
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
@@ -189,13 +189,13 @@
 
 			<div role="tabpanel" class="tab-pane fade in" id="myMembers" cg-busy="myPromiseMembers">
 				<div class="panel panel-default" ng-repeat="member in memberList">
-					<div class="panel-heading" data-toggle="collapse" href="#member">
+					<div class="panel-heading" ng-click="member.showDetails = !member.showDetails;">
 						<div class="row">
 							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="member.true_name"></h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">{{member.today_customers || 0}}/{{member.total_customers || 0}}</h3>
 						</div>
 					</div>
-					<div class="panel-body collapse" id="member">
+					<div class="panel-body" ng-show="member.showDetails">
 						<form class="form-horizontal">
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">会员备注</lable>
@@ -246,13 +246,13 @@
 
 			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers" cg-busy="myPromiseCheckCustomers">
 				<div class="panel panel-default" ng-repeat="customer in checkCustomer.list">
-					<div class="panel-heading" data-toggle="collapse" href="#checkCustomer">
+					<div class="panel-heading" ng-click="customer.showDetails = !customer.showDetails;">
 						<div class="row">
 							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5">{{customer.name}} {{customer.sexName}}</h3>
 							<h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right;">{{customer.finished_amount || 0}}/{{customer.apply_amount || 0}}</h3>
 						</div>
 					</div>
-					<div class="panel-body collapse" id="checkCustomer">
+					<div class="panel-body" ng-show="customer.showDetails">
 						<form class="form-horizontal">
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
