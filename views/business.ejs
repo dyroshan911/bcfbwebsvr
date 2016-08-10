@@ -3,7 +3,7 @@
 </div>
 
 <div class="wall" id="business-wall">
-	<div class ="row" style="margin-top: 20px;">
+	<div class="row" style="margin-top: 20px;">
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			<a href="/add-customer" class="btn btn-success btn-md btn-block">新增客户</a>
 		</div>
@@ -14,7 +14,7 @@
 			</span>
 		</div>
 	</div>
-	<br/>
+	<br />
 	<div>
 		<!-- Nav tabs -->
 		<nav>
@@ -71,9 +71,12 @@
 							<td align="right" ng-bind="customer.server_rate"></td>
 							<td align="center" ng-bind="customer.billingDate"></td>
 							<td align="center" ng-bind="customer.createDate"></td>
-							<td align="center" ng-if="!session.role == 'member'">
-								<a href="#" ng-if="customer.owner == null" ng-click="onGetOwner(customer)">点击查看</a>
-								<span ng-if="customer.owner != null" ng-bind="customer.owner"></span>
+							<td align="center">
+								<span ng-if="session.role != 'member'">
+									<a href="#" ng-if="customer.owner == null" ng-click="onGetOwner(customer)">点击查看</a>
+									<span ng-if="customer.owner != null" ng-bind="customer.owner"></span>
+								</span>
+								<span ng-if="session.role == 'member'">---</span>
 							</td>
 							<td align="center" ng-bind="customer.comment"></td>
 							<td align="center" ng-bind="customer.statusName"></td>
@@ -146,8 +149,8 @@
 					<tbody>
 						<tr ng-repeat="member in memberList">
 							<td align="center" ng-bind="member.true_name"></td>
-							<td align="center" >
-								<input type="text" class="form-control form-input" maxlength="20" title="{{member.comment}}"  " ng-model="member.comment" ng-change="onEditComment(member)" ng-blur="onComitComment(member)"/>
+							<td align="center">
+								<input type="text" class="form-control form-input" maxlength="20" title="{{member.comment}}" " ng-model="member.comment" ng-change="onEditComment(member)" ng-blur="onComitComment(member)" />
 							</td>
 							<td align="center" ng-bind="member.phone"></td>
 							<td align="center" ng-bind="member.createDate"></td>
@@ -225,7 +228,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">姓名</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="name" title="请输入姓名" maxlength="10" ng-model="editCustomer.name"
-                            ng-pattern="/[\u4e00-\u9fa5]+$/" />
+								   ng-pattern="/[\u4e00-\u9fa5]+$/" />
 							<div ng-show="editForm.name.$dirty &amp;&amp; editForm.name.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.name.$error.pattern">请使用中文</small>
 							</div>
@@ -252,7 +255,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">电话号码</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="phone" placeholder="电话号码（新增)" title="请输入新电话号码" maxlength="11" ng-model="editCustomer.newPhone"
-							ng-minlength="11" ng-pattern="/^\d+$/" />
+								   ng-minlength="11" ng-pattern="/^\d+$/" />
 							<div ng-show="editForm.phone.$dirty &amp;&amp; editForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.phone.$error.pattern">请使用数字</small>
 								<small class="alert-danger well-sm" ng-show="editForm.phone.$error.minlength &amp;&amp; !editForm.phone.$error.pattern">请输入11位手机号码</small>
@@ -263,7 +266,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="applyAmount" title="请输入贷款金额" readonly="" maxlength="20" ng-model="editCustomer.applyAmount"
-							ng-pattern="/^\d+$/" />
+								   ng-pattern="/^\d+$/" />
 							<div ng-show="editForm.applyAmount.$dirty &amp;&amp; editForm.applyAmount.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.applyAmount.$error.pattern">请使用数字</small>
 							</div>
@@ -273,7 +276,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">放款金额</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="finishedAmount" title="请输入已放款金额" maxlength="20" ng-model="editCustomer.finishedAmount"
-							ng-pattern="/^\d+$/" ng-change="onCheckAmount()" />
+								   ng-pattern="/^\d+$/" ng-change="onCheckAmount()" />
 							<div ng-show="editForm.finishedAmount.$dirty &amp;&amp; editForm.finishedAmount.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.finishedAmount.$error.pattern">请使用数字</small>
 							</div>
@@ -284,7 +287,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">服务费率(%)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<input type="text" class="form-control" name="serverRate" title="请输入服务费率" maxlength="20" ng-model="editCustomer.serverRate"
-							ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
+								   ng-pattern="/^\d*\.{0,1}\d{0,1}\d{0,1}$/" />
 							<div ng-show="editForm.serverRate.$dirty &amp;&amp; editForm.serverRate.$invalid">
 								<small class="alert-danger well-sm" ng-show="editForm.serverRate.$error.pattern">输入正确的格式，如“0.65”</small>
 							</div>
@@ -313,7 +316,7 @@
 							<select class="form-control" ng-options="status.name for status in statusOptions" ng-model="editCustomer.status"></select>
 						</div>
 					</div>
-					<br/>
+					<br />
 					<div class="form-group">
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<button type="submit" class="btn btn-success btn-lg btn-block">保存</button>
