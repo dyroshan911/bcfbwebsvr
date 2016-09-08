@@ -63,8 +63,60 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			status: {},
 			checkAmount: true
 		};
+
+		$scope.filterOptions = [
+			{ name: '所有', value: '' },
+			{ name: '等待处理', value: 'init' },
+			{ name: '处理中', value: 'handled' },
+			{ name: '完成', value: 'finished' }
+		];
+		$scope.selectedFilterCustomer = $scope.filterOptions[0];
+		$scope.selectedFilterCheckCustomer = $scope.filterOptions[0];
+
 		$scope.search = '';
 
+		getCustomerList(0, eachPageCount, '');
+		if ($rootScope.session.role == 'admin') {
+			getChannelList(0, eachPageCount, '');
+			getMemberList(0, eachPageCount, '');
+			$scope.tabNames.customer = '客户列表';
+			$scope.tabNames.channel = '渠道列表';
+			$scope.tabNames.member = '会员列表';
+			$('#myTabs a[href="#myChannels"]').tab('show');
+		} else if ($rootScope.session.role == 'channel-mgr') {
+			getChannelList(0, eachPageCount, '');
+			getMemberList(0, eachPageCount, '');
+			$('#myTabs a[href="#myChannels"]').tab('show');
+		} else if ($rootScope.session.role == 'channel') {
+			getMemberList(0, eachPageCount, '');
+		}
+
+		//functions
+		$scope.onChangeFilterCustomer = function () {
+			var filter = '';
+			if ($scope.search.length != 0) {
+				filter = $scope.search;
+				if ($scope.selectedFilterCustomer.value.length != 0) {
+					filter += ',' + $scope.selectedFilterCustomer.value;
+				}
+			} else {
+				filter = $scope.selectedFilterCustomer.value;
+			}
+			getCustomerList(0, eachPageCount, filter);
+		};
+
+		$scope.onChangeFilterCheckCustomer = function () {
+			var filter = '';
+			if ($scope.search.length != 0) {
+				filter = $scope.search;
+				if ($scope.selectedFilterCheckCustomer.value.length != 0) {
+					filter += ',' + $scope.selectedFilterCheckCustomer.value;
+				}
+			} else {
+				filter = $scope.selectedFilterCheckCustomer.value;
+			}
+			getCustomerListById($scope.checkCustomer.ownerId, 0, eachPageCount, filter);
+		};
 
 		$scope.onEditComment = function (member) {
 			member.changed = true;
@@ -97,23 +149,6 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			});
 		};
 
-		getCustomerList(0, eachPageCount, '');
-		if ($rootScope.session.role == 'admin') {
-			getChannelList(0, eachPageCount, '');
-			getMemberList(0, eachPageCount, '');
-			$scope.tabNames.customer = '客户列表';
-			$scope.tabNames.channel = '渠道列表';
-			$scope.tabNames.member = '会员列表';
-			$('#myTabs a[href="#myChannels"]').tab('show');
-		} else if ($rootScope.session.role == 'channel-mgr') {
-			getChannelList(0, eachPageCount, '');
-			getMemberList(0, eachPageCount, '');
-			$('#myTabs a[href="#myChannels"]').tab('show');
-		} else if ($rootScope.session.role == 'channel') {
-			getMemberList(0, eachPageCount, '');
-		}
-		
-		//functions
 		$scope.onEditCustomer = function (customer) {
 			$scope.editCustomer.selectedCustomer = customer;
 			$scope.editCustomer.id = customer.id;
@@ -342,7 +377,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			}
 			return phoneList;
 		}
-		
+
 		//pages
 		function sortPages(pageData, selectedIndex) {
 			var list = pageData.list;
@@ -429,7 +464,16 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		function getPageList(pageData, pageIndex) {
 			switch (pageData) {
 				case $scope.customerPageData:
-					getCustomerList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
+					var filter = '';
+					if ($scope.search.length != 0) {
+						filter = $scope.search;
+						if ($scope.selectedFilterCustomer.value.length != 0) {
+							filter += ',' + $scope.selectedFilterCustomer.value;
+						}
+					} else {
+						filter = $scope.selectedFilterCustomer.value;
+					}
+					getCustomerList(parseInt(pageIndex) * eachPageCount, eachPageCount, filter, pageIndex);
 					break;
 				case $scope.channelPageData:
 					getChannelList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
@@ -438,13 +482,22 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					getMemberList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
 					break;
 				case $scope.checkCustomerPageData:
-					getCustomerListById($scope.checkCustomer.ownerId, parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
+					var filter = '';
+					if ($scope.search.length != 0) {
+						filter = $scope.search;
+						if ($scope.selectedFilterCheckCustomer.value.length != 0) {
+							filter += ',' + $scope.selectedFilterCheckCustomer.value;
+						}
+					} else {
+						filter = $scope.selectedFilterCheckCustomer.value;
+					}
+					getCustomerListById($scope.checkCustomer.ownerId, parseInt(pageIndex) * eachPageCount, eachPageCount, filter, pageIndex);
 					break;
 				default:
 					break;
 			}
 		}
-		
+
 		//jQuery
 		$('#myTabs a[href="#myCustomers"]').click(function (e) {
 			e.preventDefault();
