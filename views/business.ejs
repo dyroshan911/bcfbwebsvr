@@ -43,17 +43,19 @@
 				<table class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
-							<th width="8%">姓名</th>
+							<th width="7%">姓名</th>
 							<th width="5%">性别</th>
 							<th width="10%">联系电话</th>
-							<th width="8%">申请金额</th>
-							<th width="8%">放款金额</th>
-							<th width="8%">服务费率(%)</th>
+							<th width="7%">申请金额</th>
+							<th width="7%">放款金额</th>
+							<th width="6%">服务费率(%)</th>
 							<th width="10%">放款日期</th>
 							<th width="10%">申请时间</th>
-							<th width="15%">所属会员</th>
-							<th width="8%">备注</th>
-							<th width="5%">状态</th>
+							<th width="10%">所属会员</th>
+							<th width="15%">备注</th>
+							<th width="8%">
+								<select class="form-control form-select" ng-options="filter.name for filter in filterOptions" ng-model="selectedFilterCustomer" ng-change="onChangeFilterCustomer()"></select>
+							</th>
 							<th width="5%" ng-hide="session.role == 'member'"></th>
 						</tr>
 					</thead>
@@ -86,11 +88,6 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="row">
-					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-						<select class="form-control" ng-options="filter.name for filter in filterOptions" ng-model="selectedFilterCustomer" ng-change="onChangeFilterCustomer()"></select>
-					</div>
-				</div>
 				<nav>
 					<ul class="pagination">
 						<li ng-repeat="page in customerPageData.list">
@@ -188,7 +185,9 @@
 							<th width="10%">放款日期</th>
 							<th width="10%">申请时间</th>
 							<th width="10%">备注</th>
-							<th width="10%">状态</th>
+							<th width="10%">
+								<select class="form-control form-select" ng-options="filter.name for filter in filterOptions" ng-model="selectedFilterCheckCustomer" ng-change="onChangeFilterCheckCustomer()"></select>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -205,11 +204,6 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="row">
-					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-						<select class="form-control" ng-options="filter.name for filter in filterOptions" ng-model="selectedFilterCheckCustomer" ng-change="onChangeFilterCheckCustomer()"></select>
-					</div>
-				</div>
 				<nav>
 					<ul class="pagination">
 						<li ng-repeat="page in checkCustomerPageData.list">
@@ -317,7 +311,7 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="text" class="form-control" name="comment" title="请输入备注信息" ng-model="editCustomer.comment" />
+							<textarea rows="3" class="form-control" name="comment" title="请输入备注信息" style="resize: none;" ng-model="editCustomer.comment" />
 						</div>
 					</div>
 					<div class="form-group">
