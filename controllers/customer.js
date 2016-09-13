@@ -33,15 +33,16 @@ exports.creatCustomer = function (token, customerObj, cb) {
                 }
             });
         } else {
-            users.getRandomChannel(function (err, user) {
-                if (!err) {
-                    customerObj.channel_id = user.id;
-                    users.increaseCustomer(user.id);
-                }
+            //users.getRandomChannel(function (err, user) {
+                //if (!err) {
+                    //hehongbingid
+                    customerObj.channel_id = "af7687de-5c04-47f5-ab7b-31e9417e47c8";
+                    users.increaseCustomer("af7687de-5c04-47f5-ab7b-31e9417e47c8");
+                //}
                 customers.createCustomer(customerObj, function (err, customer) {
                     if (!err) {
                         result = customer;
-                        //pushscheduleEventNew(data.user_id, customerObj);
+                        pushscheduleEventNewByNet("af7687de-5c04-47f5-ab7b-31e9417e47c8", customerObj);
                         cb(statusCode, result);
                     } else {
                         statusCode = 500;
@@ -51,7 +52,7 @@ exports.creatCustomer = function (token, customerObj, cb) {
                         result.source = '<<webui>>';
                     }
                 });
-            });
+            //});
         }
 
     });
@@ -179,6 +180,28 @@ function pushscheduleEventNew(user_id, customerObj) {
         }
     });
 }
+
+
+function pushscheduleEventNewByNet(user_id, customerObj) {
+    var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
+    var qeryAttr = 'true_name phone wechat_id';
+    users.queryUser(user_id, qeryAttr, function (err, superiorUsr) {
+        if (!err && superiorUsr) {                    
+            
+            var title2 = '你好，你有一个贷款订单进件\n';
+            title2 = title2 + '贷款人: '  + customerObj.name  + sex + '\n';
+            title2 = title2 + '贷款金额:' +  customerObj.apply_amount + '\n';
+            title2 = title2 + '联系电话:' + customerObj.phone;
+            var handleBy2 = '来自：网站申请';
+            var phone2 =  '';
+            var result2 =  '已进件，等待处理';
+            var detail2 = '详情进入百城主页查看，请尽快处理\n点击此消息可以进入拨打客户电话页面';
+            wechatApi.pushscheduleEvent(superiorUsr.wechat_id, title2, handleBy2, phone2, result2, detail2);
+        }
+    });
+
+}
+
 
 
 function pushscheduleEventUpdate(user_id, customerObj, status) {

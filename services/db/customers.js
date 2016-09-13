@@ -41,7 +41,9 @@ customerObj.getCustomerList = function (user_id, role, offset, limit, filter, se
     if (!offset) offset = 0;
     if (!limit) limit = 30;
     if (!filter) filter = '';
-    var textArr = filter.split(' ');
+    var textArr = filter.split(',');
+    console.log(filter)
+    console.log(textArr)
     var count = textArr.length;
     var queryObj = {};
     if (count !== 0) {
