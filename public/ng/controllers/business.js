@@ -48,7 +48,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.statusOptions = [
 			{ name: '等待处理', value: 'init' },
 			{ name: '处理中', value: 'handled' },
-			{ name: '完成', value: 'finished' }
+			{ name: '明日上门', value: 'tomorrow_come' },
+			{ name: '已经上门', value: 'aweek_need' },
+			{ name: '一周需要', value: 'coming' },
+			{ name: '放款成功', value: 'success' },
+			{ name: '完成', value: 'finished' },
 		];
 		$scope.editCustomer = {
 			selectedCustomer: {},
@@ -68,6 +72,10 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			{ name: '所有', value: '' },
 			{ name: '等待处理', value: 'init' },
 			{ name: '处理中', value: 'handled' },
+			{ name: '明日上门', value: 'tomorrow_come' },
+			{ name: '已经上门', value: 'aweek_need' },
+			{ name: '一周需要', value: 'coming' },
+			{ name: '放款成功', value: 'success' },
 			{ name: '完成', value: 'finished' }
 		];
 		$scope.selectedFilterCustomer = $scope.filterOptions[0];

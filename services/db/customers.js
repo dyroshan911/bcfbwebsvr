@@ -114,6 +114,16 @@ customerObj.updateCustomer = function (userId, role, customerId, dataObj, cb) {
             'belong_channel': userId
         };
     }
+
+    var stautsCocde = {
+            'init': '等待处理',
+            'handled': '处理中',
+            'tomorrow_come': '明日上门',
+            'aweek_need': '已经上门', 
+            'coming': '一周需要',
+            'success': '放款成功', 
+            'finished': '完成'
+    }
     CustomerModel.findOne(queryObj, function (err, user) {
         if (!err && user) {
             if(dataObj.phone) {
@@ -123,7 +133,7 @@ customerObj.updateCustomer = function (userId, role, customerId, dataObj, cb) {
             var customer,status = '';
             if  (dataObj.status != user.status && user.belong_mem != '') {
                 sendMsg = true;
-                status = (dataObj.status == 'handled') ? '正在处理':'处理完成';
+                status = stautsCocde[dataObj.status];//(dataObj.status == 'handled') ? '正在处理':'处理完成';
                 customer = user;
             }
             CustomerModel.update(queryObj, { $set: dataObj }, function (err, data) {

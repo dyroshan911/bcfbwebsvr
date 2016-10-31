@@ -62,7 +62,7 @@ var CustomerSchema = new Schema({
     comment: {type:String},                                         //备注信息         
 
     territory:{type:String},                                    //所属地域                   
-    status:{type:String, enum:['init', 'handled','finished'],default:'init'},   //处理状态
+    status:{type:String, enum:['init', 'handled','finished','tomorrow_come','aweek_need', 'coming', 'success'],default:'init'},   //处理状态
 
     create_on: {type: Number},                              //申请提交时间
     modify_on: {type: Number},                                    //修改时间
