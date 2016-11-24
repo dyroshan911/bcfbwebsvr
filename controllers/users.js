@@ -122,7 +122,7 @@ exports.getMembersListById = function (token, accountId, offset, limit, filter, 
     sessions.getSessionAttrs(token, ['role', 'user_id'], function (err, data) {
         var result = {};
         var statusCode = 201;
-        if (!err && data.user_id && data.role == 'admin') {
+        if (!err && data.user_id && (data.role == 'admin' || data.role == 'channel-mgr')) {
             users.getMembersList(accountId, offset, limit, filter, function (err, doc) {
                 if (!err) {
                     result = doc;
