@@ -5,6 +5,12 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		$scope.customerList = [];
 		$scope.channelList = [];
 		$scope.memberList = [];
+		$scope.checkMember = {
+			show: false,
+			ownerId: '',
+			ownerName: '',
+			list: []
+		};
 		$scope.checkCustomer = {
 			show: false,
 			ownerId: '',
@@ -30,6 +36,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			total: 0
 		};
 		$scope.memberPageData = {
+			current: {},
+			list: [],
+			total: 0
+		};
+		$scope.checkMemberPageData = {
 			current: {},
 			list: [],
 			total: 0
@@ -231,6 +242,14 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			}
 		};
 
+		$scope.onCheckMembers = function (owner) {
+			$scope.checkMember.show = true;
+			$scope.checkMember.ownerId = owner.id;
+			$scope.checkMember.ownerName = owner.true_name;
+			$('#myTabs a[href="#checkMembers"]').tab('show');
+			getMemberListById(owner.id, 0, eachPageCount, '');
+		};
+
 		$scope.onCheckCustomers = function (owner) {
 			$scope.checkCustomer.show = true;
 			$scope.checkCustomer.ownerId = owner.id;
@@ -239,10 +258,19 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			getCustomerListById(owner.id, 0, eachPageCount, '');
 		};
 
-		$scope.onCloseCheck = function () {
+		$scope.onCloseCheck = function (tabName) {
 			$scope.currentPageData = {};
 			$('#myTabs a[href="#myCustomers"]').tab('show');
-			$scope.checkCustomer.show = false;
+			switch (tabName) {
+				case 'member':
+					$scope.checkMember.show = false;
+					break;
+				case 'customer':
+					$scope.checkCustomer.show = false;
+					break;
+				default:
+					break;
+			}	
 		};
 
 		$scope.gotoPage = function (pageData, index) {
@@ -334,6 +362,32 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					currentPageIndex = currentPageIndex || '0';
 					sortPages($scope.memberPageData, currentPageIndex);
 					setCurrentPage($scope.memberPageData, currentPageIndex);
+				}
+			}, function (err) {
+				alert(err.message);
+			});
+		}
+
+		function getMemberListById(userId, offset, limit, filter, currentPageIndex) {
+			var paramObj = {
+				offset: offset,
+				limit: limit,
+				filter: filter
+			};
+			$scope.myPromiseCheckMembers = BusinessService.getMembersById($rootScope.session.token, userId, paramObj, function (res) {
+				$scope.checkMember.list = res.customerList;
+				for (var i = 0; i < $scope.checkMember.list.length; ++i) {
+					
+				}
+				var total = res.total;
+				if (total >= 0) {
+					$scope.checkMemberPageData.total = parseInt(total / eachPageCount);
+					if ((total % eachPageCount) != 0) {
+						$scope.checkMemberPageData.total++;
+					}
+					currentPageIndex = currentPageIndex || '0';
+					sortPages($scope.checkMemberPageData, currentPageIndex);
+					setCurrentPage($scope.checkMemberPageData, currentPageIndex);
 				}
 			}, function (err) {
 				alert(err.message);
@@ -489,6 +543,9 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				case $scope.memberPageData:
 					getMemberList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
 					break;
+				case $scope.checkMemberPageData:
+					getMemberList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
+					break;
 				case $scope.checkCustomerPageData:
 					var filter = '';
 					if ($scope.search.length != 0) {
@@ -539,6 +596,9 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 						break;
 					case '#myMembers':
 						$scope.currentPageData = $scope.memberPageData;
+						break;
+					case '#checkMembers':
+						$scope.currentPageData = $scope.checkMemberPageData;
 						break;
 					case '#checkCustomers':
 						$scope.currentPageData = $scope.checkCustomerPageData;

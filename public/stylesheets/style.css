@@ -1,6 +1,13 @@
 body {
 	font-family: Segoe UI;
 	font-size: 15px;
+	margin-top: 50px;
+}
+
+@media screen and (max-width: 479px) {
+	body {
+		margin-top: 0;
+	}
 }
 
 a {
