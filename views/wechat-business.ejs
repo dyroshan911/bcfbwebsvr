@@ -29,12 +29,22 @@
 				<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
 					<a href="#myMembers" role="tab" data-toggle="tab" ng-bind="tabNames.member"></a>
 				</li>
-				<li role="presentation" ng-show="checkCustomer.show">
-					<a href="#checkCustomers" role="tab" data-toggle="tab" style="white-space: nowrap; max-width: 100px; overflow: hidden; text-overflow: ellipsis;">{{checkCustomer.ownerName}}的客户</a>
+				<li role="presentation" ng-show="checkMember.show">
+					<a href="#checkMembers" role="tab" data-toggle="tab">{{checkMember.ownerName}}的会员</a>
 				</li>
-				<span ng-show="currentPageData == checkCustomerPageData" style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
-					<a href="javascript:void(0);" ng-click="onCloseCheck()">X</a>
-				</span>
+				<li ng-show="currentPageData == checkMemberPageData">
+					<span style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
+						<a href="javascript:void(0);" ng-click="onCloseCheck('member')">X</a>
+					</span>
+				</li>
+				<li role="presentation" ng-show="checkCustomer.show">
+					<a href="#checkCustomers" role="tab" data-toggle="tab">{{checkCustomer.ownerName}}的客户</a>
+				</li>
+				<li ng-show="currentPageData == checkCustomerPageData">
+					<span style="border: 1px solid #ddd; padding-left: 5px; padding-right: 5px;">
+						<a href="javascript:void(0);" ng-click="onCloseCheck('customer')">X</a>
+					</span>
+				</li>
 			</ul>
 		</nav>
 
@@ -178,6 +188,11 @@
 							</div>
 							<div class="form-group">
 								<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6">
+									<a class="btn btn-info btn-md btn-block" href="javascript:void(0);" ng-click="onCheckMembers(channel)">查看会员</a>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-6 col-lg-offset-6">
 									<a class="btn btn-info btn-md btn-block" href="javascript:void(0);" ng-click="onCheckCustomers(channel)">查看客户</a>
 								</div>
 							</div>
@@ -245,6 +260,39 @@
 					<ul class="pagination">
 						<li ng-repeat="page in memberPageData.list">
 							<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == memberPageData.current]" ng-bind="page.name" ng-click="gotoPage(memberPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="checkMembers" cg-busy="myPromiseCheckMembers">
+				<div class="panel panel-default" ng-repeat="member in checkMember.list">
+					<div class="panel-heading" ng-click="member.showDetails = !member.showDetails;">
+						<div class="row">
+							<h3 class="panel-title col-xs-5 col-sm-5 col-md-5 col-lg-5" ng-bind="member.true_name"></h3>
+						</div>
+					</div>
+					<div class="panel-body" ng-show="member.showDetails">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="member.phone" readonly="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">客户数</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="member.total_customers" readonly="" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in checkMemberPageData.list">
+							<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == checkMemberPageData.current]" ng-bind="page.name" ng-click="gotoPage(checkMemberPageData, page.index)"></a>
 						</li>
 					</ul>
 				</nav>

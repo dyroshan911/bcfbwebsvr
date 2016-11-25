@@ -375,9 +375,9 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 				filter: filter
 			};
 			$scope.myPromiseCheckMembers = BusinessService.getMembersById($rootScope.session.token, userId, paramObj, function (res) {
-				$scope.checkMember.list = res.customerList;
+				$scope.checkMember.list = res.membersList;
 				for (var i = 0; i < $scope.checkMember.list.length; ++i) {
-					
+					$scope.checkMember.list[i].showDetails = false;
 				}
 				var total = res.total;
 				if (total >= 0) {
@@ -575,6 +575,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		})
 
 		$('#myTabs a[href="#myMembers"]').click(function (e) {
+			e.preventDefault()
+			$(this).tab('show');
+		})
+
+		$('#myTabs a[href="#checkMembers"]').click(function (e) {
 			e.preventDefault()
 			$(this).tab('show');
 		})
