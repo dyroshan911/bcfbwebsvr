@@ -8,6 +8,8 @@ var userObj = exports = module.exports = {};
 
 var UserModel = model.AccountModel;
 var AdminModel = model.AdminModel;
+var CustomerModel = model.CustomerModel;
+
 
 userObj.init = function (ap) {
     userObj.app = ap;
@@ -49,7 +51,7 @@ userObj.queryUser = function (userName, cb) {
 
 userObj.getChannelsList = function (offset, limit, filter, getMgrOnly, cb) {
     if (!offset) offset = 0;
-    if (!limit) limit = 30;
+    if (!limit) limit = 1000;
     if (!filter) filter = '';
     var textArr = filter.split(' ');
     var count = textArr.length;
@@ -146,6 +148,36 @@ userObj.updateAccountInfo = function (userId, dataObj, cb) {
         cb(err, data);
     });
 };
+
+
+userObj.getCustomerList = function (cb) {
+    var queryObj = {};
+    var selectattr = 'id name sex phone  apply_amount finished_amount finished_date billing_date server_rate comment status create_on modify_on belong_mem belong_channel';
+    CustomerModel.find(queryObj)
+        .sort({ create_on: -1 })
+        .skip(0).
+        select(selectattr).
+        exec(function (err, customers) {
+            if (err) {
+                cb(err, null);
+            } else if (!customers) {
+                cb(new Error("not found"), null);
+            } else {
+                cb(null, customers);
+                /*CustomerModel.count(queryObj, function (errcount, count) {
+                    if (errcount) {
+                        cb(errcount, null);
+                    }
+                    else {
+                        var dataList = {};
+                        dataList.customerList = customers;
+                        dataList.total = count;
+                        cb(null, dataList);
+                    }
+                });*/
+            }
+        });
+}
 
 
 function pad(num, n) {

@@ -58,6 +58,113 @@ exports.creatCustomer = function (token, customerObj, cb) {
     });
 };
 
+exports.creatWorks = function (token, customerObj, cb) {
+
+    customerObj.comment = "工作申请";
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['user_id', 'role', 'superior'], function (err, data) {
+        if (!err && data.user_id) {
+            if (data.role == 'member') {
+                customerObj.mem_id = data.user_id;
+                customerObj.channel_id = data.superior;
+                users.increaseCustomer(data.user_id);
+                users.increaseCustomer(data.superior);
+            } else {
+                customerObj.channel_id = data.user_id;
+                users.increaseCustomer(data.user_id);
+            }
+            customers.createCustomer(customerObj, function (err, customer) {
+                if (!err) {
+                    result = customer;
+                    pushworkEventNew(data.user_id, customerObj);
+                    cb(statusCode, result);
+                } else {
+                    statusCode = 500;
+                    result.code = 'e0001';
+                    result.message = err.message;
+                    result.description = 'creatCustomer';
+                    result.source = '<<webui>>';
+                }
+            });
+        } else {
+            
+                customerObj.channel_id = "af7687de-5c04-47f5-ab7b-31e9417e47c8";
+                users.increaseCustomer("af7687de-5c04-47f5-ab7b-31e9417e47c8");
+                
+                customers.createCustomer(customerObj, function (err, customer) {
+                    if (!err) {
+                        result = customer;
+                        pushsWorkEventNewByNet("af7687de-5c04-47f5-ab7b-31e9417e47c8", customerObj);
+                        cb(statusCode, result);
+                    } else {
+                        statusCode = 500;
+                        result.code = 'e0001';
+                        result.message = err.message;
+                        result.description = 'creatWorks';
+                        result.source = '<<webui>>';
+                    }
+                });
+        }
+
+    });
+
+    //pushsWorkEventNewByNet(customerObj);
+    //console.log(customerObj);
+    //cb(statusCode, result);
+}
+
+exports.creatInsurance = function (token, customerObj, cb) {
+    customerObj.comment = "保险申请";
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['user_id', 'role', 'superior'], function (err, data) {
+        if (!err && data.user_id) {
+            if (data.role == 'member') {
+                customerObj.mem_id = data.user_id;
+                customerObj.channel_id = data.superior;
+                users.increaseCustomer(data.user_id);
+                users.increaseCustomer(data.superior);
+            } else {
+                customerObj.channel_id = data.user_id;
+                users.increaseCustomer(data.user_id);
+            }
+            customers.createCustomer(customerObj, function (err, customer) {
+                if (!err) {
+                    result = customer;
+                    pushInsuranceEventNew(data.user_id, customerObj);
+                    cb(statusCode, result);
+                } else {
+                    statusCode = 500;
+                    result.code = 'e0001';
+                    result.message = err.message;
+                    result.description = 'creatInsurance';
+                    result.source = '<<webui>>';
+                }
+            });
+        } else {
+            
+                customerObj.channel_id = "af7687de-5c04-47f5-ab7b-31e9417e47c8";
+                users.increaseCustomer("af7687de-5c04-47f5-ab7b-31e9417e47c8");
+                
+                customers.createCustomer(customerObj, function (err, customer) {
+                    if (!err) {
+                        result = customer;
+                        pushsInsuranceEventNewByNet("af7687de-5c04-47f5-ab7b-31e9417e47c8", customerObj);
+                        cb(statusCode, result);
+                    } else {
+                        statusCode = 500;
+                        result.code = 'e0001';
+                        result.message = err.message;
+                        result.description = 'creatInsurance';
+                        result.source = '<<webui>>';
+                    }
+                });
+        }
+
+    });
+}
+
 exports.getCustomerList = function (token, offset, limit, filter, cb) {
     var result = {};
     var statusCode = 200;
@@ -193,13 +300,75 @@ function pushscheduleEventNewByNet(user_id, customerObj) {
             title2 = title2 + '贷款金额:' +  customerObj.apply_amount + '\n';
             title2 = title2 + '联系电话:' + customerObj.phone;
             var handleBy2 = '来自：网站申请';
-            var phone2 =  '';
+            var phone2 =  customerObj.phone;
             var result2 =  '已进件，等待处理';
             var detail2 = '详情进入百城主页查看，请尽快处理\n点击此消息可以进入拨打客户电话页面';
             wechatApi.pushscheduleEvent(superiorUsr.wechat_id, title2, handleBy2, phone2, result2, detail2);
         }
     });
 
+}
+
+
+function pushworkEventNew(user_id, customerObj) {
+    var qeryAttr = 'wechat_id role superior true_name phone';
+    var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
+    users.queryUser(user_id, qeryAttr, function (err, user) {
+        if (!err && user && user.role == 'member') {
+            qeryAttr = 'true_name phone wechat_id';
+            users.queryUser(user.superior, qeryAttr, function (err, superiorUsr) {
+                if (!err && superiorUsr) {                    
+                    var title = '你好，您提交的' + customerObj.name + sex + '订单处理进度通知';
+                    var handleBy = superiorUsr.true_name;
+                    var phone = superiorUsr.phone;
+                    var result = '已进件，等待处理';
+                    var detail = '详情请查看在百城主页中查看，如有疑问请拨打处理人电话,\n点击此消息可以进入拨打处理人电话页面';
+                    wechatApi.pushscheduleEvent(user.wechat_id, title, handleBy, phone, result, detail);
+                    
+
+                    var title2 = '你好，你有一个工作申请进件\n';
+                    title2 = title2 + '申请人: '  + customerObj.name  + sex + '\n';
+                    title2 = title2 + '联系电话:' + customerObj.phone;
+                    var handleBy2 = '来自会员：' + user.true_name;
+                    var phone2 =  customerObj.phone;
+                    var result2 =  '已进件，等待处理';
+                    var detail2 = '请尽快处理\n点击此消息可以进入拨打申请人电话页面';
+                    wechatApi.pushscheduleEvent(superiorUsr.wechat_id, title2, handleBy2, phone2, result2, detail2);
+                }
+            });
+        }
+    });
+}
+
+
+function pushInsuranceEventNew(user_id, customerObj) {
+    var qeryAttr = 'wechat_id role superior true_name phone';
+    var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
+    users.queryUser(user_id, qeryAttr, function (err, user) {
+        if (!err && user && user.role == 'member') {
+            qeryAttr = 'true_name phone wechat_id';
+            users.queryUser(user.superior, qeryAttr, function (err, superiorUsr) {
+                if (!err && superiorUsr) {                    
+                    var title = '你好，您提交的' + customerObj.name + sex + '订单处理进度通知';
+                    var handleBy = superiorUsr.true_name;
+                    var phone = superiorUsr.phone;
+                    var result = '已进件，等待处理';
+                    var detail = '详情请查看在百城主页中查看，如有疑问请拨打处理人电话,\n点击此消息可以进入拨打处理人电话页面';
+                    wechatApi.pushscheduleEvent(user.wechat_id, title, handleBy, phone, result, detail);
+                    
+
+                    var title2 = '你好，你有一个工作保险进件\n';
+                    title2 = title2 + '申请人: '  + customerObj.name  + sex + '\n';
+                    title2 = title2 + '联系电话:' + customerObj.phone;
+                    var handleBy2 = '来自会员：' + user.true_name;
+                    var phone2 =  customerObj.phone;
+                    var result2 =  '已进件，等待处理';
+                    var detail2 = '请尽快处理\n点击此消息可以进入拨打申请人电话页面';
+                    wechatApi.pushscheduleEvent(superiorUsr.wechat_id, title2, handleBy2, phone2, result2, detail2);
+                }
+            });
+        }
+    });
 }
 
 
@@ -212,7 +381,7 @@ function pushscheduleEventUpdate(user_id, customerObj, status) {
             qeryAttr = 'true_name phone';
             users.queryUser(user.superior, qeryAttr, function (err, superiorUsr) {
                 if (!err && superiorUsr) {
-                    var title = '你好，您提交的' + customerObj.name + sex + '贷款订单处理进度通知';
+                    var title = '你好，您提交的' + customerObj.name + sex + '订单处理进度通知';
                     var handleBy = superiorUsr.true_name;
                     var phone = superiorUsr.phone;
                     var result = status;
@@ -222,4 +391,54 @@ function pushscheduleEventUpdate(user_id, customerObj, status) {
             });
         }
     });
+}
+
+
+function pushsWorkEventNewByNet(user_id, customerObj) {
+
+    var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
+    var qeryAttr = 'true_name phone wechat_id';
+    users.queryUser(user_id, qeryAttr, function (err, superiorUsr) {
+        if (!err && superiorUsr) {                    
+            
+            var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
+            var qeryAttr = 'true_name phone wechat_id';
+
+            var title2 = '你好，你有一个工作申请进件\n';
+            title2 = title2 + '申请人: '  + customerObj.name  + sex + '\n';
+            title2 = title2 + '联系电话:' + customerObj.phone;
+            var handleBy2 = '来自：微信申请';
+            var phone2 =  customerObj.phone;
+            var result2 =  '已进件，等待处理';
+            var detail2 = '请尽快处理\n点击此消息可以进入拨打申请人电话页面';
+            wechatApi.pushscheduleEvent(superiorUsr.wechat_id, title2, handleBy2, phone2, result2, detail2);
+            //wechatApi.pushscheduleEvent('o2d3EvkYbfm2hMIqlTHCVoNSfBvs', title2, handleBy2, phone2, result2, detail2);
+        }
+    });
+    //   o2d3EvkYbfm2hMIqlTHCVoNSfBvs
+    //wechatApi.pushscheduleEvent('o2d3EvrkRnGoxnMtCboQbTBu_PvU', title2, handleBy2, phone2, result2, detail2);
+}
+
+function pushsInsuranceEventNewByNet(user_id, customerObj) {
+
+    var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
+    var qeryAttr = 'true_name phone wechat_id';
+    users.queryUser(user_id, qeryAttr, function (err, superiorUsr) {
+        if (!err && superiorUsr) {                    
+            
+            var sex = (customerObj.sex == 'male') ? ' 先生' : ' 女士';
+            var qeryAttr = 'true_name phone wechat_id';
+
+            var title2 = '你好，你有一个保险申请进件\n';
+            title2 = title2 + '申请人: '  + customerObj.name  + sex + '\n';
+            title2 = title2 + '联系电话:' + customerObj.phone;
+            var handleBy2 = '来自：微信申请';
+            var phone2 =  customerObj.phone;
+            var result2 =  '已进件，等待处理';
+            var detail2 = '请尽快处理\n点击此消息可以进入拨打申请人电话页面';
+            wechatApi.pushscheduleEvent(superiorUsr.wechat_id, title2, handleBy2, phone2, result2, detail2);
+            //wechatApi.pushscheduleEvent('o2d3EvkYbfm2hMIqlTHCVoNSfBvs', title2, handleBy2, phone2, result2, detail2);
+        }
+    });
+
 }

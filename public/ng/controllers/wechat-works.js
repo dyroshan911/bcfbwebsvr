@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('myApp').controller('WechatApplyCtrl', ['$scope', '$location', '$rootScope', 'BusinessService',
+angular.module('myApp').controller('WechatWorksCtrl', ['$scope', '$location', '$rootScope', 'BusinessService',
 	function ($scope, $location, $rootScope, BusinessService) {
 		$scope.customerData = {
 			name: '',
 			sex: 'male',
 			phone: '',
-			amount: ''
 		};
 		
 		$scope.wechatJsConfig();
@@ -20,9 +19,8 @@ angular.module('myApp').controller('WechatApplyCtrl', ['$scope', '$location', '$
 				name: $scope.customerData.name,
 				sex: $scope.customerData.sex,
 				phone: $scope.customerData.phone,		
-				apply_amount: $scope.customerData.amount
 			};
-			$scope.myPromise = BusinessService.addCustomer($rootScope.session.token, dataObj, function (res) {
+			$scope.myPromise = BusinessService.addJobApply($rootScope.session.token, dataObj, function (res) {
 				//alert(JSON.stringify(res));
 				alert('申请成功');
 				wx.closeWindow();

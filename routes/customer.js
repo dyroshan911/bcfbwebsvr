@@ -28,6 +28,37 @@ router.post('/', function (req, res) {
 });
 
 
+/* create works, */
+router.post('/works', function (req, res) {
+    var token = req.query.token;
+    var customerObj = {
+        name: req.body.data.name,
+        phone: req.body.data.phone,
+        sex:req.body.data.sex,
+        apply_amount: 0
+    };
+    //...
+    customers.creatWorks(token, customerObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    }); 
+});
+
+
+/* create insurance, */
+router.post('/insurance', function (req, res) {
+    var token = req.query.token;
+    var customerObj = {
+        name: req.body.data.name,
+        phone: req.body.data.phone,
+        sex:req.body.data.sex,
+        apply_amount: 0
+    };
+    //...
+    customers.creatInsurance(token, customerObj, function (statusCode, result) {
+        httpResp(res, statusCode, result);
+    }); 
+});
+
 /* get customer list*/
 router.get('/', function (req, res) {
     var token = req.query.token;

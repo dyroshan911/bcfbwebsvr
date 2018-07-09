@@ -70,7 +70,36 @@ var AccountSchema = new Schema({
     comment:{type:String, default:""},                                    //备注信息
 });
 
+
+var CustomerSchema = new Schema({
+    id:       {type: String, unique: true, required: true},
+    name: {type: String, required: true},                                  //真实姓名
+    sex:     {type:String, enum:['male','female'],default:'male',},   //性别
+    
+    email:    {type: String},                                   //fixme:validator
+    phone:    {type: String, required: true},                                   //fixme:validator
+    
+    belong_mem:{type:String},                                         //所属会员user id
+    belong_channel:{type:String},                                    //所属渠道user id
+
+    apply_amount:{type:Number},                                 //申请金额
+    finished_amount:{type:Number},                              //已放款金额
+
+    finished_date:{type:Number},                                //放款日期
+    billing_date: {type:Number},                                //还款日期
+
+    server_rate:{type:Number},                                  //服务费率
+    comment: {type:String},                                         //备注信息         
+
+    territory:{type:String},                                    //所属地域                   
+    status:{type:String, enum:['init', 'handled','finished','tomorrow_come','aweek_need', 'coming', 'success'],default:'init'},   //处理状态
+
+    create_on: {type: Number},                              //申请提交时间
+    modify_on: {type: Number},                                    //修改时间
+});
+
 modelObj.AccountModel = mongoose.model('websvr.accounts', AccountSchema);
 modelObj.AdminModel = mongoose.model('websvr.backend.accounts', AdminSchema);
 modelObj.ProductModel = mongoose.model('websvr.products', ProductShowSchema);
 modelObj.CaseModel = mongoose.model('websvr.cases', CaseSchem);
+modelObj.CustomerModel = mongoose.model('websvr.customers', CustomerSchema);

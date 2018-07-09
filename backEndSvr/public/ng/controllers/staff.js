@@ -35,6 +35,8 @@ angular.module('myApp').controller('StaffCtrl', ['$scope', '$location', '$rootSc
 			superior: {},
 			enable: {}
 		};
+
+		$scope.excelUrl = "/api/accounts/customer?token=" + $rootScope.session.token;
 		
 		getChannelList(0, $scope.eachPageCount, '');
 		getChannelMgrList(0, '', '');

@@ -270,7 +270,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					break;
 				default:
 					break;
-			}
+			}	
 		};
 
 		$scope.gotoPage = function (pageData, index) {

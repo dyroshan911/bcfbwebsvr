@@ -104,7 +104,12 @@
 							<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == customerPageData.current]" ng-bind="page.name" ng-click="gotoPage(customerPageData, page.index)"></a>
 						</li>
 					</ul>
-				</nav>
+				</nav>	
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_customer" />
+					<button ng-click="gotoPage(customerPageData, jumpPage_customer - 1)">跳转</button>
+				</label>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="myChannels" cg-busy="myPromiseChannels">
@@ -147,6 +152,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_channel" />
+					<button ng-click="gotoPage(channelPageData, jumpPage_channel - 1)">跳转</button>
+				</label>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="myMembers" cg-busy="myPromiseMembers">
@@ -185,6 +195,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_member" />
+					<button ng-click="gotoPage(memberPageData, jumpPage_member - 1)">跳转</button>
+				</label>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="checkMembers" cg-busy="myPromiseCheckMembers">
@@ -212,6 +227,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_checkMember" />
+					<button ng-click="gotoPage(checkMemberPageData, jumpPage_checkMember - 1)">跳转</button>
+				</label>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers" cg-busy="myPromiseCheckCustomers">
@@ -219,6 +239,7 @@
 					<thead>
 						<tr>
 							<th width="10%">姓名</th>
+							<th width="10%">电话</th>
 							<th width="5%">性别</th>
 							<th width="10%">申请金额</th>
 							<th width="10%">放款金额</th>
@@ -234,6 +255,7 @@
 					<tbody>
 						<tr ng-repeat="customer in checkCustomer.list">
 							<td align="center" ng-bind="customer.name"></td>
+							<td align="center" ng-bind="customer.phone"></td>
 							<td align="center" ng-bind="customer.sexName"></td>
 							<td align="right" ng-bind="customer.apply_amount"></td>
 							<td align="right" ng-bind="customer.finished_amount"></td>
@@ -252,6 +274,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_checkCustomer" />
+					<button ng-click="gotoPage(checkCustomerPageData, jumpPage_checkCustomer - 1)">跳转</button>
+				</label>
 			</div>
 		</div>
 	</div>

@@ -22,7 +22,11 @@ customerObj.createCustomer = function (dataObj, cb) {
         belong_channel: dataObj.channel_id,
         apply_amount: dataObj.apply_amount,
         sex:dataObj.sex,
+        comment:"",
         create_on: parseInt(Date.now() / 1000)
+    };
+    if (dataObj.comment) {
+        customerInfo.comment = dataObj.comment;
     };
     var newCustomer = new CustomerModel(customerInfo);
     newCustomer.save(function (err, customer) {

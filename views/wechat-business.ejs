@@ -138,6 +138,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_customer" />
+					<button ng-click="gotoPage(customerPageData, jumpPage_customer - 1)">跳转</button>
+				</label>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="myChannels" cg-busy="myPromiseChannels">
@@ -206,6 +211,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_channel" />
+					<button ng-click="gotoPage(channelPageData, jumpPage_channel - 1)">跳转</button>
+				</label>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="myMembers" cg-busy="myPromiseMembers">
@@ -263,6 +273,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_member" />
+					<button ng-click="gotoPage(memberPageData, jumpPage_member - 1)">跳转</button>
+				</label>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="checkMembers" cg-busy="myPromiseCheckMembers">
@@ -296,6 +311,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_checkMember" />
+					<button ng-click="gotoPage(checkMemberPageData, jumpPage_checkMember - 1)">跳转</button>
+				</label>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade in" id="checkCustomers" cg-busy="myPromiseCheckCustomers">
@@ -314,6 +334,12 @@
 					</div>
 					<div class="panel-body" ng-show="customer.showDetails">
 						<form class="form-horizontal">
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" ng-model="customer.phone" readonly="" />
+								</div>
+							</div>
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">申请金额</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -366,6 +392,11 @@
 						</li>
 					</ul>
 				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_checkCustomer" />
+					<button ng-click="gotoPage(checkCustomerPageData, jumpPage_checkCustomer - 1)">跳转</button>
+				</label>
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootScope', 'UserService',
+angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootScope', 'UserService', 
 	function ($scope, $location, $rootScope, UserService) {
 		$scope.signupData = {
 			userName: '',
@@ -12,7 +12,7 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 			superior: '',
 			checkPassword: true
 		};
-
+		
 		//functions
 		$scope.onSignup = function () {
 			if ($scope.signupForm.$invalid || !$scope.signupData.checkPassword) {
@@ -22,8 +22,8 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 				user_name: $scope.signupData.userName,
 				password: $scope.signupData.passwordConfirm,
 				phone: $scope.signupData.phone,
-				true_name: $scope.signupData.name,
-				email: $scope.signupData.email,
+				true_name : $scope.signupData.name,
+				email : $scope.signupData.email,
 				superior: $scope.signupData.superior
 			};
 			$scope.myPromise = UserService.signup($rootScope.session.token, dataOdj, function (res) {
@@ -39,7 +39,7 @@ angular.module('myApp').controller('SignupCtrl', ['$scope', '$location', '$rootS
 				alert(err.message);
 			})
 		};
-
+		
 		$scope.onCheckPassword = function () {
 			if ($scope.signupData.password !== $scope.signupData.passwordConfirm) {
 				$scope.signupData.checkPassword = false;

@@ -2,7 +2,7 @@
 
 angular.module('myApp').factory('MsgService', function () {
 	var cfgData = {};
-
+	
 	var msgTab = {
 		//web server error	
 		"e0004": { "name": "NotFound", "zh-cn": "此微信未绑定百城账户" },
@@ -18,11 +18,11 @@ angular.module('myApp').factory('MsgService', function () {
 		"e99999": { "name": "UnKnown", "zh-cn": "未知错误, 请在调试窗口查看错误信息，并回报给网站管理员，谢谢!" }
 	};
 	var lang = 'zh-cn';
-
+	
 	cfgData.setLang = function (lang) {
 		lang = 'zh-cn';
 	};
-
+	
 	cfgData.getMsg = function (code) {
 		var msgItem = msgTab[code];
 		if (!msgItem) {
@@ -51,6 +51,6 @@ angular.module('myApp').factory('MsgService', function () {
 		};
 		return msg;
 	};
-
+	
 	return cfgData;
 });

@@ -80,8 +80,10 @@ exports.updateAccountInfo = function (accountId, dataObj, cb) {
     }
 
     updateData.enabled = dataObj.enable;
-    if(dataObj.enable == false)
+    if(dataObj.enable == false) {
         updateData.wechat_id = '';
+        updateData.password = 'cz123456';
+    }
 
     users.updateAccountInfo(accountId, updateData, function (err, doc) {
         if (!err) {

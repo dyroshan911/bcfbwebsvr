@@ -3,15 +3,15 @@
 angular.module('myApp').controller('WechatWarnCtrl', ['$scope', '$location', '$rootScope',
 	function ($scope, $location, $rootScope) {
 		$scope.warningContent = '';
-
+		
 		getWarningType();
 		$scope.wechatJsConfig();
-
+		
 		//functions
 		$scope.onClose = function () {
 			wx.closeWindow();
 		};
-
+		
 		function getWarningType() {
 			var type = $location.search().type;
 			switch (type) {
