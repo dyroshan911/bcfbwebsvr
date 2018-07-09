@@ -6,7 +6,7 @@ angular.module('myApp').controller('WechatBindCtrl', ['$scope', '$location', '$r
 			userName: '',
 			password: ''
 		};
-		
+
 		//functions	
 		$scope.onBind = function () {
 			var dataObj = {

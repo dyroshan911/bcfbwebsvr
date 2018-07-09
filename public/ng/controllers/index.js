@@ -10,7 +10,7 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 				alert(err.message);
 			});
 		};
-		
+
 		$scope.getDateString = function (timestamp) {
 			var ts = timestamp || 0;
 			var date = new Date(ts);
@@ -22,7 +22,7 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 			var s = date.getSeconds();
 			return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d) + ' , ' + (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
 		};
-		
+
 		$scope.makeFloat = function (n) {
 			if (!n && n !== 0) {
 				return '';
@@ -36,7 +36,7 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 				return n;
 			}
 		};
-		
+
 		$scope.wechatJsConfig = function () {
 			var dataObj = {
 				debug: false,
@@ -53,7 +53,7 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 				alert(msg);
 			});
 		}
-		
+
 		function JsConfig(data) {
 			var obj = {
 				debug: data.debug,

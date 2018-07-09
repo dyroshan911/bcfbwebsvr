@@ -3,7 +3,7 @@
 angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 	function ($http, MsgService) {
 		var cfgData = {};
-		
+
 		var makeArg = function (arg) {
 			var paramStr = '';
 			switch (typeof arg) {
@@ -24,7 +24,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 					return String(arg);
 			}
 		};
-		
+
 		var makeUrl = function () {
 			var argLen = arguments.length;
 			if (argLen === 0) {
@@ -43,7 +43,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 			}
 			return urlStr;
 		};
-		
+
 		cfgData.get = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				var date = new Date();
@@ -65,7 +65,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 				}
 			});
 		};
-		
+
 		cfgData.post = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				var date = new Date();
@@ -87,7 +87,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 				}
 			});
 		};
-		
+
 		cfgData.put = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				var date = new Date();
@@ -109,7 +109,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 				}
 			});
 		};
-		
+
 		cfgData.delete = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				var date = new Date();
@@ -131,7 +131,7 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 				}
 			});
 		};
-		
+
 		cfgData.head = function (url, obj, successcb, failcb) {
 			if (obj.params) {
 				var date = new Date();
@@ -153,6 +153,6 @@ angular.module('myApp').factory('ApiService', ['$http', 'MsgService',
 				};
 			});
 		};
-		
+
 		return cfgData;
 	}]);

@@ -10,17 +10,17 @@ angular.module('myApp').controller('WechatAccountCtrl', ['$scope', '$location', 
 			passwordConfirm: '',
 			checkPassword: true
 		};
-		
+
 		$scope.completeData = {
 			userName: '',
 			password: '',
 			passwordConfirm: '',
 			checkPassword: true
 		};
-		
+
 		getAccountInfo();
 		$scope.wechatJsConfig();
-		
+
 		//functions
 		$scope.onSave = function () {
 			if ($scope.accountForm.$invalid || !$scope.accountData.checkPassword) {
@@ -42,7 +42,7 @@ angular.module('myApp').controller('WechatAccountCtrl', ['$scope', '$location', 
 				alert(err.message);
 			});
 		};
-		
+
 		$scope.onUnbind = function () {
 			var answer = window.confirm('确定解除账号绑定？');
 			if (answer == true) {
@@ -51,11 +51,11 @@ angular.module('myApp').controller('WechatAccountCtrl', ['$scope', '$location', 
 				return;
 			}
 		};
-		
+
 		$scope.onCancel = function () {
 			wx.closeWindow();
 		};
-		
+
 		$scope.onCheckPassword = function (formData) {
 			if (formData.password !== formData.passwordConfirm) {
 				formData.checkPassword = false;
@@ -63,7 +63,7 @@ angular.module('myApp').controller('WechatAccountCtrl', ['$scope', '$location', 
 				formData.checkPassword = true;
 			}
 		};
-		
+
 		$scope.onComplete = function () {
 			if ($scope.completeForm.$invalid || !$scope.completeData.checkPassword) {
 				return;
@@ -86,7 +86,7 @@ angular.module('myApp').controller('WechatAccountCtrl', ['$scope', '$location', 
 				alert(err.message);
 			})
 		};
-		
+
 		function getAccountInfo() {
 			$scope.myPromiseInfo = UserService.getAccountInfo($rootScope.session.token, function (res) {
 				//alert(JSON.stringify(res));
@@ -100,7 +100,7 @@ angular.module('myApp').controller('WechatAccountCtrl', ['$scope', '$location', 
 				alert(err.message);
 			});
 		}
-		
+
 		function unbind() {
 			var dataObj = {
 				true_name: $scope.accountData.name,

@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootScope', 'UserService', 
+angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootScope', 'UserService',
 	function ($scope, $location, $rootScope, UserService) {
 		$scope.loginData = {
 			userName: '',
 			password: ''
 		};
-		
+
 		//functions
 		$scope.onLogin = function () {
 			var dataObj = {
@@ -29,7 +29,7 @@ angular.module('myApp').controller('LoginCtrl', ['$scope', '$location', '$rootSc
 	}]);
 
 
-angular.module('myApp').controller('CallPhoneCtrl', ['$scope', '$location', '$rootScope', 'UserService', 
+angular.module('myApp').controller('CallPhoneCtrl', ['$scope', '$location', '$rootScope', 'UserService',
 	function ($scope, $location, $rootScope, UserService) {
 		$scope.phone = 'tel:' + $location.search().phone;
 		//functions

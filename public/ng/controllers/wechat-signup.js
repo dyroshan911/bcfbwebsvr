@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('myApp').controller('WechatSignupCtrl', ['$scope', '$location', '$rootScope', 'UserService', 
+angular.module('myApp').controller('WechatSignupCtrl', ['$scope', '$location', '$rootScope', 'UserService',
 	function ($scope, $location, $rootScope, UserService) {
 		$scope.wechatSignupData = {
 			name: '',
-			phone: '', 
+			phone: '',
 			superior: ''
 		};
-		
+
 		//functions
 		$scope.onWechatSignup = function () {
 			if ($scope.wechatSignupForm.$invalid) {
@@ -17,8 +17,8 @@ angular.module('myApp').controller('WechatSignupCtrl', ['$scope', '$location', '
 				user_name: '',
 				password: '',
 				phone: $scope.wechatSignupData.phone,
-				true_name : $scope.wechatSignupData.name,
-				email : '',
+				true_name: $scope.wechatSignupData.name,
+				email: '',
 				superior: $scope.wechatSignupData.superior
 			};
 			$scope.myPromise = UserService.signup($rootScope.session.token, dataOdj, function (res) {
