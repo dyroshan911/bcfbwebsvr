@@ -63,6 +63,7 @@ cache.init(function (err) {
 var routes = require('./routes/index');
 var apiAccounts = require('./routes/users');
 var apiCustomers = require('./routes/customer');
+var apiPolicys = require('./routes/policy');
 var wechats = require('./routes/wechats');
 var apiSessions = require('./routes/sessions');
 var apiBackDoor = require('./routes/backDoor');
@@ -117,6 +118,7 @@ app.use('/api/sessions', apiSessions);
 app.use('/api/accounts', apiAccounts);
 app.use('/api/wechat', wechats);
 app.use('/api/customers', apiCustomers);
+app.use('/api/policys', apiPolicys);
 app.use('/api/backDoor', apiBackDoor);
 app.use('/api/webShow', apiWebShows);
 

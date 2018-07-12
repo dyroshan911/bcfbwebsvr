@@ -8,6 +8,7 @@ var users = require("./users.js");
 var customers = require("./customers.js")
 var products = require("./products.js")
 var cases = require("./cases.js")
+var policys = require("./policys.js")
 var mongoose = require('mongoose');
 
 var app = exports = module.exports = {
@@ -15,6 +16,7 @@ var app = exports = module.exports = {
     Customers: customers,
     Cases: cases,
     Products: products,
+    Policys: policys,
     DB: mongoose,
 
     config_data: { url: null, options: null },
@@ -50,6 +52,7 @@ app.start = function () {
         } else {
             app.Users.init(app);
             app.Customers.init(app);
+            APP.Policys.init(app);
             app.state = "init";
         }
     });

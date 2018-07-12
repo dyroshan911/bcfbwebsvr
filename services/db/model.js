@@ -93,7 +93,39 @@ var CaseSchem = new Schema({
 });
 
 
+//保单
+var PolicySchema = new Schema({
+    id:       {type: String, unique: true, required: true},
+    payer_name: {type: String, required: true},                 //支付保险费用人
+    insurer_name:     {type: String, required: true},           //被保人
+    
+    effective_time:    {type:Number, required: true},           //生效时间
+    insurance_types:    {type: String, required: true},        //险种
+    
+    insurance_company:{type:String, required: true},            //所属保险公司
+
+    payment_frequency:{type:String, required: true},           //缴款频率
+
+    payment_time:{type:String, required: true},                //缴多久
+
+    insurance_time:{type:String, required: true},           //保多久
+
+    insurance_amount:{type:Number, required: true},        //主保险额
+
+    payment_year:{type:Number, required: true},            //年交保费
+
+    comment: {type:String},                                //备注信息 
+
+    belong_mem:{type:String},                              //所属会员user id
+    belong_channel:{type:String},                          //所属渠道user id  
+
+    create_on: {type: Number},                              //申请提交时间
+    modify_on: {type: Number},                                    //修改时间
+});
+
+
 modelObj.AccountModel = mongoose.model('websvr.accounts', AccountSchema);
 modelObj.CustomerModel = mongoose.model('websvr.customers', CustomerSchema);
 modelObj.ProductModel = mongoose.model('websvr.products', ProductShowSchema);
 modelObj.CaseModel = mongoose.model('websvr.cases', CaseSchem);
+modelObj.PolicyModel = mongoose.model('websvr.policys', PolicySchema);
