@@ -61,3 +61,5 @@ router.get('/:account_id', function (req, res) {
         httpResp(res, statusCode, result);
     });
 });
+
+module.exports = router;

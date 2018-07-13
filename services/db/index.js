@@ -52,7 +52,7 @@ app.start = function () {
         } else {
             app.Users.init(app);
             app.Customers.init(app);
-            APP.Policys.init(app);
+            app.Policys.init(app);
             app.state = "init";
         }
     });
