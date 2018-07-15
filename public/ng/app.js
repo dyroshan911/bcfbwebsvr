@@ -4,7 +4,7 @@
 var sessionStorage = window.sessionStorage;
 
 // Declare app level module which depends on filters, and services
-var myApp = angular.module('myApp', ['ngRoute', 'ngTouch', 'ngResource', 'cgBusy']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngAnimate', 'cgBusy']);
 myApp.config(['$routeProvider', '$locationProvider', '$resourceProvider',
 	function ($routeProvider, $locationProvider, $resourceProvider) {
 		$routeProvider.when('/', { templateUrl: ('partial/home'), controller: 'HomeCtrl', permission: 'none' });
