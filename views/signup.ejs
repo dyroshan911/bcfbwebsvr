@@ -2,7 +2,7 @@
 	<% include header %>
 </div>
 
-<div class="container">
+<div class="container pc-view">
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
 		<div class="panel panel-default" style="margin-top: 50px;" cg-busy="myPromise">
 			<div class="panel-body">
@@ -12,8 +12,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="userName" placeholder="用户名" title="请输入用户名" required="" maxlength="20" ng-model="signupData.userName"
-							ng-minlength="6" ng-pattern="/^\w+$/" />
+							<input type="text" class="form-control" name="userName" placeholder="用户名" title="请输入用户名" required="" maxlength="20" ng-model="signupData.userName" ng-minlength="6" ng-pattern="/^\w+$/" />
 							<div ng-show="signupForm.userName.$dirty &amp;&amp; signupForm.userName.$invalid">
 								<small class="alert-danger well-sm" ng-show="signupForm.userName.$error.pattern">请使用字母，数字或者下划线</small>
 								<small class="alert-danger well-sm" ng-show="signupForm.userName.$error.minlength &amp;&amp; !signupForm.userName.$error.pattern">最小长度为6个字符</small>
@@ -22,8 +21,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="password" class="form-control" name="password" placeholder="密码" title="请输入密码" required="" maxlength="20" ng-model="signupData.password"
-							ng-minlength="6" ng-change="onCheckPassword()" />
+							<input type="password" class="form-control" name="password" placeholder="密码" title="请输入密码" required="" maxlength="20" ng-model="signupData.password" ng-minlength="6" ng-change="onCheckPassword()" />
 							<div ng-show="signupForm.password.$dirty &amp;&amp; signupForm.password.$invalid">
 								<small class="alert-danger well-sm" ng-show="signupForm.password.$error.minlength">最小长度为6个字符</small>
 							</div>
@@ -31,8 +29,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" required="" maxlength="20" ng-model="signupData.passwordConfirm"
-							ng-change="onCheckPassword()" />
+							<input type="password" class="form-control" name="passwordConfirm" placeholder="确认密码" title="请确认密码" required="" maxlength="20" ng-model="signupData.passwordConfirm" ng-change="onCheckPassword()" />
 							<div ng-show="signupForm.passwordConfirm.$dirty &amp;&amp; (signupData.passwordConfirm.length &gt; 0)">
 								<small class="alert-danger well-sm" ng-show="!signupData.checkPassword">请确认两次输入的密码一致</small>
 							</div>
@@ -40,8 +37,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="11" ng-model="signupData.phone"
-							ng-minlength="11" ng-pattern="/^\d+$/" />
+							<input type="text" class="form-control" name="phone" placeholder="电话号码" title="请输入电话号码" required="" maxlength="11" ng-model="signupData.phone" ng-minlength="11" ng-pattern="/^\d+$/" />
 							<div ng-show="signupForm.phone.$dirty &amp;&amp; signupForm.phone.$invalid">
 								<small class="alert-danger well-sm" ng-show="signupForm.phone.$error.pattern">请使用数字</small>
 								<small class="alert-danger well-sm" ng-show="signupForm.phone.$error.minlength &amp;&amp; !signupForm.phone.$error.pattern">请输入11位手机号码</small>
@@ -50,17 +46,15 @@
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="10" ng-model="signupData.name"
-                            ng-pattern="/[\u4e00-\u9fa5]+$/" />
-                            <div ng-show="signupForm.name.$dirty &amp;&amp; signupForm.name.$invalid">
+							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="10" ng-model="signupData.name" ng-pattern="/[\u4e00-\u9fa5]+$/" />
+							<div ng-show="signupForm.name.$dirty &amp;&amp; signupForm.name.$invalid">
 								<small class="alert-danger well-sm" ng-show="signupForm.name.$error.pattern">请使用中文</small>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-							<input type="email" class="form-control" name="email" placeholder="电子邮箱" title="请输入电子邮箱" maxlength="20" ng-model="signupData.email"
-							ng-pattern="/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/" />
+							<input type="email" class="form-control" name="email" placeholder="电子邮箱" title="请输入电子邮箱" maxlength="20" ng-model="signupData.email" ng-pattern="/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/" />
 							<div ng-show="signupForm.email.$dirty &amp;&amp; signupForm.email.$invalid">
 								<small class="alert-danger well-sm" ng-show="signupForm.email.$error.pattern">邮箱格式错误</small>
 							</div>

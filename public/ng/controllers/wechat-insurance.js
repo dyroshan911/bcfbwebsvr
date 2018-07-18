@@ -3,360 +3,444 @@
 angular.module('myApp').controller('WechatInsuranceCtrl', ['$scope', '$location', '$rootScope', 'BusinessService',
 	function ($scope, $location, $rootScope, BusinessService) {
 		$scope.payerOptions = [
-			{ id: 0, name: 'ÄĞÖ÷ÈË', value: 'ÄĞÖ÷ÈË' },
-			{ id: 1, name: 'Å®Ö÷ÈË', value: 'Å®Ö÷ÈË' },
-			{ id: 2, name: '¸¸Ç×', value: '¸¸Ç×' },
-			{ id: 3, name: 'Ä¸Ç×', value: 'Ä¸Ç×' },
-			{ id: 4, name: '¶ù×Ó', value: '¶ù×Ó' },
-			{ id: 5, name: 'Å®¶ù', value: 'Å®¶ù' },
-			{ id: 6, name: 'ÆäËû', value: 'ÆäËû' }
+			{ id: 'payer0', name: 'ç”·ä¸»äºº', value: 'ç”·ä¸»äºº' },
+			{ id: 'payer1', name: 'å¥³ä¸»äºº', value: 'å¥³ä¸»äºº' },
+			{ id: 'payer2', name: 'çˆ¶äº²', value: 'çˆ¶äº²' },
+			{ id: 'payer3', name: 'æ¯äº²', value: 'æ¯äº²' },
+			{ id: 'payer4', name: 'å„¿å­', value: 'å„¿å­' },
+			{ id: 'payer5', name: 'å¥³å„¿', value: 'å¥³å„¿' },
+			{ id: 'payer6', name: 'å…¶ä»–', value: 'å…¶ä»–' }
 		];
 
 		$scope.insurantOptions = [
-			{ id: 0, name: 'ÄĞÖ÷ÈË', value: 'ÄĞÖ÷ÈË' },
-			{ id: 1, name: 'Å®Ö÷ÈË', value: 'Å®Ö÷ÈË' },
-			{ id: 2, name: '¶ù×Ó', value: '¶ù×Ó' },
-			{ id: 3, name: 'Å®¶ù', value: 'Å®¶ù' },
-			{ id: 4, name: '¸¸Ç×', value: '¸¸Ç×' },
-			{ id: 5, name: 'Ä¸Ç×', value: 'Ä¸Ç×' },
-			{ id: 6, name: '¹«¹«', value: '¹«¹«' },
-			{ id: 7, name: 'ÆÅÆÅ', value: 'ÆÅÆÅ' },
-			{ id: 8, name: 'ÔÀ¸¸', value: 'ÔÀ¸¸' },
-			{ id: 9, name: 'ÔÀÄ¸', value: 'ÔÀÄ¸' },
-			{ id: 10, name: '³µÁ¾', value: '³µÁ¾' },
-			{ id: 11, name: '·¿Îİ', value: '·¿Îİ' },
-			{ id: 12, name: 'Ô±¹¤', value: 'Ô±¹¤' },
-			{ id: 13, name: '³§·¿', value: '³§·¿' },
-			{ id: 14, name: 'ÆäËû', value: 'ÆäËû' }
+			{ id: 'insurant0', name: 'ç”·ä¸»äºº', value: 'ç”·ä¸»äºº' },
+			{ id: 'insurant1', name: 'å¥³ä¸»äºº', value: 'å¥³ä¸»äºº' },
+			{ id: 'insurant2', name: 'å„¿å­', value: 'å„¿å­' },
+			{ id: 'insurant3', name: 'å¥³å„¿', value: 'å¥³å„¿' },
+			{ id: 'insurant4', name: 'çˆ¶äº²', value: 'çˆ¶äº²' },
+			{ id: 'insurant5', name: 'æ¯äº²', value: 'æ¯äº²' },
+			{ id: 'insurant6', name: 'å…¬å…¬', value: 'å…¬å…¬' },
+			{ id: 'insurant7', name: 'å©†å©†', value: 'å©†å©†' },
+			{ id: 'insurant8', name: 'å²³çˆ¶', value: 'å²³çˆ¶' },
+			{ id: 'insurant9', name: 'å²³æ¯', value: 'å²³æ¯' },
+			{ id: 'insurant10', name: 'è½¦è¾†', value: 'è½¦è¾†' },
+			{ id: 'insurant11', name: 'æˆ¿å±‹', value: 'æˆ¿å±‹' },
+			{ id: 'insurant12', name: 'å‘˜å·¥', value: 'å‘˜å·¥' },
+			{ id: 'insurant13', name: 'å‚æˆ¿', value: 'å‚æˆ¿' },
+			{ id: 'insurant14', name: 'å…¶ä»–', value: 'å…¶ä»–' }
 		];
 
 		$scope.insuranceTypeList = [
-			{ id: 0, name: 'ÖØ´ó¼²²¡', value: 'ÖØ´ó¼²²¡', selected: false },
-			{ id: 1, name: 'ÇáÖ¢', value: 'ÇáÖ¢', selected: false },
-			{ id: 2, name: 'ÖĞÖ¢', value: 'ÖĞÖ¢', selected: false },
-			{ id: 3, name: '¶ñĞÔÖ×Áö', value: '¶ñĞÔÖ×Áö', selected: false },
-			{ id: 4, name: '×¡ÔºÒ½ÁÆ', value: '×¡ÔºÒ½ÁÆ', selected: false },
-			{ id: 5, name: 'Éí¹ÊÊÙÏÕ', value: 'Éí¹ÊÊÙÏÕ', selected: false },
-			{ id: 6, name: 'ÒâÍâ±£ÕÏ', value: 'ÒâÍâ±£ÕÏ', selected: false },
-			{ id: 7, name: 'Äê½ğÀí²Æ', value: 'Äê½ğÀí²Æ', selected: false },
-			{ id: 8, name: '½ÌÓı±£ÏÕ', value: '½ÌÓı±£ÏÕ', selected: false },
-			{ id: 9, name: '¼ÒÍ¥²ÆÏÕ', value: '¼ÒÍ¥²ÆÏÕ', selected: false },
-			{ id: 10, name: '³µÁ¾±£ÏÕ', value: '³µÁ¾±£ÏÕ', selected: false },
-			{ id: 11, name: 'ÆóÒµ²ÆÏÕ', value: 'ÆóÒµ²ÆÏÕ', selected: false },
-			{ id: 12, name: 'ÍÅÒâ¹ÍÖ÷', value: 'ÍÅÒâ¹ÍÖ÷', selected: false },
-			{ id: 13, name: '»¥Öú±£ÏÕ', value: '»¥Öú±£ÏÕ', selected: false },
-			{ id: 14, name: 'ÆäËü±£ÏÕ', value: 'ÆäËü±£ÏÕ', selected: false }
+			{ id: 'insurance0', name: 'é‡å¤§ç–¾ç—…', value: 'é‡å¤§ç–¾ç—…', selected: false },
+			{ id: 'insurance1', name: 'è½»ç—‡', value: 'è½»ç—‡', selected: false },
+			{ id: 'insurance2', name: 'ä¸­ç—‡', value: 'ä¸­ç—‡', selected: false },
+			{ id: 'insurance3', name: 'æ¶æ€§è‚¿ç˜¤', value: 'æ¶æ€§è‚¿ç˜¤', selected: false },
+			{ id: 'insurance4', name: 'ä½é™¢åŒ»ç–—', value: 'ä½é™¢åŒ»ç–—', selected: false },
+			{ id: 'insurance5', name: 'èº«æ•…å¯¿é™©', value: 'èº«æ•…å¯¿é™©', selected: false },
+			{ id: 'insurance6', name: 'æ„å¤–ä¿éšœ', value: 'æ„å¤–ä¿éšœ', selected: false },
+			{ id: 'insurance7', name: 'å¹´é‡‘ç†è´¢', value: 'å¹´é‡‘ç†è´¢', selected: false },
+			{ id: 'insurance8', name: 'æ•™è‚²ä¿é™©', value: 'æ•™è‚²ä¿é™©', selected: false },
+			{ id: 'insurance9', name: 'å®¶åº­è´¢é™©', value: 'å®¶åº­è´¢é™©', selected: false },
+			{ id: 'insurance10', name: 'è½¦è¾†ä¿é™©', value: 'è½¦è¾†ä¿é™©', selected: false },
+			{ id: 'insurance11', name: 'ä¼ä¸šè´¢é™©', value: 'ä¼ä¸šè´¢é™©', selected: false },
+			{ id: 'insurance12', name: 'å›¢æ„é›‡ä¸»', value: 'å›¢æ„é›‡ä¸»', selected: false },
+			{ id: 'insurance13', name: 'äº’åŠ©ä¿é™©', value: 'äº’åŠ©ä¿é™©', selected: false },
+			{ id: 'insurance14', name: 'å…¶å®ƒä¿é™©', value: 'å…¶å®ƒä¿é™©', selected: false }
+		];
+
+		$scope.frequencyOptions = [
+			{ id: 'frequency0', name: 'æœˆç¼´', value: 'æœˆç¼´' },
+			{ id: 'frequency', name: 'å­£åº¦ç¼´', value: 'å­£åº¦ç¼´' },
+			{ id: 'frequency2', name: 'åŠå¹´ç¼´', value: 'åŠå¹´ç¼´' },
+			{ id: 'frequency3', name: 'å¹´ç¼´', value: 'å¹´ç¼´' },
+			{ id: 'frequency4', name: 'è¶¸ç¼´', value: 'è¶¸ç¼´' }
 		];
 
 		$scope.insuranceCompanyIndexList = [
 			{
-				id: 0,
+				id: 'index0',
 				name: 'A',
 				list: [
-					{ id: 0, name: '°²ĞÅÅ©ÏÕ', value: '°²ĞÅÅ©ÏÕ' },
-					{ id: 1, name: '°²»ªÅ©ÏÕ', value: '°²»ªÅ©ÏÕ' },
-					{ id: 2, name: '°²ĞÄ²ÆÏÕ', value: '°²ĞÄ²ÆÏÕ' },
-					{ id: 3, name: '°²Ê¢£¨Ïã¸Û£©', value: '°²Ê¢£¨Ïã¸Û£©' },
-					{ id: 4, name: '°²Ê¢ÌìÆ½', value: '°²Ê¢ÌìÆ½' },
-					{ id: 5, name: '°²Áª²ÆÏÕ', value: '°²Áª²ÆÏÕ' },
-					{ id: 6, name: '°²³Ç²ÆÏÕ', value: '°²³Ç²ÆÏÕ' },
-					{ id: 7, name: '°²´ï±£ÏÕ', value: '°²´ï±£ÏÕ' },
-					{ id: 8, name: '°²°îÈËÊÙ', value: '°²°îÈËÊÙ' },
-					{ id: 9, name: '°²°îÑøÀÏ', value: '°²°îÑøÀÏ' },
-					{ id: 10, name: '°²°î²ÆÏÕ', value: '°²°î²ÆÏÕ' },
-					{ id: 11, name: '°®ĞÄÈËÊÙ', value: '°®ĞÄÈËÊÙ' }
+					{ id: 0, name: 'å®‰ä¿¡å†œé™©', value: 'å®‰ä¿¡å†œé™©' },
+					{ id: 1, name: 'å®‰åå†œé™©', value: 'å®‰åå†œé™©' },
+					{ id: 2, name: 'å®‰å¿ƒè´¢é™©', value: 'å®‰å¿ƒè´¢é™©' },
+					{ id: 3, name: 'å®‰ç››ï¼ˆé¦™æ¸¯ï¼‰', value: 'å®‰ç››ï¼ˆé¦™æ¸¯ï¼‰' },
+					{ id: 4, name: 'å®‰ç››å¤©å¹³', value: 'å®‰ç››å¤©å¹³' },
+					{ id: 5, name: 'å®‰è”è´¢é™©', value: 'å®‰è”è´¢é™©' },
+					{ id: 6, name: 'å®‰åŸè´¢é™©', value: 'å®‰åŸè´¢é™©' },
+					{ id: 7, name: 'å®‰è¾¾ä¿é™©', value: 'å®‰è¾¾ä¿é™©' },
+					{ id: 8, name: 'å®‰é‚¦äººå¯¿', value: 'å®‰é‚¦äººå¯¿' },
+					{ id: 9, name: 'å®‰é‚¦å…»è€', value: 'å®‰é‚¦å…»è€' },
+					{ id: 10, name: 'å®‰é‚¦è´¢é™©', value: 'å®‰é‚¦è´¢é™©' },
+					{ id: 11, name: 'çˆ±å¿ƒäººå¯¿', value: 'çˆ±å¿ƒäººå¯¿' }
 				]
 			},
 			{
-				id: 1,
+				id: 'index1',
 				name: 'B',
 				list: [
-					{ id: 0, name: '±£³Ï£¨Ïã¸Û£©', value: '±£³Ï£¨Ïã¸Û£©' },
-					{ id: 1, name: '±±´ó·½Õı', value: '±±´ó·½Õı' },
-					{ id: 2, name: '±±²¿Íå²ÆÏÕ', value: '±±²¿Íå²ÆÏÕ' },
-					{ id: 3, name: '²³º£ÈËÊÙ', value: '²³º£ÈËÊÙ' },
-					{ id: 4, name: '²³º£²ÆÏÕ', value: '²³º£²ÆÏÕ' },
-					{ id: 5, name: '°ÙÄêÈËÊÙ', value: '°ÙÄêÈËÊÙ' },
-					{ id: 6, name: '³ö¿ÚĞÅÓÃ', value: '³ö¿ÚĞÅÓÃ' },
-					{ id: 7, name: '°²´ï±£ÏÕ', value: '°²´ï±£ÏÕ' },
-					{ id: 8, name: '°²°îÈËÊÙ', value: '°²°îÈËÊÙ' },
-					{ id: 9, name: '°²°îÑøÀÏ', value: '°²°îÑøÀÏ' },
-					{ id: 10, name: '°²°î²ÆÏÕ', value: '°²°î²ÆÏÕ' },
-					{ id: 11, name: '°®ĞÄÈËÊÙ', value: '°®ĞÄÈËÊÙ' }
+					{ id: 0, name: 'ä¿è¯šï¼ˆé¦™æ¸¯ï¼‰', value: 'ä¿è¯šï¼ˆé¦™æ¸¯ï¼‰' },
+					{ id: 1, name: 'åŒ—å¤§æ–¹æ­£', value: 'åŒ—å¤§æ–¹æ­£' },
+					{ id: 2, name: 'åŒ—éƒ¨æ¹¾è´¢é™©', value: 'åŒ—éƒ¨æ¹¾è´¢é™©' },
+					{ id: 3, name: 'æ¸¤æµ·äººå¯¿', value: 'æ¸¤æµ·äººå¯¿' },
+					{ id: 4, name: 'æ¸¤æµ·è´¢é™©', value: 'æ¸¤æµ·è´¢é™©' },
+					{ id: 5, name: 'ç™¾å¹´äººå¯¿', value: 'ç™¾å¹´äººå¯¿' },
+					{ id: 6, name: 'å‡ºå£ä¿¡ç”¨', value: 'å‡ºå£ä¿¡ç”¨' },
+					{ id: 7, name: 'å®‰è¾¾ä¿é™©', value: 'å®‰è¾¾ä¿é™©' },
+					{ id: 8, name: 'å®‰é‚¦äººå¯¿', value: 'å®‰é‚¦äººå¯¿' },
+					{ id: 9, name: 'å®‰é‚¦å…»è€', value: 'å®‰é‚¦å…»è€' },
+					{ id: 10, name: 'å®‰é‚¦è´¢é™©', value: 'å®‰é‚¦è´¢é™©' },
+					{ id: 11, name: 'çˆ±å¿ƒäººå¯¿', value: 'çˆ±å¿ƒäººå¯¿' }
 				]
 			},
 			{
-				id: 2,
+				id: 'index2',
 				name: 'C',
 				list: [
-					{ id: 0, name: '³ö¿ÚĞÅÓÃ', value: '³ö¿ÚĞÅÓÃ' },
-					{ id: 1, name: '³ÏÌ©²ÆÏÕ', value: '³ÏÌ©²ÆÏÕ' },
-					{ id: 2, name: '³¤³ÇÈËÊÙ', value: '³¤³ÇÈËÊÙ' },
-					{ id: 3, name: '³¤°²ÔğÈÎ', value: '³¤°²ÔğÈÎ' },
-					{ id: 4, name: '³¤½­ÑøÀÏ', value: '³¤½­ÑøÀÏ' },
-					{ id: 5, name: '³¤½­²ÆÏÕ', value: '³¤½­²ÆÏÕ' },
-					{ id: 6, name: '³¤ÉúÈËÊÙ', value: '³¤ÉúÈËÊÙ' }
+					{ id: 0, name: 'å‡ºå£ä¿¡ç”¨', value: 'å‡ºå£ä¿¡ç”¨' },
+					{ id: 1, name: 'è¯šæ³°è´¢é™©', value: 'è¯šæ³°è´¢é™©' },
+					{ id: 2, name: 'é•¿åŸäººå¯¿', value: 'é•¿åŸäººå¯¿' },
+					{ id: 3, name: 'é•¿å®‰è´£ä»»', value: 'é•¿å®‰è´£ä»»' },
+					{ id: 4, name: 'é•¿æ±Ÿå…»è€', value: 'é•¿æ±Ÿå…»è€' },
+					{ id: 5, name: 'é•¿æ±Ÿè´¢é™©', value: 'é•¿æ±Ÿè´¢é™©' },
+					{ id: 6, name: 'é•¿ç”Ÿäººå¯¿', value: 'é•¿ç”Ÿäººå¯¿' }
 				]
 			},
 			{
-				id: 3,
+				id: 'index3',
 				name: 'D',
 				list: [
-					{ id: 0, name: '¶«¾©º£ÉÏ', value: '¶«¾©º£ÉÏ' },
-					{ id: 1, name: '¶«ÎâÈËÊÙ', value: '¶«ÎâÈËÊÙ' },
-					{ id: 2, name: '¶«º£º½ÔË', value: '¶«º£º½ÔË' },
-					{ id: 3, name: '´óµØ²Æ²ú', value: '´óµØ²Æ²ú' },
-					{ id: 4, name: '´ó¶¼»áÈËÊÙ', value: '´ó¶¼»áÈËÊÙ' },
-					{ id: 5, name: 'µÂ»ª°²¹Ë', value: 'µÂ»ª°²¹Ë' },
-					{ id: 6, name: '¶¼°î±£ÏÕ', value: '¶¼°î±£ÏÕ' },
-					{ id: 7, name: '¶¦ºÍ²ÆÏÕ', value: '¶¦ºÍ²ÆÏÕ' }
+					{ id: 0, name: 'ä¸œäº¬æµ·ä¸Š', value: 'ä¸œäº¬æµ·ä¸Š' },
+					{ id: 1, name: 'ä¸œå´äººå¯¿', value: 'ä¸œå´äººå¯¿' },
+					{ id: 2, name: 'ä¸œæµ·èˆªè¿', value: 'ä¸œæµ·èˆªè¿' },
+					{ id: 3, name: 'å¤§åœ°è´¢äº§', value: 'å¤§åœ°è´¢äº§' },
+					{ id: 4, name: 'å¤§éƒ½ä¼šäººå¯¿', value: 'å¤§éƒ½ä¼šäººå¯¿' },
+					{ id: 5, name: 'å¾·åå®‰é¡¾', value: 'å¾·åå®‰é¡¾' },
+					{ id: 6, name: 'éƒ½é‚¦ä¿é™©', value: 'éƒ½é‚¦ä¿é™©' },
+					{ id: 7, name: 'é¼å’Œè´¢é™©', value: 'é¼å’Œè´¢é™©' }
 				]
 			},
 			{
-				id: 4,
+				id: 'index4',
 				name: 'F',
 				list: [
-					{ id: 0, name: '¸´ĞÇ±£µÂĞÅ', value: '¶«¾©º£ÉÏ' },
-					{ id: 1, name: '¸´ĞÇÁªºÏ½¡¿µ', value: '¸´ĞÇÁªºÏ½¡¿µ' },
-					{ id: 2, name: '¸»µÂÉúÃü', value: '¸»µÂÉúÃü' },
-					{ id: 3, name: '¸»µÂ²ÆÏÕ', value: '¸»µÂ²ÆÏÕ' },
-					{ id: 4, name: '¸»°î²ÆÏÕ', value: '¸»°î²ÆÏÕ' }
+					{ id: 0, name: 'å¤æ˜Ÿä¿å¾·ä¿¡', value: 'ä¸œäº¬æµ·ä¸Š' },
+					{ id: 1, name: 'å¤æ˜Ÿè”åˆå¥åº·', value: 'å¤æ˜Ÿè”åˆå¥åº·' },
+					{ id: 2, name: 'å¯Œå¾·ç”Ÿå‘½', value: 'å¯Œå¾·ç”Ÿå‘½' },
+					{ id: 3, name: 'å¯Œå¾·è´¢é™©', value: 'å¯Œå¾·è´¢é™©' },
+					{ id: 4, name: 'å¯Œé‚¦è´¢é™©', value: 'å¯Œé‚¦è´¢é™©' }
 				]
 			},
 			{
-				id: 5,
+				id: 'index5',
 				name: 'G',
 				list: [
-					{ id: 0, name: '¹â´óÓÀÃ÷', value: '¹â´óÓÀÃ÷' },
-					{ id: 1, name: '¹úÔªÅ©ÏÕ', value: '¹úÔªÅ©ÏÕ' },
-					{ id: 2, name: '¹ú»ªÈËÊÙ', value: '¹ú»ªÈËÊÙ' },
-					{ id: 3, name: '¹úÊÙÑøÀÏ', value: '¹úÊÙÑøÀÏ' },
-					{ id: 4, name: '¹úÊÙ²ÆÏÕ', value: '¹úÊÙ²ÆÏÕ' },
-					{ id: 5, name: '¹úÌ©²ÆÏÕ', value: '¹úÌ©²ÆÏÕ' },
-					{ id: 6, name: '¹úÁªÈËÊÙ', value: '¹úÁªÈËÊÙ' },
-					{ id: 7, name: '¹¤Òø°²Ê¢', value: '¹¤Òø°²Ê¢' }
+					{ id: 0, name: 'å…‰å¤§æ°¸æ˜', value: 'å…‰å¤§æ°¸æ˜' },
+					{ id: 1, name: 'å›½å…ƒå†œé™©', value: 'å›½å…ƒå†œé™©' },
+					{ id: 2, name: 'å›½åäººå¯¿', value: 'å›½åäººå¯¿' },
+					{ id: 3, name: 'å›½å¯¿å…»è€', value: 'å›½å¯¿å…»è€' },
+					{ id: 4, name: 'å›½å¯¿è´¢é™©', value: 'å›½å¯¿è´¢é™©' },
+					{ id: 5, name: 'å›½æ³°è´¢é™©', value: 'å›½æ³°è´¢é™©' },
+					{ id: 6, name: 'å›½è”äººå¯¿', value: 'å›½è”äººå¯¿' },
+					{ id: 7, name: 'å·¥é“¶å®‰ç››', value: 'å·¥é“¶å®‰ç››' }
 				]
 			},
 			{
-				id: 6,
+				id: 'index6',
 				name: 'H',
 				list: [
-					{ id: 0, name: '»ªÅ©²ÆÏÕ', value: '»ªÅ©²ÆÏÕ' },
-					{ id: 1, name: '»ªÏÄÈËÊÙ', value: '»ªÏÄÈËÊÙ' },
-					{ id: 2, name: '»ª°²²ÆÏÕ', value: '»ª°²²ÆÏÕ' },
-					{ id: 3, name: '»ª»ãÈËÊÙ', value: '»ª»ãÈËÊÙ' },
-					{ id: 4, name: '»ªÌ©ÈËÊÙ', value: '»ªÌ©ÈËÊÙ' },
-					{ id: 5, name: '»ªÌ©²ÆÏÕ', value: '»ªÌ©²ÆÏÕ' },
-					{ id: 6, name: '»ªº£²ÆÏÕ', value: '»ªº£²ÆÏÕ' },
-					{ id: 7, name: '»ª¹óÈËÊÙ', value: '»ª¹óÈËÊÙ' },
-					{ id: 8, name: 'ºÏÖÚÈËÊÙ', value: 'ºÏÖÚÈËÊÙ' },
-					{ id: 9, name: 'ºÏÖÚ²ÆÏÕ', value: 'ºÏÖÚ²ÆÏÕ' },
-					{ id: 10, name: 'ºÍÌ©ÈËÊÙ', value: 'ºÍÌ©ÈËÊÙ' },
-					{ id: 11, name: 'ºÍĞ³½¡¿µ', value: 'ºÍĞ³½¡¿µ' },
-					{ id: 12, name: 'ºêÀû£¨Ïã¸Û£©', value: 'ºêÀû£¨Ïã¸Û£©' },
-					{ id: 13, name: 'ºë¿µÈËÊÙ', value: 'ºë¿µÈËÊÙ' },
-					{ id: 14, name: 'ºã´óÈËÊÙ', value: 'ºã´óÈËÊÙ' },
-					{ id: 15, name: 'ºã°²±ê×¼', value: 'ºã°²±ê×¼' },
-					{ id: 16, name: 'ºã°î²ÆÏÕ', value: 'ºã°î²ÆÏÕ' },
-					{ id: 17, name: 'ºáÇÙÈËÊÙ', value: 'ºáÇÙÈËÊÙ' },
-					{ id: 18, name: '»ã·áÈËÊÙ', value: '»ã·áÈËÊÙ' },
-					{ id: 19, name: '»ãÓÑ»¥Öú', value: '»ãÓÑ»¥Öú' },
-					{ id: 20, name: 'º£Ï¿½ğÇÅ', value: 'º£Ï¿½ğÇÅ' }
+					{ id: 0, name: 'åå†œè´¢é™©', value: 'åå†œè´¢é™©' },
+					{ id: 1, name: 'åå¤äººå¯¿', value: 'åå¤äººå¯¿' },
+					{ id: 2, name: 'åå®‰è´¢é™©', value: 'åå®‰è´¢é™©' },
+					{ id: 3, name: 'åæ±‡äººå¯¿', value: 'åæ±‡äººå¯¿' },
+					{ id: 4, name: 'åæ³°äººå¯¿', value: 'åæ³°äººå¯¿' },
+					{ id: 5, name: 'åæ³°è´¢é™©', value: 'åæ³°è´¢é™©' },
+					{ id: 6, name: 'åæµ·è´¢é™©', value: 'åæµ·è´¢é™©' },
+					{ id: 7, name: 'åè´µäººå¯¿', value: 'åè´µäººå¯¿' },
+					{ id: 8, name: 'åˆä¼—äººå¯¿', value: 'åˆä¼—äººå¯¿' },
+					{ id: 9, name: 'åˆä¼—è´¢é™©', value: 'åˆä¼—è´¢é™©' },
+					{ id: 10, name: 'å’Œæ³°äººå¯¿', value: 'å’Œæ³°äººå¯¿' },
+					{ id: 11, name: 'å’Œè°å¥åº·', value: 'å’Œè°å¥åº·' },
+					{ id: 12, name: 'å®åˆ©ï¼ˆé¦™æ¸¯ï¼‰', value: 'å®åˆ©ï¼ˆé¦™æ¸¯ï¼‰' },
+					{ id: 13, name: 'å¼˜åº·äººå¯¿', value: 'å¼˜åº·äººå¯¿' },
+					{ id: 14, name: 'æ’å¤§äººå¯¿', value: 'æ’å¤§äººå¯¿' },
+					{ id: 15, name: 'æ’å®‰æ ‡å‡†', value: 'æ’å®‰æ ‡å‡†' },
+					{ id: 16, name: 'æ’é‚¦è´¢é™©', value: 'æ’é‚¦è´¢é™©' },
+					{ id: 17, name: 'æ¨ªç´äººå¯¿', value: 'æ¨ªç´äººå¯¿' },
+					{ id: 18, name: 'æ±‡ä¸°äººå¯¿', value: 'æ±‡ä¸°äººå¯¿' },
+					{ id: 19, name: 'æ±‡å‹äº’åŠ©', value: 'æ±‡å‹äº’åŠ©' },
+					{ id: 20, name: 'æµ·å³¡é‡‘æ¡¥', value: 'æµ·å³¡é‡‘æ¡¥' }
 				]
 			},
 			{
-				id: 7,
+				id: 'index7',
 				name: 'I',
 				list: [
-					{ id: 0, name: '°®ºÍÒê', value: '°®ºÍÒê' }
+					{ id: 0, name: 'çˆ±å’Œè°Š', value: 'çˆ±å’Œè°Š' }
 				]
 			},
 			{
-				id: 8,
+				id: 'index8',
 				name: 'J',
 				list: [
-					{ id: 0, name: '¾ÃÂ¡²ÆÏÕ', value: '¾ÃÂ¡²ÆÏÕ' },
-					{ id: 1, name: '½»Òø¿µÁª', value: '½»Òø¿µÁª' },
-					{ id: 2, name: '¼ªÏéÈËÊÙ', value: '¼ªÏéÈËÊÙ' },
-					{ id: 3, name: '¾ı¿µÈËÊÙ', value: '¾ı¿µÈËÊÙ' },
-					{ id: 4, name: '¾ıÁúÈËÊÙ', value: '¾ıÁúÈËÊÙ' },
-					{ id: 5, name: '½¨ĞÅÈËÊÙ', value: '½¨ĞÅÈËÊÙ' },
-					{ id: 6, name: '½¨ĞÅ²ÆÏÕ', value: '½¨ĞÅ²ÆÏÕ' },
-					{ id: 7, name: '½õÌ©²ÆÏÕ', value: '½õÌ©²ÆÏÕ' }
+					{ id: 0, name: 'ä¹…éš†è´¢é™©', value: 'ä¹…éš†è´¢é™©' },
+					{ id: 1, name: 'äº¤é“¶åº·è”', value: 'äº¤é“¶åº·è”' },
+					{ id: 2, name: 'å‰ç¥¥äººå¯¿', value: 'å‰ç¥¥äººå¯¿' },
+					{ id: 3, name: 'å›åº·äººå¯¿', value: 'å›åº·äººå¯¿' },
+					{ id: 4, name: 'å›é¾™äººå¯¿', value: 'å›é¾™äººå¯¿' },
+					{ id: 5, name: 'å»ºä¿¡äººå¯¿', value: 'å»ºä¿¡äººå¯¿' },
+					{ id: 6, name: 'å»ºä¿¡è´¢é™©', value: 'å»ºä¿¡è´¢é™©' },
+					{ id: 7, name: 'é”¦æ³°è´¢é™©', value: 'é”¦æ³°è´¢é™©' }
 				]
 			},
 			{
-				id: 9,
+				id: 'index9',
 				name: 'K',
 				list: [
-					{ id: 0, name: 'À¥ÂØ½¡¿µ', value: 'À¥ÂØ½¡¿µ' }
+					{ id: 0, name: 'æ˜†ä»‘å¥åº·', value: 'æ˜†ä»‘å¥åº·' }
 				]
 			},
 			{
-				id: 10,
+				id: 'index10',
 				name: 'L',
 				list: [
-					{ id: 0, name: 'Àû°²ÈËÊÙ', value: 'Àû°²ÈËÊÙ' },
-					{ id: 1, name: 'Àû±¦»¥Öú', value: 'Àû±¦»¥Öú' },
-					{ id: 2, name: 'Àû±¦²ÆÏÕ', value: 'Àû±¦²ÆÏÕ' },
-					{ id: 3, name: 'ÀÍºÏÉç', value: 'ÀÍºÏÉç' },
-					{ id: 4, name: 'Â½¼Ò×ì¹úÊÙ', value: 'Â½¼Ò×ì¹úÊÙ' },
-					{ id: 5, name: 'Â½¼Ò×ì¹úÌ©', value: 'Â½¼Ò×ì¹úÌ©' }
+					{ id: 0, name: 'åˆ©å®‰äººå¯¿', value: 'åˆ©å®‰äººå¯¿' },
+					{ id: 1, name: 'åˆ©å®äº’åŠ©', value: 'åˆ©å®äº’åŠ©' },
+					{ id: 2, name: 'åˆ©å®è´¢é™©', value: 'åˆ©å®è´¢é™©' },
+					{ id: 3, name: 'åŠ³åˆç¤¾', value: 'åŠ³åˆç¤¾' },
+					{ id: 4, name: 'é™†å®¶å˜´å›½å¯¿', value: 'é™†å®¶å˜´å›½å¯¿' },
+					{ id: 5, name: 'é™†å®¶å˜´å›½æ³°', value: 'é™†å®¶å˜´å›½æ³°' }
 				]
 			},
 			{
-				id: 11,
+				id: 'index11',
 				name: 'M',
 				list: [
-					{ id: 0, name: 'ÃñÉúÈËÊÙ', value: 'ÃñÉúÈËÊÙ' },
-					{ id: 1, name: 'ÃÀÑÇ²ÆÏÕ', value: 'ÃÀÑÇ²ÆÏÕ' }
+					{ id: 0, name: 'æ°‘ç”Ÿäººå¯¿', value: 'æ°‘ç”Ÿäººå¯¿' },
+					{ id: 1, name: 'ç¾äºšè´¢é™©', value: 'ç¾äºšè´¢é™©' }
 				]
 			},
 			{
-				id: 12,
+				id: 'index12',
 				name: 'N',
 				list: [
-					{ id: 0, name: 'Å©ÒøÈËÊÙ', value: 'Å©ÒøÈËÊÙ' },
+					{ id: 0, name: 'å†œé“¶äººå¯¿', value: 'å†œé“¶äººå¯¿' },
 				]
 			},
 			{
-				id: 13,
+				id: 'index13',
 				name: 'P',
 				list: [
-					{ id: 0, name: 'Æ½°²ÈËÊÙ', value: 'Æ½°²ÈËÊÙ' },
-					{ id: 1, name: 'Æ½°²½¡¿µ', value: 'Æ½°²½¡¿µ' },
-					{ id: 2, name: 'Æ½°²ÑøÀÏ', value: 'Æ½°²ÑøÀÏ' },
-					{ id: 3, name: 'Æ½°²²ÆÏÕ', value: 'Æ½°²²ÆÏÕ' }
+					{ id: 0, name: 'å¹³å®‰äººå¯¿', value: 'å¹³å®‰äººå¯¿' },
+					{ id: 1, name: 'å¹³å®‰å¥åº·', value: 'å¹³å®‰å¥åº·' },
+					{ id: 2, name: 'å¹³å®‰å…»è€', value: 'å¹³å®‰å…»è€' },
+					{ id: 3, name: 'å¹³å®‰è´¢é™©', value: 'å¹³å®‰è´¢é™©' }
 				]
 			},
 			{
-				id: 14,
+				id: 'index14',
 				name: 'Q',
 				list: [
-					{ id: 0, name: 'Ç°º£ÈËÊÙ', value: 'Ç°º£ÈËÊÙ' },
-					{ id: 1, name: 'Ç°º£²ÆÏÕ', value: 'Ç°º£²ÆÏÕ' }
+					{ id: 0, name: 'å‰æµ·äººå¯¿', value: 'å‰æµ·äººå¯¿' },
+					{ id: 1, name: 'å‰æµ·è´¢é™©', value: 'å‰æµ·è´¢é™©' }
 				]
 			},
 			{
-				id: 15,
+				id: 'index15',
 				name: 'R',
 				list: [
-					{ id: 0, name: 'ÈË±£½¡¿µ', value: 'ÈË±£½¡¿µ' },
-					{ id: 1, name: 'ÈË±£ÊÙÏÕ', value: 'ÈË±£ÊÙÏÕ' },
-					{ id: 2, name: 'ÈË±£²ÆÏÕ', value: 'ÈË±£²ÆÏÕ' },
-					{ id: 3, name: 'ÈÕ±¾ĞËÑÇ', value: 'ÈÕ±¾ĞËÑÇ' },
-					{ id: 4, name: 'ÈÕ±¾²ÆÏÕ', value: 'ÈÕ±¾²ÆÏÕ' },
-					{ id: 5, name: 'ÈğÔÙÆóÉÌ', value: 'ÈğÔÙÆóÉÌ' },
-					{ id: 6, name: 'ÈğÌ©ÈËÊÙ', value: 'ÈğÌ©ÈËÊÙ' }
+					{ id: 0, name: 'äººä¿å¥åº·', value: 'äººä¿å¥åº·' },
+					{ id: 1, name: 'äººä¿å¯¿é™©', value: 'äººä¿å¯¿é™©' },
+					{ id: 2, name: 'äººä¿è´¢é™©', value: 'äººä¿è´¢é™©' },
+					{ id: 3, name: 'æ—¥æœ¬å…´äºš', value: 'æ—¥æœ¬å…´äºš' },
+					{ id: 4, name: 'æ—¥æœ¬è´¢é™©', value: 'æ—¥æœ¬è´¢é™©' },
+					{ id: 5, name: 'ç‘å†ä¼å•†', value: 'ç‘å†ä¼å•†' },
+					{ id: 6, name: 'ç‘æ³°äººå¯¿', value: 'ç‘æ³°äººå¯¿' }
 				]
 			},
 			{
-				id: 16,
+				id: 'index16',
 				name: 'S',
 				list: [
-					{ id: 0, name: 'Èı¾®×¡ÓÑ', value: 'Èı¾®×¡ÓÑ' },
-					{ id: 1, name: 'ÈıĞÇ²ÆÏÕ', value: 'ÈıĞÇ²ÆÏÕ' },
-					{ id: 2, name: 'ÉÏº£ÈËÊÙ', value: 'ÉÏº£ÈËÊÙ' },
-					{ id: 3, name: 'Ê·´ø²ÆÏÕ', value: 'Ê·´ø²ÆÏÕ' },
-					{ id: 4, name: 'ËÕÀèÊÀ²ÆÏÕ', value: 'ËÕÀèÊÀ²ÆÏÕ' }
+					{ id: 0, name: 'ä¸‰äº•ä½å‹', value: 'ä¸‰äº•ä½å‹' },
+					{ id: 1, name: 'ä¸‰æ˜Ÿè´¢é™©', value: 'ä¸‰æ˜Ÿè´¢é™©' },
+					{ id: 2, name: 'ä¸Šæµ·äººå¯¿', value: 'ä¸Šæµ·äººå¯¿' },
+					{ id: 3, name: 'å²å¸¦è´¢é™©', value: 'å²å¸¦è´¢é™©' },
+					{ id: 4, name: 'è‹é»ä¸–è´¢é™©', value: 'è‹é»ä¸–è´¢é™©' }
 				]
 			},
 			{
-				id: 17,
+				id: 'index17',
 				name: 'T',
 				list: [
-					{ id: 0, name: 'Í¬·½È«Çò', value: 'Í¬·½È«Çò' },
-					{ id: 1, name: 'Ìì°²ÈËÊÙ', value: 'Ìì°²ÈËÊÙ' },
-					{ id: 2, name: 'Ìì°²²ÆÏÕ', value: 'Ìì°²²ÆÏÕ' },
-					{ id: 3, name: 'Ì«±£°²Áª', value: 'Ì«±£°²Áª' },
-					{ id: 4, name: 'Ì«Æ½ÈËÊÙ', value: 'Ì«Æ½ÈËÊÙ' },
-					{ id: 5, name: 'Ì«Æ½ÑøÀÏ', value: 'Ì«Æ½ÑøÀÏ' },
-					{ id: 6, name: 'Ì«Æ½ÑóÈËÊÙ', value: 'Ì«Æ½ÑóÈËÊÙ' },
-					{ id: 7, name: 'Ì«Æ½Ñó²ÆÏÕ', value: 'Ì«Æ½Ñó²ÆÏÕ' },
-					{ id: 8, name: 'Ì«Æ½²ÆÏÕ', value: 'Ì«Æ½²ÆÏÕ' },
-					{ id: 9, name: 'Ì©É½²ÆÏÕ', value: 'Ì©É½²ÆÏÕ' },
-					{ id: 10, name: 'Ì©¿µÈËÊÙ', value: 'Ì©¿µÈËÊÙ' },
-					{ id: 11, name: 'Ì©¿µÑøÀÏ', value: 'Ì©¿µÑøÀÏ' },
-					{ id: 12, name: 'Ì©¿µÔÚÏß', value: 'Ì©¿µÔÚÏß' },
-					{ id: 13, name: 'ÌúÂ·×Ô±£', value: 'ÌúÂ·×Ô±£' }
+					{ id: 0, name: 'åŒæ–¹å…¨çƒ', value: 'åŒæ–¹å…¨çƒ' },
+					{ id: 1, name: 'å¤©å®‰äººå¯¿', value: 'å¤©å®‰äººå¯¿' },
+					{ id: 2, name: 'å¤©å®‰è´¢é™©', value: 'å¤©å®‰è´¢é™©' },
+					{ id: 3, name: 'å¤ªä¿å®‰è”', value: 'å¤ªä¿å®‰è”' },
+					{ id: 4, name: 'å¤ªå¹³äººå¯¿', value: 'å¤ªå¹³äººå¯¿' },
+					{ id: 5, name: 'å¤ªå¹³å…»è€', value: 'å¤ªå¹³å…»è€' },
+					{ id: 6, name: 'å¤ªå¹³æ´‹äººå¯¿', value: 'å¤ªå¹³æ´‹äººå¯¿' },
+					{ id: 7, name: 'å¤ªå¹³æ´‹è´¢é™©', value: 'å¤ªå¹³æ´‹è´¢é™©' },
+					{ id: 8, name: 'å¤ªå¹³è´¢é™©', value: 'å¤ªå¹³è´¢é™©' },
+					{ id: 9, name: 'æ³°å±±è´¢é™©', value: 'æ³°å±±è´¢é™©' },
+					{ id: 10, name: 'æ³°åº·äººå¯¿', value: 'æ³°åº·äººå¯¿' },
+					{ id: 11, name: 'æ³°åº·å…»è€', value: 'æ³°åº·å…»è€' },
+					{ id: 12, name: 'æ³°åº·åœ¨çº¿', value: 'æ³°åº·åœ¨çº¿' },
+					{ id: 13, name: 'é“è·¯è‡ªä¿', value: 'é“è·¯è‡ªä¿' }
 				]
 			},
 			{
-				id: 18,
+				id: 'index18',
 				name: 'X',
 				list: [
-					{ id: 0, name: 'ĞÅÀû±£ÏÕ', value: 'ĞÅÀû±£ÏÕ' },
-					{ id: 1, name: 'ĞÅÌ©ÈËÊÙ', value: 'ĞÅÌ©ÈËÊÙ' },
-					{ id: 2, name: 'ĞÅÃÀÈËÊÙ', value: 'ĞÅÃÀÈËÊÙ' },
-					{ id: 3, name: 'ĞÅ³ÏÈËÊÙ', value: 'ĞÅ³ÏÈËÊÙ' },
-					{ id: 4, name: 'ĞÅ´ï²ÆÏÕ', value: 'ĞÅ´ï²ÆÏÕ' },
-					{ id: 5, name: 'ĞÒ¸£ÈËÊÙ', value: 'ĞÒ¸£ÈËÊÙ' },
-					{ id: 6, name: 'ĞÂ¹âº£º½', value: 'ĞÂ¹âº£º½' },
-					{ id: 7, name: 'ĞÂ»ªÈËÊÙ', value: 'ĞÂ»ªÈËÊÙ' },
-					{ id: 8, name: 'ĞÂ»ªÑøÀÏ', value: 'ĞÂ»ªÑøÀÏ' },
-					{ id: 9, name: 'ÏÖ´ú²ÆÏÕ', value: 'ÏÖ´ú²ÆÏÕ' },
-					{ id: 10, name: 'öÎ°²³µÏÕ', value: 'öÎ°²³µÏÕ' }
+					{ id: 0, name: 'ä¿¡åˆ©ä¿é™©', value: 'ä¿¡åˆ©ä¿é™©' },
+					{ id: 1, name: 'ä¿¡æ³°äººå¯¿', value: 'ä¿¡æ³°äººå¯¿' },
+					{ id: 2, name: 'ä¿¡ç¾äººå¯¿', value: 'ä¿¡ç¾äººå¯¿' },
+					{ id: 3, name: 'ä¿¡è¯šäººå¯¿', value: 'ä¿¡è¯šäººå¯¿' },
+					{ id: 4, name: 'ä¿¡è¾¾è´¢é™©', value: 'ä¿¡è¾¾è´¢é™©' },
+					{ id: 5, name: 'å¹¸ç¦äººå¯¿', value: 'å¹¸ç¦äººå¯¿' },
+					{ id: 6, name: 'æ–°å…‰æµ·èˆª', value: 'æ–°å…‰æµ·èˆª' },
+					{ id: 7, name: 'æ–°åäººå¯¿', value: 'æ–°åäººå¯¿' },
+					{ id: 8, name: 'æ–°åå…»è€', value: 'æ–°åå…»è€' },
+					{ id: 9, name: 'ç°ä»£è´¢é™©', value: 'ç°ä»£è´¢é™©' },
+					{ id: 10, name: 'é‘«å®‰è½¦é™©', value: 'é‘«å®‰è½¦é™©' }
 				]
 			},
 			{
-				id: 19,
+				id: 'index19',
 				name: 'Y',
 				list: [
-					{ id: 0, name: 'ÑÇÌ«²ÆÏÕ', value: 'ÑÇÌ«²ÆÏÕ' },
-					{ id: 1, name: 'ÓÑ°î£¨Ïã¸Û£©', value: 'ÓÑ°î£¨Ïã¸Û£©' },
-					{ id: 2, name: 'ÓÑ°î±£ÏÕ', value: 'ÓÑ°î±£ÏÕ' },
-					{ id: 3, name: 'Ò×°²²ÆÏÕ', value: 'Ò×°²²ÆÏÕ' },
-					{ id: 4, name: 'ÓÀ°²²ÆÏÕ', value: 'ÓÀ°²²ÆÏÕ' },
-					{ id: 5, name: 'ÓÀ³Ï²ÆÏÕ', value: 'ÓÀ³Ï²ÆÏÕ' },
-					{ id: 6, name: 'ÑàÕÔ²ÆÏÕ', value: 'ÑàÕÔ²ÆÏÕ' },
-					{ id: 7, name: 'Ó¢´óÈËÊÙ', value: 'Ó¢´óÈËÊÙ' },
-					{ id: 8, name: 'Ó¢´ó²ÆÏÕ', value: 'Ó¢´ó²ÆÏÕ' },
-					{ id: 9, name: 'Ñô¹âÈËÊÙ', value: 'Ñô¹âÈËÊÙ' },
-					{ id: 10, name: 'Ñô¹âĞÅ±£', value: 'Ñô¹âĞÅ±£' },
-					{ id: 11, name: 'Ñô¹âÅ©ÏÕ', value: 'Ñô¹âÅ©ÏÕ' },
-					{ id: 5, name: 'Ñô¹â²ÆÏÕ', value: 'Ñô¹â²ÆÏÕ' }
+					{ id: 0, name: 'äºšå¤ªè´¢é™©', value: 'äºšå¤ªè´¢é™©' },
+					{ id: 1, name: 'å‹é‚¦ï¼ˆé¦™æ¸¯ï¼‰', value: 'å‹é‚¦ï¼ˆé¦™æ¸¯ï¼‰' },
+					{ id: 2, name: 'å‹é‚¦ä¿é™©', value: 'å‹é‚¦ä¿é™©' },
+					{ id: 3, name: 'æ˜“å®‰è´¢é™©', value: 'æ˜“å®‰è´¢é™©' },
+					{ id: 4, name: 'æ°¸å®‰è´¢é™©', value: 'æ°¸å®‰è´¢é™©' },
+					{ id: 5, name: 'æ°¸è¯šè´¢é™©', value: 'æ°¸è¯šè´¢é™©' },
+					{ id: 6, name: 'ç‡•èµµè´¢é™©', value: 'ç‡•èµµè´¢é™©' },
+					{ id: 7, name: 'è‹±å¤§äººå¯¿', value: 'è‹±å¤§äººå¯¿' },
+					{ id: 8, name: 'è‹±å¤§è´¢é™©', value: 'è‹±å¤§è´¢é™©' },
+					{ id: 9, name: 'é˜³å…‰äººå¯¿', value: 'é˜³å…‰äººå¯¿' },
+					{ id: 10, name: 'é˜³å…‰ä¿¡ä¿', value: 'é˜³å…‰ä¿¡ä¿' },
+					{ id: 11, name: 'é˜³å…‰å†œé™©', value: 'é˜³å…‰å†œé™©' },
+					{ id: 5, name: 'é˜³å…‰è´¢é™©', value: 'é˜³å…‰è´¢é™©' }
 				]
 			},
 			{
-				id: 20,
+				id: 'index20',
 				name: 'Z',
 				list: [
-					{ id: 0, name: 'ÖĞĞÅ±£³Ï', value: 'ÖĞĞÅ±£³Ï' },
-					{ id: 1, name: 'ÖĞ»ªÈËÊÙ', value: 'ÖĞ»ªÈËÊÙ' },
-					{ id: 2, name: 'ÖĞ»ªÁªºÏ²ÆÏÕ', value: 'ÖĞ»ªÁªºÏ²ÆÏÕ' },
-					{ id: 3, name: 'ÖĞÔ­Å©ÏÕ', value: 'ÖĞÔ­Å©ÏÕ' },
-					{ id: 4, name: 'ÖĞ¹úÈËÊÙ', value: 'ÖĞ¹úÈËÊÙ' },
-					{ id: 5, name: 'ÖĞ¹úÈËÊÙ£¨º£Íâ£©', value: 'ÖĞ¹úÈËÊÙ£¨º£Íâ£©' },
-					{ id: 6, name: 'ÖĞºêÈËÊÙ', value: 'ÖĞºêÈËÊÙ' },
-					{ id: 7, name: 'ÖĞµÂ°²Áª', value: 'ÖĞµÂ°²Áª' },
-					{ id: 8, name: 'ÖĞÒâÈËÊÙ', value: 'ÖĞÒâÈËÊÙ' },
-					{ id: 9, name: 'ÖĞÒâ²ÆÏÕ', value: 'ÖĞÒâ²ÆÏÕ' },
-					{ id: 10, name: 'ÖĞ·¨ÈËÊÙ', value: 'ÖĞ·¨ÈËÊÙ' },
-					{ id: 11, name: 'ÖĞÃº²ÆÏÕ', value: 'ÖĞÃº²ÆÏÕ' },
-					{ id: 12, name: 'ÖĞÊ¯ÓÍ²ÆÏÕ', value: 'ÖĞÊ¯ÓÍ²ÆÏÕ' },
-					{ id: 13, name: 'ÖĞº½°²ÃË²ÆÏÕ', value: 'ÖĞº½°²ÃË²ÆÏÕ' },
-					{ id: 14, name: 'ÖĞÓ¢ÈËÊÙ', value: 'ÖĞÓ¢ÈËÊÙ' },
-					{ id: 15, name: 'ÖĞºÉÈËÊÙ', value: 'ÖĞºÉÈËÊÙ' },
-					{ id: 16, name: 'ÖĞÈÚÈËÊÙ', value: 'ÖĞÈÚÈËÊÙ' },
-					{ id: 17, name: 'ÖĞÂ·²ÆÏÕ', value: 'ÖĞÂ·²ÆÏÕ' },
-					{ id: 18, name: 'ÖĞÔ¶º£ÔË', value: 'ÖĞÔ¶º£ÔË' },
-					{ id: 19, name: 'ÖĞÓÊÈËÊÙ', value: 'ÖĞÓÊÈËÊÙ' },
-					{ id: 20, name: 'ÖĞÌú×Ô±£', value: 'ÖĞÌú×Ô±£' },
-					{ id: 21, name: 'ÖĞÒøÈıĞÇ', value: 'ÖĞÒøÈıĞÇ' },
-					{ id: 22, name: 'ÖĞÒø²ÆÏÕ', value: 'ÖĞÒø²ÆÏÕ' },
-					{ id: 23, name: 'ÖĞº«ÈËÊÙ', value: 'ÖĞº«ÈËÊÙ' },
-					{ id: 24, name: 'ÖÚ°²ÔÚÏß', value: 'ÖÚ°²ÔÚÏß' },
-					{ id: 25, name: 'ÖÚ»İÏà»¥', value: 'ÖÚ»İÏà»¥' },
-					{ id: 26, name: 'ÖÚ³Ï³µÏÕ', value: 'ÖÚ³Ï³µÏÕ' },
-					{ id: 27, name: 'ÕĞÉÌÈÊºÍ', value: 'ÕĞÉÌÈÊºÍ' },
-					{ id: 28, name: 'ÕĞÉÌĞÅÅµ', value: 'ÕĞÉÌĞÅÅµ' },
-					{ id: 29, name: 'ÕãÉÌ²ÆÏÕ', value: 'ÕãÉÌ²ÆÏÕ' },
-					{ id: 30, name: 'Öé·å±£ÏÕ', value: 'Öé·å±£ÏÕ' },
-					{ id: 31, name: 'Öé½­ÈËÊÙ', value: 'Öé½­ÈËÊÙ' },
-					{ id: 32, name: '×Ï½ğ²ÆÏÕ', value: '×Ï½ğ²ÆÏÕ' }
+					{ id: 0, name: 'ä¸­ä¿¡ä¿è¯š', value: 'ä¸­ä¿¡ä¿è¯š' },
+					{ id: 1, name: 'ä¸­åäººå¯¿', value: 'ä¸­åäººå¯¿' },
+					{ id: 2, name: 'ä¸­åè”åˆè´¢é™©', value: 'ä¸­åè”åˆè´¢é™©' },
+					{ id: 3, name: 'ä¸­åŸå†œé™©', value: 'ä¸­åŸå†œé™©' },
+					{ id: 4, name: 'ä¸­å›½äººå¯¿', value: 'ä¸­å›½äººå¯¿' },
+					{ id: 5, name: 'ä¸­å›½äººå¯¿ï¼ˆæµ·å¤–ï¼‰', value: 'ä¸­å›½äººå¯¿ï¼ˆæµ·å¤–ï¼‰' },
+					{ id: 6, name: 'ä¸­å®äººå¯¿', value: 'ä¸­å®äººå¯¿' },
+					{ id: 7, name: 'ä¸­å¾·å®‰è”', value: 'ä¸­å¾·å®‰è”' },
+					{ id: 8, name: 'ä¸­æ„äººå¯¿', value: 'ä¸­æ„äººå¯¿' },
+					{ id: 9, name: 'ä¸­æ„è´¢é™©', value: 'ä¸­æ„è´¢é™©' },
+					{ id: 10, name: 'ä¸­æ³•äººå¯¿', value: 'ä¸­æ³•äººå¯¿' },
+					{ id: 11, name: 'ä¸­ç…¤è´¢é™©', value: 'ä¸­ç…¤è´¢é™©' },
+					{ id: 12, name: 'ä¸­çŸ³æ²¹è´¢é™©', value: 'ä¸­çŸ³æ²¹è´¢é™©' },
+					{ id: 13, name: 'ä¸­èˆªå®‰ç›Ÿè´¢é™©', value: 'ä¸­èˆªå®‰ç›Ÿè´¢é™©' },
+					{ id: 14, name: 'ä¸­è‹±äººå¯¿', value: 'ä¸­è‹±äººå¯¿' },
+					{ id: 15, name: 'ä¸­è·äººå¯¿', value: 'ä¸­è·äººå¯¿' },
+					{ id: 16, name: 'ä¸­èäººå¯¿', value: 'ä¸­èäººå¯¿' },
+					{ id: 17, name: 'ä¸­è·¯è´¢é™©', value: 'ä¸­è·¯è´¢é™©' },
+					{ id: 18, name: 'ä¸­è¿œæµ·è¿', value: 'ä¸­è¿œæµ·è¿' },
+					{ id: 19, name: 'ä¸­é‚®äººå¯¿', value: 'ä¸­é‚®äººå¯¿' },
+					{ id: 20, name: 'ä¸­é“è‡ªä¿', value: 'ä¸­é“è‡ªä¿' },
+					{ id: 21, name: 'ä¸­é“¶ä¸‰æ˜Ÿ', value: 'ä¸­é“¶ä¸‰æ˜Ÿ' },
+					{ id: 22, name: 'ä¸­é“¶è´¢é™©', value: 'ä¸­é“¶è´¢é™©' },
+					{ id: 23, name: 'ä¸­éŸ©äººå¯¿', value: 'ä¸­éŸ©äººå¯¿' },
+					{ id: 24, name: 'ä¼—å®‰åœ¨çº¿', value: 'ä¼—å®‰åœ¨çº¿' },
+					{ id: 25, name: 'ä¼—æƒ ç›¸äº’', value: 'ä¼—æƒ ç›¸äº’' },
+					{ id: 26, name: 'ä¼—è¯šè½¦é™©', value: 'ä¼—è¯šè½¦é™©' },
+					{ id: 27, name: 'æ‹›å•†ä»å’Œ', value: 'æ‹›å•†ä»å’Œ' },
+					{ id: 28, name: 'æ‹›å•†ä¿¡è¯º', value: 'æ‹›å•†ä¿¡è¯º' },
+					{ id: 29, name: 'æµ™å•†è´¢é™©', value: 'æµ™å•†è´¢é™©' },
+					{ id: 30, name: 'ç å³°ä¿é™©', value: 'ç å³°ä¿é™©' },
+					{ id: 31, name: 'ç æ±Ÿäººå¯¿', value: 'ç æ±Ÿäººå¯¿' },
+					{ id: 32, name: 'ç´«é‡‘è´¢é™©', value: 'ç´«é‡‘è´¢é™©' }
 				]
 			},
 		];
+
+		$scope.policyList = [];
+		$scope.selectedInsuranceCompanyIndex = $scope.insuranceCompanyIndexList[0];
+		$scope.selectedPayer = $scope.payerOptions[0];
+		$scope.selectedInsurant = $scope.insurantOptions[0];
+		$scope.selectedFrequency = $scope.frequencyOptions[0];
+		$scope.radioForInsuranceCompany = {};
+
+		$scope.addPolicyData = {};
+
+		getPolicyList(0, 100, '', 0);
+
+		//functions
+		$scope.onClickAddPolicy = function () {
+			$('#datepicker-effective-time').datepicker({
+				format: 'yyyy-mm-dd',
+				language: 'zh-CN',
+				clearBtn: true,
+				todayBtn: 'linked',
+				autoclose: true,
+				todayHighlight: true
+			});
+			$scope.addPolicyData.paymentTime = '';
+			$scope.addPolicyData.insuranceTime = '';
+			$scope.addPolicyData.insuranceAmount = 0;
+			$scope.addPolicyData.paymentYear = 0;
+			$scope.addPolicyData.comment = '';
+			$('#modal-add-policy').modal({ backdrop: 'static' });
+		};
+
+		$scope.onSelectInsuranceType = function (modalId) {
+			$scope.onOpenInnerModal(modalId);
+		};
+
+		$scope.onSelectInsuranceTypeOK = function (modalId) {
+			$scope.onCloseInnerModal(modalId);
+			$scope.addPolicyData.insuranceType = '';
+			for (var i = 0; i < $scope.insuranceTypeList.length; i++) {
+				var insuranceType = $scope.insuranceTypeList[i];
+				if (insuranceType.selected === true) {
+					$scope.addPolicyData.insuranceType += insuranceType.value + ',';
+				}
+			}
+		};
+
+		$scope.onSelectInsuranceCompany = function (modalId) {
+			$scope.onOpenInnerModal(modalId);
+		};
+
+		$scope.onSelectInsuranceCompanyOK = function (modalId) {
+			$scope.onCloseInnerModal(modalId);
+			$scope.addPolicyData.insuranceCompany = $scope.radioForInsuranceCompany.radio;
+		};
+
+		$scope.onAddPolicy = function () {
+			$scope.addPolicyData.payerName = $scope.selectedPayer.value;
+			$scope.addPolicyData.insurantName = $scope.selectedInsurant.value;
+			var effectiveTime = $('#datepicker-effective-time').datepicker('getDate');
+			if (effectiveTime != null) {
+				$scope.addPolicyData.effectiveTime = effectiveTime.getTime();
+			}
+			$scope.addPolicyData.paymentFrequency = $scope.selectedFrequency.value;
+		};
+
+		function getPolicyList(offset, limit, filter, currentPageIndex) {
+			var paramObj = {
+				offset: offset,
+				limit: limit,
+				filter: filter
+			};
+			$scope.myPromisePolicyList = BusinessService.getPolicys($rootScope.session.token, function (res) {
+				$scope.policyList.list = res.policysList;
+			}, function (err) {
+				alert(err.message);
+			});
+		}
 
 		//jQuery
 		$('#myTabs a[href="#myInsurance"]').click(function (e) {

@@ -8,6 +8,7 @@
 /obj
 /.vs
 /.vscode
+/docs
 /backEndSvr/node_modules
 /backEndSvr/public/lib
 /backEndSvr/obj

@@ -1,13 +1,6 @@
 body {
 	font-family: Segoe UI;
-	font-size: 15px;
-	margin-top: 50px;
-}
-
-@media screen and (max-width: 479px) {
-	body {
-		margin-top: 0;
-	}
+	font-size: 14px;
 }
 
 /*magic-radio .magic-checkbox*/
@@ -164,6 +157,7 @@ body {
 	}
 }
 
+/*override*/
 a {
 	color: #00B7FF;
 }
@@ -239,7 +233,16 @@ i, cite, em, var, address, dfn {
 		text-align: right;
 	}
 
+.modal-dialog {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /*business page*/
+.pc-view {
+	margin-top: 50px;
+}
+
 #business-wall {
 	min-width: 1280px;
 }
