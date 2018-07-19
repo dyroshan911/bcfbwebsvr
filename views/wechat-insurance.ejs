@@ -78,7 +78,7 @@
 				</div>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade in" id="insuranceInfo" cg-busy="promiseInsuranceInfo">
+			<div role="tabpanel" class="tab-pane fade in" id="insuranceInfo" cg-busy="myPromiseInsuranceInfo">
 				<div class="panel panel-default">
 					<div class="panel-heading">年交保费统计（元）</div>
 					<div>
@@ -230,7 +230,7 @@
 <!--modal-->
 <div class="modal fade" id="modal-add-policy" tabindex="-1" role="dialog" aria-hidden="false">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" cg-busy="promiseNewPolicy">
+		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -238,7 +238,7 @@
 				<h4 class="modal-title" id="myModalLabel">新表单</h4>
 			</div>
 			<div class="modal-body">
-				<form name='newPolicy' role="form" class="form-horizontal" ng-submit="onAddPolicy()">
+				<form name='newPolicy' role="form" class="form-horizontal" cg-busy="myPromiseAddPolicy" ng-submit="onAddPolicy()">
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保人</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -255,9 +255,9 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">生效日期</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<div class="input-group date" id="datepicker-effective-time">
-								<input type="text" class="form-control" readonly="" />
+								<input type="text" class="form-control" readonly="" required="required" />
 								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-th"></i>
+									<i class="glyphicon glyphicon-calendar"></i>
 								</span>
 							</div>
 						</div>
@@ -266,7 +266,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险类型</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<div class="input-group">
-								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" />
+								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceType" />
 								<span class="input-group-addon" ng-click="onSelectInsuranceType('#modal-insurance-type')">
 									<i class="glyphicon glyphicon-th-list"></i>
 								</span>
@@ -277,7 +277,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险公司</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<div class="input-group">
-								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" />
+								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceCompany" />
 								<span class="input-group-addon" ng-click="onSelectInsuranceCompany('#modal-insurance-company')">
 									<i class="glyphicon glyphicon-briefcase"></i>
 								</span>
@@ -293,25 +293,25 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保期限（年）</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身投保" ng-model="addPolicyData.paymentTime" />
+							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="addPolicyData.paymentTime" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险期限（年）</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身保险" ng-model="addPolicyData.insuranceTime" />
+							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="addPolicyData.insuranceTime" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">主险保额（万元）</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" ng-model="addPolicyData.insuranceAmount" />
+							<input type="number" class="form-control" required="required" ng-model="addPolicyData.insuranceAmount" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">年缴保费（元）</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" ng-model="addPolicyData.paymentYear" />
+							<input type="number" class="form-control" required="required" ng-model="addPolicyData.paymentYear" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -333,6 +333,16 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$('#datepicker-effective-time').datepicker({
+			format: 'yyyy-mm-dd',
+			language: 'zh-CN',
+			clearBtn: true,
+			todayBtn: 'linked',
+			autoclose: true,
+			todayHighlight: true
+		});
+	</script>
 </div>
 
 <!--inner modal-->
@@ -346,7 +356,7 @@
 			<div class="modal-body">
 				<form role="form" class="form-horizontal form-separated" ng-submit="onSelectInsuranceTypeOK('#modal-insurance-type')">
 					<div class="form-body pdl">
-						<div class="form-group" cg-busy="staffListPromise">
+						<div class="form-group">
 							<span class="col-xs-6 col-sm-4 col-md-3" ng-repeat="type in insuranceTypeList">
 								<input type="checkbox" id="{{type.id}}" class="magic-checkbox" ng-model="type.selected" />
 								<label class="pull-left" for="{{type.id}}" ng-bind="type.name"></label>
@@ -380,7 +390,7 @@
 								<select class="form-control" style="padding-left: 15px !important;" ng-options="index.name for index in insuranceCompanyIndexList" ng-model="selectedInsuranceCompanyIndex"></select>
 							</div>
 						</div>
-						<div class="form-group" cg-busy="staffListPromise">
+						<div class="form-group">
 							<span class="col-xs-9 col-xs-offset-3 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0" ng-repeat="company in selectedInsuranceCompanyIndex.list">
 								<input type="radio" name="radio" id="{{company.id}}" class="magic-radio" value="{{company.value}}" ng-model="radioForInsuranceCompany.radio" />
 								<label for="{{company.id}}" ng-bind="company.name"></label>

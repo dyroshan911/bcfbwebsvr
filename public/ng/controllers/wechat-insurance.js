@@ -379,18 +379,18 @@ angular.module('myApp').controller('WechatInsuranceCtrl', ['$scope', '$location'
 
 		//functions
 		$scope.onClickAddPolicy = function () {
-			$('#datepicker-effective-time').datepicker({
-				format: 'yyyy-mm-dd',
-				language: 'zh-CN',
-				clearBtn: true,
-				todayBtn: 'linked',
-				autoclose: true,
-				todayHighlight: true
-			});
+			$("#datepicker-effective-time").datepicker('clearDates');
+			$scope.selectedInsuranceCompanyIndex = $scope.insuranceCompanyIndexList[0];
+			$scope.selectedPayer = $scope.payerOptions[0];
+			$scope.selectedInsurant = $scope.insurantOptions[0];
+			$scope.selectedFrequency = $scope.frequencyOptions[0];
+			$scope.radioForInsuranceCompany = {};
+			$scope.addPolicyData.insuranceType = '';
+			$scope.addPolicyData.insuranceCompany = '';
 			$scope.addPolicyData.paymentTime = '';
 			$scope.addPolicyData.insuranceTime = '';
-			$scope.addPolicyData.insuranceAmount = 0;
-			$scope.addPolicyData.paymentYear = 0;
+			$scope.addPolicyData.insuranceAmount = '';
+			$scope.addPolicyData.paymentYear = '';
 			$scope.addPolicyData.comment = '';
 			$('#modal-add-policy').modal({ backdrop: 'static' });
 		};
@@ -420,21 +420,46 @@ angular.module('myApp').controller('WechatInsuranceCtrl', ['$scope', '$location'
 		};
 
 		$scope.onAddPolicy = function () {
+			var effectiveTime = $('#datepicker-effective-time').datepicker('getDate');
+			if (effectiveTime == null) {
+				alert('请选择生效日期');
+				return;
+			}
+			if ($scope.addPolicyData.insuranceType == '') {
+				alert('请选择保险类型');
+				return;
+			}
+			if ($scope.addPolicyData.insuranceCompany == '') {
+				alert('请选择保险公司');
+				return;
+			}
 			$scope.addPolicyData.payerName = $scope.selectedPayer.value;
 			$scope.addPolicyData.insurantName = $scope.selectedInsurant.value;
-			var effectiveTime = $('#datepicker-effective-time').datepicker('getDate');
-			if (effectiveTime != null) {
-				$scope.addPolicyData.effectiveTime = effectiveTime.getTime();
-			}
+			$scope.addPolicyData.effectiveTime = effectiveTime.getTime();
 			$scope.addPolicyData.paymentFrequency = $scope.selectedFrequency.value;
+			var dataObj = {
+				payer_name: $scope.addPolicyData.payerName,
+				insurer_name: $scope.addPolicyData.insurantName,
+				effective_time: $scope.addPolicyData.effectiveTime,
+				insurance_types: $scope.addPolicyData.insuranceType,
+				insurance_company: $scope.addPolicyData.insuranceCompany,
+				payment_frequency: $scope.selectedFrequency.value,
+				payment_time: '交' + $scope.addPolicyData.paymentTime + '年',
+				insurance_time: '保' + $scope.addPolicyData.insuranceTime + '年',
+				insurance_amount: $scope.addPolicyData.insuranceAmount,
+				payment_year: $scope.addPolicyData.paymentYear,
+				comment: $scope.addPolicyData.comment
+			};
+			$scope.myPromiseAddPolicy = BusinessService.addPolicy($rootScope.session.token, dataObj, function (res) {
+				alert('添加表单成功');
+				$('#modal-add-policy').modal('toggle');
+				getPolicyList(0, 100, '', 0);
+			}, function (err) {
+				alert(err.message);
+			});
 		};
 
 		function getPolicyList(offset, limit, filter, currentPageIndex) {
-			var paramObj = {
-				offset: offset,
-				limit: limit,
-				filter: filter
-			};
 			$scope.myPromisePolicyList = BusinessService.getPolicys($rootScope.session.token, function (res) {
 				$scope.policyList.list = res.policysList;
 			}, function (err) {
