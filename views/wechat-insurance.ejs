@@ -1,405 +1,50 @@
-<div class="container-wechat">
+<div class="container">
 	<br />
-	<div class="row">
-		<div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
-			<button class="btn btn-success btn-md btn-block" ng-click="onClickAddPolicy()">添加保单</button>
-		</div>
-	</div>
-	<div style="margin-top: 20px;">
-		<!-- Nav tabs -->
-		<nav>
-			<ul class="nav nav-tabs" id="myTabs" role="tablist">
-				<li role="presentation" class="active">
-					<a href="#myInsurance" role="tab" data-toggle="tab">我的保单</a>
-				</li>
-				<li role="presentation">
-					<a href="#insuranceInfo" role="tab" data-toggle="tab">保单分析</a>
-				</li>
-			</ul>
-		</nav>
-
-		<!-- Tab panes -->
-		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane fade in active" id="myInsurance" cg-busy="myPromisePolicyList">
-				<div class="panel panel-default">
-					<div class="panel-heading"></div>
-					<div class="panel-body">
-						<form class="form-horizontal">
-							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保人</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">受保人</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险公司</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险类型</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">生效时间</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">续费时间</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险金额</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">缴纳费用</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" />
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-
-			<div role="tabpanel" class="tab-pane fade in" id="insuranceInfo" cg-busy="myPromiseInsuranceInfo">
-				<div class="panel panel-default">
-					<div class="panel-heading">年交保费统计（元）</div>
-					<div>
-						<table class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th width="40%">投保人</th>
-									<th width="40%">年缴保费</th>
-									<th width="20%">件数</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-									<td align="center"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">重大疾病保额统计（万元）</div>
-					<div>
-						<table class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th width="40%">受保人</th>
-									<th width="40%">保险金额</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">事故寿险保额统计（万元）</div>
-					<div>
-						<table class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th width="50%">受保人</th>
-									<th width="50%">保险金额</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">意外保障保额统计（万元）</div>
-					<div>
-						<table class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th width="50%">受保人</th>
-									<th width="50%">保险金额</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">住院医疗保额统计（万元）</div>
-					<div>
-						<table class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th width="50%">受保人</th>
-									<th width="50%">保险金额</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">个人保单件数</div>
-					<div>
-						<table class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th width="40%">受保人</th>
-									<th width="40%">年缴保费</th>
-									<th width="20%">件数</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-									<td align="center"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">公司保单件数</div>
-					<div>
-						<table class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th width="80%">保险公司</th>
-									<th width="20%">件数</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!--modal-->
-<div class="modal fade" id="modal-add-policy" tabindex="-1" role="dialog" aria-hidden="false">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title" id="myModalLabel">新表单</h4>
-			</div>
-			<div class="modal-body">
-				<form name='newPolicy' role="form" class="form-horizontal" cg-busy="myPromiseAddPolicy" ng-submit="onAddPolicy()">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+		<div class="panel panel-default" style="margin-top: 100px;">
+			<div class="panel-body" cg-busy="myPromise">
+				<form name='customerForm' role="form" class="form-horizontal" ng-submit="onApply()">
 					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保人</lable>
+						<h2 style="text-align: center;">保险申请</h2>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">联系电话</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<select class="form-control" ng-options="payer.name for payer in payerOptions" ng-model="selectedPayer"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">受保人</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<select class="form-control" ng-options="insurant.name for insurant in insurantOptions" ng-model="selectedInsurant"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">生效日期</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<div class="input-group date" id="datepicker-effective-time">
-								<input type="text" class="form-control" readonly="" required="required" />
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-calendar"></i>
-								</span>
+							<input type="text" class="form-control" name="phone" placeholder="电话" title="请输入联系电话" required="" maxlength="11" ng-model="customerData.phone" ng-minlength="11" ng-pattern="/^\d+$/" />
+							<div ng-show="customerForm.phone.$dirty &amp;&amp; customerForm.phone.$invalid">
+								<small class="alert-danger well-sm" ng-show="customerForm.phone.$error.pattern">请使用数字</small>
+								<small class="alert-danger well-sm" ng-show="customerForm.phone.$error.minlength &amp;&amp; !customerForm.phone.$error.pattern">请输入11位手机号码</small>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险类型</lable>
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">客户姓名</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<div class="input-group">
-								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceType" />
-								<span class="input-group-addon" ng-click="onSelectInsuranceType('#modal-insurance-type')">
-									<i class="glyphicon glyphicon-th-list"></i>
-								</span>
+							<input type="text" class="form-control" name="name" placeholder="姓名" title="请输入姓名" required="" maxlength="10" ng-model="customerData.name" ng-pattern="/[\u4e00-\u9fa5]+$/" />
+							<div ng-show="customerForm.name.$dirty &amp;&amp; customerForm.name.$invalid">
+								<small class="alert-danger well-sm" ng-show="customerForm.name.$error.pattern">请使用中文</small>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险公司</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<div class="input-group">
-								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceCompany" />
-								<span class="input-group-addon" ng-click="onSelectInsuranceCompany('#modal-insurance-company')">
-									<i class="glyphicon glyphicon-briefcase"></i>
-								</span>
+						<div class="col-xs-10 col-xs-offset-4 col-sm-10 col-sm-offset-4 col-md-10 col-md-offset-4 col-lg-10 col-lg-offset-4">
+							<div class="radio-inline">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="male" ng-model="customerData.sex" /> 先生
+								</label>
+							</div>
+							<div class="radio-inline">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="female" ng-model="customerData.sex" /> 女士
+								</label>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">缴费频率</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<select class="form-control" ng-options="frequency.name for frequency in frequencyOptions" ng-model="selectedFrequency"></select>
+						<br/>
+						<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+							<button class="btn btn-success btn-lg btn-block" type="submit">确定</button>
 						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保期限（年）</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="addPolicyData.paymentTime" />
-						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险期限（年）</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="addPolicyData.insuranceTime" />
-						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">主险保额（万元）</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="addPolicyData.insuranceAmount" />
-						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">年缴保费（元）</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="addPolicyData.paymentYear" />
-						</div>
-					</div>
-					<div class="form-group">
-						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
-						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<textarea type="text" rows="3" class="form-control" style="resize: none;" ng-model="addPolicyData.comment" />
-						</div>
-					</div>
-					<br />
-					<div class="form-group">
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<button type="submit" class="btn btn-success btn-lg btn-block">提交</button>
-						</div>
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<script>
-		$('#datepicker-effective-time').datepicker({
-			format: 'yyyy-mm-dd',
-			language: 'zh-CN',
-			clearBtn: true,
-			todayBtn: 'linked',
-			autoclose: true,
-			todayHighlight: true
-		});
-	</script>
-</div>
-
-<!--inner modal-->
-<div id="modal-insurance-type" tabindex="-1" role="dialog" class="modal inner">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" aria-hidden="true" class="close" ng-click="onCloseInnerModal('#modal-insurance-type')">×</button>
-				<h4 id="modal-default-label" class="modal-title">选择保险类型</h4>
-			</div>
-			<div class="modal-body">
-				<form role="form" class="form-horizontal form-separated" ng-submit="onSelectInsuranceTypeOK('#modal-insurance-type')">
-					<div class="form-body pdl">
-						<div class="form-group">
-							<span class="col-xs-6 col-sm-4 col-md-3" ng-repeat="type in insuranceTypeList">
-								<input type="checkbox" id="{{type.id}}" class="magic-checkbox" ng-model="type.selected" />
-								<label class="pull-left" for="{{type.id}}" ng-bind="type.name"></label>
-							</span>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">确定</button>
-						<button type="button" class="btn btn-default" ng-click="onCloseInnerModal('#modal-insurance-type')">取消</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!--inner modal-->
-<div id="modal-insurance-company" tabindex="-1" role="dialog" class="modal inner">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" aria-hidden="true" class="close" ng-click="onCloseInnerModal('#modal-insurance-company')">×</button>
-				<h4 id="modal-default-label" class="modal-title">选择保险公司</h4>
-			</div>
-			<div class="modal-body">
-				<form role="form" class="form-horizontal form-separated" ng-submit="onSelectInsuranceCompanyOK('#modal-insurance-company')">
-					<div class="form-body pdl">
-						<div class="form-group">
-							<label class="col-xs-4 col-sm-4 col-md-4 control-label">索引：</label>
-							<div class="col-xs-6 col-sm-4 col-md-4">
-								<select class="form-control" style="padding-left: 15px !important;" ng-options="index.name for index in insuranceCompanyIndexList" ng-model="selectedInsuranceCompanyIndex"></select>
-							</div>
-						</div>
-						<div class="form-group">
-							<span class="col-xs-9 col-xs-offset-3 col-sm-4 col-sm-offset-0 col-md-3 col-md-offset-0" ng-repeat="company in selectedInsuranceCompanyIndex.list">
-								<input type="radio" name="radio" id="{{company.id}}" class="magic-radio" value="{{company.value}}" ng-model="radioForInsuranceCompany.radio" />
-								<label for="{{company.id}}" ng-bind="company.name"></label>
-							</span>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">确定</button>
-						<button type="button" class="btn btn-default" ng-click="onCloseInnerModal('#modal-insurance-company')">取消</button>
 					</div>
 				</form>
 			</div>
