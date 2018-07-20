@@ -11,10 +11,10 @@ exports.creatPolicy = function (token, policyObj, cb) {
     sessions.getSessionAttrs(token, ['user_id', 'role', 'superior'], function (err, data) {
         if (!err && data.user_id) {
             if (data.role == 'member') {
-                policyObj.mem_id = data.user_id;
-                policyObj.channel_id = data.superior;
+                policyObj.belong_mem = data.user_id;
+                policyObj.belong_channel = data.superior;
             } else {
-                policyObj.channel_id = data.user_id;
+                policyObj.belong_channel = data.user_id;
             }
             policys.createPolicy(policyObj, function (err, policy) {
                 if (!err) {
