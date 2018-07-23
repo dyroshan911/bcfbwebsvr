@@ -11,7 +11,7 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 			});
 		};
 
-		$scope.getDateString = function (timestamp) {
+		$scope.getDateString = function (timestamp, isDate) {
 			var ts = timestamp || 0;
 			var date = new Date(ts);
 			var y = date.getFullYear();
@@ -20,7 +20,11 @@ angular.module('myApp').controller('IndexCtrl', ['$scope', '$location', '$rootSc
 			var h = date.getHours();
 			var i = date.getMinutes();
 			var s = date.getSeconds();
-			return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d) + ' , ' + (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
+			if (isDate) {
+				return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d);
+			} else {
+				return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d) + ' , ' + (h < 10 ? '0' + h : h) + ':' + (i < 10 ? '0' + i : i) + ':' + (s < 10 ? '0' + s : s);
+			}
 		};
 
 		$scope.makeFloat = function (n) {

@@ -375,7 +375,7 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 
 		$scope.addPolicyData = {};
 
-		getPolicyList(0, 100, '', 0);
+		getPolicyList();
 
 		//functions
 		$scope.onClickAddPolicy = function () {
@@ -392,6 +392,10 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 			$scope.addPolicyData.insuranceAmount = '';
 			$scope.addPolicyData.paymentYear = '';
 			$scope.addPolicyData.comment = '';
+			for (var i = 0; i < $scope.insuranceTypeList.length; i++) {
+				var insuranceType = $scope.insuranceTypeList[i];
+				insuranceType.selected = false;
+			}
 			$('#modal-add-policy').modal({ backdrop: 'static' });
 		};
 
@@ -408,6 +412,9 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 					$scope.addPolicyData.insuranceType += insuranceType.value + ',';
 				}
 			}
+			if ($scope.addPolicyData.insuranceType != '') {
+				$scope.addPolicyData.insuranceType = $scope.addPolicyData.insuranceType.substring(0, $scope.addPolicyData.insuranceType.length - 1);
+			}
 		};
 
 		$scope.onSelectInsuranceCompany = function (modalId) {
@@ -417,6 +424,11 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 		$scope.onSelectInsuranceCompanyOK = function (modalId) {
 			$scope.onCloseInnerModal(modalId);
 			$scope.addPolicyData.insuranceCompany = $scope.radioForInsuranceCompany.radio;
+		};
+
+		$scope.onClickPolicy = function (id) {
+			id = '#policy-' + id;
+			$(id).toggle(200);
 		};
 
 		$scope.onAddPolicy = function () {
@@ -453,15 +465,47 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 			$scope.myPromiseAddPolicy = BusinessService.addPolicy($rootScope.session.token, dataObj, function (res) {
 				alert('添加表单成功');
 				$('#modal-add-policy').modal('toggle');
-				getPolicyList(0, 100, '', 0);
+				getPolicyList();
 			}, function (err) {
 				alert(err.message);
 			});
 		};
 
-		function getPolicyList(offset, limit, filter, currentPageIndex) {
+		function getPolicyList() {
 			$scope.myPromisePolicyList = BusinessService.getPolicys($rootScope.session.token, function (res) {
-				$scope.policyList.list = res.policysList;
+				$scope.policyList = res.policysList;
+				for (var i = 0; i < $scope.policyList.length; i++) {
+					var policy = $scope.policyList[i];
+					policy.effectiveTime = $scope.getDateString(policy.effective_time, true);
+					var insuranceTime;
+					switch (policy.payment_frequency) {
+						case $scope.frequencyOptions[0].value: {
+							insuranceTime = 3600000 * 24 * 31;
+							break;
+						}
+						case $scope.frequencyOptions[1].value: {
+							insuranceTime = 3600000 * 24 * 31 * 3;
+							break;
+						}
+						case $scope.frequencyOptions[2].value: {
+							insuranceTime = 3600000 * 24 * 31 * 6;
+							break;
+						}
+						case $scope.frequencyOptions[3].value: {
+							insuranceTime = 3600000 * 24 * 365;
+							break;
+						}
+						case $scope.frequencyOptions[4].value: {
+							insuranceTime = policy.insurance_time.substring(policy.insurance_time.indexOf('保') + 1, policy.insurance_time.indexOf('年'));
+							break;
+						}
+						default: {
+							insuranceTime = 0;
+							break;
+						}
+					}
+					policy.nextPaymentTime = $scope.getDateString(policy.effective_time + insuranceTime, true);
+				}
 			}, function (err) {
 				alert(err.message);
 			});
