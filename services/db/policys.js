@@ -74,7 +74,6 @@ policyObj.getPolicyList = function (user_id, role, offset, limit, filter, cb) {
         return;
     }
 
-
     var selectattr = 'id payer_name insurer_name  effective_time insurance_types insurance_company payment_frequency payment_time insurance_time insurance_amount payment_year comment belong_mem belong_channel';
 
     PolicyModel.find(queryObj)

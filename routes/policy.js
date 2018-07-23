@@ -49,6 +49,15 @@ router.get('/', function (req, res) {
 
 });
 
+/* get policy analysis*/
+router.get('/analysis', function (req, res) {
+    var token = req.query.token;
+    policys.getPolicyAnalysis(token, function(statusCode, result){
+        httpResp(res, statusCode, result);
+    });
+    //httpResp(res, 200, {customerlist:'test get customer'});
+});
+
 /* get policy list by id*/
 router.get('/:account_id', function (req, res) {
     var token = req.query.token;

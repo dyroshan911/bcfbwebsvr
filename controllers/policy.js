@@ -69,6 +69,111 @@ exports.getPolicyList = function (token, offset, limit, filter, cb) {
     });
 }
 
+exports.getPolicyAnalysis = function (token, cb) {
+    var result = {
+        annual_payment:{
+            list:[],
+            total_count:0,
+            total_amout:0
+        },
+        severe_disease:[],
+        death_insurance:[],
+        accidental_guarantee:[],
+        hospitalization:[],
+        personal:{
+            list:[],
+            total_count:0,
+            total_amout:0
+        },
+        company:{
+            list:[],
+            total_count:0
+        }
+    };
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['user_id', 'role'], function (err, data) {
+        if (!err && data.user_id) {
+            policys.getPolicyList(data.user_id, data.role, 0, -1, null, function (err, doc) {
+                //result = doc;
+                if (!err && doc && doc.policysList) {
+                    var payer_namelist = {};
+                    var severe_disease_nameList = {};
+                    var death_insurance_nameList = {};
+                    for(var i = 0; i < doc.policysList.length; i++) {
+                        var policy = doc.policysList[i];
+                        
+                        ////年缴保费统计
+                        if (!payer_namelist[policy.payer_name]) {
+                            payer_namelist[policy.payer_name] = {
+                                payer_name: policy.payer_name,
+                                payment_year : policy.payment_year,
+                                count : 1
+                            }
+                            result.annual_payment.total_count = result.annual_payment.total_count + 1;
+                            result.annual_payment.total_amout = result.annual_payment.total_amout + policy.payment_year;
+                        } else {
+                            payer_namelist[policy.payer_name].payment_year = payer_namelist[policy.payer_name].payment_year + policy.payment_year;
+                            payer_namelist[policy.payer_name].count = payer_namelist[policy.payer_name].count + 1;
+                            
+                            result.annual_payment.total_count = result.annual_payment.total_count + 1;
+                            result.annual_payment.total_amout = result.annual_payment.total_amout + policy.payment_year;
+                        }
+                        
+                        //重大疾病保额统计
+                        if (policy.insurance_types.indexOf("重大疾病") != -1) {
+                            if (!severe_disease_nameList[policy.insurer_name]) {
+                                severe_disease_nameList[policy.insurer_name] = {
+                                    insurer_name : policy.insurer_name,
+                                    amount : policy.payment_year
+                                }
+                            } else {
+                                severe_disease_nameList[policy.insurer_name].amount = severe_disease_nameList[policy.insurer_name].amount + policy.payment_year;
+                            }
+                            
+                        }
+                        
+                        
+                        //身故寿险保额统计
+                        if (policy.insurance_types.indexOf("身故寿险") != -1) {
+                            if (!death_insurance_nameList[policy.insurer_name]) {
+                                death_insurance_nameList[policy.insurer_name] = {
+                                    insurer_name : policy.insurer_name,
+                                    amount : policy.payment_year
+                                }
+                            } else {
+                                death_insurance_nameList[policy.insurer_name].amount = death_insurance_nameList[policy.insurer_name].amount + policy.payment_year;
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    for (key in payer_namelist) {
+                        result.annual_payment.list.push(payer_namelist[key]);
+                    }
+                    
+                    for (key in severe_disease_nameList) {
+                        result.severe_disease.push(severe_disease_nameList[key]);
+                    }
+                    
+                    for (key in death_insurance_nameList) {
+                        result.death_insurance.push(death_insurance_nameList[key]);
+                    }
+                };
+                cb(statusCode, result);
+            });
+        } else {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
+        }
+    });
+}
+
 
 exports.getPolicyListById = function (token, accountId, offset, limit, filter, cb) {
     var result = {};
