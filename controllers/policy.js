@@ -99,6 +99,11 @@ exports.getPolicyAnalysis = function (token, cb) {
                     var payer_namelist = {};
                     var severe_disease_nameList = {};
                     var death_insurance_nameList = {};
+                    var accidental_guarantee_nameList = {};
+                    var hospitalization_nameList = {};
+                    var personal_nameList = {};
+                    var company_nameList = {};
+                    
                     for(var i = 0; i < doc.policysList.length; i++) {
                         var policy = doc.policysList[i];
                         
@@ -143,7 +148,61 @@ exports.getPolicyAnalysis = function (token, cb) {
                             } else {
                                 death_insurance_nameList[policy.insurer_name].amount = death_insurance_nameList[policy.insurer_name].amount + policy.payment_year;
                             }
+                        }
+                        
+                        //意外保障保额统计
+                        if (policy.insurance_types.indexOf("意外保障") != -1) {
+                            if (!accidental_guarantee_nameList[policy.insurer_name]) {
+                                accidental_guarantee_nameList[policy.insurer_name] = {
+                                    insurer_name : policy.insurer_name,
+                                    amount : policy.payment_year
+                                }
+                            } else {
+                                accidental_guarantee_nameList[policy.insurer_name].amount = accidental_guarantee_nameList[policy.insurer_name].amount + policy.payment_year;
+                            }
+                        }
+                        
+                        //住院医疗保额统计
+                        if (policy.insurance_types.indexOf("住院医疗") != -1) {
+                            if (!hospitalization_nameList[policy.insurer_name]) {
+                                hospitalization_nameList[policy.insurer_name] = {
+                                    insurer_name : policy.insurer_name,
+                                    amount : policy.payment_year
+                                }
+                            } else {
+                                hospitalization_nameList[policy.insurer_name].amount = hospitalization_nameList[policy.insurer_name].amount + policy.payment_year;
+                            }
+                        }
+                        
+                        
+                        //个人保单件数
+                        if (!personal_nameList[policy.insurer_name]) {
+                            personal_nameList[policy.insurer_name] = {
+                                insurer_name: policy.insurer_name,
+                                payment_year : policy.payment_year,
+                                count : 1
+                            }
+                            result.personal.total_count = result.personal.total_count + 1;
+                            result.personal.total_amout = result.personal.total_amout + policy.payment_year;
+                        } else {
+                            personal_nameList[policy.insurer_name].payment_year = personal_nameList[policy.insurer_name].payment_year + policy.payment_year;
+                            personal_nameList[policy.insurer_name].count = personal_nameList[policy.insurer_name].count + 1;
                             
+                            result.personal.total_count = result.personal.total_count + 1;
+                            result.personal.total_amout = result.personal.total_amout + policy.payment_year;
+                        }
+                        
+                        
+                        //公司保单件数
+                        if (!company_nameList[policy.insurance_company]) {
+                            company_nameList[policy.insurance_company] = {
+                                company_name: policy.insurance_company,
+                                count : 1
+                            }
+                            result.company.total_count = result.company.total_count + 1;
+                        } else {
+                            company_nameList[policy.insurance_company].count = company_nameList[policy.insurance_company].count + 1;
+                            result.company.total_count = result.company.total_count + 1;
                         }
                         
                         
@@ -159,6 +218,22 @@ exports.getPolicyAnalysis = function (token, cb) {
                     
                     for (key in death_insurance_nameList) {
                         result.death_insurance.push(death_insurance_nameList[key]);
+                    }
+                    
+                    for (key in accidental_guarantee_nameList) {
+                        result.accidental_guarantee.push(accidental_guarantee_nameList[key]);
+                    }
+                    
+                    for (key in hospitalization_nameList) {
+                        result.hospitalization.push(hospitalization_nameList[key]);
+                    }
+                    
+                    for (key in personal_nameList) {
+                        result.personal.list.push(personal_nameList[key]);
+                    }
+                    
+                    for (key in company_nameList) {
+                        result.company.list.push(company_nameList[key]);
                     }
                 };
                 cb(statusCode, result);
