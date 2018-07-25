@@ -461,6 +461,16 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					var policy = $scope.checkPolicy.list[i];
 					policy.effectiveTime = $scope.getDateString(policy.effective_time, true);
 				}
+				var total = res.total;
+				if (total >= 0) {
+					$scope.checkPolicyPageData.total = parseInt(total / eachPageCount);
+					if ((total % eachPageCount) != 0) {
+						$scope.checkPolicyPageData.total++;
+					}
+					currentPageIndex = currentPageIndex || '0';
+					sortPages($scope.checkPolicyPageData, currentPageIndex);
+					setCurrentPage($scope.checkPolicyPageData, currentPageIndex);
+				}
 			}, function (err) {
 				alert(err.message);
 			});
