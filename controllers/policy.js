@@ -208,31 +208,31 @@ exports.getPolicyAnalysis = function (token, cb) {
                         
                     }
                     
-                    for (key in payer_namelist) {
+                    for (var key in payer_namelist) {
                         result.annual_payment.list.push(payer_namelist[key]);
                     }
                     
-                    for (key in severe_disease_nameList) {
+                    for (var key in severe_disease_nameList) {
                         result.severe_disease.push(severe_disease_nameList[key]);
                     }
                     
-                    for (key in death_insurance_nameList) {
+                    for (var key in death_insurance_nameList) {
                         result.death_insurance.push(death_insurance_nameList[key]);
                     }
                     
-                    for (key in accidental_guarantee_nameList) {
+                    for (var key in accidental_guarantee_nameList) {
                         result.accidental_guarantee.push(accidental_guarantee_nameList[key]);
                     }
                     
-                    for (key in hospitalization_nameList) {
+                    for (var key in hospitalization_nameList) {
                         result.hospitalization.push(hospitalization_nameList[key]);
                     }
                     
-                    for (key in personal_nameList) {
+                    for (var key in personal_nameList) {
                         result.personal.list.push(personal_nameList[key]);
                     }
                     
-                    for (key in company_nameList) {
+                    for (var key in company_nameList) {
                         result.company.list.push(company_nameList[key]);
                     }
                 };
