@@ -17,6 +17,12 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			ownerName: '',
 			list: []
 		};
+		$scope.checkPolicy = {
+			show: false,
+			ownerId: '',
+			ownerName: '',
+			list: []
+		};
 
 		$scope.tabNames = {
 			customer: '我的客户',
@@ -46,6 +52,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			total: 0
 		};
 		$scope.checkCustomerPageData = {
+			current: {},
+			list: [],
+			total: 0
+		};
+		$scope.checkPolicyPageData = {
 			current: {},
 			list: [],
 			total: 0
@@ -258,16 +269,30 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			getCustomerListById(owner.id, 0, eachPageCount, '');
 		};
 
+		$scope.onCheckPolicy = function (owner) {
+			$scope.checkCustomer.show = true;
+			$scope.checkCustomer.ownerId = owner.id;
+			$scope.checkCustomer.ownerName = owner.true_name;
+			$('#myTabs a[href="#checkPolicy"]').tab('show');
+			getPolicyListById(owner.id, 0, eachPageCount, '');
+		};
+
 		$scope.onCloseCheck = function (tabName) {
 			$scope.currentPageData = {};
 			$('#myTabs a[href="#myCustomers"]').tab('show');
 			switch (tabName) {
-				case 'member':
+				case 'member': {
 					$scope.checkMember.show = false;
 					break;
-				case 'customer':
+				}
+				case 'customer': {
 					$scope.checkCustomer.show = false;
 					break;
+				}
+				case 'policy': {
+					$scope.checkCustomer.show = false;
+					break;
+				}
 				default:
 					break;
 			}
@@ -424,6 +449,23 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			});
 		}
 
+		function getPolicyListById(userId, offset, limit, filter, currentPageIndex) {
+			var paramObj = {
+				offset: offset,
+				limit: limit,
+				filter: filter
+			};
+			$scope.myPromiseCheckPolicy = BusinessService.getPolicysById($rootScope.session.token, userId, paramObj, function (res) {
+				$scope.checkPolicy.list = res.policysList;
+				for (var i = 0; i < $scope.checkPolicy.list.length; i++) {
+					var policy = $scope.checkPolicy.list[i];
+					policy.effectiveTime = $scope.getDateString(policy.effective_time, true);
+				}
+			}, function (err) {
+				alert(err.message);
+			});
+		}
+
 		function getNameByValue(value, list) {
 			for (var i = 0; i < list.length; ++i) {
 				if (value == list[i].value) {
@@ -525,7 +567,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 
 		function getPageList(pageData, pageIndex) {
 			switch (pageData) {
-				case $scope.customerPageData:
+				case $scope.customerPageData: {
 					var filter = '';
 					if ($scope.search.length != 0) {
 						filter = $scope.search;
@@ -537,16 +579,20 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					}
 					getCustomerList(parseInt(pageIndex) * eachPageCount, eachPageCount, filter, pageIndex);
 					break;
-				case $scope.channelPageData:
+				}
+				case $scope.channelPageData: {
 					getChannelList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
 					break;
-				case $scope.memberPageData:
+				}
+				case $scope.memberPageData: {
 					getMemberList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
 					break;
-				case $scope.checkMemberPageData:
+				}
+				case $scope.checkMemberPageData: {
 					getMemberList(parseInt(pageIndex) * eachPageCount, eachPageCount, $scope.search, pageIndex);
 					break;
-				case $scope.checkCustomerPageData:
+				}
+				case $scope.checkCustomerPageData: {
 					var filter = '';
 					if ($scope.search.length != 0) {
 						filter = $scope.search;
@@ -558,6 +604,11 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 					}
 					getCustomerListById($scope.checkCustomer.ownerId, parseInt(pageIndex) * eachPageCount, eachPageCount, filter, pageIndex);
 					break;
+				}
+				case $scope.checkPolicyPageData: {
+					getPolicyListById($scope.checkPolicy.ownerId, parseInt(pageIndex) * eachPageCount, eachPageCount, '', pageIndex);
+					break;
+				}
 				default:
 					break;
 			}
@@ -589,25 +640,39 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 			$(this).tab('show');
 		})
 
+		$('#myTabs a[href="#checkPolicy"]').click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		})
+
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			var tabName = e.target.hash;
 			$scope.$apply(function () {
 				switch (tabName) {
-					case '#myCustomers':
+					case '#myCustomers': {
 						$scope.currentPageData = $scope.customerPageData;
 						break;
-					case '#myChannels':
+					}
+					case '#myChannels': {
 						$scope.currentPageData = $scope.channelPageData;
 						break;
-					case '#myMembers':
+					}
+					case '#myMembers': {
 						$scope.currentPageData = $scope.memberPageData;
 						break;
-					case '#checkMembers':
+					}
+					case '#checkMembers': {
 						$scope.currentPageData = $scope.checkMemberPageData;
 						break;
-					case '#checkCustomers':
+					}
+					case '#checkCustomers': {
 						$scope.currentPageData = $scope.checkCustomerPageData;
 						break;
+					}
+					case '#checkPolicy': {
+						$scope.currentPageData = $scope.checkPolicyPageData;
+						break;
+					}
 					default:
 						break;
 				}
