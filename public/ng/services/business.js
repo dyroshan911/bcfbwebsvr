@@ -150,5 +150,15 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 		return ApiService.post('api/policys', obj, successcb, failcb);
 	};
 
+	cfgData.getPolicyAnalysis = function (token, successcb, failcb) {
+		var url = 'api/policys/analysis';
+		var obj = {
+			params: {
+				token: token
+			}
+		};
+		return ApiService.get(url, obj, successcb, failcb);
+	};
+
 	return cfgData;
 }]);

@@ -372,10 +372,12 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 		$scope.selectedInsurant = $scope.insurantOptions[0];
 		$scope.selectedFrequency = $scope.frequencyOptions[0];
 		$scope.radioForInsuranceCompany = {};
+		$scope.policyAnalysis = {};
 
 		$scope.addPolicyData = {};
 
 		getPolicyList();
+		getPolicyAnalysis();
 
 		//functions
 		$scope.onClickAddPolicy = function () {
@@ -466,6 +468,7 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 				alert('添加表单成功');
 				$('#modal-add-policy').modal('toggle');
 				getPolicyList();
+				getPolicyAnalysis();
 			}, function (err) {
 				alert(err.message);
 			});
@@ -506,6 +509,14 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 					}
 					policy.nextPaymentTime = $scope.getDateString(policy.effective_time + insuranceTime, true);
 				}
+			}, function (err) {
+				alert(err.message);
+			});
+		}
+
+		function getPolicyAnalysis() {
+			$scope.myPromisePolicyAnalysis = BusinessService.getPolicyAnalysis($rootScope.session.token, function (res) {
+				$scope.policyAnalysis = res;
 			}, function (err) {
 				alert(err.message);
 			});

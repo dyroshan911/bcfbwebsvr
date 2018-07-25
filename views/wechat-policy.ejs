@@ -89,11 +89,11 @@
 				</div>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade in" id="insuranceInfo" cg-busy="myPromiseInsuranceInfo">
+			<div role="tabpanel" class="tab-pane fade in" id="insuranceInfo" cg-busy="myPromisePolicyAnalysis">
 				<div class="panel panel-default">
 					<div class="panel-heading">年交保费统计(元)</div>
 					<div>
-						<table class="table table-bordered table-striped table-hover">
+						<table class="table table-bordered table-striped table-hover" style="margin-bottom: 0;">
 							<thead>
 								<tr>
 									<th width="40%">投保人</th>
@@ -102,10 +102,15 @@
 								</tr>
 							</thead>
 							<tbody>
+								<tr ng-repeat="analysis in policyAnalysis.annual_payment.list">
+									<td align="center" ng-bind="analysis.payer_name"></td>
+									<td align="center" ng-bind="analysis.payment_year"></td>
+									<td align="center" ng-bind="analysis.count"></td>
+								</tr>
 								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-									<td align="center"></td>
+									<td align="center">合计</td>
+									<td align="center" ng-bind="policyAnalysis.annual_payment.total_count"></td>
+									<td align="center" ng-bind="policyAnalysis.annual_payment.total_amout"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -115,7 +120,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">重大疾病保额统计(万元)</div>
 					<div>
-						<table class="table table-bordered table-striped table-hover">
+						<table class="table table-bordered table-striped table-hover" style="margin-bottom: 0;">
 							<thead>
 								<tr>
 									<th width="40%">受保人</th>
@@ -123,9 +128,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
+								<tr ng-repeat="analysis in policyAnalysis.severe_disease">
+									<td align="center" ng-bind="analysis.insurer_name"></td>
+									<td align="center" ng-bind="analysis.amount"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -133,9 +138,9 @@
 				</div>
 
 				<div class="panel panel-default">
-					<div class="panel-heading">事故寿险保额统计(万元)</div>
+					<div class="panel-heading">身故寿险保额统计(万元)</div>
 					<div>
-						<table class="table table-bordered table-striped table-hover">
+						<table class="table table-bordered table-striped table-hover" style="margin-bottom: 0;">
 							<thead>
 								<tr>
 									<th width="50%">受保人</th>
@@ -143,9 +148,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
+								<tr ng-repeat="analysis in policyAnalysis.death_insurance">
+									<td align="center" ng-bind="analysis.insurer_name"></td>
+									<td align="center" ng-bind="analysis.amount"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -155,7 +160,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">意外保障保额统计(万元)</div>
 					<div>
-						<table class="table table-bordered table-striped table-hover">
+						<table class="table table-bordered table-striped table-hover" style="margin-bottom: 0;">
 							<thead>
 								<tr>
 									<th width="50%">受保人</th>
@@ -163,9 +168,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
+								<tr ng-repeat="analysis in policyAnalysis.accidental_guarantee">
+									<td align="center" ng-bind="analysis.insurer_name"></td>
+									<td align="center" ng-bind="analysis.amount"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -175,7 +180,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">住院医疗保额统计(万元)</div>
 					<div>
-						<table class="table table-bordered table-striped table-hover">
+						<table class="table table-bordered table-striped table-hover" style="margin-bottom: 0;">
 							<thead>
 								<tr>
 									<th width="50%">受保人</th>
@@ -183,9 +188,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
+								<tr ng-repeat="analysis in policyAnalysis.hospitalization">
+									<td align="center" ng-bind="analysis.insurer_name"></td>
+									<td align="center" ng-bind="analysis.amount"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -195,7 +200,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">个人保单件数</div>
 					<div>
-						<table class="table table-bordered table-striped table-hover">
+						<table class="table table-bordered table-striped table-hover" style="margin-bottom: 0;">
 							<thead>
 								<tr>
 									<th width="40%">受保人</th>
@@ -204,10 +209,15 @@
 								</tr>
 							</thead>
 							<tbody>
+								<tr ng-repeat="analysis in policyAnalysis.personal.list">
+									<td align="center" ng-bind="analysis.insurer_name"></td>
+									<td align="center" ng-bind="analysis.payment_year"></td>
+									<td align="center" ng-bind="analysis.count"></td>
+								</tr>
 								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
-									<td align="center"></td>
+									<td align="center">合计</td>
+									<td align="center" ng-bind="policyAnalysis.personal.total_amout"></td>
+									<td align="center" ng-bind="policyAnalysis.personal.total_count"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -217,7 +227,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">公司保单件数</div>
 					<div>
-						<table class="table table-bordered table-striped table-hover">
+						<table class="table table-bordered table-striped table-hover" style="margin-bottom: 0;">
 							<thead>
 								<tr>
 									<th width="80%">保险公司</th>
@@ -225,9 +235,13 @@
 								</tr>
 							</thead>
 							<tbody>
+								<tr ng-repeat="analysis in policyAnalysis.company.list">
+									<td align="center" ng-bind="analysis.company_name"></td>
+									<td align="center" ng-bind="analysis.count"></td>
+								</tr>
 								<tr>
-									<td align="center"></td>
-									<td align="center"></td>
+									<td align="center">合计</td>
+									<td align="center" ng-bind="policyAnalysis.company.total_count"></td>
 								</tr>
 							</tbody>
 						</table>
