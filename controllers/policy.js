@@ -310,3 +310,24 @@ exports.updatePolicyInfo = function (token, policyId, dataObj, cb) {
         }
     });
 }
+
+
+exports.removePolicy = function (token, policyId, cb) {
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['user_id', 'role'], function (err, data) {
+        if (!err && data.user_id) {
+            policys.removePolicy(data.user_id, data.role, policyId, function (err, doc) {
+                result = doc;
+                cb(statusCode, result);
+            });
+        } else {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
+        }
+    });
+}
