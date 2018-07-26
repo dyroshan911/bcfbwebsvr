@@ -71,4 +71,23 @@ router.get('/:account_id', function (req, res) {
     });
 });
 
+/* update customer info by id*/
+router.put('/:policy_id', function (req, res) {
+    var token = req.query.token;
+    var policy_id = req.params.policy_id;
+    var dataObj = req.body.data;
+    policys.updatePolicyInfo(token, policy_id, dataObj, function(statusCode, result){
+        httpResp(res, statusCode, result);
+    });
+});
+
+/* update customer info by id*/
+router.delete('/:policy_id', function (req, res) {
+    var token = req.query.token;
+    var policy_id = req.params.policy_id;
+    policys.removePolicy(token, policy_id, function(statusCode, result){
+        httpResp(res, statusCode, result);
+    });
+});
+
 module.exports = router;

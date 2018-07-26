@@ -93,7 +93,7 @@ exports.getPolicyAnalysis = function (token, cb) {
     var statusCode = 200;
     sessions.getSessionAttrs(token, ['user_id', 'role'], function (err, data) {
         if (!err && data.user_id) {
-            policys.getPolicyList(data.user_id, data.role, 0, -1, null, function (err, doc) {
+            policys.getPolicyList(data.user_id, data.role, 0, 1000, null, function (err, doc) {
                 //result = doc;
                 if (!err && doc && doc.policysList) {
                     var payer_namelist = {};
@@ -264,6 +264,41 @@ exports.getPolicyListById = function (token, accountId, offset, limit, filter, c
                     result = doc;
                     cb(statusCode, result);
                 });
+            });
+        } else {
+            statusCode = 403;
+            result.code = 'e1110';
+            result.message = 'err.message';
+            result.description = 'err.message';
+            result.source = '<<webui>>';
+            cb(statusCode, result);
+        }
+    });
+}
+
+
+exports.updatePolicyInfo = function (token, policyId, dataObj, cb) {
+    var result = {};
+    var statusCode = 200;
+    sessions.getSessionAttrs(token, ['user_id', 'role'], function (err, data) {
+        if (!err && data.user_id) {
+
+            var updateData = {
+                payer_name: dataObj.payer_name,
+                insurer_name: dataObj.insurer_name,
+                effective_time: dataObj.effective_time,
+                insurance_types: dataObj.insurance_types,
+                insurance_company: dataObj.insurance_company,
+                payment_frequency: dataObj.payment_frequency, 
+                payment_time: dataObj.payment_time,
+                insurance_time: dataObj.insurance_time,
+                insurance_amount: dataObj.insurance_amount,
+                payment_year: dataObj.payment_year,
+                comment:dataObj.comment,
+            };
+            policys.updatePolicy(data.user_id, data.role, policyId, updateData, function (err, doc) {
+                result = doc;
+                cb(statusCode, result);
             });
         } else {
             statusCode = 403;

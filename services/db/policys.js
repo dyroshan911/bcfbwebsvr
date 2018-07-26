@@ -101,3 +101,25 @@ policyObj.getPolicyList = function (user_id, role, offset, limit, filter, cb) {
             }
         });
 }
+
+
+policyObj.updatePolicy = function (userId, role, policyId, dataObj, cb) {
+    var queryObj = { 'id': policyId };
+    if (role == null) {
+        cb(new Error("not permision"), "not permision");
+    }
+
+    PolicyModel.update(queryObj, { $set: dataObj }, function (err, data) {
+        cb(err, data);
+    });
+}
+
+policyObj.removePolicy = function (userId, role, policyId, cb) {
+    if (role == null) {
+        cb(new Error("not permision"), "not permision");
+    }
+    var conditions = {'id': policyId};
+    PolicyModel.remove(conditions, function(err, data){
+        cb(err, data);
+    })
+}
