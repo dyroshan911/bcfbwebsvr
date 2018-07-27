@@ -375,18 +375,20 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 		$scope.policyAnalysis = {};
 
 		$scope.addPolicyData = {};
+		var datePicker = {};
 
 		getPolicyList();
 		getPolicyAnalysis();
 
 		//functions
 		$scope.onClickAddPolicy = function () {
-			$("#datepicker-effective-time").datepicker('clearDates');
+			datePicker = $("#datepicker-effective-time-add");
+			datePicker.datepicker('clearDates');
+			$scope.radioForInsuranceCompany = {};
 			$scope.selectedInsuranceCompanyIndex = $scope.insuranceCompanyIndexList[0];
 			$scope.selectedPayer = $scope.payerOptions[0];
 			$scope.selectedInsurant = $scope.insurantOptions[0];
 			$scope.selectedFrequency = $scope.frequencyOptions[0];
-			$scope.radioForInsuranceCompany = {};
 			$scope.addPolicyData.insuranceType = '';
 			$scope.addPolicyData.insuranceCompany = '';
 			$scope.addPolicyData.paymentTime = '';
@@ -434,7 +436,7 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 		};
 
 		$scope.onAddPolicy = function () {
-			var effectiveTime = $('#datepicker-effective-time').datepicker('getDate');
+			var effectiveTime = datePicker.datepicker('getDate');
 			if (effectiveTime == null) {
 				alert('请选择生效日期');
 				return;
@@ -467,6 +469,132 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 			$scope.myPromiseAddPolicy = BusinessService.addPolicy($rootScope.session.token, dataObj, function (res) {
 				alert('添加表单成功');
 				$('#modal-add-policy').modal('toggle');
+				getPolicyList();
+				getPolicyAnalysis();
+			}, function (err) {
+				alert(err.message);
+			});
+		};
+
+		$scope.onClickEditPolicy = function (policy) {
+			$scope.addPolicyData.id = policy.id;
+			//payer
+			for (var i = 0; i < $scope.payerOptions.length; i++) {
+				if ($scope.payerOptions[i].value === policy.payer_name) {
+					$scope.selectedPayer = $scope.payerOptions[i];
+					break;
+				}
+			}
+			//insurant
+			for (var i = 0; i < $scope.insurantOptions.length; i++) {
+				if ($scope.insurantOptions[i].value === policy.insurer_name) {
+					$scope.selectedInsurant = $scope.insurantOptions[i];
+					break;
+				}
+			}
+			//datepicker
+			datePicker = $("#datepicker-effective-time-edit");
+			datePicker.datepicker('setDate', new Date(policy.effective_time));
+			//type
+			$scope.addPolicyData.insuranceType = policy.insurance_types;
+			var typeList = policy.insurance_types.split(",");
+			for (var i = 0; i < $scope.insuranceTypeList.length; i++) {
+				var insuranceType = $scope.insuranceTypeList[i];
+				var result = false;
+				for (var j = 0; j < typeList.length; j++) {
+					if (typeList[j] === insuranceType.value) {
+						insuranceType.selected = true;
+						result = true;
+						break;
+					}
+				}
+				if (result === false) {
+					insuranceType.selected = false;
+				}
+			}
+			//company
+			$scope.radioForInsuranceCompany = {};
+			$scope.selectedInsuranceCompanyIndex = $scope.insuranceCompanyIndexList[0];
+			$scope.addPolicyData.insuranceCompany = '';
+			/*
+			for (var i = 0; i < $scope.insuranceCompanyIndexList.length; i++) {
+				var companyIndex = $scope.insuranceCompanyIndexList[i];
+				var result = false;
+				for (var j = 0; j < companyIndex.list.length; j++) {
+					if (companyIndex.list[j].value === policy.insurance_company) {
+						$scope.selectedInsuranceCompanyIndex = companyIndex;
+						$scope.radioForInsuranceCompany = companyIndex.list[j].value;
+						result = true;
+						break;
+					}
+				}
+				if (result === true) {
+					break;
+				}
+			}
+			*/
+			//frequency
+			for (var i = 0; i < $scope.frequencyOptions.length; i++) {
+				if ($scope.frequencyOptions[i].value === policy.payment_frequency) {
+					$scope.selectedFrequency = $scope.frequencyOptions[i];
+					break;
+				}
+			}
+			//others
+			$scope.addPolicyData.paymentTime = policy.payment_time.substring(policy.payment_time.indexOf('交') + 1, policy.payment_time.indexOf('年'));;
+			$scope.addPolicyData.insuranceTime = policy.insurance_time.substring(policy.insurance_time.indexOf('保') + 1, policy.insurance_time.indexOf('年'));
+			$scope.addPolicyData.insuranceAmount = policy.insurance_amount;
+			$scope.addPolicyData.paymentYear = policy.payment_year;
+			$scope.addPolicyData.comment = policy.comment;
+			$('#modal-edit-policy').modal({ backdrop: 'static' });
+		};
+
+		$scope.onEditPolicy = function () {
+			var effectiveTime = datePicker.datepicker('getDate');
+			if (effectiveTime == null) {
+				alert('请选择生效日期');
+				return;
+			}
+			if ($scope.addPolicyData.insuranceType == '') {
+				alert('请选择保险类型');
+				return;
+			}
+			if ($scope.addPolicyData.insuranceCompany == '') {
+				alert('请选择保险公司');
+				return;
+			}
+			$scope.addPolicyData.payerName = $scope.selectedPayer.value;
+			$scope.addPolicyData.insurantName = $scope.selectedInsurant.value;
+			$scope.addPolicyData.effectiveTime = effectiveTime.getTime();
+			$scope.addPolicyData.paymentFrequency = $scope.selectedFrequency.value;
+			var dataObj = {
+				payer_name: $scope.addPolicyData.payerName,
+				insurer_name: $scope.addPolicyData.insurantName,
+				effective_time: $scope.addPolicyData.effectiveTime,
+				insurance_types: $scope.addPolicyData.insuranceType,
+				insurance_company: $scope.addPolicyData.insuranceCompany,
+				payment_frequency: $scope.selectedFrequency.value,
+				payment_time: '交' + $scope.addPolicyData.paymentTime + '年',
+				insurance_time: '保' + $scope.addPolicyData.insuranceTime + '年',
+				insurance_amount: $scope.addPolicyData.insuranceAmount,
+				payment_year: $scope.addPolicyData.paymentYear,
+				comment: $scope.addPolicyData.comment
+			};
+			$scope.myPromiseEditPolicy = BusinessService.editPolicy($rootScope.session.token, $scope.addPolicyData.id, dataObj, function (res) {
+				alert('编辑表单成功');
+				$('#modal-edit-policy').modal('toggle');
+				getPolicyList();
+				getPolicyAnalysis();
+			}, function (err) {
+				alert(err.message);
+			});
+		};
+
+		$scope.onClickDeletePolicy = function (policy) {
+			if (confirm('确认删除保单') == false) {
+				return;
+			}
+			$scope.myPromiseDeletePolicy = BusinessService.deletePolicy($rootScope.session.token, policy.id, function (res) {
 				getPolicyList();
 				getPolicyAnalysis();
 			}, function (err) {

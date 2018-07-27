@@ -28,7 +28,7 @@
 							<i class="glyphicon glyphicon-chevron-down"></i>
 						</span>
 					</div>
-					<div class="panel-body" id="policy-{{policy.id}}" style="display: none;">
+					<div class="panel-body" id="policy-{{policy.id}}" style="display: none;" cg-busy="myPromiseDeletePolicy">
 						<form class="form-horizontal">
 							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保人</lable>
@@ -43,15 +43,15 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险公司</lable>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									<input type="text" class="form-control" readonly="" ng-model="policy.insurance_company" />
-								</div>
-							</div>
-							<div class="form-group">
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险类型</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" readonly="" ng-model="policy.insurance_types" />
+								</div>
+							</div>
+							<div class="form-group">
+								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险公司</lable>
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<input type="text" class="form-control" readonly="" ng-model="policy.insurance_company" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -82,6 +82,14 @@
 								<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 									<input type="text" class="form-control" readonly="" ng-model="policy.comment" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+									<button class="btn btn-success btn-md btn-block" ng-click="onClickEditPolicy(policy)">编辑</button>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+									<button class="btn btn-danger btn-md btn-block" ng-click="onClickDeletePolicy(policy)">删除</button>
 								</div>
 							</div>
 						</form>
@@ -260,7 +268,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">新表单</h4>
+				<h4 class="modal-title">新表单</h4>
 			</div>
 			<div class="modal-body">
 				<form name='newPolicy' role="form" class="form-horizontal" cg-busy="myPromiseAddPolicy" ng-submit="onAddPolicy()">
@@ -279,7 +287,7 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">生效日期</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<div class="input-group date" id="datepicker-effective-time">
+							<div class="input-group date" id="datepicker-effective-time-add">
 								<input type="text" class="form-control" readonly="" required="required" />
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-calendar"></i>
@@ -359,7 +367,125 @@
 		</div>
 	</div>
 	<script>
-		$('#datepicker-effective-time').datepicker({
+		$('#datepicker-effective-time-add').datepicker({
+			format: 'yyyy-mm-dd',
+			language: 'zh-CN',
+			clearBtn: true,
+			todayBtn: 'linked',
+			autoclose: true,
+			todayHighlight: true
+		});
+	</script>
+</div>
+
+<!--modal-->
+<div class="modal fade" id="modal-edit-policy" tabindex="-1" role="dialog" aria-hidden="false">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">编辑表单</h4>
+			</div>
+			<div class="modal-body">
+				<form name='newPolicy' role="form" class="form-horizontal" cg-busy="myPromiseEditPolicy" ng-submit="onEditPolicy()">
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保人</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<select class="form-control" ng-options="payer.name for payer in payerOptions" ng-model="selectedPayer"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">受保人</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<select class="form-control" ng-options="insurant.name for insurant in insurantOptions" ng-model="selectedInsurant"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">生效日期</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<div class="input-group date" id="datepicker-effective-time-edit">
+								<input type="text" class="form-control" readonly="" required="required" />
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险类型</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<div class="input-group">
+								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceType" />
+								<span class="input-group-addon" ng-click="onSelectInsuranceType('#modal-insurance-type')">
+									<i class="glyphicon glyphicon-th-list"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险公司</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<div class="input-group">
+								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceCompany" />
+								<span class="input-group-addon" ng-click="onSelectInsuranceCompany('#modal-insurance-company')">
+									<i class="glyphicon glyphicon-briefcase"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">缴费频率</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<select class="form-control" ng-options="frequency.name for frequency in frequencyOptions" ng-model="selectedFrequency"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保期限(年)</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="addPolicyData.paymentTime" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险期限(年)</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="addPolicyData.insuranceTime" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">主险保额(万元)</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="number" class="form-control" required="required" ng-model="addPolicyData.insuranceAmount" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">年缴保费(元)</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<input type="number" class="form-control" required="required" ng-model="addPolicyData.paymentYear" />
+						</div>
+					</div>
+					<div class="form-group">
+						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							<textarea type="text" rows="3" class="form-control" style="resize: none;" ng-model="addPolicyData.comment" />
+						</div>
+					</div>
+					<br />
+					<div class="form-group">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="submit" class="btn btn-success btn-lg btn-block">提交</button>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<button type="button" class="btn btn-warning btn-lg btn-block" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#datepicker-effective-time-edit').datepicker({
 			format: 'yyyy-mm-dd',
 			language: 'zh-CN',
 			clearBtn: true,

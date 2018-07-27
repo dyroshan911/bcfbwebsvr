@@ -150,14 +150,34 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 		return ApiService.post('api/policys', obj, successcb, failcb);
 	};
 
-	cfgData.getPolicyAnalysis = function (token, successcb, failcb) {
-		var url = 'api/policys/analysis';
+	cfgData.editPolicy = function (token, policyId, dataObj, successcb, failcb) {
+		var url = 'api/policys/' + policyId;
+		var obj = {
+			params: {
+				token: token
+			},
+			data: dataObj
+		};
+		return ApiService.put(url, obj, successcb, failcb);
+	};
+
+	cfgData.deletePolicy = function (token, policyId, successcb, failcb) {
+		var url = 'api/policys/' + policyId;
 		var obj = {
 			params: {
 				token: token
 			}
 		};
-		return ApiService.get(url, obj, successcb, failcb);
+		return ApiService.delete(url, obj, successcb, failcb);
+	};
+
+	cfgData.getPolicyAnalysis = function (token, successcb, failcb) {
+		var obj = {
+			params: {
+				token: token
+			}
+		};
+		return ApiService.get('api/policys/analysis', obj, successcb, failcb);
 	};
 
 	return cfgData;
