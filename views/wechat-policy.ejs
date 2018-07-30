@@ -299,7 +299,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险类型</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<div class="input-group">
-								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceType" />
+								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="policyData.insuranceType" />
 								<span class="input-group-addon" ng-click="onSelectInsuranceType('#modal-insurance-type')">
 									<i class="glyphicon glyphicon-th-list"></i>
 								</span>
@@ -310,7 +310,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险公司</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<div class="input-group">
-								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceCompany" />
+								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="policyData.insuranceCompany" />
 								<span class="input-group-addon" ng-click="onSelectInsuranceCompany('#modal-insurance-company')">
 									<i class="glyphicon glyphicon-briefcase"></i>
 								</span>
@@ -326,31 +326,31 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保期限(年)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="addPolicyData.paymentTime" />
+							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="policyData.paymentTime" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险期限(年)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="addPolicyData.insuranceTime" />
+							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="policyData.insuranceTime" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">主险保额(万元)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="addPolicyData.insuranceAmount" />
+							<input type="number" class="form-control" required="required" ng-model="policyData.insuranceAmount" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">年缴保费(元)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="addPolicyData.paymentYear" />
+							<input type="number" class="form-control" required="required" ng-model="policyData.paymentYear" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<textarea type="text" rows="3" class="form-control" style="resize: none;" ng-model="addPolicyData.comment" />
+							<textarea type="text" rows="3" class="form-control" style="resize: none;" ng-model="policyData.comment" />
 						</div>
 					</div>
 					<br />
@@ -417,7 +417,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险类型</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<div class="input-group">
-								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceType" />
+								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="policyData.insuranceType" />
 								<span class="input-group-addon" ng-click="onSelectInsuranceType('#modal-insurance-type')">
 									<i class="glyphicon glyphicon-th-list"></i>
 								</span>
@@ -428,7 +428,7 @@
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险公司</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 							<div class="input-group">
-								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="addPolicyData.insuranceCompany" />
+								<input type="text" class="form-control" readonly="readonly" autocomplete="off" placeholder="点击右侧按钮选择" required="required" ng-model="policyData.insuranceCompany" />
 								<span class="input-group-addon" ng-click="onSelectInsuranceCompany('#modal-insurance-company')">
 									<i class="glyphicon glyphicon-briefcase"></i>
 								</span>
@@ -444,31 +444,31 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保期限(年)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="addPolicyData.paymentTime" />
+							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="policyData.paymentTime" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险期限(年)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="addPolicyData.insuranceTime" />
+							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="policyData.insuranceTime" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">主险保额(万元)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="addPolicyData.insuranceAmount" />
+							<input type="number" class="form-control" required="required" ng-model="policyData.insuranceAmount" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">年缴保费(元)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="addPolicyData.paymentYear" />
+							<input type="number" class="form-control" required="required" ng-model="policyData.paymentYear" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">备注</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<textarea type="text" rows="3" class="form-control" style="resize: none;" ng-model="addPolicyData.comment" />
+							<textarea type="text" rows="3" class="form-control" style="resize: none;" ng-model="policyData.comment" />
 						</div>
 					</div>
 					<br />

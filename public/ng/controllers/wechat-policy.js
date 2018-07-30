@@ -374,7 +374,7 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 		$scope.radioForInsuranceCompany = {};
 		$scope.policyAnalysis = {};
 
-		$scope.addPolicyData = {};
+		$scope.policyData = {};
 		var datePicker = {};
 
 		getPolicyList();
@@ -389,13 +389,13 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 			$scope.selectedPayer = $scope.payerOptions[0];
 			$scope.selectedInsurant = $scope.insurantOptions[0];
 			$scope.selectedFrequency = $scope.frequencyOptions[0];
-			$scope.addPolicyData.insuranceType = '';
-			$scope.addPolicyData.insuranceCompany = '';
-			$scope.addPolicyData.paymentTime = '';
-			$scope.addPolicyData.insuranceTime = '';
-			$scope.addPolicyData.insuranceAmount = '';
-			$scope.addPolicyData.paymentYear = '';
-			$scope.addPolicyData.comment = '';
+			$scope.policyData.insuranceType = '';
+			$scope.policyData.insuranceCompany = '';
+			$scope.policyData.paymentTime = '';
+			$scope.policyData.insuranceTime = '';
+			$scope.policyData.insuranceAmount = '';
+			$scope.policyData.paymentYear = '';
+			$scope.policyData.comment = '';
 			for (var i = 0; i < $scope.insuranceTypeList.length; i++) {
 				var insuranceType = $scope.insuranceTypeList[i];
 				insuranceType.selected = false;
@@ -409,15 +409,15 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 
 		$scope.onSelectInsuranceTypeOK = function (modalId) {
 			$scope.onCloseInnerModal(modalId);
-			$scope.addPolicyData.insuranceType = '';
+			$scope.policyData.insuranceType = '';
 			for (var i = 0; i < $scope.insuranceTypeList.length; i++) {
 				var insuranceType = $scope.insuranceTypeList[i];
 				if (insuranceType.selected === true) {
-					$scope.addPolicyData.insuranceType += insuranceType.value + ',';
+					$scope.policyData.insuranceType += insuranceType.value + ',';
 				}
 			}
-			if ($scope.addPolicyData.insuranceType != '') {
-				$scope.addPolicyData.insuranceType = $scope.addPolicyData.insuranceType.substring(0, $scope.addPolicyData.insuranceType.length - 1);
+			if ($scope.policyData.insuranceType != '') {
+				$scope.policyData.insuranceType = $scope.policyData.insuranceType.substring(0, $scope.policyData.insuranceType.length - 1);
 			}
 		};
 
@@ -427,7 +427,7 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 
 		$scope.onSelectInsuranceCompanyOK = function (modalId) {
 			$scope.onCloseInnerModal(modalId);
-			$scope.addPolicyData.insuranceCompany = $scope.radioForInsuranceCompany.radio;
+			$scope.policyData.insuranceCompany = $scope.radioForInsuranceCompany.radio;
 		};
 
 		$scope.onClickPolicy = function (id) {
@@ -441,30 +441,30 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 				alert('请选择生效日期');
 				return;
 			}
-			if ($scope.addPolicyData.insuranceType == '') {
+			if ($scope.policyData.insuranceType == '') {
 				alert('请选择保险类型');
 				return;
 			}
-			if ($scope.addPolicyData.insuranceCompany == '') {
+			if ($scope.policyData.insuranceCompany == '') {
 				alert('请选择保险公司');
 				return;
 			}
-			$scope.addPolicyData.payerName = $scope.selectedPayer.value;
-			$scope.addPolicyData.insurantName = $scope.selectedInsurant.value;
-			$scope.addPolicyData.effectiveTime = effectiveTime.getTime();
-			$scope.addPolicyData.paymentFrequency = $scope.selectedFrequency.value;
+			$scope.policyData.payerName = $scope.selectedPayer.value;
+			$scope.policyData.insurantName = $scope.selectedInsurant.value;
+			$scope.policyData.effectiveTime = effectiveTime.getTime();
+			$scope.policyData.paymentFrequency = $scope.selectedFrequency.value;
 			var dataObj = {
-				payer_name: $scope.addPolicyData.payerName,
-				insurer_name: $scope.addPolicyData.insurantName,
-				effective_time: $scope.addPolicyData.effectiveTime,
-				insurance_types: $scope.addPolicyData.insuranceType,
-				insurance_company: $scope.addPolicyData.insuranceCompany,
+				payer_name: $scope.policyData.payerName,
+				insurer_name: $scope.policyData.insurantName,
+				effective_time: $scope.policyData.effectiveTime,
+				insurance_types: $scope.policyData.insuranceType,
+				insurance_company: $scope.policyData.insuranceCompany,
 				payment_frequency: $scope.selectedFrequency.value,
-				payment_time: '交' + $scope.addPolicyData.paymentTime + '年',
-				insurance_time: '保' + $scope.addPolicyData.insuranceTime + '年',
-				insurance_amount: $scope.addPolicyData.insuranceAmount,
-				payment_year: $scope.addPolicyData.paymentYear,
-				comment: $scope.addPolicyData.comment
+				payment_time: '交' + $scope.policyData.paymentTime + '年',
+				insurance_time: '保' + $scope.policyData.insuranceTime + '年',
+				insurance_amount: $scope.policyData.insuranceAmount,
+				payment_year: $scope.policyData.paymentYear,
+				comment: $scope.policyData.comment
 			};
 			$scope.myPromiseAddPolicy = BusinessService.addPolicy($rootScope.session.token, dataObj, function (res) {
 				alert('添加表单成功');
@@ -477,7 +477,7 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 		};
 
 		$scope.onClickEditPolicy = function (policy) {
-			$scope.addPolicyData.id = policy.id;
+			$scope.policyData.id = policy.id;
 			//payer
 			for (var i = 0; i < $scope.payerOptions.length; i++) {
 				if ($scope.payerOptions[i].value === policy.payer_name) {
@@ -496,7 +496,7 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 			datePicker = $("#datepicker-effective-time-edit");
 			datePicker.datepicker('setDate', new Date(policy.effective_time));
 			//type
-			$scope.addPolicyData.insuranceType = policy.insurance_types;
+			$scope.policyData.insuranceType = policy.insurance_types;
 			var typeList = policy.insurance_types.split(",");
 			for (var i = 0; i < $scope.insuranceTypeList.length; i++) {
 				var insuranceType = $scope.insuranceTypeList[i];
@@ -512,18 +512,15 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 					insuranceType.selected = false;
 				}
 			}
-			//company
-			$scope.radioForInsuranceCompany = {};
-			$scope.selectedInsuranceCompanyIndex = $scope.insuranceCompanyIndexList[0];
-			$scope.addPolicyData.insuranceCompany = '';
-			/*
+			//company		
 			for (var i = 0; i < $scope.insuranceCompanyIndexList.length; i++) {
 				var companyIndex = $scope.insuranceCompanyIndexList[i];
 				var result = false;
 				for (var j = 0; j < companyIndex.list.length; j++) {
 					if (companyIndex.list[j].value === policy.insurance_company) {
 						$scope.selectedInsuranceCompanyIndex = companyIndex;
-						$scope.radioForInsuranceCompany = companyIndex.list[j].value;
+						$scope.radioForInsuranceCompany.radio = companyIndex.list[j].value;
+						$scope.policyData.insuranceCompany = $scope.radioForInsuranceCompany.radio;
 						result = true;
 						break;
 					}
@@ -532,7 +529,7 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 					break;
 				}
 			}
-			*/
+
 			//frequency
 			for (var i = 0; i < $scope.frequencyOptions.length; i++) {
 				if ($scope.frequencyOptions[i].value === policy.payment_frequency) {
@@ -541,11 +538,11 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 				}
 			}
 			//others
-			$scope.addPolicyData.paymentTime = policy.payment_time.substring(policy.payment_time.indexOf('交') + 1, policy.payment_time.indexOf('年'));;
-			$scope.addPolicyData.insuranceTime = policy.insurance_time.substring(policy.insurance_time.indexOf('保') + 1, policy.insurance_time.indexOf('年'));
-			$scope.addPolicyData.insuranceAmount = policy.insurance_amount;
-			$scope.addPolicyData.paymentYear = policy.payment_year;
-			$scope.addPolicyData.comment = policy.comment;
+			$scope.policyData.paymentTime = parseInt(policy.payment_time.substring(policy.payment_time.indexOf('交') + 1, policy.payment_time.indexOf('年')));
+			$scope.policyData.insuranceTime = parseInt(policy.insurance_time.substring(policy.insurance_time.indexOf('保') + 1, policy.insurance_time.indexOf('年')));
+			$scope.policyData.insuranceAmount = parseInt(policy.insurance_amount);
+			$scope.policyData.paymentYear = parseInt(policy.payment_year);
+			$scope.policyData.comment = policy.comment;
 			$('#modal-edit-policy').modal({ backdrop: 'static' });
 		};
 
@@ -555,32 +552,32 @@ angular.module('myApp').controller('WechatPolicyCtrl', ['$scope', '$location', '
 				alert('请选择生效日期');
 				return;
 			}
-			if ($scope.addPolicyData.insuranceType == '') {
+			if ($scope.policyData.insuranceType == '') {
 				alert('请选择保险类型');
 				return;
 			}
-			if ($scope.addPolicyData.insuranceCompany == '') {
+			if ($scope.policyData.insuranceCompany == '') {
 				alert('请选择保险公司');
 				return;
 			}
-			$scope.addPolicyData.payerName = $scope.selectedPayer.value;
-			$scope.addPolicyData.insurantName = $scope.selectedInsurant.value;
-			$scope.addPolicyData.effectiveTime = effectiveTime.getTime();
-			$scope.addPolicyData.paymentFrequency = $scope.selectedFrequency.value;
+			$scope.policyData.payerName = $scope.selectedPayer.value;
+			$scope.policyData.insurantName = $scope.selectedInsurant.value;
+			$scope.policyData.effectiveTime = effectiveTime.getTime();
+			$scope.policyData.paymentFrequency = $scope.selectedFrequency.value;
 			var dataObj = {
-				payer_name: $scope.addPolicyData.payerName,
-				insurer_name: $scope.addPolicyData.insurantName,
-				effective_time: $scope.addPolicyData.effectiveTime,
-				insurance_types: $scope.addPolicyData.insuranceType,
-				insurance_company: $scope.addPolicyData.insuranceCompany,
+				payer_name: $scope.policyData.payerName,
+				insurer_name: $scope.policyData.insurantName,
+				effective_time: $scope.policyData.effectiveTime,
+				insurance_types: $scope.policyData.insuranceType,
+				insurance_company: $scope.policyData.insuranceCompany,
 				payment_frequency: $scope.selectedFrequency.value,
-				payment_time: '交' + $scope.addPolicyData.paymentTime + '年',
-				insurance_time: '保' + $scope.addPolicyData.insuranceTime + '年',
-				insurance_amount: $scope.addPolicyData.insuranceAmount,
-				payment_year: $scope.addPolicyData.paymentYear,
-				comment: $scope.addPolicyData.comment
+				payment_time: '交' + $scope.policyData.paymentTime + '年',
+				insurance_time: '保' + $scope.policyData.insuranceTime + '年',
+				insurance_amount: $scope.policyData.insuranceAmount,
+				payment_year: $scope.policyData.paymentYear,
+				comment: $scope.policyData.comment
 			};
-			$scope.myPromiseEditPolicy = BusinessService.editPolicy($rootScope.session.token, $scope.addPolicyData.id, dataObj, function (res) {
+			$scope.myPromiseEditPolicy = BusinessService.editPolicy($rootScope.session.token, $scope.policyData.id, dataObj, function (res) {
 				alert('编辑表单成功');
 				$('#modal-edit-policy').modal('toggle');
 				getPolicyList();
