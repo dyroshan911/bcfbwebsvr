@@ -116,7 +116,7 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		if ($rootScope.session.role == 'admin') {
 			getChannelList(0, eachPageCount, '');
 			getMemberList(0, eachPageCount, '');
-			getpolicyList(0, eachPageCount, '');
+			getPolicyList(0, eachPageCount, '');
 			$scope.tabNames.customer = '客户列表';
 			$scope.tabNames.channel = '渠道列表';
 			$scope.tabNames.member = '会员列表';
