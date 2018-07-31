@@ -265,9 +265,6 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
 				<h4 class="modal-title">新表单</h4>
 			</div>
 			<div class="modal-body">
@@ -326,25 +323,25 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保期限(年)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="policyData.paymentTime" />
+							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="policyData.paymentTime" onkeypress="if ((event.keyCode < 48 || event.keyCode > 57)) {event.returnValue = false;}" onpaste="return false;" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险期限(年)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="policyData.insuranceTime" />
+							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="policyData.insuranceTime" onkeypress="if ((event.keyCode < 48 || event.keyCode > 57)) {event.returnValue = false;}" onpaste="return false;" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">主险保额(万元)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="policyData.insuranceAmount" />
+							<input type="number" class="form-control" required="required" ng-model="policyData.insuranceAmount" onkeypress="if ((event.keyCode < 48 || event.keyCode > 57)) {event.returnValue = false;}" onpaste="return false;" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">年缴保费(元)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="policyData.paymentYear" />
+							<input type="number" class="form-control" required="required" ng-model="policyData.paymentYear" onkeypress="if ((event.keyCode < 48 || event.keyCode > 57)) {event.returnValue = false;}" onpaste="return false;" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -383,9 +380,6 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
 				<h4 class="modal-title">编辑表单</h4>
 			</div>
 			<div class="modal-body">
@@ -444,25 +438,25 @@
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">投保期限(年)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="policyData.paymentTime" />
+							<input type="number" class="form-control" placeholder="0表示终身投保" required="required" ng-model="policyData.paymentTime" onkeypress="if ((event.keyCode < 48 || event.keyCode > 57)) {event.returnValue = false;}" onpaste="return false;" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">保险期限(年)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="policyData.insuranceTime" />
+							<input type="number" class="form-control" placeholder="0表示终身保险" required="required" ng-model="policyData.insuranceTime" onkeypress="if ((event.keyCode < 48 || event.keyCode > 57)) {event.returnValue = false;}" onpaste="return false;" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">主险保额(万元)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="policyData.insuranceAmount" />
+							<input type="number" class="form-control" required="required" ng-model="policyData.insuranceAmount" onkeypress="if ((event.keyCode < 48 || event.keyCode > 57)) {event.returnValue = false;}" onpaste="return false;" />
 						</div>
 					</div>
 					<div class="form-group">
 						<lable class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4">年缴保费(元)</lable>
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-							<input type="number" class="form-control" required="required" ng-model="policyData.paymentYear" />
+							<input type="number" class="form-control" required="required" ng-model="policyData.paymentYear" onkeypress="if ((event.keyCode < 48 || event.keyCode > 57)) {event.returnValue = false;}" onpaste="return false;" />
 						</div>
 					</div>
 					<div class="form-group">

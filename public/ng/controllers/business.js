@@ -270,9 +270,9 @@ angular.module('myApp').controller('BusinessCtrl', ['$scope', '$location', '$roo
 		};
 
 		$scope.onCheckPolicy = function (owner) {
-			$scope.checkCustomer.show = true;
-			$scope.checkCustomer.ownerId = owner.id;
-			$scope.checkCustomer.ownerName = owner.true_name;
+			$scope.checkPolicy.show = true;
+			$scope.checkPolicy.ownerId = owner.id;
+			$scope.checkPolicy.ownerName = owner.true_name;
 			$('#myTabs a[href="#checkPolicy"]').tab('show');
 			getPolicyListById(owner.id, 0, eachPageCount, '');
 		};
