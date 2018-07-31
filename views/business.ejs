@@ -29,6 +29,9 @@
 				<li role="presentation" ng-show="session.role == 'channel-mgr' || session.role == 'channel'">
 					<a href="#myMembers" role="tab" data-toggle="tab" ng-bind="tabNames.member"></a>
 				</li>
+				<li role="presentation" ng-show="session.role == 'admin'">
+					<a href="#myPolicy" role="tab" data-toggle="tab" ng-bind="tabNames.policy"></a>
+				</li>
 				<li role="presentation" ng-show="checkMember.show">
 					<a href="#checkMembers" role="tab" data-toggle="tab">{{checkMember.ownerName}}的会员</a>
 				</li>
@@ -195,9 +198,11 @@
 							<td align="center">
 								<a href="javascript:void(0);" ng-click="onCheckCustomers(member)">查看客户</a>
 							</td>
+							<!--
 							<td align="center">
 								<a href="javascript:void(0);" ng-click="onCheckPolicy(member)">查看保单</a>
 							</td>
+							-->
 						</tr>
 					</tbody>
 				</table>
@@ -212,6 +217,51 @@
 					第
 					<input type="text" ng-model="jumpPage_member" />
 					<button ng-click="gotoPage(memberPageData, jumpPage_member - 1)">跳转</button>
+				</label>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="myPolicy" cg-busy="myPromisePolicy">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="10%">会员姓名</th>
+							<th width="10%">联系电话</th>
+							<th width="10%">投保人</th>
+							<th width="10%">受保人</th>
+							<th width="10%">保险类型</th>
+							<th width="10%">保险公司</th>
+							<th width="20%">生效时间</th>
+							<th width="5%">保险金额(万元)</th>
+							<th width="5%">缴纳费用(元)</th>
+							<th width="10%">备注</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="policy in policyList">
+							<td align="center" ng-bind="policy.belong_name"></td>
+							<td align="center" ng-bind="policy.belong_tel"></td>
+							<td align="center" ng-bind="policy.payer_name"></td>
+							<td align="center" ng-bind="policy.insurer_name"></td>
+							<td align="center" ng-bind="policy.insurance_types"></td>
+							<td align="center" ng-bind="policy.insurance_company"></td>
+							<td align="center" ng-bind="policy.effectiveTime"></td>
+							<td align="center" ng-bind="policy.insurance_amount"></td>
+							<td align="center" ng-bind="policy.payment_year"></td>
+							<td align="center" ng-bind="policy.comment"></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav>
+					<ul class="pagination">
+						<li ng-repeat="page in policyPageData.list">
+							<a href="javascript:void(0);" ng-class="{true: 'currentPageStyle'}[page == policyPageData.current]" ng-bind="page.name" ng-click="gotoPage(policyPageData, page.index)"></a>
+						</li>
+					</ul>
+				</nav>
+				<label>
+					第
+					<input type="text" ng-model="jumpPage_member" />
+					<button ng-click="gotoPage(policyPageData, jumpPage_member - 1)">跳转</button>
 				</label>
 			</div>
 

@@ -127,6 +127,19 @@ angular.module('myApp').factory('BusinessService', ['ApiService', function (ApiS
 		return ApiService.get(url, obj, successcb, failcb);
 	};
 
+	cfgData.getPolicyList = function (token, paramObj, successcb, failcb) {
+		var url = 'api/policys';
+		var obj = {
+			params: {
+				token: token,
+				offset: paramObj.offset,
+				limit: paramObj.limit,
+				filter: paramObj.filter
+			}
+		};
+		return ApiService.get(url, obj, successcb, failcb);
+	};
+
 	cfgData.getPolicysById = function (token, userId, paramObj, successcb, failcb) {
 		var url = 'api/policys/' + userId;
 		var obj = {
