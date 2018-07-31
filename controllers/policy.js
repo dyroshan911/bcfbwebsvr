@@ -8,7 +8,7 @@ var wechatApi = require("../services/wechat/wechatApi")
 exports.creatPolicy = function (token, policyObj, cb) {
     var result = {};
     var statusCode = 200;
-    sessions.getSessionAttrs(token, ['user_id', 'role', 'superior'], function (err, data) {
+    sessions.getSessionAttrs(token, ['user_id', 'role', 'superior', 'true_name', 'phone'], function (err, data) {
         if (!err && data.user_id) {
             if (data.role == 'member') {
                 policyObj.belong_mem = data.user_id;
@@ -16,6 +16,9 @@ exports.creatPolicy = function (token, policyObj, cb) {
             } else {
                 policyObj.belong_channel = data.user_id;
             }
+            policyObj.belong_name = data.true_name;
+            policyObj.belong_tel = data.phone;
+
             policys.createPolicy(policyObj, function (err, policy) {
                 if (!err) {
                     result = policy;

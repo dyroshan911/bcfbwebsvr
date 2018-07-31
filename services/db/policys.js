@@ -27,6 +27,8 @@ policyObj.createPolicy = function (dataObj, cb) {
         belong_mem: dataObj.belong_mem,
         belong_channel: dataObj.belong_channel,
         comment:dataObj.comment,
+        belong_name:dataObj.belong_name,             
+        belong_tel:dataObj.belong_tel, 
         create_on: parseInt(Date.now() / 1000)
     };
     var newPolicy = new PolicyModel(policyInfo);
@@ -74,7 +76,7 @@ policyObj.getPolicyList = function (user_id, role, offset, limit, filter, cb) {
         return;
     }
 
-    var selectattr = 'id payer_name insurer_name  effective_time insurance_types insurance_company payment_frequency payment_time insurance_time insurance_amount payment_year comment belong_mem belong_channel';
+    var selectattr = 'id payer_name insurer_name  effective_time insurance_types insurance_company payment_frequency payment_time insurance_time insurance_amount payment_year comment belong_mem belong_channel belong_name belong_tel';
 
     PolicyModel.find(queryObj)
         .sort({ create_on: -1 })

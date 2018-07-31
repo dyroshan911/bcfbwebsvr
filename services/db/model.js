@@ -119,6 +119,9 @@ var PolicySchema = new Schema({
     belong_mem:{type:String},                              //所属会员user id
     belong_channel:{type:String},                          //所属渠道user id  
 
+    belong_name:{type:String},                              //保单所属人姓名
+    belong_tel:{type:String},                               //保单所属人电话
+
     create_on: {type: Number},                              //申请提交时间
     modify_on: {type: Number},                                    //修改时间
 });
